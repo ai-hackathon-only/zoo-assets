@@ -5,7 +5,7 @@ import { OrbitControls } from 'three/addons/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/GLTFLoader.js';
 import { generateLayout, GRID_M } from './generator.js';
 
-const T0 = performance.now();
+// rAF timestamps count from navigation start, so first-frame time includes HTML, three.js and GLB downloads.
 const $ = (id) => document.getElementById(id);
 const PATH_ASSET = 'path_asphalt_straight';
 const DEFAULTS = { size: 200, density: 0.5, population: 60, seed: 42 };
@@ -92,6 +92,8 @@ function placement(pos, rotDeg, half, scale = [1, 1, 1]) {
 let layout = null;
 let buildToken = 0;
 
+const GATE_ASSET = 'gate_pedestrian_wicket';
+
 function collectPlacements(L) {
   const half = L.boundary.width_m / 2;
   const groups = new Map();
@@ -101,16 +103,16 @@ function collectPlacements(L) {
   for (const e of L.enclosures) {
     for (const a of e.animals) add(a.asset_id, placement(a.position, a.rotation_deg, half));
     const b = e.bounds, gx = e.gate_position[0], gy = e.gate_position[1];
-    // fence pieces are 2 m long along X; leave a gap for the gate.
+    // fence pieces are 2 m long along X; the gate tile gets a 2 m wicket gate (same grid footprint).
     for (let x = b.min_x; x < b.max_x - 0.01; x += GRID_M) {
       for (const y of [b.min_y, b.max_y]) {
-        if (Math.abs(x + 1 - gx) < 1.01 && Math.abs(y - gy) < 1.01) continue;
+        if (Math.abs(x + 1 - gx) < 1.01 && Math.abs(y - gy) < 1.01) { add(GATE_ASSET, placement([x + 1, y, 0], 0, half)); continue; }
         add(e.fence_asset_id, placement([x + 1, y, 0], 0, half));
       }
     }
     for (let y = b.min_y; y < b.max_y - 0.01; y += GRID_M) {
       for (const x of [b.min_x, b.max_x]) {
-        if (Math.abs(y + 1 - gy) < 1.01 && Math.abs(x - gx) < 1.01) continue;
+        if (Math.abs(y + 1 - gy) < 1.01 && Math.abs(x - gx) < 1.01) { add(GATE_ASSET, placement([x, y + 1, 0], 90, half)); continue; }
         add(e.fence_asset_id, placement([x, y + 1, 0], 90, half));
       }
     }
@@ -255,7 +257,7 @@ function loop(now) {
   controls.update();
   renderer.render(scene, camera);
   if (!firstFrame && document.body.dataset.ready) {
-    firstFrame = now - T0;
+    firstFrame = now;
     $('first').textContent = `first frame ${(firstFrame / 1000).toFixed(2)} s`;
     document.body.dataset.firstFrameMs = String(Math.round(firstFrame));
   }
