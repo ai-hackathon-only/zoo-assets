@@ -284,7 +284,12 @@ export function generateLayout(settings, options = {}) {
   }
 
   // 3. Enclosure Placement
-  const targetEncCount = Math.max(4, Math.min(animalCatalog.length, Math.floor(4 + density * Math.min(46, (gridCells / 40) * 12))));
+  // When park is large and density is high, scale up to all available animal species
+  const maxForSize = Math.min(
+    animalCatalog.length,
+    Math.floor(4 + ((size_m - 80) / 520) * (animalCatalog.length - 4))
+  );
+  const targetEncCount = Math.max(4, Math.min(animalCatalog.length, Math.round(4 + density * (maxForSize - 4))));
 
   // Deterministic shuffle of animals
   const animalsShuffled = [...animalCatalog];
@@ -305,7 +310,7 @@ export function generateLayout(settings, options = {}) {
     let placed = false;
     let attempts = 0;
 
-    while (!placed && attempts < 150) {
+    while (!placed && attempts < 300) {
       attempts++;
       const avY = avenueYList[Math.floor(rand() * avenueYList.length)];
       const onNorth = rand() > 0.5;
@@ -348,37 +353,57 @@ export function generateLayout(settings, options = {}) {
 
           // Spawn animal instances inside enclosure bounds
           const animalInstances = [];
-          const animalCount = 1 + (density > 0.3 ? Math.floor(rand() * 2) : 0);
-
           const maxAnimalDim = Math.max(animal.size_m[0], animal.size_m[1]);
           const halfAnimalLen = maxAnimalDim / 2;
           const animalMargin = halfAnimalLen + 0.5;
 
-          for (let aIdx = 0; aIdx < animalCount; aIdx++) {
-            let variant = 'adult';
-            let assetId = animal.id;
+          const hasBaby = assetIdSet.has(`${animal.id}_baby`);
+          const hasRare = assetIdSet.has(`${animal.id}_rare`);
 
-            if (aIdx > 0) {
-              const roll = rand();
-              if (roll < 0.4 && assetIdSet.has(animal.id + '_baby')) {
-                variant = 'baby';
-                assetId = `${animal.id}_baby`;
-              } else if (roll < 0.7 && assetIdSet.has(animal.id + '_rare')) {
-                variant = 'rare';
-                assetId = `${animal.id}_rare`;
-              }
-            }
+          // Adult primary instance
+          const adultX = minXM + animalMargin + rand() * Math.max(0.1, widthM - 2 * animalMargin);
+          const adultY = minYM + animalMargin + rand() * Math.max(0.1, depthM - 2 * animalMargin);
 
-            const posX = minXM + animalMargin + rand() * Math.max(0.1, widthM - 2 * animalMargin);
-            const posY = minYM + animalMargin + rand() * Math.max(0.1, depthM - 2 * animalMargin);
+          animalInstances.push({
+            id: `${animal.id}_${enclosures.length + 1}_1`,
+            asset_id: animal.id,
+            variant: 'adult',
+            position: [Math.round(adultX * 100) / 100, Math.round(adultY * 100) / 100, 0],
+            rotation_deg: Math.round(rand() * 360)
+          });
 
+          // Helper to spawn companion instance nearby within safe enclosure bounds
+          const spawnNearby = (assetId, variantType, idx) => {
+            const spreadX = Math.min(3.5, Math.max(0.5, (widthM - 2 * animalMargin) / 3));
+            const spreadY = Math.min(3.5, Math.max(0.5, (depthM - 2 * animalMargin) / 3));
+            const offsetX = (rand() - 0.5) * spreadX * 2;
+            const offsetY = (rand() - 0.5) * spreadY * 2;
+            const posX = Math.max(minXM + animalMargin, Math.min(maxXM - animalMargin, adultX + offsetX));
+            const posY = Math.max(minYM + animalMargin, Math.min(maxYM - animalMargin, adultY + offsetY));
             animalInstances.push({
-              id: `${animal.id}_${enclosures.length + 1}_${aIdx + 1}`,
+              id: `${animal.id}_${enclosures.length + 1}_${idx}`,
               asset_id: assetId,
-              variant: variant,
+              variant: variantType,
               position: [Math.round(posX * 100) / 100, Math.round(posY * 100) / 100, 0],
               rotation_deg: Math.round(rand() * 360)
             });
+          };
+
+          let instIdx = 2;
+          // Spawn babies and rare mutations next to adults when variants exist
+          if (hasBaby && (density > 0.25 || density >= 1.0)) {
+            spawnNearby(`${animal.id}_baby`, 'baby', instIdx++);
+          }
+          if (hasRare && (density > 0.5 || density >= 1.0)) {
+            spawnNearby(`${animal.id}_rare`, 'rare', instIdx++);
+          }
+
+          // If no variants exist for this animal, add extra adults when density is high
+          if (!hasBaby && !hasRare) {
+            const extraCount = density > 0.7 ? 2 : (density > 0.35 ? 1 : 0);
+            for (let e = 0; e < extraCount; e++) {
+              spawnNearby(animal.id, 'adult', instIdx++);
+            }
           }
 
           enclosures.push({
