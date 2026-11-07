@@ -57,6 +57,19 @@ const ruleFailures = {
   every_species_at_max_settings: 0
 };
 
+const STYLES = ['grid', 'loop', 'radial'];
+const ruleFailuresByStyle = {
+  grid: { ...ruleFailures },
+  loop: { ...ruleFailures },
+  radial: { ...ruleFailures }
+};
+const seedsByStyle = { grid: 0, loop: 0, radial: 0 };
+
+function failRule(rule, style) {
+  ruleFailures[rule]++;
+  if (ruleFailuresByStyle[style]) ruleFailuresByStyle[style][rule]++;
+}
+
 const timings = [];
 const enclosureCounts = [];
 const animalCounts = [];
@@ -89,10 +102,13 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
     population = Math.round(((i * 17 + 29) % 301));
   }
 
-  const seed = `seed_${i}_${size_m}_${density}_${population}`;
+  const styles = ['grid', 'loop', 'radial'];
+  const style = styles[i % styles.length];
+  seedsByStyle[style]++;
+  const seed = `seed_${i}_${size_m}_${density}_${population}_${style}`;
 
   const t0 = performance.now();
-  const layout = generateLayout({ size_m, density, population, seed }, { assets });
+  const layout = generateLayout({ size_m, density, population, seed, style }, { assets });
   const t1 = performance.now();
   timings.push(t1 - t0);
 
@@ -102,11 +118,11 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
 
   // 1. One entrance rule
   if (!layout.entrance || !layout.entrance.position || layout.entrance.position.length !== 3) {
-    ruleFailures.one_entrance++;
+    failRule('one_entrance', style);
   } else {
     const [ex, ey, ez] = layout.entrance.position;
     if (ez !== 0 || ex < 0 || ex > size_m || ey < 0 || ey > size_m) {
-      ruleFailures.one_entrance++;
+      failRule('one_entrance', style);
     }
   }
 
@@ -173,7 +189,7 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
       break;
     }
   }
-  if (!pathsConnected) ruleFailures.path_connectivity++;
+  if (!pathsConnected) failRule('path_connectivity', style);
 
   // 3. Enclosure sizing & presence rule (must have enclosures >= 4, and dimensions >= expected tier)
   let sizingOk = true;
@@ -196,7 +212,7 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
       }
     }
   }
-  if (!sizingOk) ruleFailures.enclosure_sizing_and_presence++;
+  if (!sizingOk) failRule('enclosure_sizing_and_presence', style);
 
   // 4. Animals contained rule (pivot ± half animal length within enclosure bounds)
   let animalsContained = true;
@@ -221,7 +237,7 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
     }
     if (!animalsContained) break;
   }
-  if (!animalsContained) ruleFailures.animals_contained++;
+  if (!animalsContained) failRule('animals_contained', style);
 
   // 5. No overlapping footprints (enclosures, facilities, entrance, AND paths)
   let noOverlap = true;
@@ -296,7 +312,7 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
     }
   }
 
-  if (!noOverlap) ruleFailures.no_overlapping_footprints++;
+  if (!noOverlap) failRule('no_overlapping_footprints', style);
 
   // 6. Facilities next to path
   let facNextToPath = true;
@@ -314,7 +330,7 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
       break;
     }
   }
-  if (!facNextToPath) ruleFailures.facilities_next_to_path++;
+  if (!facNextToPath) failRule('facilities_next_to_path', style);
 
   // 7. People on paths or near enclosures
   let peopleOk = true;
@@ -344,7 +360,7 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
       break;
     }
   }
-  if (!peopleOk) ruleFailures.people_on_paths_or_near_enclosures++;
+  if (!peopleOk) failRule('people_on_paths_or_near_enclosures', style);
 
   // 8. Ground and boundary
   let groundAndBound = true;
@@ -372,7 +388,7 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
   for (const p of layout.people) {
     if (!checkPos(p.position)) { groundAndBound = false; break; }
   }
-  if (!groundAndBound) ruleFailures.ground_and_boundary++;
+  if (!groundAndBound) failRule('ground_and_boundary', style);
 
   // 9. Every asset_id exists in assets.json
   if (knownAssetIds.size > 0) {
@@ -394,7 +410,7 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
         break;
       }
     }
-    if (!idsExist) ruleFailures.asset_ids_exist++;
+    if (!idsExist) failRule('asset_ids_exist', style);
   }
 
   // 10. Every species present at max settings rule (size 600m, density 1.0)
@@ -402,7 +418,7 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
     const totalSpecies = assets ? assets.filter(a => a.category === 'animals' && !a.variant_of && !a.id.endsWith('_baby') && !a.id.endsWith('_rare')).length : 130;
     const speciesInLayout = new Set(layout.enclosures.map(e => e.species_id));
     if (speciesInLayout.size < totalSpecies) {
-      ruleFailures.every_species_at_max_settings++;
+      failRule('every_species_at_max_settings', style);
       console.error(`Max settings layout missed species: placed ${speciesInLayout.size} of ${totalSpecies}`);
     }
   }
@@ -427,6 +443,21 @@ for (const [rule, failCount] of Object.entries(ruleFailures)) {
   const status = failCount === 0 ? 'PASS' : `FAIL (${failCount} failures)`;
   if (failCount > 0) allPassed = false;
   console.log(`• Rule [${rule}]: ${status}`);
+}
+
+console.log('\n--- Breakdown by Layout Style ---');
+for (const style of STYLES) {
+  const count = seedsByStyle[style] || 0;
+  let stylePassed = true;
+  for (const failCount of Object.values(ruleFailuresByStyle[style])) {
+    if (failCount > 0) stylePassed = false;
+  }
+  console.log(`• Style [${style}] (${count} seeds): ${stylePassed ? 'ALL RULES PASS' : 'FAIL'}`);
+  for (const [rule, failCount] of Object.entries(ruleFailuresByStyle[style])) {
+    if (failCount > 0) {
+      console.log(`    - Rule [${rule}]: FAIL (${failCount})`);
+    }
+  }
 }
 
 console.log('\n--- Content Distribution (across 200 seeds) ---');

@@ -264,6 +264,45 @@ if (simToggleCheck && simToggleCheck.hasBtn) {
   console.log(`Simulation toggle: initial=${simToggleCheck.initialSim} -> paused=${simToggleCheck.pausedSim} -> resumed=${simToggleCheck.resumedSim}`);
 }
 
+// 4c. Layout Style Setting Check
+const styleCheck = await evalJs(`
+  const sel = document.getElementById('style');
+  if (!sel) return { hasSel: false };
+  const initialStyle = sel.value;
+  const initialPaths = window.__park?.layout?.paths?.length || 0;
+  sel.value = 'loop';
+  sel.dispatchEvent(new Event('change', { bubbles: true }));
+  return { hasSel: true, initialStyle, initialPaths, newStyle: sel.value };
+`);
+if (styleCheck && styleCheck.hasSel) {
+  await new Promise(r => setTimeout(r, 600));
+  const loopInfo = await evalJs(`
+    return {
+      style: window.__park?.layout?.settings?.style,
+      paths: window.__park?.layout?.paths?.length || 0,
+      url: window.location.search
+    };
+  `);
+  // Switch to radial
+  await evalJs(`
+    const sel = document.getElementById('style');
+    sel.value = 'radial';
+    sel.dispatchEvent(new Event('change', { bubbles: true }));
+  `);
+  await new Promise(r => setTimeout(r, 600));
+  const radialInfo = await evalJs(`
+    return {
+      style: window.__park?.layout?.settings?.style,
+      paths: window.__park?.layout?.paths?.length || 0,
+      url: window.location.search
+    };
+  `);
+  console.log(`\n--- 3c. Layout Style Setting Check ---`);
+  console.log(`Layout style grid: ${styleCheck.initialPaths} paths`);
+  console.log(`Layout style loop: style=${loopInfo?.style}, ${loopInfo?.paths} paths (URL: "${loopInfo?.url}")`);
+  console.log(`Layout style radial: style=${radialInfo?.style}, ${radialInfo?.paths} paths (URL: "${radialInfo?.url}")`);
+}
+
 // 5. Gallery Search Interaction Check
 console.log('\n--- 4. Gallery Search Interaction Check ---');
 const galleryUrl = 'https://ai-hackathon-only.github.io/zoo-assets/';
@@ -316,6 +355,24 @@ if (consoleErrors.length > 0) {
 }
 
 // 7. Screenshots of 3 different seeds at 1280px and 390px if requested
+if (process.argv.includes('--style-shots')) {
+  console.log('\n--- Screenshots for layout styles ---');
+  for (const st of ['grid', 'loop', 'radial']) {
+    await evalJs(`
+      const sel = document.getElementById('style');
+      if (sel) {
+        sel.value = '${st}';
+        sel.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    `);
+    await new Promise(r => setTimeout(r, 1500));
+    const shot = await sendSession('Page.captureScreenshot', { format: 'png' });
+    const p = `docs/park/park-style-${st}.png`;
+    fs.writeFileSync(p, Buffer.from(shot.result.data, 'base64'));
+    console.log(`Saved screenshot for style ${st}: ${p} (${fs.statSync(p).size} bytes)`);
+  }
+}
+
 if (process.argv.includes('--screenshots')) {
   console.log('\n--- 6. Screenshots (1280px & 390px) ---');
   const shotsDir = '/tmp/park-shots';

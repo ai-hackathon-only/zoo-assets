@@ -8,7 +8,7 @@ import { generateLayout, GRID_M } from './generator.js';
 // rAF timestamps count from navigation start, so first-frame time includes HTML, three.js and GLB downloads.
 const $ = (id) => document.getElementById(id);
 const PATH_ASSET = 'path_asphalt_straight';
-const DEFAULTS = { size: 200, density: 0.5, population: 60, seed: 42 };
+const DEFAULTS = { size: 200, density: 0.5, population: 60, seed: 42, style: 'grid' };
 
 // ---------- settings <-> URL ----------
 function readSettings() {
@@ -17,17 +17,20 @@ function readSettings() {
     const v = Number(q.get(k));
     return q.has(k) && Number.isFinite(v) ? Math.min(hi, Math.max(lo, v)) : DEFAULTS[k];
   };
+  const styleVal = q.get('style');
   return {
     size: num('size', 80, 600),
     density: num('density', 0, 1),
     population: Math.round(num('population', 0, 300)),
     seed: q.get('seed') || String(DEFAULTS.seed),
     theme: q.get('theme') === 'night' ? 'night' : 'day',
+    style: ['grid', 'loop', 'radial'].includes(styleVal) ? styleVal : DEFAULTS.style,
   };
 }
 function writeSettings(s) {
   const params = { size: s.size, density: s.density, population: s.population, seed: s.seed };
   if (s.theme === 'night') params.theme = 'night';
+  if (s.style && s.style !== 'grid') params.style = s.style;
   const q = new URLSearchParams(params);
   history.replaceState(null, '', `${location.pathname}?${q}`);
 }
@@ -353,7 +356,7 @@ function collectPlacements(L) {
 async function build(s, given = null) {
   const token = ++buildToken;
   const t = performance.now();
-  layout = given || generateLayout({ size_m: s.size, density: s.density, population: s.population, seed: s.seed }, { assets: catalog });
+  layout = given || generateLayout({ size_m: s.size, density: s.density, population: s.population, seed: s.seed, style: s.style }, { assets: catalog });
   const genMs = performance.now() - t;
   const size = layout.boundary.width_m;
   ground.scale.set(size + 40, size + 40, 1);
@@ -460,12 +463,13 @@ mini.addEventListener('click', (ev) => {
 });
 
 // ---------- controls ----------
-const inputs = { size: $('size'), density: $('density'), population: $('population'), seed: $('seed') };
+const inputs = { size: $('size'), density: $('density'), population: $('population'), seed: $('seed'), style: $('style') };
 function current() {
   return {
     size: Number(inputs.size.value), density: Number(inputs.density.value),
     population: Number(inputs.population.value), seed: inputs.seed.value.trim() || '0',
     theme: currentTheme,
+    style: inputs.style ? inputs.style.value : 'grid',
   };
 }
 function showValues() {
@@ -483,6 +487,7 @@ function apply(reframe) {
 }
 for (const k of ['size', 'density', 'population']) inputs[k].addEventListener('input', () => apply(k === 'size'));
 inputs.seed.addEventListener('change', () => apply(false));
+if (inputs.style) inputs.style.addEventListener('change', () => apply(false));
 $('shuffle').addEventListener('click', () => {
   inputs.seed.value = String(Math.floor(Math.random() * 1e6));
   apply(false);
@@ -510,6 +515,7 @@ $('import-file').addEventListener('change', async (ev) => {
   const st = L.settings;
   inputs.size.value = st.size_m; inputs.density.value = st.density;
   inputs.population.value = st.population; inputs.seed.value = st.seed;
+  if (st.style && inputs.style) inputs.style.value = st.style;
   showValues();
   writeSettings(current());
   clearTimeout(pending);
@@ -565,6 +571,7 @@ function loop(now) {
 const s0 = readSettings();
 inputs.size.value = s0.size; inputs.density.value = s0.density;
 inputs.population.value = s0.population; inputs.seed.value = s0.seed;
+if (inputs.style) inputs.style.value = s0.style;
 showValues();
 setTheme(s0.theme);
 const res = await fetch('../assets.json');
