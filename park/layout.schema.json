@@ -154,7 +154,7 @@
                 "asset_id": { "type": "string" },
                 "variant": {
                   "type": "string",
-                  "enum": ["adult", "baby", "mutation"]
+                  "enum": ["adult", "baby", "rare"]
                 },
                 "position": {
                   "type": "array",

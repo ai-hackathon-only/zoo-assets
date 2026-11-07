@@ -8,12 +8,13 @@
  * Rules checked:
  * 1. One entrance (on boundary)
  * 2. Path connectivity (paths reach every enclosure and facility)
- * 3. Enclosure sizing (proportional to animal's size_m)
- * 4. Animals contained inside enclosure
- * 5. No overlapping footprints (enclosures, facilities, entrance)
+ * 3. Enclosure sizing & presence (sized per animal's size_m; enclosures > 0)
+ * 4. Animals contained inside enclosure (pivot ± half animal length within bounds)
+ * 5. No overlapping footprints (enclosures, facilities, entrance, paths)
  * 6. Facilities next to a path
  * 7. People on paths or near enclosures
  * 8. Ground & boundary (Z=0 and inside boundary)
+ * 9. Every asset_id exists in assets.json
  */
 
 import fs from 'node:fs';
@@ -25,13 +26,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const ROOT = path.resolve(__dirname, '..');
 
-// Load assets.json if present
+// Load assets.json
 let assets = null;
+let knownAssetIds = new Set();
 try {
   const raw = JSON.parse(fs.readFileSync(path.join(ROOT, 'assets.json'), 'utf8'));
   assets = raw.assets || raw;
-} catch {
-  // Use built-in generator defaults
+  for (const a of assets) {
+    knownAssetIds.add(a.id);
+  }
+} catch (e) {
+  console.warn('Warning: could not load assets.json:', e.message);
 }
 
 const TOTAL_SEEDS = 200;
@@ -42,19 +47,31 @@ console.log(`Setting ranges: size 80m-600m, density 0.0-1.0, population 0-300 pe
 const ruleFailures = {
   one_entrance: 0,
   path_connectivity: 0,
-  enclosure_sizing: 0,
+  enclosure_sizing_and_presence: 0,
   animals_contained: 0,
   no_overlapping_footprints: 0,
   facilities_next_to_path: 0,
   people_on_paths_or_near_enclosures: 0,
-  ground_and_boundary: 0
+  ground_and_boundary: 0,
+  asset_ids_exist: 0
 };
 
 const timings = [];
+const enclosureCounts = [];
+const animalCounts = [];
+
+// Quick determinism check before the 200-seed loop (excluding wall-clock elapsed timing)
+const sampleSettings = { size_m: 160, density: 0.5, population: 50, seed: 'determinism_test' };
+const runA = generateLayout(sampleSettings, { assets });
+const runB = generateLayout(sampleSettings, { assets });
+delete runA.stats.generation_time_ms;
+delete runB.stats.generation_time_ms;
+if (JSON.stringify(runA) !== JSON.stringify(runB)) {
+  console.error('FATAL: Layout generator is not deterministic for identical settings and seed!');
+  process.exit(1);
+}
 
 for (let i = 0; i < TOTAL_SEEDS; i++) {
-  // Diverse sampling across parameter space
-  // Ensure we hit edge cases: 80m min, 600m max, population 0, population 300, density 0, density 1
   let size_m, density, population;
   if (i === 0) {
     size_m = 80; density = 0.0; population = 0;
@@ -65,7 +82,6 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
   } else if (i === 3) {
     size_m = 600; density = 1.0; population = 300;
   } else {
-    // Interpolate & pseudo-random spread
     const t = i / (TOTAL_SEEDS - 1);
     size_m = 80 + Math.round((t * 520) / GRID_M) * GRID_M;
     density = Math.round(((i * 7 + 13) % 100) / 100 * 100) / 100;
@@ -78,6 +94,10 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
   const layout = generateLayout({ size_m, density, population, seed }, { assets });
   const t1 = performance.now();
   timings.push(t1 - t0);
+
+  enclosureCounts.push(layout.enclosures.length);
+  const totalAnimalsInLayout = layout.enclosures.reduce((sum, e) => sum + e.animals.length, 0);
+  animalCounts.push(totalAnimalsInLayout);
 
   // 1. One entrance rule
   if (!layout.entrance || !layout.entrance.position || layout.entrance.position.length !== 3) {
@@ -96,7 +116,6 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
     pathTileMap.set(key, pt);
   }
 
-  // Find path tile nearest entrance
   let startTile = null;
   let minEntDist = Infinity;
   for (const pt of layout.paths) {
@@ -138,7 +157,6 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
     }
   }
 
-  // Check every enclosure gate is reachable
   let pathsConnected = true;
   for (const enc of layout.enclosures) {
     const gateKey = `${Math.round(enc.gate_position[0])},${Math.round(enc.gate_position[1])}`;
@@ -147,8 +165,6 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
       break;
     }
   }
-
-  // Check every facility path_tile is reachable
   for (const fac of layout.facilities) {
     const facPathKey = `${Math.round(fac.path_tile[0])},${Math.round(fac.path_tile[1])}`;
     if (!reachablePaths.has(facPathKey)) {
@@ -158,25 +174,46 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
   }
   if (!pathsConnected) ruleFailures.path_connectivity++;
 
-  // 3. Enclosure sizing rule
+  // 3. Enclosure sizing & presence rule (must have enclosures >= 4, and dimensions >= expected tier)
   let sizingOk = true;
-  for (const enc of layout.enclosures) {
-    const w = enc.bounds.width;
-    const d = enc.bounds.depth;
-    if (w < 6 || d < 6) {
-      sizingOk = false;
-      break;
+  if (layout.enclosures.length < 4) {
+    sizingOk = false;
+  } else {
+    for (const enc of layout.enclosures) {
+      const w = enc.bounds.width;
+      const d = enc.bounds.depth;
+      const animalMeta = assets ? assets.find(a => a.id === enc.species_id) : null;
+      if (animalMeta && animalMeta.size_m) {
+        const expected = getEnclosureSizeMeters(animalMeta.size_m);
+        if (w < expected.width || d < expected.depth) {
+          sizingOk = false;
+          break;
+        }
+      } else if (w < 6 || d < 6) {
+        sizingOk = false;
+        break;
+      }
     }
   }
-  if (!sizingOk) ruleFailures.enclosure_sizing++;
+  if (!sizingOk) ruleFailures.enclosure_sizing_and_presence++;
 
-  // 4. Animals contained rule
+  // 4. Animals contained rule (pivot ± half animal length within enclosure bounds)
   let animalsContained = true;
   for (const enc of layout.enclosures) {
     const b = enc.bounds;
+    const animalMeta = assets ? assets.find(a => a.id === enc.species_id) : null;
+    const maxDim = (animalMeta && animalMeta.size_m) ? Math.max(animalMeta.size_m[0], animalMeta.size_m[1]) : 1.0;
+    const halfLen = maxDim / 2;
+
     for (const an of enc.animals) {
       const [ax, ay, az] = an.position;
-      if (ax < b.min_x || ax > b.max_x || ay < b.min_y || ay > b.max_y || az !== 0) {
+      if (
+        (ax - halfLen) < b.min_x ||
+        (ax + halfLen) > b.max_x ||
+        (ay - halfLen) < b.min_y ||
+        (ay + halfLen) > b.max_y ||
+        az !== 0
+      ) {
         animalsContained = false;
         break;
       }
@@ -185,11 +222,10 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
   }
   if (!animalsContained) ruleFailures.animals_contained++;
 
-  // 5. No overlapping footprints
+  // 5. No overlapping footprints (enclosures, facilities, entrance, AND paths)
   let noOverlap = true;
   const boxes = [];
 
-  // Entrance
   boxes.push({
     type: 'entrance',
     minX: layout.entrance.position[0] - layout.entrance.footprint[0] / 2,
@@ -198,7 +234,6 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
     maxY: layout.entrance.position[1] + layout.entrance.footprint[1] / 2
   });
 
-  // Enclosures
   for (const enc of layout.enclosures) {
     boxes.push({
       type: 'enclosure',
@@ -209,7 +244,6 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
     });
   }
 
-  // Facilities
   for (const fac of layout.facilities) {
     boxes.push({
       type: 'facility',
@@ -232,6 +266,35 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
     }
     if (!noOverlap) break;
   }
+
+  // Check that no path tile lies strictly inside any enclosure or facility
+  if (noOverlap) {
+    for (const pt of layout.paths) {
+      const px = pt.position[0];
+      const py = pt.position[1];
+
+      for (const enc of layout.enclosures) {
+        if (px > enc.bounds.min_x && px < enc.bounds.max_x && py > enc.bounds.min_y && py < enc.bounds.max_y) {
+          noOverlap = false;
+          break;
+        }
+      }
+      if (!noOverlap) break;
+
+      for (const fac of layout.facilities) {
+        const minX = fac.position[0] - fac.footprint[0] / 2;
+        const maxX = fac.position[0] + fac.footprint[0] / 2;
+        const minY = fac.position[1] - fac.footprint[1] / 2;
+        const maxY = fac.position[1] + fac.footprint[1] / 2;
+        if (px > minX && px < maxX && py > minY && py < maxY) {
+          noOverlap = false;
+          break;
+        }
+      }
+      if (!noOverlap) break;
+    }
+  }
+
   if (!noOverlap) ruleFailures.no_overlapping_footprints++;
 
   // 6. Facilities next to path
@@ -261,7 +324,6 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
       break;
     }
 
-    // Grid cell of person position
     const pgx = Math.floor(px / GRID_M);
     const pgy = Math.floor(py / GRID_M);
     const cellKey = `${pgx * GRID_M + GRID_M / 2},${pgy * GRID_M + GRID_M / 2}`;
@@ -310,12 +372,43 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
     if (!checkPos(p.position)) { groundAndBound = false; break; }
   }
   if (!groundAndBound) ruleFailures.ground_and_boundary++;
+
+  // 9. Every asset_id exists in assets.json
+  if (knownAssetIds.size > 0) {
+    let idsExist = true;
+    const idsToCheck = [];
+    idsToCheck.push(layout.entrance.asset_id);
+    for (const enc of layout.enclosures) {
+      idsToCheck.push(enc.fence_asset_id);
+      for (const an of enc.animals) idsToCheck.push(an.asset_id);
+    }
+    for (const fac of layout.facilities) idsToCheck.push(fac.asset_id);
+    for (const dec of layout.decorations) idsToCheck.push(dec.asset_id);
+    for (const p of layout.people) idsToCheck.push(p.asset_id);
+
+    for (const aid of idsToCheck) {
+      if (!knownAssetIds.has(aid)) {
+        idsExist = false;
+        console.error(`Unknown asset_id in layout: ${aid}`);
+        break;
+      }
+    }
+    if (!idsExist) ruleFailures.asset_ids_exist++;
+  }
 }
 
 const avgMs = (timings.reduce((a, b) => a + b, 0) / timings.length).toFixed(2);
 const minMs = Math.min(...timings).toFixed(2);
 const maxMs = Math.max(...timings).toFixed(2);
 const totalMs = timings.reduce((a, b) => a + b, 0).toFixed(1);
+
+const minEnc = Math.min(...enclosureCounts);
+const maxEnc = Math.max(...enclosureCounts);
+const avgEnc = (enclosureCounts.reduce((a, b) => a + b, 0) / enclosureCounts.length).toFixed(1);
+
+const minAni = Math.min(...animalCounts);
+const maxAni = Math.max(...animalCounts);
+const avgAni = (animalCounts.reduce((a, b) => a + b, 0) / animalCounts.length).toFixed(1);
 
 console.log('--- Layout Rules Verification Report (200 seeds) ---');
 let allPassed = true;
@@ -324,6 +417,10 @@ for (const [rule, failCount] of Object.entries(ruleFailures)) {
   if (failCount > 0) allPassed = false;
   console.log(`• Rule [${rule}]: ${status}`);
 }
+
+console.log('\n--- Content Distribution (across 200 seeds) ---');
+console.log(`• Enclosures: min=${minEnc}, avg=${avgEnc}, max=${maxEnc}`);
+console.log(`• Animals:    min=${minAni}, avg=${avgAni}, max=${maxAni}`);
 
 console.log('\n--- Performance Timing ---');
 console.log(`• Average generation time: ${avgMs} ms / layout`);

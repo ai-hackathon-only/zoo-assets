@@ -31,17 +31,17 @@ function createPRNG(seed) {
   };
 }
 
-// Built-in catalog of common zoo animals and their real-world dimensions
+// Built-in catalog of real zoo animals from assets.json and their dimensions
 const DEFAULT_ANIMALS = [
   { id: 'african_elephant', name: 'African elephant', size_m: [1.8, 5.5, 3.2] },
   { id: 'asian_elephant', name: 'Asian elephant', size_m: [1.6, 5.0, 2.7] },
-  { id: 'giraffe', name: 'Giraffe', size_m: [1.0, 4.0, 5.2] },
-  { id: 'hippo', name: 'Hippo', size_m: [1.5, 4.2, 1.5] },
   { id: 'white_rhino', name: 'White rhino', size_m: [1.4, 3.8, 1.8] },
+  { id: 'indian_rhino', name: 'Indian rhino', size_m: [1.5, 3.5, 1.7] },
+  { id: 'hippo', name: 'Hippo', size_m: [1.5, 4.2, 1.5] },
   { id: 'lion', name: 'Lion', size_m: [0.9, 2.1, 1.2] },
   { id: 'bengal_tiger', name: 'Bengal tiger', size_m: [0.9, 2.4, 1.1] },
-  { id: 'zebra', name: 'Plains zebra', size_m: [0.8, 2.3, 1.4] },
-  { id: 'grizzly_bear', name: 'Grizzly bear', size_m: [1.0, 2.2, 1.3] },
+  { id: 'plains_zebra', name: 'Plains zebra', size_m: [0.8, 2.3, 1.4] },
+  { id: 'brown_bear', name: 'Brown bear', size_m: [1.0, 2.2, 1.3] },
   { id: 'polar_bear', name: 'Polar bear', size_m: [1.1, 2.5, 1.4] },
   { id: 'western_gorilla', name: 'Western gorilla', size_m: [0.9, 1.1, 1.7] },
   { id: 'chimpanzee', name: 'Chimpanzee', size_m: [0.7, 0.9, 1.2] },
@@ -51,8 +51,8 @@ const DEFAULT_ANIMALS = [
   { id: 'snow_leopard', name: 'Snow leopard', size_m: [0.6, 1.8, 0.6] },
   { id: 'cheetah', name: 'Cheetah', size_m: [0.6, 1.9, 0.8] },
   { id: 'ostrich', name: 'Ostrich', size_m: [0.9, 1.6, 2.4] },
-  { id: 'emperor_penguin', name: 'Emperor penguin', size_m: [0.4, 0.4, 1.1] },
-  { id: 'flamingo', name: 'Greater flamingo', size_m: [0.4, 0.6, 1.3] },
+  { id: 'african_penguin', name: 'African penguin', size_m: [0.35, 0.35, 0.65] },
+  { id: 'greater_flamingo', name: 'Greater flamingo', size_m: [0.4, 0.6, 1.3] },
   { id: 'nile_crocodile', name: 'Nile crocodile', size_m: [0.9, 4.5, 0.6] },
   { id: 'komodo_dragon', name: 'Komodo dragon', size_m: [0.6, 2.6, 0.5] },
   { id: 'galapagos_tortoise', name: 'Galapagos tortoise', size_m: [0.9, 1.2, 0.7] },
@@ -66,41 +66,43 @@ const DEFAULT_ANIMALS = [
 ];
 
 const DEFAULT_FACILITIES = [
-  { id: 'kiosk_ice_cream', category: 'food', footprint: [4, 4] },
-  { id: 'kiosk_drinks', category: 'food', footprint: [4, 4] },
-  { id: 'kiosk_burgers', category: 'food', footprint: [4, 4] },
-  { id: 'restroom_small', category: 'facilities', footprint: [4, 4] },
-  { id: 'restroom_large', category: 'facilities', footprint: [6, 4] },
-  { id: 'gift_shop_small', category: 'shop', footprint: [6, 4] },
-  { id: 'info_kiosk', category: 'facilities', footprint: [2, 2] },
-  { id: 'first_aid_station', category: 'facilities', footprint: [4, 4] },
-  { id: 'bench_wood_straight', category: 'benches_lamps_bins_signs', footprint: [2, 2] },
-  { id: 'trash_bin_wood', category: 'benches_lamps_bins_signs', footprint: [2, 2] },
-  { id: 'park_lamp_post', category: 'benches_lamps_bins_signs', footprint: [2, 2] }
+  { id: 'kiosk_ice_cream', category: 'facilities', footprint: [4, 4] },
+  { id: 'kiosk_beverage_bar', category: 'facilities', footprint: [4, 4] },
+  { id: 'kiosk_pretzel_snack', category: 'facilities', footprint: [4, 4] },
+  { id: 'kiosk_souvenir_stand', category: 'facilities', footprint: [4, 4] },
+  { id: 'booth_visitor_info', category: 'facilities', footprint: [4, 4] },
+  { id: 'building_public_restroom', category: 'facilities', footprint: [6, 4] },
+  { id: 'building_first_aid_station', category: 'facilities', footprint: [4, 4] },
+  { id: 'bench_park_wood_classic', category: 'benches_lamps_bins_signs', footprint: [2, 2] },
+  { id: 'bin_waste_general_timber', category: 'benches_lamps_bins_signs', footprint: [2, 2] },
+  { id: 'lamp_post_victorian_single', category: 'benches_lamps_bins_signs', footprint: [2, 2] }
 ];
 
 const DEFAULT_DECORATIONS = [
-  { id: 'tree_oak_medium' },
-  { id: 'tree_pine_tall' },
-  { id: 'tree_acacia' },
-  { id: 'bush_flowering' },
-  { id: 'rock_boulder_cluster' },
-  { id: 'flower_bed_circular' }
+  { id: 'acacia_tree' },
+  { id: 'oak_tree' },
+  { id: 'pine_tree' },
+  { id: 'boulder_medium' },
+  { id: 'boulder_large' },
+  { id: 'sandstone_boulder' },
+  { id: 'flag_pole' },
+  { id: 'patio_umbrella' }
 ];
 
 const DEFAULT_KEEPERS = [
-  'keeper_m_uniform_khaki',
-  'keeper_f_uniform_green',
-  'keeper_m_tools_rake',
-  'keeper_f_bucket'
+  'keeper_safari_lead_01',
+  'keeper_carnivore_specialist_02',
+  'keeper_aquatic_feeder_03',
+  'keeper_primate_caregiver_04',
+  'keeper_vet_surgeon_05'
 ];
 
 const DEFAULT_VISITORS = [
-  'visitor_man_casual',
-  'visitor_woman_summer',
-  'visitor_child_boy',
-  'visitor_child_girl',
-  'visitor_tourist_camera'
+  'visitor_tourist_camera_01',
+  'visitor_tourist_sunhat_02',
+  'visitor_child_balloon_03',
+  'visitor_child_icecream_04',
+  'visitor_child_cap_05'
 ];
 
 /**
@@ -144,11 +146,29 @@ export function generateLayout(settings, options = {}) {
 
   const rand = createPRNG(seed);
 
-  const animalCatalog = (options.assets && options.assets.filter(a => a.category === 'animals')) || DEFAULT_ANIMALS;
-  const facilityCatalog = DEFAULT_FACILITIES;
-  const decorCatalog = DEFAULT_DECORATIONS;
-  const keeperCatalog = DEFAULT_KEEPERS;
-  const visitorCatalog = DEFAULT_VISITORS;
+  const allAssets = options.assets || null;
+  const assetIdSet = new Set(allAssets ? allAssets.map(a => a.id) : []);
+
+  const animalCatalog = (allAssets ? allAssets.filter(a => a.category === 'animals' && !a.variant_of) : null) || DEFAULT_ANIMALS;
+
+  const facilityCatalog = (allAssets ? allAssets.filter(a =>
+    (a.category === 'facilities' && (a.id.startsWith('kiosk_') || a.id.startsWith('building_') || a.id.startsWith('booth_') || a.id.startsWith('pavilion_'))) ||
+    (a.category === 'benches_lamps_bins_signs')
+  ).map(a => ({
+    id: a.id,
+    category: a.category,
+    footprint: [
+      Math.max(2, Math.round(a.size_m[0] / GRID_M) * GRID_M),
+      Math.max(2, Math.round(a.size_m[1] / GRID_M) * GRID_M)
+    ]
+  })) : null) || DEFAULT_FACILITIES;
+
+  const decorCatalog = (allAssets ? allAssets.filter(a =>
+    (a.category === 'plants' || a.category === 'landscape' || a.category === 'decor') && !a.id.includes('bunting')
+  ).map(a => ({ id: a.id })) : null) || DEFAULT_DECORATIONS;
+
+  const keeperCatalog = (allAssets ? allAssets.filter(a => a.category === 'keepers').map(a => a.id) : null) || DEFAULT_KEEPERS;
+  const visitorCatalog = (allAssets ? allAssets.filter(a => a.category === 'visitors').map(a => a.id) : null) || DEFAULT_VISITORS;
 
   const gridCells = Math.floor(size_m / GRID_M);
 
@@ -182,7 +202,7 @@ export function generateLayout(settings, options = {}) {
   }
 
   function isRegionFree(gx, gy, gw, gh) {
-    if (gx < 0 || gy < 0 || gx + gw > gridCells || gy + gh > gridCells) return false;
+    if (gx < 2 || gy < 2 || gx + gw > gridCells - 2 || gy + gh > gridCells - 2) return false;
     for (let dy = 0; dy < gh; dy++) {
       for (let dx = 0; dx < gw; dx++) {
         if (occ[cellIdx(gx + dx, gy + dy)] !== OCC_EMPTY) return false;
@@ -200,7 +220,7 @@ export function generateLayout(settings, options = {}) {
   }
 
   // 1. Entrance on South boundary (centered on X, at bottom Y=0)
-  const entranceWidthM = 4;
+  const entranceWidthM = 6;
   const entranceDepthM = 2;
   const entranceGW = Math.round(entranceWidthM / GRID_M);
   const entranceGH = Math.round(entranceDepthM / GRID_M);
@@ -211,7 +231,7 @@ export function generateLayout(settings, options = {}) {
 
   const entrance = {
     id: 'entrance_main',
-    asset_id: 'gate_archway_main',
+    asset_id: 'gate_entrance_arch_grand',
     position: [
       (entranceGX + entranceGW / 2) * GRID_M,
       (entranceGY + entranceGH / 2) * GRID_M,
@@ -222,7 +242,6 @@ export function generateLayout(settings, options = {}) {
   };
 
   // 2. Arterial Path Network
-  // Main spine road moving North from entrance to North boundary (minus margin)
   const spineGX = entranceGX + Math.floor(entranceGW / 2);
   const pathSet = new Set();
 
@@ -241,16 +260,16 @@ export function generateLayout(settings, options = {}) {
     if (entranceGW > 1) addPathCell(spineGX - 1, entranceGY + dy);
   }
 
-  // Central spine
+  // Central spine road moving North
   const northBoundGY = gridCells - 4;
   for (let gy = entranceGY + entranceGH; gy <= northBoundGY; gy++) {
     addPathCell(spineGX, gy);
   }
 
-  // Cross avenues spaced regularly across the grid
-  const avenueSpacingCells = Math.max(8, Math.floor(gridCells / (3 + Math.floor(density * 4))));
+  // Cross avenues spaced regularly so enclosures fit cleanly between them
+  const avenueSpacingCells = Math.max(16, Math.floor(gridCells / (2 + Math.floor(density * 3))));
   const avenueYList = [];
-  for (let gy = 4; gy <= northBoundGY; gy += avenueSpacingCells) {
+  for (let gy = 6; gy <= northBoundGY - 6; gy += avenueSpacingCells) {
     avenueYList.push(gy);
     const minX = 4;
     const maxX = gridCells - 5;
@@ -258,23 +277,16 @@ export function generateLayout(settings, options = {}) {
       addPathCell(gx, gy);
     }
   }
-
-  // Outer ring side paths connecting avenues at East and West
-  for (const gy of avenueYList) {
-    const minX = 4;
-    const maxX = gridCells - 5;
-    for (let y = avenueYList[0]; y <= avenueYList[avenueYList.length - 1]; y++) {
-      addPathCell(minX, y);
-      addPathCell(maxX, y);
-    }
+  if (avenueYList.length === 0) {
+    const midY = Math.floor(gridCells / 2);
+    avenueYList.push(midY);
+    for (let gx = 4; gx <= gridCells - 5; gx++) addPathCell(gx, midY);
   }
 
   // 3. Enclosure Placement
-  // Determine number of enclosures based on density and size
-  const maxPossibleEnc = Math.floor((gridCells * gridCells) / (12 * 12));
-  const targetEncCount = Math.max(4, Math.min(Math.min(maxPossibleEnc, animalCatalog.length), Math.floor(4 + density * 40)));
+  const targetEncCount = Math.max(4, Math.min(animalCatalog.length, Math.floor(4 + density * Math.min(46, (gridCells / 40) * 12))));
 
-  // Shuffle animals deterministically
+  // Deterministic shuffle of animals
   const animalsShuffled = [...animalCatalog];
   for (let i = animalsShuffled.length - 1; i > 0; i--) {
     const j = Math.floor(rand() * (i + 1));
@@ -283,7 +295,7 @@ export function generateLayout(settings, options = {}) {
 
   const enclosures = [];
 
-  // Try placing enclosures adjacent to path avenues
+  // Try placing enclosures adjacent to path avenues and spine
   for (let i = 0; i < animalsShuffled.length && enclosures.length < targetEncCount; i++) {
     const animal = animalsShuffled[i];
     const encSize = getEnclosureSizeMeters(animal.size_m);
@@ -293,33 +305,34 @@ export function generateLayout(settings, options = {}) {
     let placed = false;
     let attempts = 0;
 
-    while (!placed && attempts < 80) {
+    while (!placed && attempts < 150) {
       attempts++;
-      // Pick an avenue and a side (North or South of avenue)
       const avY = avenueYList[Math.floor(rand() * avenueYList.length)];
       const onNorth = rand() > 0.5;
-      
-      const encGY = onNorth ? avY + 1 : avY - 1 - encGH;
+
+      const encGY = onNorth ? avY + 1 : avY - encGH;
       const minGX = 4;
       const maxGX = gridCells - 4 - encGW;
       if (maxGX <= minGX) continue;
 
-      const encGX = minGX + Math.floor(rand() * ((maxGX - minGX) / 2)) * 2;
+      const encGX = minGX + Math.floor(rand() * (maxGX - minGX));
 
-      // Check if region (including 1-cell border margin) is free
-      if (isRegionFree(encGX - 1, encGY - 1, encGW + 2, encGH + 2)) {
+      if (isRegionFree(encGX, encGY, encGW, encGH)) {
         // Enclosure footprint must be adjacent to at least one path tile
-        let hasPathAdj = false;
-        let gateGX = encGX + Math.floor(encGW / 2);
-        let gateGY = onNorth ? encGY : encGY + encGH - 1;
-
-        // Check if adjacent row is path
         const adjPathY = onNorth ? encGY - 1 : encGY + encGH;
-        if (isCellValid(gateGX, adjPathY) && getCell(gateGX, adjPathY) === OCC_PATH) {
-          hasPathAdj = true;
+        let gateGX = encGX + Math.floor(encGW / 2);
+
+        // Find path tile on adjacent row
+        let hasAdjPath = false;
+        for (let gx = encGX; gx < encGX + encGW; gx++) {
+          if (getCell(gx, adjPathY) === OCC_PATH) {
+            gateGX = gx;
+            hasAdjPath = true;
+            break;
+          }
         }
 
-        if (hasPathAdj) {
+        if (hasAdjPath) {
           markRegion(encGX, encGY, encGW, encGH, OCC_ENCLOSURE);
 
           const minXM = encGX * GRID_M;
@@ -335,21 +348,33 @@ export function generateLayout(settings, options = {}) {
 
           // Spawn animal instances inside enclosure bounds
           const animalInstances = [];
-          const animalCount = 1 + (density > 0.4 ? Math.floor(rand() * 2) : 0);
+          const animalCount = 1 + (density > 0.3 ? Math.floor(rand() * 2) : 0);
+
+          const maxAnimalDim = Math.max(animal.size_m[0], animal.size_m[1]);
+          const halfAnimalLen = maxAnimalDim / 2;
+          const animalMargin = halfAnimalLen + 0.5;
 
           for (let aIdx = 0; aIdx < animalCount; aIdx++) {
-            const isAdult = aIdx === 0;
-            const isBaby = !isAdult && aIdx === 1 && rand() > 0.4;
-            const isMutation = !isAdult && !isBaby && rand() > 0.7;
+            let variant = 'adult';
+            let assetId = animal.id;
 
-            const variant = isAdult ? 'adult' : (isBaby ? 'baby' : (isMutation ? 'mutation' : 'adult'));
-            const marginM = 1.5;
-            const posX = minXM + marginM + rand() * (widthM - 2 * marginM);
-            const posY = minYM + marginM + rand() * (depthM - 2 * marginM);
+            if (aIdx > 0) {
+              const roll = rand();
+              if (roll < 0.4 && assetIdSet.has(animal.id + '_baby')) {
+                variant = 'baby';
+                assetId = `${animal.id}_baby`;
+              } else if (roll < 0.7 && assetIdSet.has(animal.id + '_rare')) {
+                variant = 'rare';
+                assetId = `${animal.id}_rare`;
+              }
+            }
+
+            const posX = minXM + animalMargin + rand() * Math.max(0.1, widthM - 2 * animalMargin);
+            const posY = minYM + animalMargin + rand() * Math.max(0.1, depthM - 2 * animalMargin);
 
             animalInstances.push({
               id: `${animal.id}_${enclosures.length + 1}_${aIdx + 1}`,
-              asset_id: animal.id,
+              asset_id: assetId,
               variant: variant,
               position: [Math.round(posX * 100) / 100, Math.round(posY * 100) / 100, 0],
               rotation_deg: Math.round(rand() * 360)
@@ -386,7 +411,7 @@ export function generateLayout(settings, options = {}) {
   const pathTileArray = Array.from(pathSet).map(s => s.split(',').map(Number));
 
   let facAttempts = 0;
-  while (facilities.length < targetFacilityCount && facAttempts < 300) {
+  while (facilities.length < targetFacilityCount && facAttempts < 400) {
     facAttempts++;
     const pathTile = pathTileArray[Math.floor(rand() * pathTileArray.length)];
     const ptGX = pathTile[0];
@@ -398,162 +423,121 @@ export function generateLayout(settings, options = {}) {
 
     // Try 4 cardinal directions adjacent to this path tile
     const directions = [
-      { dx: 1, dy: 0 },
-      { dx: -facGW, dy: 0 },
-      { dx: 0, dy: 1 },
-      { dx: 0, dy: -facGH }
+      { gx: ptGX, gy: ptGY + 1, rot: 180 },
+      { gx: ptGX, gy: ptGY - facGH, rot: 0 },
+      { gx: ptGX + 1, gy: ptGY, rot: 270 },
+      { gx: ptGX - facGW, gy: ptGY, rot: 90 }
     ];
 
     const dir = directions[Math.floor(rand() * directions.length)];
-    const targetGX = ptGX + dir.dx;
-    const targetGY = ptGY + dir.dy;
+    if (isRegionFree(dir.gx, dir.gy, facGW, facGH)) {
+      markRegion(dir.gx, dir.gy, facGW, facGH, OCC_FACILITY);
 
-    if (isRegionFree(targetGX, targetGY, facGW, facGH)) {
-      markRegion(targetGX, targetGY, facGW, facGH, OCC_FACILITY);
-
-      const fXM = (targetGX + facGW / 2) * GRID_M;
-      const fYM = (targetGY + facGH / 2) * GRID_M;
+      const posX = (dir.gx + facGW / 2) * GRID_M;
+      const posY = (dir.gy + facGH / 2) * GRID_M;
 
       facilities.push({
-        id: `facility_${facTemplate.id}_${facilities.length + 1}`,
+        id: `fac_${facTemplate.id}_${facilities.length + 1}`,
         asset_id: facTemplate.id,
         category: facTemplate.category,
-        position: [fXM, fYM, 0],
-        rotation_deg: (Math.floor(rand() * 4) * 90),
-        footprint: [facTemplate.footprint[0], facTemplate.footprint[1]],
+        position: [Math.round(posX * 100) / 100, Math.round(posY * 100) / 100, 0],
+        rotation_deg: dir.rot,
+        footprint: facTemplate.footprint,
         path_tile: [ptGX * GRID_M + GRID_M / 2, ptGY * GRID_M + GRID_M / 2]
       });
     }
   }
 
-  // 5. Decorations (trees, rocks, flowers in empty spots)
+  // 5. Decorations (in empty open spaces)
   const decorations = [];
-  const targetDecorCount = Math.floor(10 + density * 50);
+  const targetDecorCount = Math.max(8, Math.floor(6 + density * 50));
   let decorAttempts = 0;
-  while (decorations.length < targetDecorCount && decorAttempts < 200) {
-    decorAttempts++;
-    const dgx = 2 + Math.floor(rand() * (gridCells - 4));
-    const dgy = 2 + Math.floor(rand() * (gridCells - 4));
 
-    if (getCell(dgx, dgy) === OCC_EMPTY) {
-      setCell(dgx, dgy, OCC_DECOR);
-      const decTemplate = decorCatalog[Math.floor(rand() * decorCatalog.length)];
+  while (decorations.length < targetDecorCount && decorAttempts < 500) {
+    decorAttempts++;
+    const gx = 2 + Math.floor(rand() * (gridCells - 4));
+    const gy = 2 + Math.floor(rand() * (gridCells - 4));
+
+    if (getCell(gx, gy) === OCC_EMPTY) {
+      setCell(gx, gy, OCC_DECOR);
+      const decorItem = decorCatalog[Math.floor(rand() * decorCatalog.length)];
       decorations.push({
-        id: `decor_${decTemplate.id}_${decorations.length + 1}`,
-        asset_id: decTemplate.id,
-        position: [dgx * GRID_M + GRID_M / 2, dgy * GRID_M + GRID_M / 2, 0],
-        rotation_deg: Math.round(rand() * 360),
-        scale: Math.round((0.85 + rand() * 0.3) * 100) / 100
+        id: `decor_${decorItem.id}_${decorations.length + 1}`,
+        asset_id: decorItem.id,
+        position: [gx * GRID_M + GRID_M / 2, gy * GRID_M + GRID_M / 2, 0],
+        rotation_deg: Math.round(rand() * 360)
       });
     }
   }
 
-  // 6. People (Visitors and Keepers)
+  // 6. People Placement (Visitors and Keepers on paths or near enclosure gates)
   const people = [];
-  const keeperCount = Math.max(1, Math.min(25, Math.round(population * 0.15)));
+  const keeperCount = Math.min(population, Math.max(1, Math.floor(population * 0.15)));
   const visitorCount = population - keeperCount;
 
-  // Spawn keepers near enclosures and facilities
+  // Keepers spawn near enclosure gates or along paths
   for (let k = 0; k < keeperCount; k++) {
-    const kAsset = keeperCatalog[Math.floor(rand() * keeperCatalog.length)];
-    let pos;
-    let encId = null;
+    const keeperId = keeperCatalog[Math.floor(rand() * keeperCatalog.length)];
+    let pos, nearEncId = null;
 
-    if (enclosures.length > 0 && rand() > 0.3) {
+    if (enclosures.length > 0 && rand() > 0.4) {
       const enc = enclosures[Math.floor(rand() * enclosures.length)];
-      encId = enc.id;
-      // Positioned on path at enclosure gate
-      pos = [
-        enc.gate_position[0] + (rand() - 0.5) * 0.6,
-        enc.gate_position[1] + (rand() - 0.5) * 0.6,
-        0
-      ];
+      pos = [enc.gate_position[0], enc.gate_position[1], 0];
+      nearEncId = enc.id;
     } else {
       const pt = pathTileArray[Math.floor(rand() * pathTileArray.length)];
-      pos = [
-        pt[0] * GRID_M + GRID_M / 2 + (rand() - 0.5) * 0.8,
-        pt[1] * GRID_M + GRID_M / 2 + (rand() - 0.5) * 0.8,
-        0
-      ];
+      pos = [pt[0] * GRID_M + GRID_M / 2, pt[1] * GRID_M + GRID_M / 2, 0];
     }
 
     people.push({
       id: `person_keeper_${k + 1}`,
-      asset_id: kAsset,
+      asset_id: keeperId,
       role: 'keeper',
-      position: [Math.round(pos[0] * 100) / 100, Math.round(pos[1] * 100) / 100, 0],
+      position: pos,
       rotation_deg: Math.round(rand() * 360),
-      near_enclosure_id: encId
+      near_enclosure_id: nearEncId
     });
   }
 
-  // Spawn visitors along paths, especially viewing enclosures
+  // Visitors spawn on paths
   for (let v = 0; v < visitorCount; v++) {
-    const vAsset = visitorCatalog[Math.floor(rand() * visitorCatalog.length)];
-    let pos;
-    let encId = null;
-
-    if (enclosures.length > 0 && rand() > 0.4) {
-      const enc = enclosures[Math.floor(rand() * enclosures.length)];
-      encId = enc.id;
-      // Positioned near enclosure gate / viewing path
-      pos = [
-        enc.gate_position[0] + (rand() - 0.5) * 1.2,
-        enc.gate_position[1] + (rand() - 0.5) * 1.2,
-        0
-      ];
-    } else {
-      const pt = pathTileArray[Math.floor(rand() * pathTileArray.length)];
-      pos = [
-        pt[0] * GRID_M + GRID_M / 2 + (rand() - 0.5) * 1.0,
-        pt[1] * GRID_M + GRID_M / 2 + (rand() - 0.5) * 1.0,
-        0
-      ];
-    }
+    const visitorId = visitorCatalog[Math.floor(rand() * visitorCatalog.length)];
+    const pt = pathTileArray[Math.floor(rand() * pathTileArray.length)];
+    const jitterX = (rand() - 0.5) * 0.8;
+    const jitterY = (rand() - 0.5) * 0.8;
 
     people.push({
       id: `person_visitor_${v + 1}`,
-      asset_id: vAsset,
+      asset_id: visitorId,
       role: 'visitor',
-      position: [Math.round(pos[0] * 100) / 100, Math.round(pos[1] * 100) / 100, 0],
-      rotation_deg: Math.round(rand() * 360),
-      near_enclosure_id: encId
+      position: [
+        Math.round((pt[0] * GRID_M + GRID_M / 2 + jitterX) * 100) / 100,
+        Math.round((pt[1] * GRID_M + GRID_M / 2 + jitterY) * 100) / 100,
+        0
+      ],
+      rotation_deg: Math.round(rand() * 360)
     });
   }
 
-  // 7. Format Path Tiles
-  const pathTiles = [];
-  for (const pKey of pathSet) {
-    const [pgx, pgy] = pKey.split(',').map(Number);
-    const conns = [];
-    if (pathSet.has(`${pgx},${pgy + 1}`)) conns.push('north');
-    if (pathSet.has(`${pgx},${pgy - 1}`)) conns.push('south');
-    if (pathSet.has(`${pgx + 1},${pgy}`)) conns.push('east');
-    if (pathSet.has(`${pgx - 1},${pgy}`)) conns.push('west');
+  // Format path instances
+  const paths = Array.from(pathSet).map((pStr, idx) => {
+    const [gx, gy] = pStr.split(',').map(Number);
+    return {
+      id: `path_${idx + 1}`,
+      position: [gx * GRID_M + GRID_M / 2, gy * GRID_M + GRID_M / 2, 0],
+      size: [GRID_M, GRID_M]
+    };
+  });
 
-    pathTiles.push({
-      id: `path_${pgx}_${pgy}`,
-      position: [pgx * GRID_M + GRID_M / 2, pgy * GRID_M + GRID_M / 2, 0],
-      size: [GRID_M, GRID_M],
-      connections: conns
-    });
-  }
-
-  const endTime = Date.now();
-  const generationTimeMs = Math.max(1, endTime - startTime);
-
-  let totalAnimals = 0;
-  for (const e of enclosures) {
-    totalAnimals += e.animals.length;
-  }
+  const durationMs = Date.now() - startTime;
 
   return {
     version: '1.0.0',
     settings: {
-      size_m: size_m,
-      density: density,
-      population: population,
-      seed: seed
+      size_m,
+      density,
+      population,
+      seed
     },
     boundary: {
       width_m: size_m,
@@ -563,20 +547,19 @@ export function generateLayout(settings, options = {}) {
       max_x: size_m,
       max_y: size_m
     },
-    entrance: entrance,
-    paths: pathTiles,
-    enclosures: enclosures,
-    facilities: facilities,
-    decorations: decorations,
-    people: people,
+    entrance,
+    paths,
+    enclosures,
+    facilities,
+    decorations,
+    people,
     stats: {
-      enclosure_count: enclosures.length,
-      facility_count: facilities.length,
-      animal_count: totalAnimals,
-      visitor_count: visitorCount,
-      keeper_count: keeperCount,
-      path_tile_count: pathTiles.length,
-      generation_time_ms: generationTimeMs
+      total_enclosures: enclosures.length,
+      total_animals: enclosures.reduce((sum, e) => sum + e.animals.length, 0),
+      total_facilities: facilities.length,
+      total_decorations: decorations.length,
+      total_people: people.length,
+      generation_time_ms: durationMs
     }
   };
 }
