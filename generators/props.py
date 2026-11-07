@@ -416,11 +416,17 @@ def _build_enrichment(W, L, H, variant, aid, p, z):
 
 def _build_shop(W, L, H, variant, aid, p, z):
     if "plush_lion_toy" in variant:
-        # Cute stuffed lion sitting
-        z.ball(0.12, loc=(0, 0, 0.12), colour="tan", seg=8, rings=6)
-        # Head & mane
-        z.ball(0.10, loc=(0, -0.06, 0.24), colour="tan", seg=8, rings=6)
-        z.ball(0.14, loc=(0, -0.04, 0.24), colour="orange", scale=(1.2, 0.9, 1.2), seg=8, rings=6)
+        # Cute stuffed lion sitting with mane ring and snout
+        z.ball(0.11, loc=(0, 0.04, 0.11), colour="tan", seg=8, rings=6)
+        # Mane ring framing head
+        z.cyl(0.15, 0.07, loc=(0, -0.05, 0.23), colour="dark_brown", rot=(90, 0, 0), seg=10)
+        # Head
+        z.ball(0.09, loc=(0, -0.07, 0.23), colour="tan", seg=8, rings=6)
+        # Snout & ears
+        z.ball(0.04, loc=(0, -0.14, 0.21), colour="sand", seg=6, rings=4)
+        z.ball(0.015, loc=(0, -0.17, 0.23), colour="black", seg=4, rings=4)
+        for ex in (-0.08, 0.08):
+            z.ball(0.025, loc=(ex, -0.06, 0.30), colour="tan", seg=4, rings=4)
 
     elif "plush_elephant_toy" in variant:
         z.ball(0.14, loc=(0, 0, 0.14), colour="light_grey", scale=(1, 1.2, 1), seg=8, rings=6)
@@ -437,15 +443,20 @@ def _build_shop(W, L, H, variant, aid, p, z):
         z.cone(0.025, 0.05, loc=(0, -0.10, 0.24), colour="yellow", rot=(90, 0, 0), seg=4)
 
     elif "plush_giraffe_toy" in variant:
-        z.ball(0.12, loc=(0, 0, 0.14), colour="sand", seg=8, rings=6)
-        # Long neck
-        z.cyl(0.04, H * 0.55, loc=(0, -0.06, H * 0.50), colour="sand", rot=(10, 0, 0), seg=6)
-        # Head
-        z.ball(0.07, loc=(0, -0.12, H * 0.82), colour="sand", seg=6, rings=4)
-        # Spots (spheres protruding from neck)
-        for sz, sy in ((H * 0.35, -0.05), (H * 0.55, -0.07), (H * 0.70, -0.09)):
-            z.ball(0.025, loc=(0.04, sy, sz), colour="brown", seg=4, rings=4)
-            z.ball(0.025, loc=(-0.04, sy, sz), colour="brown", seg=4, rings=4)
+        # Yellow body
+        z.ball(0.11, loc=(0, 0.04, 0.13), colour="gold", scale=(0.9, 1.2, 0.9), seg=8, rings=6)
+        # Tall neck reaching up to 0.7m target height
+        z.cyl(0.035, H * 0.62, loc=(0, -0.04, H * 0.48), colour="gold", rot=(5, 0, 0), seg=6)
+        # Head & ossicones
+        z.ball(0.065, loc=(0, -0.09, H * 0.84), colour="gold", seg=6, rings=4)
+        for hx in (-0.025, 0.025):
+            z.cyl(0.008, 0.06, loc=(hx, -0.09, H * 0.94), colour="dark_brown", seg=4)
+        # Distinct brown spots on neck and flanks
+        for sz, sy in ((H * 0.35, -0.03), (H * 0.52, -0.04), (H * 0.68, -0.06)):
+            z.box((0.025, 0.025, 0.025), loc=(0.035, sy, sz), colour="brown")
+            z.box((0.025, 0.025, 0.025), loc=(-0.035, sy, sz), colour="brown")
+        z.box((0.04, 0.04, 0.03), loc=(0.09, 0.04, 0.13), colour="brown")
+        z.box((0.04, 0.04, 0.03), loc=(-0.09, 0.04, 0.13), colour="brown")
 
     elif "zoo_guide_brochure" in variant:
         z.box((W, L, H * 0.90), loc=(0, 0, H * 0.45), colour="teal")
@@ -471,9 +482,15 @@ def _build_shop(W, L, H, variant, aid, p, z):
         z.cyl(min(W, L) * 0.35, 0.02, loc=(0, 0, 0.06), colour="dark_brown", seg=8)
 
     elif "zoo_logo_hoodie" in variant:
-        # Folded garment with colored logo patch
-        z.box((W, L, H), loc=(0, 0, H / 2), colour="navy")
-        z.box((W * 0.40, L * 0.35, 0.003), loc=(0, 0, H + 0.0015), colour="gold")
+        # Folded hoodie with body, sleeves, hood and logo
+        z.box((W * 0.60, L * 0.85, H * 0.65), loc=(0, 0, H * 0.32), colour="navy")
+        # Sleeves folded along sides
+        z.box((W * 0.18, L * 0.80, H * 0.55), loc=(-W * 0.38, 0, H * 0.28), colour="navy")
+        z.box((W * 0.18, L * 0.80, H * 0.55), loc=(W * 0.38, 0, H * 0.28), colour="navy")
+        # Hood rolled at back
+        z.cyl(W * 0.25, 0.08, loc=(0, L * 0.25, H * 0.70), colour="navy", rot=(0, 90, 0), seg=8)
+        # Gold zoo logo patch on chest
+        z.box((W * 0.32, L * 0.28, 0.005), loc=(0, -L * 0.10, H * 0.66), colour="gold")
 
     elif "ceramic_souvenir_mug" in variant:
         r = min(W, L) * 0.42
@@ -492,15 +509,27 @@ def _build_shop(W, L, H, variant, aid, p, z):
         z.cyl(W * 0.30, 0.028, loc=(0, 0, H * 0.75), colour="yellow", rot=(90, 0, 0), seg=8)
 
     elif "soft_pretzel_mustard" in variant:
-        # Baked pretzel loop
-        z.box((W * 0.85, L * 0.85, H * 0.70), loc=(0, 0, H * 0.35), colour="tan")
-        # Mustard dip cup slightly offset above floor
-        z.cyl(0.035, H * 0.80, loc=(W * 0.32, L * 0.30, 0.01 + H * 0.40), colour="yellow", seg=6)
+        # Paper serving tray
+        z.box((0.21, 0.19, 0.014), loc=(0, 0, 0.007), colour="white")
+        # Twisted pretzel knot made of non-coplanar 6-sided tubular segments
+        z.cyl(0.015, 0.12, loc=(-0.045, 0.02, 0.025), colour="brown", rot=(90, 0, 35), seg=6)
+        z.cyl(0.015, 0.12, loc=(0.015, 0.02, 0.025), colour="brown", rot=(90, 0, -35), seg=6)
+        z.cyl(0.015, 0.12, loc=(-0.015, -0.03, 0.025), colour="brown", rot=(0, 90, 0), seg=6)
+        z.cyl(0.015, 0.10, loc=(-0.015, 0.06, 0.025), colour="brown", rot=(0, 90, 0), seg=6)
+        # Salt crystals on pretzel
+        for sx, sy in ((-0.05, 0.06), (-0.015, 0.06), (0.02, 0.06)):
+            z.ball(0.006, loc=(sx, sy, 0.038), colour="white", seg=4, rings=4)
+        # Yellow mustard dipping cup sunk into tray
+        z.cyl(0.024, 0.048, loc=(0.065, -0.045, 0.028), colour="yellow", seg=8)
 
     elif "softserve_icecream_cone" in variant:
         r = min(W, L) / 2
-        z.cone(r * 0.85, H * 0.55, loc=(0, 0, H * 0.28), colour="tan", seg=6)
-        z.ball(r, loc=(0, 0, H * 0.70), colour="white", scale=(1, 1, 1.4), seg=8, rings=6)
+        # Waffle cone
+        z.cone(r * 0.75, H * 0.55, loc=(0, 0, H * 0.28), colour="tan", seg=6)
+        # Swirled pink strawberry ice cream
+        z.cyl(r * 0.85, H * 0.18, loc=(0, 0, H * 0.58), colour="pink", seg=8)
+        z.cyl(r * 0.65, H * 0.16, loc=(0, 0, H * 0.72), colour="pink", seg=8)
+        z.cone(r * 0.45, H * 0.20, loc=(0, 0, H * 0.88), colour="pink", seg=6)
 
     elif "fountain_soda_cup" in variant:
         r = min(W, L) / 2
@@ -536,11 +565,19 @@ def _build_shop(W, L, H, variant, aid, p, z):
         z.box((W * 0.35, 0.04, 0.03), loc=(0, 0, H / 2), colour="yellow")
 
     elif "helium_tiger_balloon" in variant:
-        # Mylar tiger balloon
+        # Mylar tiger balloon with black stripes and white muzzle
         z.ball(0.18, loc=(0, 0, H * 0.70), colour="orange", scale=(1.2, 0.7, 1), seg=8, rings=6)
-        # Ears
+        # Ears with black tips
         for ex in (-0.16, 0.16):
             z.cone(0.04, 0.08, loc=(ex, 0, H * 0.85), colour="orange", seg=4)
+            z.box((0.02, 0.02, 0.02), loc=(ex, 0, H * 0.89), colour="black")
+        # Tiger stripes across forehead & cheeks
+        z.box((0.025, 0.15, 0.06), loc=(0, -0.08, H * 0.78), colour="black")
+        z.box((0.36, 0.03, 0.02), loc=(0, 0, H * 0.72), colour="black")
+        z.box((0.32, 0.03, 0.02), loc=(0, 0, H * 0.66), colour="black")
+        # White muzzle with black nose
+        z.ball(0.05, loc=(0, -0.11, H * 0.65), colour="white", scale=(1.2, 0.7, 0.8), seg=6, rings=4)
+        z.box((0.02, 0.02, 0.015), loc=(0, -0.15, H * 0.66), colour="black")
         # String
         z.cyl(0.008, H * 0.55, loc=(0, 0, H * 0.28), colour="white", seg=4)
 
