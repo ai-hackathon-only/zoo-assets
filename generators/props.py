@@ -50,22 +50,26 @@ def _build_food(W, L, H, variant, aid, p, z):
         z.cyl(r * 1.015, H * 0.12, loc=(0, 0, H * 0.75), colour="tan", seg=12)
 
     elif "meat_rib_slab" in variant:
-        # Red meat slab
-        z.box((W * 0.90, L * 0.85, H * 0.92), loc=(0, 0, H * 0.46), colour="red")
-        # Bone ribs protruding
+        # Red meat base slab (flatter, distinct)
+        z.box((W * 0.90, L * 0.80, H * 0.45), loc=(0, 0, H * 0.225), colour="red")
+        # Thick white rib bones sitting on top and protruding at sides
         num_ribs = 4
-        spacing = (W * 0.80) / (num_ribs - 1)
+        spacing = (W * 0.75) / (num_ribs - 1)
         for i in range(num_ribs):
-            rx = -W * 0.40 + i * spacing
-            z.cyl(0.022, L * 1.05, loc=(rx, 0, H * 0.48), colour="white", rot=(90, 0, 0), seg=6)
+            rx = -W * 0.375 + i * spacing
+            z.cyl(0.032, L * 1.12, loc=(rx, 0, H * 0.60), colour="white", rot=(90, 0, 0), seg=8)
 
     elif "fish_bucket_herring" in variant:
-        r = min(W, L) * 0.45
-        z.cyl(r, H * 0.85, loc=(0, 0, H * 0.425), colour="grey", seg=10, r2=r * 0.75)
-        z.cyl(r * 1.04, 0.03, loc=(0, 0, H * 0.83), colour="charcoal", seg=10)
-        # Fish tails sticking out
-        for angle, fx in ((20, -0.06), (-35, 0.05), (75, 0.0)):
-            z.cone(0.045, 0.16, loc=(fx, 0, H * 0.82), colour="light_grey", rot=(angle, 15, 0), seg=4)
+        r_top = min(W, L) * 0.45
+        r_bot = r_top * 0.75
+        # Light grey bucket tapering wider toward the top
+        z.cyl(r_bot, H * 0.80, loc=(0, 0, H * 0.40), colour="light_grey", seg=10, r2=r_top)
+        # Upper rim band
+        z.cyl(r_top * 1.04, 0.03, loc=(0, 0, H * 0.78), colour="charcoal", seg=10)
+        # Silver / blue fish protruding out of the bucket
+        for angle, fx, fy in ((25, -0.07, 0.02), (-30, 0.06, -0.02), (10, 0.0, 0.04)):
+            z.cone(0.04, 0.22, loc=(fx, fy, H * 0.78), colour="water", rot=(angle, 15, 0), seg=4)
+            z.ball(0.035, loc=(fx, fy, H * 0.88), colour="light_grey", scale=(0.6, 1.2, 0.6), seg=6, rings=4)
 
     elif "eucalyptus_bundle" in variant:
         # Tall bundle of branches tied together
@@ -167,11 +171,22 @@ def _build_food(W, L, H, variant, aid, p, z):
         z.box((W * 0.82, L * 0.80, H * 0.65), loc=(0, 0, H * 0.52), colour="maroon")
 
     elif "watermelon_enrich_treat" in variant:
-        r = min(W, L) / 2
-        # Green melon with carved slice revealing red pulp
-        z.ball(r, loc=(0, 0, H / 2), colour="forest", scale=(1, 1, 0.9), seg=10, rings=6)
-        # Carved wedge cut
-        z.box((r * 0.8, r * 0.8, H * 0.45), loc=(0, -r * 0.45, H / 2), colour="red")
+        r = min(W, L) * 0.48
+        # Forest green rind body
+        z.ball(r, loc=(0, 0, H * 0.45), colour="forest", scale=(1, 1, 0.88), seg=12, rings=8)
+        # Light green stripes on rind
+        for ang in (0, 45, 90, 135, 180, 225, 270, 315):
+            rad = math.radians(ang)
+            sx = math.cos(rad) * (r * 0.96)
+            sy = math.sin(rad) * (r * 0.96)
+            z.cyl(0.015, H * 0.55, loc=(sx, sy, H * 0.42), colour="leaf", rot=(0, 0, ang), seg=4)
+        # Flat cut face revealing bright red melon pulp
+        z.cyl(r * 0.82, 0.04, loc=(0, 0, H * 0.68), colour="red", seg=10)
+        # Cut melon wedge slice protruding on top
+        z.box((r * 0.70, 0.07, H * 0.28), loc=(0, -0.02, H * 0.82), colour="red")
+        # Black seed specks on the cut slice
+        for sx in (-0.05, 0.01, 0.06):
+            z.ball(0.012, loc=(sx, 0.02, H * 0.82), colour="black")
 
     elif "krill_shrimp_pail" in variant:
         r = min(W, L) * 0.46
@@ -221,19 +236,18 @@ def _build_enrichment(W, L, H, variant, aid, p, z):
         z.cyl(0.02, H - 0.55, loc=(0, 0, (H + 0.45) / 2), colour="light_grey", seg=4)
 
     elif "tire_pyramid" in variant:
-        # Stacked tires: 3 on ground, 1 on top
-        tr = 0.42
-        th = 0.26
-        # Base ring of 3 tires
+        # Stacked tires: 3 on ground, 1 on top, total height H
+        th = H * 0.52
+        tr = min(W, L) * 0.22
+        dist = tr * 1.35
         angles = [0, 120, 240]
-        dist = 0.45
         for ang in angles:
             rad = math.radians(ang)
             tx = math.cos(rad) * dist
             ty = math.sin(rad) * dist
             z.cyl(tr, th, loc=(tx, ty, th / 2), colour="charcoal", seg=10)
-        # Top apex tire
-        z.cyl(tr, th, loc=(0, 0, th * 1.5), colour="charcoal", seg=10)
+        # Top apex tire resting on bottom tier
+        z.cyl(tr, th, loc=(0, 0, H - th / 2), colour="charcoal", seg=10)
 
     elif "puzzle_barrel" in variant:
         r = min(W, L) / 2
@@ -296,12 +310,16 @@ def _build_enrichment(W, L, H, variant, aid, p, z):
         z.cyl(0.02, H * 0.55, loc=(0, 0, H * 0.72), colour="charcoal", seg=4)
 
     elif "bamboo_windchime_toy" in variant:
-        # Hanging bamboo clappers
-        z.box((W * 0.70, L * 0.70, 0.04), loc=(0, 0, H * 0.95), colour="brown")
-        lengths = [0.45, 0.60, 0.75, 0.90]
-        for i, (bx, by) in enumerate(((-0.12, -0.12), (0.12, -0.12), (-0.12, 0.12), (0.12, 0.12))):
+        # Central hanging bamboo suspension pole from floor to top board
+        z.cyl(0.025, H - 0.03, loc=(0, 0, (H - 0.03) / 2), colour="olive", seg=6)
+        # Top suspension board
+        z.box((W * 0.85, L * 0.85, 0.03), loc=(0, 0, H - 0.015), colour="brown")
+        # Hanging chime tubes of varying lengths
+        lengths = [H * 0.30, H * 0.40, H * 0.50, H * 0.60]
+        offsets = ((-W * 0.35, -L * 0.35), (W * 0.35, -L * 0.35), (-W * 0.35, L * 0.35), (W * 0.35, L * 0.35))
+        for i, (bx, by) in enumerate(offsets):
             ch = lengths[i % 4]
-            z.cyl(0.035, ch, loc=(bx, by, H * 0.95 - ch / 2), colour="olive", seg=6)
+            z.cyl(0.035, ch, loc=(bx, by, H - 0.05 - ch / 2), colour="olive", seg=6)
 
     elif "primate_puzzle_box" in variant:
         # Wooden feeder box with maze holes
@@ -319,11 +337,14 @@ def _build_enrichment(W, L, H, variant, aid, p, z):
     elif "climbing_cargo_net" in variant:
         # Large timber A-frame with rope grid
         pw = 0.12
-        z.box((pw, L, H), loc=(-W * 0.45, 0, H / 2), colour="dark_brown")
-        z.box((pw, L, H), loc=(W * 0.45, 0, H / 2), colour="dark_brown")
+        post_h = H - pw
+        # Vertical side posts
+        z.box((pw, L * 0.90, post_h), loc=(-W * 0.45, 0, post_h / 2), colour="dark_brown")
+        z.box((pw, L * 0.90, post_h), loc=(W * 0.45, 0, post_h / 2), colour="dark_brown")
+        # Top cross beam extending fully across
         z.box((W, L, pw), loc=(0, 0, H - pw / 2), colour="dark_brown")
-        # Mesh fill
-        z.box((W * 0.85, 0.04, H * 0.85), loc=(0, 0, H * 0.48), colour="tan")
+        # Mesh fill netting inside the frame
+        z.box((W * 0.82, 0.04, post_h * 0.92), loc=(0, 0, post_h / 2), colour="tan")
 
     elif "misting_rub_station" in variant:
         # Spray arch with scratch brush rollers
@@ -337,16 +358,18 @@ def _build_enrichment(W, L, H, variant, aid, p, z):
     elif "splash_wading_tub" in variant:
         # Shallow galvanized pool
         r = min(W, L) / 2
-        z.cyl(r, H * 0.80, loc=(0, 0, H * 0.40), colour="light_grey", seg=12, r2=r * 0.90)
-        z.cyl(r * 0.90, 0.04, loc=(0, 0, H * 0.65), colour="water", seg=10)
+        z.cyl(r, H, loc=(0, 0, H / 2), colour="light_grey", seg=12, r2=r * 0.92)
+        z.cyl(r * 0.88, 0.04, loc=(0, 0, H * 0.82), colour="water", seg=10)
 
     elif "treat_labyrinth_plate" in variant:
         # Disc with labyrinth walls
         r = min(W, L) / 2
-        z.cyl(r, H * 0.40, loc=(0, 0, H * 0.20), colour="teal", seg=12)
-        # Raised ridges
-        z.cyl(r * 0.70, H * 0.60, loc=(0, 0, H * 0.45), colour="teal", seg=10, r2=r * 0.70)
-        z.cyl(r * 0.40, H * 0.80, loc=(0, 0, H * 0.55), colour="white", seg=8)
+        # Base plate from 0 to H * 0.35
+        z.cyl(r, H * 0.35, loc=(0, 0, H * 0.175), colour="teal", seg=12)
+        # Outer labyrinth ridge from 0.05 to H * 0.70
+        z.cyl(r * 0.70, H * 0.65, loc=(0, 0, (0.05 + H * 0.70) / 2), colour="teal", seg=10)
+        # Inner white hub from 0.08 to H
+        z.cyl(r * 0.35, H * 0.92, loc=(0, 0, (0.08 + H) / 2), colour="white", seg=8)
 
     elif "floating_plastic_ring" in variant:
         # Hollow buoy donut ring
