@@ -193,8 +193,14 @@ def render_thumb(ob, path, res=256):
     bg.inputs["Color"].default_value = (0.9, 0.92, 0.95, 1)
     bg.inputs["Strength"].default_value = 0.9
     sc.world = world
-    sc.render.engine = "BLENDER_EEVEE"
-    sc.eevee.taa_render_samples = 16
+    # Workbench: no GPU shader cache, same image on every machine, ~0.2 s per thumb.
+    sc.render.engine = "BLENDER_WORKBENCH"
+    sh = sc.display.shading
+    sh.light = "STUDIO"
+    sh.color_type = "TEXTURE"
+    sh.show_shadows = True
+    sh.show_cavity = False
+    sc.display.render_aa = "8"
     sc.render.resolution_x = sc.render.resolution_y = res
     sc.render.film_transparent = True
     sc.view_settings.view_transform = "Standard"

@@ -1,6 +1,6 @@
 """Rebuild every asset in assets.json: GLB + PNG thumbnail in assets/<category>/.
 
-blender -b -noaudio --factory-startup --python build_all.py [-- --only ID ... | --category C | --generator G]
+blender -b -noaudio --factory-startup --python build_all.py [-- --only ID ... | --category C | --generator G | --allow-skip]
 Each asset row names a generator module in generators/; it must define build(asset, z).
 """
 import argparse
@@ -27,6 +27,8 @@ def main():
     ap.add_argument("--category")
     ap.add_argument("--generator")
     ap.add_argument("--no-thumbs", action="store_true")
+    ap.add_argument("--allow-skip", action="store_true",
+                    help="while generators are being written: rows without a generator don't fail the build")
     a = ap.parse_args(argv)
     with open(os.path.join(ROOT, "assets.json")) as f:
         rows = json.load(f)["assets"]
@@ -53,7 +55,9 @@ def main():
             traceback.print_exc()
             failed.append(r["id"])
     print(f"BUILD built={built} skipped(no generator)={len(skipped)} failed={len(failed)} {failed}")
-    if failed:
+    if skipped:
+        print("SKIPPED (no generator):", " ".join(skipped[:20]), "..." if len(skipped) > 20 else "")
+    if failed or (skipped and not a.allow_skip):
         sys.exit(1)
 
 
