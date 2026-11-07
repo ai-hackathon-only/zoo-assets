@@ -5,2026 +5,1921 @@
       "id": "keeper_safari_lead_01",
       "category": "keepers",
       "name": "Zoo Keeper: Safari Team Lead",
-      "mesh_name": "SM_Keepers_SafariLead_01",
+      "mesh_name": "SM_keepers_keeper_safari_lead_01",
       "size_m": [
         0.6,
         0.4,
         1.88
       ],
       "generator": "gen_human.py",
-      "tri_budget": 3000,
-      "file_budget_kb": 300,
       "meta": {
         "role_type": "keeper",
         "build": "tall",
         "skin_tone": "tan",
         "uniform": "khaki",
         "tool": "clipboard"
-      }
+      },
+      "budget_tris": 3000
     },
     {
       "id": "keeper_carnivore_specialist_02",
       "category": "keepers",
       "name": "Zoo Keeper: Carnivore Keeper",
-      "mesh_name": "SM_Keepers_CarnivoreSpecialist_02",
+      "mesh_name": "SM_keepers_keeper_carnivore_specialist_02",
       "size_m": [
         0.65,
         0.45,
         1.82
       ],
       "generator": "gen_human.py",
-      "tri_budget": 3000,
-      "file_budget_kb": 300,
       "meta": {
         "role_type": "keeper",
         "build": "athletic",
         "skin_tone": "dark",
         "uniform": "olive",
         "tool": "meat_tongs"
-      }
+      },
+      "budget_tris": 3000
     },
     {
       "id": "keeper_aquatic_feeder_03",
       "category": "keepers",
       "name": "Zoo Keeper: Aquarium Caretaker",
-      "mesh_name": "SM_Keepers_AquaticFeeder_03",
+      "mesh_name": "SM_keepers_keeper_aquatic_feeder_03",
       "size_m": [
         0.6,
         0.4,
         1.75
       ],
       "generator": "gen_human.py",
-      "tri_budget": 3000,
-      "file_budget_kb": 300,
       "meta": {
         "role_type": "keeper",
         "build": "athletic",
         "skin_tone": "fair",
         "uniform": "navy",
         "tool": "fish_bucket"
-      }
+      },
+      "budget_tris": 3000
     },
     {
       "id": "keeper_primate_caregiver_04",
       "category": "keepers",
       "name": "Zoo Keeper: Primate Enrichment Keeper",
-      "mesh_name": "SM_Keepers_PrimateCaregiver_04",
+      "mesh_name": "SM_keepers_keeper_primate_caregiver_04",
       "size_m": [
         0.55,
         0.38,
         1.7
       ],
       "generator": "gen_human.py",
-      "tri_budget": 3000,
-      "file_budget_kb": 300,
       "meta": {
         "role_type": "keeper",
         "build": "slim",
         "skin_tone": "medium",
         "uniform": "khaki",
         "tool": "puzzle_box"
-      }
+      },
+      "budget_tris": 3000
     },
     {
       "id": "keeper_vet_surgeon_05",
       "category": "keepers",
       "name": "Zoo Keeper: Lead Zoo Veterinarian",
-      "mesh_name": "SM_Keepers_VetSurgeon_05",
+      "mesh_name": "SM_keepers_keeper_vet_surgeon_05",
       "size_m": [
         0.55,
         0.38,
         1.78
       ],
       "generator": "gen_human.py",
-      "tri_budget": 3000,
-      "file_budget_kb": 300,
       "meta": {
         "role_type": "keeper",
         "build": "slim",
         "skin_tone": "fair",
         "uniform": "teal_scrubs",
         "tool": "med_kit"
-      }
+      },
+      "budget_tris": 3000
     },
     {
       "id": "keeper_vet_assistant_06",
       "category": "keepers",
       "name": "Zoo Keeper: Vet Assistant",
-      "mesh_name": "SM_Keepers_VetAssistant_06",
+      "mesh_name": "SM_keepers_keeper_vet_assistant_06",
       "size_m": [
         0.5,
         0.35,
         1.62
       ],
       "generator": "gen_human.py",
-      "tri_budget": 3000,
-      "file_budget_kb": 300,
       "meta": {
         "role_type": "keeper",
         "build": "petite",
         "skin_tone": "dark",
         "uniform": "teal_scrubs",
         "tool": "scanner"
-      }
+      },
+      "budget_tris": 3000
     },
     {
       "id": "keeper_aviary_curator_07",
       "category": "keepers",
       "name": "Zoo Keeper: Aviary Curator",
-      "mesh_name": "SM_Keepers_AviaryCurator_07",
+      "mesh_name": "SM_keepers_keeper_aviary_curator_07",
       "size_m": [
         0.6,
         0.4,
         1.76
       ],
       "generator": "gen_human.py",
-      "tri_budget": 3000,
-      "file_budget_kb": 300,
       "meta": {
         "role_type": "keeper",
         "build": "athletic",
         "skin_tone": "medium",
         "uniform": "green",
         "tool": "seed_scoop"
-      }
+      },
+      "budget_tris": 3000
     },
     {
       "id": "keeper_herpetologist_08",
       "category": "keepers",
       "name": "Zoo Keeper: Reptile Specialist",
-      "mesh_name": "SM_Keepers_Herpetologist_08",
+      "mesh_name": "SM_keepers_keeper_herpetologist_08",
       "size_m": [
         0.55,
         0.38,
         1.8
       ],
       "generator": "gen_human.py",
-      "tri_budget": 3000,
-      "file_budget_kb": 300,
       "meta": {
         "role_type": "keeper",
         "build": "slim",
         "skin_tone": "tan",
         "uniform": "camo_khaki",
         "tool": "snake_hook"
-      }
+      },
+      "budget_tris": 3000
     },
     {
       "id": "keeper_elephant_keeper_09",
       "category": "keepers",
       "name": "Zoo Keeper: Elephant Keeper",
-      "mesh_name": "SM_Keepers_ElephantKeeper_09",
+      "mesh_name": "SM_keepers_keeper_elephant_keeper_09",
       "size_m": [
         0.75,
         0.5,
         1.92
       ],
       "generator": "gen_human.py",
-      "tri_budget": 3000,
-      "file_budget_kb": 300,
       "meta": {
         "role_type": "keeper",
         "build": "stocky",
         "skin_tone": "dark",
         "uniform": "heavy_work",
         "tool": "shovel"
-      }
+      },
+      "budget_tris": 3000
     },
     {
       "id": "keeper_ungulate_feeder_10",
       "category": "keepers",
       "name": "Zoo Keeper: Hoofed Stock Keeper",
-      "mesh_name": "SM_Keepers_UngulateFeeder_10",
+      "mesh_name": "SM_keepers_keeper_ungulate_feeder_10",
       "size_m": [
         0.65,
         0.42,
         1.84
       ],
       "generator": "gen_human.py",
-      "tri_budget": 3000,
-      "file_budget_kb": 300,
       "meta": {
         "role_type": "keeper",
         "build": "athletic",
         "skin_tone": "fair",
         "uniform": "khaki",
         "tool": "pitchfork"
-      }
+      },
+      "budget_tris": 3000
     },
     {
       "id": "keeper_arctic_curator_11",
       "category": "keepers",
       "name": "Zoo Keeper: Arctic Habitat Keeper",
-      "mesh_name": "SM_Keepers_ArcticCurator_11",
+      "mesh_name": "SM_keepers_keeper_arctic_curator_11",
       "size_m": [
         0.75,
         0.5,
         1.8
       ],
       "generator": "gen_human.py",
-      "tri_budget": 3000,
-      "file_budget_kb": 300,
       "meta": {
         "role_type": "keeper",
         "build": "stocky",
         "skin_tone": "fair",
         "uniform": "parka_blue",
         "tool": "ice_pick"
-      }
+      },
+      "budget_tris": 3000
     },
     {
       "id": "keeper_nocturnal_keeper_12",
       "category": "keepers",
       "name": "Zoo Keeper: Nocturnal House Keeper",
-      "mesh_name": "SM_Keepers_NocturnalKeeper_12",
+      "mesh_name": "SM_keepers_keeper_nocturnal_keeper_12",
       "size_m": [
         0.55,
         0.38,
         1.72
       ],
       "generator": "gen_human.py",
-      "tri_budget": 3000,
-      "file_budget_kb": 300,
       "meta": {
         "role_type": "keeper",
         "build": "slim",
         "skin_tone": "dark",
         "uniform": "charcoal",
         "tool": "red_flashlight"
-      }
+      },
+      "budget_tris": 3000
     },
     {
       "id": "keeper_nursery_nurse_13",
       "category": "keepers",
       "name": "Zoo Keeper: Animal Nursery Nurse",
-      "mesh_name": "SM_Keepers_NurseryNurse_13",
+      "mesh_name": "SM_keepers_keeper_nursery_nurse_13",
       "size_m": [
         0.52,
         0.36,
         1.64
       ],
       "generator": "gen_human.py",
-      "tri_budget": 3000,
-      "file_budget_kb": 300,
       "meta": {
         "role_type": "keeper",
         "build": "petite",
         "skin_tone": "medium",
         "uniform": "white_apron",
         "tool": "nursing_bottle"
-      }
+      },
+      "budget_tris": 3000
     },
     {
       "id": "keeper_grounds_landscaper_14",
       "category": "keepers",
       "name": "Zoo Keeper: Zoo Landscaper",
-      "mesh_name": "SM_Keepers_GroundsLandscaper_14",
+      "mesh_name": "SM_keepers_keeper_grounds_landscaper_14",
       "size_m": [
         0.62,
         0.42,
         1.78
       ],
       "generator": "gen_human.py",
-      "tri_budget": 3000,
-      "file_budget_kb": 300,
       "meta": {
         "role_type": "keeper",
         "build": "athletic",
         "skin_tone": "tan",
         "uniform": "orange_vest",
         "tool": "rake"
-      }
+      },
+      "budget_tris": 3000
     },
     {
       "id": "keeper_maintenance_tech_15",
       "category": "keepers",
       "name": "Zoo Keeper: Habitat Maintenance Tech",
-      "mesh_name": "SM_Keepers_MaintenanceTech_15",
+      "mesh_name": "SM_keepers_keeper_maintenance_tech_15",
       "size_m": [
         0.7,
         0.48,
         1.85
       ],
       "generator": "gen_human.py",
-      "tri_budget": 3000,
-      "file_budget_kb": 300,
       "meta": {
         "role_type": "keeper",
         "build": "stocky",
         "skin_tone": "medium",
         "uniform": "blue_overalls",
         "tool": "toolbox"
-      }
+      },
+      "budget_tris": 3000
     },
     {
       "id": "keeper_security_ranger_16",
       "category": "keepers",
       "name": "Zoo Keeper: Zoo Ranger / Security",
-      "mesh_name": "SM_Keepers_SecurityRanger_16",
+      "mesh_name": "SM_keepers_keeper_security_ranger_16",
       "size_m": [
         0.65,
         0.42,
         1.86
       ],
       "generator": "gen_human.py",
-      "tri_budget": 3000,
-      "file_budget_kb": 300,
       "meta": {
         "role_type": "keeper",
         "build": "athletic",
         "skin_tone": "dark",
         "uniform": "ranger_tan",
         "tool": "radio_holster"
-      }
+      },
+      "budget_tris": 3000
     },
     {
       "id": "keeper_education_guide_17",
       "category": "keepers",
       "name": "Zoo Keeper: Educational Safari Guide",
-      "mesh_name": "SM_Keepers_EducationGuide_17",
+      "mesh_name": "SM_keepers_keeper_education_guide_17",
       "size_m": [
         0.56,
         0.38,
         1.74
       ],
       "generator": "gen_human.py",
-      "tri_budget": 3000,
-      "file_budget_kb": 300,
       "meta": {
         "role_type": "keeper",
         "build": "slim",
         "skin_tone": "fair",
         "uniform": "yellow_polo",
         "tool": "megaphone"
-      }
+      },
+      "budget_tris": 3000
     },
     {
       "id": "keeper_penguin_keeper_18",
       "category": "keepers",
       "name": "Zoo Keeper: Penguin Colony Caretaker",
-      "mesh_name": "SM_Keepers_PenguinKeeper_18",
+      "mesh_name": "SM_keepers_keeper_penguin_keeper_18",
       "size_m": [
         0.62,
         0.42,
         1.72
       ],
       "generator": "gen_human.py",
-      "tri_budget": 3000,
-      "file_budget_kb": 300,
       "meta": {
         "role_type": "keeper",
         "build": "athletic",
         "skin_tone": "tan",
         "uniform": "waders_blue",
         "tool": "feed_pail"
-      }
+      },
+      "budget_tris": 3000
     },
     {
       "id": "keeper_botanist_curator_19",
       "category": "keepers",
       "name": "Zoo Keeper: Botanical Habitat Curator",
-      "mesh_name": "SM_Keepers_BotanistCurator_19",
+      "mesh_name": "SM_keepers_keeper_botanist_curator_19",
       "size_m": [
         0.52,
         0.36,
         1.65
       ],
       "generator": "gen_human.py",
-      "tri_budget": 3000,
-      "file_budget_kb": 300,
       "meta": {
         "role_type": "keeper",
         "build": "petite",
         "skin_tone": "fair",
         "uniform": "green_smock",
         "tool": "pruning_shears"
-      }
+      },
+      "budget_tris": 3000
     },
     {
       "id": "keeper_apprentice_keeper_20",
       "category": "keepers",
       "name": "Zoo Keeper: Junior Apprentice Keeper",
-      "mesh_name": "SM_Keepers_ApprenticeKeeper_20",
+      "mesh_name": "SM_keepers_keeper_apprentice_keeper_20",
       "size_m": [
         0.55,
         0.38,
         1.68
       ],
       "generator": "gen_human.py",
-      "tri_budget": 3000,
-      "file_budget_kb": 300,
       "meta": {
         "role_type": "keeper",
         "build": "slim",
         "skin_tone": "medium",
         "uniform": "khaki_vest",
         "tool": "broom"
-      }
+      },
+      "budget_tris": 3000
     },
     {
       "id": "visitor_tourist_camera_01",
       "category": "visitors",
       "name": "Visitor: Tourist with DSLR Camera",
-      "mesh_name": "SM_Visitors_TouristCamera_01",
+      "mesh_name": "SM_visitors_visitor_tourist_camera_01",
       "size_m": [
         0.6,
         0.4,
         1.78
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "athletic",
         "skin_tone": "fair",
         "outfit": "casual_polo",
         "accessory": "camera"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_tourist_sunhat_02",
       "category": "visitors",
       "name": "Visitor: Tourist with Sunhat",
-      "mesh_name": "SM_Visitors_TouristSunhat_02",
+      "mesh_name": "SM_visitors_visitor_tourist_sunhat_02",
       "size_m": [
         0.55,
         0.38,
         1.68
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "slim",
         "skin_tone": "tan",
         "outfit": "summer_dress",
         "accessory": "tote_bag"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_child_balloon_03",
       "category": "visitors",
       "name": "Visitor: Excited Child with Balloon",
-      "mesh_name": "SM_Visitors_ChildBalloon_03",
+      "mesh_name": "SM_visitors_visitor_child_balloon_03",
       "size_m": [
         0.45,
         0.35,
         1.15
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "child",
         "skin_tone": "dark",
         "outfit": "tshirt_shorts",
         "accessory": "balloon"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_child_icecream_04",
       "category": "visitors",
       "name": "Visitor: Child Licking Ice Cream",
-      "mesh_name": "SM_Visitors_ChildIcecream_04",
+      "mesh_name": "SM_visitors_visitor_child_icecream_04",
       "size_m": [
         0.42,
         0.32,
         1.1
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "child",
         "skin_tone": "fair",
         "outfit": "overalls",
         "accessory": "ice_cream"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_child_cap_05",
       "category": "visitors",
       "name": "Visitor: Child with Safari Cap",
-      "mesh_name": "SM_Visitors_ChildCap_05",
+      "mesh_name": "SM_visitors_visitor_child_cap_05",
       "size_m": [
         0.44,
         0.34,
         1.2
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "child",
         "skin_tone": "medium",
         "outfit": "safari_kids",
         "accessory": "binoculars_toy"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_toddler_waddling_06",
       "category": "visitors",
       "name": "Visitor: Toddler Waddling",
-      "mesh_name": "SM_Visitors_ToddlerWaddling_06",
+      "mesh_name": "SM_visitors_visitor_toddler_waddling_06",
       "size_m": [
         0.38,
         0.3,
         0.88
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "toddler",
         "skin_tone": "fair",
         "outfit": "onesie_yellow",
         "accessory": "none"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_teen_phone_07",
       "category": "visitors",
       "name": "Visitor: Teenager Browsing Phone",
-      "mesh_name": "SM_Visitors_TeenPhone_07",
+      "mesh_name": "SM_visitors_visitor_teen_phone_07",
       "size_m": [
         0.55,
         0.38,
         1.72
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "slim",
         "skin_tone": "medium",
         "outfit": "hoodie_jeans",
         "accessory": "smartphone"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_teen_skateboard_08",
       "category": "visitors",
       "name": "Visitor: Teen with Backpack",
-      "mesh_name": "SM_Visitors_TeenSkateboard_08",
+      "mesh_name": "SM_visitors_visitor_teen_skateboard_08",
       "size_m": [
         0.6,
         0.4,
         1.75
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "athletic",
         "skin_tone": "dark",
         "outfit": "graphic_tee",
         "accessory": "backpack"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_senior_cane_09",
       "category": "visitors",
       "name": "Visitor: Grandfather with Wooden Cane",
-      "mesh_name": "SM_Visitors_SeniorCane_09",
+      "mesh_name": "SM_visitors_visitor_senior_cane_09",
       "size_m": [
         0.58,
         0.45,
         1.7
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "senior",
         "skin_tone": "fair",
         "outfit": "cardigan",
         "accessory": "cane"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_senior_sunvisor_10",
       "category": "visitors",
       "name": "Visitor: Grandmother with Sun Visor",
-      "mesh_name": "SM_Visitors_SeniorSunvisor_10",
+      "mesh_name": "SM_visitors_visitor_senior_sunvisor_10",
       "size_m": [
         0.55,
         0.4,
         1.62
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "senior",
         "skin_tone": "tan",
         "outfit": "blouse_skirt",
         "accessory": "umbrella"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_family_dad_backpack_11",
       "category": "visitors",
       "name": "Visitor: Father Carrying Heavy Daypack",
-      "mesh_name": "SM_Visitors_FamilyDadBackpack_11",
+      "mesh_name": "SM_visitors_visitor_family_dad_backpack_11",
       "size_m": [
         0.7,
         0.48,
         1.84
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "stocky",
         "skin_tone": "fair",
         "outfit": "cargo_hiking",
         "accessory": "heavy_pack"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_family_mom_stroller_12",
       "category": "visitors",
       "name": "Visitor: Mother Pushing Stroller",
-      "mesh_name": "SM_Visitors_FamilyMomStroller_12",
+      "mesh_name": "SM_visitors_visitor_family_mom_stroller_12",
       "size_m": [
         0.6,
         0.5,
         1.7
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "slim",
         "skin_tone": "dark",
         "outfit": "activewear",
         "accessory": "stroller_handle"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_wildlife_photographer_13",
       "category": "visitors",
       "name": "Visitor: Pro Wildlife Photographer",
-      "mesh_name": "SM_Visitors_WildlifePhotographer_13",
+      "mesh_name": "SM_visitors_visitor_wildlife_photographer_13",
       "size_m": [
         0.65,
         0.45,
         1.82
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "athletic",
         "skin_tone": "medium",
         "outfit": "camo_vest",
         "accessory": "tripod_rig"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_art_student_14",
       "category": "visitors",
       "name": "Visitor: Art Student Sketching",
-      "mesh_name": "SM_Visitors_ArtStudent_14",
+      "mesh_name": "SM_visitors_visitor_art_student_14",
       "size_m": [
         0.55,
         0.38,
         1.66
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "slim",
         "skin_tone": "fair",
         "outfit": "boho_jacket",
         "accessory": "sketchbook"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_school_trip_scout_15",
       "category": "visitors",
       "name": "Visitor: School Scout on Field Trip",
-      "mesh_name": "SM_Visitors_SchoolTripScout_15",
+      "mesh_name": "SM_visitors_visitor_school_trip_scout_15",
       "size_m": [
         0.45,
         0.35,
         1.25
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "child",
         "skin_tone": "tan",
         "outfit": "scout_uniform",
         "accessory": "field_notebook"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_school_chaperone_16",
       "category": "visitors",
       "name": "Visitor: School Field Trip Leader",
-      "mesh_name": "SM_Visitors_SchoolChaperone_16",
+      "mesh_name": "SM_visitors_visitor_school_chaperone_16",
       "size_m": [
         0.62,
         0.42,
         1.76
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "athletic",
         "skin_tone": "dark",
         "outfit": "hi_vis_yellow",
         "accessory": "clipboard_whistle"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_zoology_student_17",
       "category": "visitors",
       "name": "Visitor: Zoology Graduate Student",
-      "mesh_name": "SM_Visitors_ZoologyStudent_17",
+      "mesh_name": "SM_visitors_visitor_zoology_student_17",
       "size_m": [
         0.58,
         0.4,
         1.74
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "slim",
         "skin_tone": "medium",
         "outfit": "vest_khaki",
         "accessory": "digital_recorder"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_souvenir_shopper_18",
       "category": "visitors",
       "name": "Visitor: Visitor with Souvenir Bags",
-      "mesh_name": "SM_Visitors_SouvenirShopper_18",
+      "mesh_name": "SM_visitors_visitor_souvenir_shopper_18",
       "size_m": [
         0.6,
         0.42,
         1.68
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "athletic",
         "skin_tone": "fair",
         "outfit": "shopping_chic",
         "accessory": "gift_bags"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_jogger_sport_19",
       "category": "visitors",
       "name": "Visitor: Morning Zoo Jogger",
-      "mesh_name": "SM_Visitors_JoggerSport_19",
+      "mesh_name": "SM_visitors_visitor_jogger_sport_19",
       "size_m": [
         0.6,
         0.38,
         1.8
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "athletic",
         "skin_tone": "dark",
         "outfit": "running_shorts",
         "accessory": "water_flask"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_snack_muncher_20",
       "category": "visitors",
       "name": "Visitor: Visitor Eating Soft Pretzel",
-      "mesh_name": "SM_Visitors_SnackMuncher_20",
+      "mesh_name": "SM_visitors_visitor_snack_muncher_20",
       "size_m": [
         0.68,
         0.46,
         1.78
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "stocky",
         "skin_tone": "tan",
         "outfit": "denim_jacket",
         "accessory": "pretzel"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_bird_watcher_21",
       "category": "visitors",
       "name": "Visitor: Binoculars Bird Watcher",
-      "mesh_name": "SM_Visitors_BirdWatcher_21",
+      "mesh_name": "SM_visitors_visitor_bird_watcher_21",
       "size_m": [
         0.56,
         0.4,
         1.72
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "slim",
         "skin_tone": "fair",
         "outfit": "outdoor_vest",
         "accessory": "binoculars_neck"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_wheelchair_user_22",
       "category": "visitors",
       "name": "Visitor: Visitor in Active Wheelchair",
-      "mesh_name": "SM_Visitors_WheelchairUser_22",
+      "mesh_name": "SM_visitors_visitor_wheelchair_user_22",
       "size_m": [
         0.85,
         0.95,
         1.3
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "seated",
         "skin_tone": "medium",
         "outfit": "casual_jacket",
         "accessory": "wheelchair"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_parent_shoulder_kid_23",
       "category": "visitors",
       "name": "Visitor: Parent with Kid on Shoulders",
-      "mesh_name": "SM_Visitors_ParentShoulderKid_23",
+      "mesh_name": "SM_visitors_visitor_parent_shoulder_kid_23",
       "size_m": [
         0.65,
         0.45,
         2.15
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "tall",
         "skin_tone": "dark",
         "outfit": "casual_shirt",
         "accessory": "kid_rider"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_twin_kid_boy_24",
       "category": "visitors",
       "name": "Visitor: Zoo Explorer Twin A",
-      "mesh_name": "SM_Visitors_TwinKidBoy_24",
+      "mesh_name": "SM_visitors_visitor_twin_kid_boy_24",
       "size_m": [
         0.44,
         0.34,
         1.18
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "child",
         "skin_tone": "fair",
         "outfit": "explorer_hat",
         "accessory": "map_sheet"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "visitor_twin_kid_girl_25",
       "category": "visitors",
       "name": "Visitor: Zoo Explorer Twin B",
-      "mesh_name": "SM_Visitors_TwinKidGirl_25",
+      "mesh_name": "SM_visitors_visitor_twin_kid_girl_25",
       "size_m": [
         0.44,
         0.34,
         1.18
       ],
       "generator": "gen_human.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "role_type": "visitor",
         "build": "child",
         "skin_tone": "fair",
         "outfit": "explorer_hat",
         "accessory": "compass"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "enrich_boomer_ball_lg_01",
       "category": "enrichment",
       "name": "Enrichment: Heavy-Duty Boomer Ball Large",
-      "mesh_name": "SM_Enrichment_BoomerBallLg_01",
+      "mesh_name": "SM_enrichment_enrich_boomer_ball_lg_01",
       "size_m": [
         1.0,
         1.0,
         1.0
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "enrichment",
         "variant": "boomer_ball_lg"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "enrich_boomer_ball_sm_02",
       "category": "enrichment",
       "name": "Enrichment: Small Carnivore Play Ball",
-      "mesh_name": "SM_Enrichment_BoomerBallSm_02",
+      "mesh_name": "SM_enrichment_enrich_boomer_ball_sm_02",
       "size_m": [
         0.4,
         0.4,
         0.4
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "enrichment",
         "variant": "boomer_ball_sm"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "enrich_tire_swing_single_03",
       "category": "enrichment",
       "name": "Enrichment: Single Hanging Tire Swing",
-      "mesh_name": "SM_Enrichment_TireSwingSingle_03",
+      "mesh_name": "SM_enrichment_enrich_tire_swing_single_03",
       "size_m": [
         0.8,
         0.8,
         1.8
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "enrichment",
         "variant": "tire_swing_single"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "enrich_tire_pyramid_04",
       "category": "enrichment",
       "name": "Enrichment: Stacked Enrichment Tires",
-      "mesh_name": "SM_Enrichment_TirePyramid_04",
+      "mesh_name": "SM_enrichment_enrich_tire_pyramid_04",
       "size_m": [
         1.6,
         1.6,
         1.2
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "enrichment",
         "variant": "tire_pyramid"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "enrich_puzzle_barrel_05",
       "category": "enrichment",
       "name": "Enrichment: Rolling Feeder Barrel with Holes",
-      "mesh_name": "SM_Enrichment_PuzzleBarrel_05",
+      "mesh_name": "SM_enrichment_enrich_puzzle_barrel_05",
       "size_m": [
         0.7,
         0.7,
         1.0
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "enrichment",
         "variant": "puzzle_barrel"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "enrich_firehose_cube_06",
       "category": "enrichment",
       "name": "Enrichment: Woven Firehose Chew Cube",
-      "mesh_name": "SM_Enrichment_FirehoseCube_06",
+      "mesh_name": "SM_enrichment_enrich_firehose_cube_06",
       "size_m": [
         0.6,
         0.6,
         0.6
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "enrichment",
         "variant": "firehose_cube"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "enrich_ice_block_treat_07",
       "category": "enrichment",
       "name": "Enrichment: Frozen Fish & Fruit Block",
-      "mesh_name": "SM_Enrichment_IceBlockTreat_07",
+      "mesh_name": "SM_enrichment_enrich_ice_block_treat_07",
       "size_m": [
         0.5,
         0.5,
         0.5
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "enrichment",
         "variant": "ice_block_treat"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "enrich_scratch_post_timber_08",
       "category": "enrichment",
       "name": "Enrichment: Heavy Timber Scratching Post",
-      "mesh_name": "SM_Enrichment_ScratchPostTimber_08",
+      "mesh_name": "SM_enrichment_enrich_scratch_post_timber_08",
       "size_m": [
         0.6,
         0.6,
         2.2
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "enrichment",
         "variant": "scratch_post_timber"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "enrich_floating_log_buoy_09",
       "category": "enrichment",
       "name": "Enrichment: Floating Otter Log Buoy",
-      "mesh_name": "SM_Enrichment_FloatingLogBuoy_09",
+      "mesh_name": "SM_enrichment_enrich_floating_log_buoy_09",
       "size_m": [
         0.5,
         1.8,
         0.5
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "enrichment",
         "variant": "floating_log_buoy"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "enrich_scent_marking_log_10",
       "category": "enrichment",
       "name": "Enrichment: Perforated Herb Scent Log",
-      "mesh_name": "SM_Enrichment_ScentMarkingLog_10",
+      "mesh_name": "SM_enrichment_enrich_scent_marking_log_10",
       "size_m": [
         0.4,
         1.4,
         0.4
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "enrichment",
         "variant": "scent_marking_log"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "enrich_rope_spiral_tug_11",
       "category": "enrichment",
       "name": "Enrichment: Braided Hemp Rope Spiral Tug",
-      "mesh_name": "SM_Enrichment_RopeSpiralTug_11",
+      "mesh_name": "SM_enrichment_enrich_rope_spiral_tug_11",
       "size_m": [
         0.3,
         0.3,
         2.0
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "enrichment",
         "variant": "rope_spiral_tug"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "enrich_forage_bungee_net_12",
       "category": "enrichment",
       "name": "Enrichment: Bungee Suspended Forage Net",
-      "mesh_name": "SM_Enrichment_ForageBungeeNet_12",
+      "mesh_name": "SM_enrichment_enrich_forage_bungee_net_12",
       "size_m": [
         0.7,
         0.7,
         1.5
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "enrichment",
         "variant": "forage_bungee_net"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "enrich_bamboo_windchime_toy_13",
       "category": "enrichment",
       "name": "Enrichment: Primate Clatter Chime Toy",
-      "mesh_name": "SM_Enrichment_BambooWindchimeToy_13",
+      "mesh_name": "SM_enrichment_enrich_bamboo_windchime_toy_13",
       "size_m": [
         0.5,
         0.5,
         1.6
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "enrichment",
         "variant": "bamboo_windchime_toy"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "enrich_primate_puzzle_box_14",
       "category": "enrichment",
       "name": "Enrichment: Clear Primate Slider Maze Box",
-      "mesh_name": "SM_Enrichment_PrimatePuzzleBox_14",
+      "mesh_name": "SM_enrichment_enrich_primate_puzzle_box_14",
       "size_m": [
         0.8,
         0.4,
         0.6
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "enrichment",
         "variant": "primate_puzzle_box"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "enrich_rubber_wobble_cone_15",
       "category": "enrichment",
       "name": "Enrichment: Weighted Wobble Cone Feeder",
-      "mesh_name": "SM_Enrichment_RubberWobbleCone_15",
+      "mesh_name": "SM_enrichment_enrich_rubber_wobble_cone_15",
       "size_m": [
         0.6,
         0.6,
         0.8
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "enrichment",
         "variant": "rubber_wobble_cone"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "enrich_climbing_cargo_net_16",
       "category": "enrichment",
       "name": "Enrichment: Rope Climbing Wall Net",
-      "mesh_name": "SM_Enrichment_ClimbingCargoNet_16",
+      "mesh_name": "SM_enrichment_enrich_climbing_cargo_net_16",
       "size_m": [
         2.5,
         0.2,
         2.0
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "enrichment",
         "variant": "climbing_cargo_net"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "enrich_misting_rub_station_17",
       "category": "enrichment",
       "name": "Enrichment: Overhead Misting Post Station",
-      "mesh_name": "SM_Enrichment_MistingRubStation_17",
+      "mesh_name": "SM_enrichment_enrich_misting_rub_station_17",
       "size_m": [
         1.0,
         0.8,
         2.4
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "enrichment",
         "variant": "misting_rub_station"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "enrich_splash_wading_tub_18",
       "category": "enrichment",
       "name": "Enrichment: Reinforced Splash Tub",
-      "mesh_name": "SM_Enrichment_SplashWadingTub_18",
+      "mesh_name": "SM_enrichment_enrich_splash_wading_tub_18",
       "size_m": [
         1.5,
         1.5,
         0.6
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "enrichment",
         "variant": "splash_wading_tub"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "enrich_treat_labyrinth_plate_19",
       "category": "enrichment",
       "name": "Enrichment: Ground Grazing Forage Maze",
-      "mesh_name": "SM_Enrichment_TreatLabyrinthPlate_19",
+      "mesh_name": "SM_enrichment_enrich_treat_labyrinth_plate_19",
       "size_m": [
         1.2,
         1.2,
         0.25
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "enrichment",
         "variant": "treat_labyrinth_plate"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "enrich_floating_plastic_ring_20",
       "category": "enrichment",
       "name": "Enrichment: Pygmy Hippo Floating Toy Ring",
-      "mesh_name": "SM_Enrichment_FloatingPlasticRing_20",
+      "mesh_name": "SM_enrichment_enrich_floating_plastic_ring_20",
       "size_m": [
         0.9,
         0.9,
         0.3
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "enrichment",
         "variant": "floating_plastic_ring"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "food_hay_bale_square_01",
       "category": "food",
       "name": "Food: Standard Timothy Hay Bale",
-      "mesh_name": "SM_Food_HayBaleSquare_01",
+      "mesh_name": "SM_food_food_hay_bale_square_01",
       "size_m": [
         0.9,
         0.5,
         0.45
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "food",
         "variant": "hay_bale_square"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "food_hay_bale_round_02",
       "category": "food",
       "name": "Food: Giant Round Pasture Silage Bale",
-      "mesh_name": "SM_Food_HayBaleRound_02",
+      "mesh_name": "SM_food_food_hay_bale_round_02",
       "size_m": [
         1.5,
         1.5,
         1.2
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "food",
         "variant": "hay_bale_round"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "food_meat_rib_slab_03",
       "category": "food",
       "name": "Food: Raw Beef Rib Feeding Slab",
-      "mesh_name": "SM_Food_MeatRibSlab_03",
+      "mesh_name": "SM_food_food_meat_rib_slab_03",
       "size_m": [
         0.6,
         0.35,
         0.15
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "food",
         "variant": "meat_rib_slab"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "food_fish_bucket_herring_04",
       "category": "food",
       "name": "Food: Galvanized Pail Packed with Fish",
-      "mesh_name": "SM_Food_FishBucketHerring_04",
+      "mesh_name": "SM_food_food_fish_bucket_herring_04",
       "size_m": [
         0.4,
         0.4,
         0.45
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "food",
         "variant": "fish_bucket_herring"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "food_eucalyptus_bundle_05",
       "category": "food",
       "name": "Food: Fresh Eucalyptus Branch Bundle",
-      "mesh_name": "SM_Food_EucalyptusBundle_05",
+      "mesh_name": "SM_food_food_eucalyptus_bundle_05",
       "size_m": [
         0.6,
         0.6,
         1.2
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "food",
         "variant": "eucalyptus_bundle"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "food_bamboo_stalk_sheaf_06",
       "category": "food",
       "name": "Food: Tied Giant Bamboo Sheaf",
-      "mesh_name": "SM_Food_BambooStalkSheaf_06",
+      "mesh_name": "SM_food_food_bamboo_stalk_sheaf_06",
       "size_m": [
         0.5,
         0.5,
         2.0
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "food",
         "variant": "bamboo_stalk_sheaf"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "food_fruit_crate_mixed_07",
       "category": "food",
       "name": "Food: Slatted Wood Crate of Apples & Citrus",
-      "mesh_name": "SM_Food_FruitCrateMixed_07",
+      "mesh_name": "SM_food_food_fruit_crate_mixed_07",
       "size_m": [
         0.6,
         0.4,
         0.3
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "food",
         "variant": "fruit_crate_mixed"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "food_veggie_bushel_roots_08",
       "category": "food",
       "name": "Food: Woven Basket of Root Veggies",
-      "mesh_name": "SM_Food_VeggieBushelRoots_08",
+      "mesh_name": "SM_food_food_veggie_bushel_roots_08",
       "size_m": [
         0.5,
         0.5,
         0.45
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "food",
         "variant": "veggie_bushel_roots"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "food_seed_pellet_trough_09",
       "category": "food",
       "name": "Food: Hanging Zinc Seed & Grain Trough",
-      "mesh_name": "SM_Food_SeedPelletTrough_09",
+      "mesh_name": "SM_food_food_seed_pellet_trough_09",
       "size_m": [
         1.2,
         0.4,
         0.35
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "food",
         "variant": "seed_pellet_trough"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "food_insect_larva_dish_10",
       "category": "food",
       "name": "Food: Ceramic Mealworm & Cricket Bowl",
-      "mesh_name": "SM_Food_InsectLarvaDish_10",
+      "mesh_name": "SM_food_food_insect_larva_dish_10",
       "size_m": [
         0.35,
         0.35,
         0.15
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "food",
         "variant": "insect_larva_dish"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "food_salt_lick_mineral_11",
       "category": "food",
       "name": "Food: Hanging Red Mineral Salt Block",
-      "mesh_name": "SM_Food_SaltLickMineral_11",
+      "mesh_name": "SM_food_food_salt_lick_mineral_11",
       "size_m": [
         0.3,
         0.3,
         0.3
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "food",
         "variant": "salt_lick_mineral"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "food_raw_marrow_bone_12",
       "category": "food",
       "name": "Food: Large Bovine Marrow Knuckle Bone",
-      "mesh_name": "SM_Food_RawMarrowBone_12",
+      "mesh_name": "SM_food_food_raw_marrow_bone_12",
       "size_m": [
         0.5,
         0.2,
         0.2
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "food",
         "variant": "raw_marrow_bone"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "food_browse_wall_rack_13",
       "category": "food",
       "name": "Food: Wall-Mounted Forage Browse Rack",
-      "mesh_name": "SM_Food_BrowseWallRack_13",
+      "mesh_name": "SM_food_food_browse_wall_rack_13",
       "size_m": [
         1.4,
         0.35,
         1.0
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "food",
         "variant": "browse_wall_rack"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "food_slow_feeder_haynet_14",
       "category": "food",
       "name": "Food: Suspended Knotted Hay Net",
-      "mesh_name": "SM_Food_SlowFeederHaynet_14",
+      "mesh_name": "SM_food_food_slow_feeder_haynet_14",
       "size_m": [
         0.7,
         0.7,
         1.1
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "food",
         "variant": "slow_feeder_haynet"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "food_nectar_tube_feeder_15",
       "category": "food",
       "name": "Food: Glass Hummingbird Nectar Tube",
-      "mesh_name": "SM_Food_NectarTubeFeeder_15",
+      "mesh_name": "SM_food_food_nectar_tube_feeder_15",
       "size_m": [
         0.25,
         0.25,
         0.6
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "food",
         "variant": "nectar_tube_feeder"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "food_carnivore_nutrient_loaf_16",
       "category": "food",
       "name": "Food: Pressed Carnivore Nutrient Block",
-      "mesh_name": "SM_Food_CarnivoreNutrientLoaf_16",
+      "mesh_name": "SM_food_food_carnivore_nutrient_loaf_16",
       "size_m": [
         0.4,
         0.25,
         0.2
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "food",
         "variant": "carnivore_nutrient_loaf"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "food_watermelon_enrich_treat_17",
       "category": "food",
       "name": "Food: Quartered Carved Watermelon",
-      "mesh_name": "SM_Food_WatermelonEnrichTreat_17",
+      "mesh_name": "SM_food_food_watermelon_enrich_treat_17",
       "size_m": [
         0.4,
         0.4,
         0.35
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "food",
         "variant": "watermelon_enrich_treat"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "food_krill_shrimp_pail_18",
       "category": "food",
       "name": "Food: Aquatic Krill & Squid Feeder Tub",
-      "mesh_name": "SM_Food_KrillShrimpPail_18",
+      "mesh_name": "SM_food_food_krill_shrimp_pail_18",
       "size_m": [
         0.45,
         0.45,
         0.4
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "food",
         "variant": "krill_shrimp_pail"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "food_pellet_feed_sack_19",
       "category": "food",
       "name": "Food: Jute Pelletized Animal Feed Sack",
-      "mesh_name": "SM_Food_PelletFeedSack_19",
+      "mesh_name": "SM_food_food_pellet_feed_sack_19",
       "size_m": [
         0.5,
         0.35,
         0.75
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "food",
         "variant": "pellet_feed_sack"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "food_water_drink_trough_20",
       "category": "food",
       "name": "Food: Cast Concrete Heated Waterer",
-      "mesh_name": "SM_Food_WaterDrinkTrough_20",
+      "mesh_name": "SM_food_food_water_drink_trough_20",
       "size_m": [
         1.1,
         0.6,
         0.5
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "food",
         "variant": "water_drink_trough"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "shop_plush_lion_toy_01",
       "category": "shop",
       "name": "Shop Item: Souvenir Plush Stuffed Lion",
-      "mesh_name": "SM_Shop_PlushLionToy_01",
+      "mesh_name": "SM_shop_shop_plush_lion_toy_01",
       "size_m": [
         0.3,
         0.4,
         0.35
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "shop",
         "variant": "plush_lion_toy"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "shop_plush_elephant_toy_02",
       "category": "shop",
       "name": "Shop Item: Souvenir Plush Stuffed Elephant",
-      "mesh_name": "SM_Shop_PlushElephantToy_02",
+      "mesh_name": "SM_shop_shop_plush_elephant_toy_02",
       "size_m": [
         0.35,
         0.45,
         0.35
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "shop",
         "variant": "plush_elephant_toy"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "shop_plush_penguin_toy_03",
       "category": "shop",
       "name": "Shop Item: Souvenir Plush Stuffed Penguin",
-      "mesh_name": "SM_Shop_PlushPenguinToy_03",
+      "mesh_name": "SM_shop_shop_plush_penguin_toy_03",
       "size_m": [
         0.25,
         0.25,
         0.35
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "shop",
         "variant": "plush_penguin_toy"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "shop_plush_giraffe_toy_04",
       "category": "shop",
       "name": "Shop Item: Souvenir Plush Tall Giraffe",
-      "mesh_name": "SM_Shop_PlushGiraffeToy_04",
+      "mesh_name": "SM_shop_shop_plush_giraffe_toy_04",
       "size_m": [
         0.3,
         0.4,
         0.7
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "shop",
         "variant": "plush_giraffe_toy"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "shop_zoo_guide_brochure_05",
       "category": "shop",
       "name": "Shop Item: Folded Zoo Illustrated Map Brochure",
-      "mesh_name": "SM_Shop_ZooGuideBrochure_05",
+      "mesh_name": "SM_shop_shop_zoo_guide_brochure_05",
       "size_m": [
         0.15,
         0.25,
         0.02
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "shop",
         "variant": "zoo_guide_brochure"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "shop_postcard_carousel_rack_06",
       "category": "shop",
       "name": "Shop Item: Rotating Wire Postcard Stand",
-      "mesh_name": "SM_Shop_PostcardCarouselRack_06",
+      "mesh_name": "SM_shop_shop_postcard_carousel_rack_06",
       "size_m": [
         0.45,
         0.45,
         0.9
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "shop",
         "variant": "postcard_carousel_rack"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "shop_animal_ear_headband_07",
       "category": "shop",
       "name": "Shop Item: Tiger Stripe Ear Headband",
-      "mesh_name": "SM_Shop_AnimalEarHeadband_07",
+      "mesh_name": "SM_shop_shop_animal_ear_headband_07",
       "size_m": [
         0.2,
         0.18,
         0.15
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "shop",
         "variant": "animal_ear_headband"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "shop_safari_pith_helmet_08",
       "category": "shop",
       "name": "Shop Item: Childrens Khaki Safari Sun Hat",
-      "mesh_name": "SM_Shop_SafariPithHelmet_08",
+      "mesh_name": "SM_shop_shop_safari_pith_helmet_08",
       "size_m": [
         0.3,
         0.32,
         0.18
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "shop",
         "variant": "safari_pith_helmet"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "shop_zoo_logo_hoodie_09",
       "category": "shop",
       "name": "Shop Item: Folded Zoo Souvenir Hoodie Stack",
-      "mesh_name": "SM_Shop_ZooLogoHoodie_09",
+      "mesh_name": "SM_shop_shop_zoo_logo_hoodie_09",
       "size_m": [
         0.4,
         0.35,
         0.25
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "shop",
         "variant": "zoo_logo_hoodie"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "shop_ceramic_souvenir_mug_10",
       "category": "shop",
       "name": "Shop Item: Stoneware Animal Mug",
-      "mesh_name": "SM_Shop_CeramicSouvenirMug_10",
+      "mesh_name": "SM_shop_shop_ceramic_souvenir_mug_10",
       "size_m": [
         0.14,
         0.11,
         0.11
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "shop",
         "variant": "ceramic_souvenir_mug"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "shop_steel_water_bottle_11",
       "category": "shop",
       "name": "Shop Item: Branded Insulated Eco Flask",
-      "mesh_name": "SM_Shop_SteelWaterBottle_11",
+      "mesh_name": "SM_shop_shop_steel_water_bottle_11",
       "size_m": [
         0.09,
         0.09,
         0.26
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "shop",
         "variant": "steel_water_bottle"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "shop_spiral_rainbow_lollipop_12",
       "category": "shop",
       "name": "Shop Item: Jumbo Swirl Zoo Lollipop",
-      "mesh_name": "SM_Shop_SpiralRainbowLollipop_12",
+      "mesh_name": "SM_shop_shop_spiral_rainbow_lollipop_12",
       "size_m": [
         0.16,
         0.03,
         0.35
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "shop",
         "variant": "spiral_rainbow_lollipop"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "shop_soft_pretzel_mustard_13",
       "category": "shop",
       "name": "Shop Item: Salted Jumbo Pretzel in Paper Tray",
-      "mesh_name": "SM_Shop_SoftPretzelMustard_13",
+      "mesh_name": "SM_shop_shop_soft_pretzel_mustard_13",
       "size_m": [
         0.22,
         0.2,
         0.06
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "shop",
         "variant": "soft_pretzel_mustard"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "shop_softserve_icecream_cone_14",
       "category": "shop",
       "name": "Shop Item: Swirled Soft-Serve Waffle Cone",
-      "mesh_name": "SM_Shop_SoftserveIcecreamCone_14",
+      "mesh_name": "SM_shop_shop_softserve_icecream_cone_14",
       "size_m": [
         0.09,
         0.09,
         0.22
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "shop",
         "variant": "softserve_icecream_cone"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "shop_fountain_soda_cup_15",
       "category": "shop",
       "name": "Shop Item: Lidded Zoo Soda Cup with Straw",
-      "mesh_name": "SM_Shop_FountainSodaCup_15",
+      "mesh_name": "SM_shop_shop_fountain_soda_cup_15",
       "size_m": [
         0.11,
         0.11,
         0.2
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "shop",
         "variant": "fountain_soda_cup"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "shop_animal_sticker_sheet_16",
       "category": "shop",
       "name": "Shop Item: Holographic Wild Animal Sticker Sheet",
-      "mesh_name": "SM_Shop_AnimalStickerSheet_16",
+      "mesh_name": "SM_shop_shop_animal_sticker_sheet_16",
       "size_m": [
         0.18,
         0.25,
         0.01
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "shop",
         "variant": "animal_sticker_sheet"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "shop_keychain_spin_tree_17",
       "category": "shop",
       "name": "Shop Item: Countertop Metal Keychain Spinner",
-      "mesh_name": "SM_Shop_KeychainSpinTree_17",
+      "mesh_name": "SM_shop_shop_keychain_spin_tree_17",
       "size_m": [
         0.35,
         0.35,
         0.6
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "shop",
         "variant": "keychain_spin_tree"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "shop_figurine_blind_box_18",
       "category": "shop",
       "name": "Shop Item: Collectible Miniature Animal Blind Box",
-      "mesh_name": "SM_Shop_FigurineBlindBox_18",
+      "mesh_name": "SM_shop_shop_figurine_blind_box_18",
       "size_m": [
         0.08,
         0.08,
         0.1
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "shop",
         "variant": "figurine_blind_box"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "shop_toy_plastic_binoculars_19",
       "category": "shop",
       "name": "Shop Item: Kid Safari Toy Binoculars",
-      "mesh_name": "SM_Shop_ToyPlasticBinoculars_19",
+      "mesh_name": "SM_shop_shop_toy_plastic_binoculars_19",
       "size_m": [
         0.16,
         0.14,
         0.07
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "shop",
         "variant": "toy_plastic_binoculars"
-      }
+      },
+      "budget_tris": 2000
     },
     {
       "id": "shop_helium_tiger_balloon_20",
       "category": "shop",
       "name": "Shop Item: Foil Animal Head Helium Balloon",
-      "mesh_name": "SM_Shop_HeliumTigerBalloon_20",
+      "mesh_name": "SM_shop_shop_helium_tiger_balloon_20",
       "size_m": [
         0.45,
         0.2,
         0.5
       ],
       "generator": "gen_props.py",
-      "tri_budget": 2000,
-      "file_budget_kb": 150,
       "meta": {
         "prop_family": "shop",
         "variant": "helium_tiger_balloon"
-      }
+      },
+      "budget_tris": 2000
     }
   ]
 }
