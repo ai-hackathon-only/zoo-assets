@@ -44,7 +44,8 @@ def main():
             continue
         try:
             zoo.reset()
-            gen.build(r, zoo)
+            zoo.begin(r)
+            gen.build(dict(r, id=r.get("variant_of", r["id"])), zoo)  # variants reuse the adult's id-keyed builder
             ob = zoo.finish(r)
             glb, png = paths(r)
             zoo.export_glb(ob, os.path.join(ROOT, glb))

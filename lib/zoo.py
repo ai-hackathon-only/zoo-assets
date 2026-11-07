@@ -11,7 +11,10 @@ import bmesh
 import bpy
 from mathutils import Matrix, Vector
 
-from lib import palette
+from lib import palette, variants
+
+_RECOLOUR = None   # set by begin() for rare variants
+_VARIANT = None
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PALETTE_PNG = os.path.join(ROOT, "palette", "palette.png")
@@ -27,7 +30,17 @@ def budget(category):
 
 
 def reset():
+    global _RECOLOUR, _VARIANT
     bpy.ops.wm.read_factory_settings(use_empty=True)
+    _RECOLOUR = _VARIANT = None
+
+
+def begin(asset):
+    """Call after reset(), before the generator: switches on the asset's variant (see lib/variants.py)."""
+    global _RECOLOUR, _VARIANT
+    _VARIANT = asset.get("variant")
+    rc = asset.get("params", {}).get("recolour")
+    _RECOLOUR = variants.recolour_fn(rc, asset.get("params", {}).get("body")) if _VARIANT == "rare" and rc else None
 
 
 def material():
@@ -49,6 +62,8 @@ def material():
 def paint(bm, colour, faces=None):
     """Map each face to a small copy of itself inside the colour's swatch (no zero-area UVs)."""
     uv = bm.loops.layers.uv.verify()
+    if _RECOLOUR:
+        colour = _RECOLOUR(colour)
     cu, cv, half = palette.swatch(colour)
     for f in (faces if faces is not None else bm.faces):
         n = f.normal if f.normal.length > 0 else Vector((0, 0, 1))
@@ -128,6 +143,8 @@ def finish(asset):
     obs = [o for o in bpy.context.scene.objects if o.type == "MESH"]
     if not obs:
         raise ValueError(f"{asset['id']}: generator made no parts")
+    if _VARIANT == "baby":
+        _babyfy(obs, asset)
     bm = bmesh.new()
     for o in obs:
         tmp = o.data.copy()
@@ -150,6 +167,51 @@ def finish(asset):
     for p in ob.data.polygons:
         p.use_smooth = False
     return ob
+
+
+def _babyfy(obs, asset):
+    """Bigger head, shorter legs, then fit back to size_m. Animals face -Y; upright ones (H > L) have the
+    head on top. Head parts: centre in the top 35 % of the height and (upright or the front 40 % of length)."""
+    bpy.context.view_layer.update()
+    def bounds(o):
+        ps = [o.matrix_world @ v.co for v in o.data.vertices]
+        return (Vector([min(p[i] for p in ps) for i in range(3)]), Vector([max(p[i] for p in ps) for i in range(3)]))
+    bb = {o.name: bounds(o) for o in obs}
+    lo = Vector([min(b[0][i] for b in bb.values()) for i in range(3)])
+    hi = Vector([max(b[1][i] for b in bb.values()) for i in range(3)])
+    size = hi - lo
+    upright = size.z > size.y * 1.1
+    def centre(o):
+        a, b = bb[o.name]
+        return (a + b) / 2
+    head = [o for o in obs if centre(o).z > lo.z + size.z * 0.65
+            and (upright or centre(o).y < lo.y + size.y * 0.4)]
+    if head:
+        hl = Vector([min(bb[o.name][0][i] for o in head) for i in range(3)])
+        hh = Vector([max(bb[o.name][1][i] for o in head) for i in range(3)])
+        # neck joint: back-bottom of the head for walkers, bottom centre for upright animals
+        pivot = Vector(((hl.x + hh.x) / 2, (hl.y + hh.y) / 2 if upright else hh.y, hl.z))
+        m = Matrix.Translation(pivot) @ Matrix.Scale(variants.BABY_HEAD, 4) @ Matrix.Translation(-pivot)
+        for o in head:
+            o.data.transform(o.matrix_world)
+            o.matrix_world = Matrix()
+            o.data.transform(m)
+    # legs: squash everything under the torso line towards the floor, lift the rest by the same amount
+    cut = lo.z + size.z * (0.3 if not upright else 0.2)
+    drop = (cut - lo.z) * (1 - variants.BABY_LEG)
+    for o in obs:
+        o.data.transform(o.matrix_world)
+        o.matrix_world = Matrix()
+        for v in o.data.vertices:
+            if v.co.z < cut:
+                v.co.z = lo.z + (v.co.z - lo.z) * variants.BABY_LEG
+            else:
+                v.co.z -= drop
+    # fit back to the baby's size_m height
+    zs = [v.co.z for o in obs for v in o.data.vertices]
+    k = asset["size_m"][2] / max(max(zs) - min(zs), 1e-6)
+    for o in obs:
+        o.data.transform(Matrix.Scale(k, 4))
 
 
 def object_name(asset):

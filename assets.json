@@ -27,6 +27,61 @@
    "thumb": "assets/animals/african_elephant.png"
   },
   {
+   "id": "african_elephant_baby",
+   "category": "animals",
+   "name": "African elephant (baby)",
+   "size_m": [
+    0.81,
+    2.475,
+    1.44
+   ],
+   "generator": "quadruped",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "grey",
+    "marks": [
+     "trunk",
+     "tusks",
+     "big_ears"
+    ]
+   },
+   "variant_of": "african_elephant",
+   "variant": "baby",
+   "tris": 968,
+   "bytes": 71632,
+   "glb": "assets/animals/african_elephant_baby.glb",
+   "thumb": "assets/animals/african_elephant_baby.png"
+  },
+  {
+   "id": "african_elephant_rare",
+   "category": "animals",
+   "name": "African elephant (albino)",
+   "size_m": [
+    1.8,
+    5.5,
+    3.2
+   ],
+   "generator": "quadruped",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "grey",
+    "marks": [
+     "trunk",
+     "tusks",
+     "big_ears"
+    ],
+    "recolour": "albino"
+   },
+   "variant_of": "african_elephant",
+   "variant": "rare",
+   "tris": 1160,
+   "bytes": 87120,
+   "glb": "assets/animals/african_elephant_rare.glb",
+   "thumb": "assets/animals/african_elephant_rare.png"
+  },
+  {
    "id": "asian_elephant",
    "category": "animals",
    "name": "Asian elephant",
@@ -72,6 +127,57 @@
    "bytes": 76300,
    "glb": "assets/animals/white_rhino.glb",
    "thumb": "assets/animals/white_rhino.png"
+  },
+  {
+   "id": "white_rhino_baby",
+   "category": "animals",
+   "name": "White rhinoceros (baby)",
+   "size_m": [
+    0.63,
+    1.8,
+    0.81
+   ],
+   "generator": "quadruped",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "light_grey",
+    "marks": [
+     "horn2"
+    ]
+   },
+   "variant_of": "white_rhino",
+   "variant": "baby",
+   "tris": 800,
+   "bytes": 60824,
+   "glb": "assets/animals/white_rhino_baby.glb",
+   "thumb": "assets/animals/white_rhino_baby.png"
+  },
+  {
+   "id": "white_rhino_rare",
+   "category": "animals",
+   "name": "White rhinoceros (albino)",
+   "size_m": [
+    1.4,
+    4.0,
+    1.8
+   ],
+   "generator": "quadruped",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "light_grey",
+    "marks": [
+     "horn2"
+    ],
+    "recolour": "albino"
+   },
+   "variant_of": "white_rhino",
+   "variant": "rare",
+   "tris": 992,
+   "bytes": 76312,
+   "glb": "assets/animals/white_rhino_rare.glb",
+   "thumb": "assets/animals/white_rhino_rare.png"
   },
   {
    "id": "indian_rhino",
@@ -121,6 +227,57 @@
    "thumb": "assets/animals/hippo.png"
   },
   {
+   "id": "hippo_baby",
+   "category": "animals",
+   "name": "Hippopotamus (baby)",
+   "size_m": [
+    0.675,
+    1.89,
+    0.675
+   ],
+   "generator": "quadruped",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "grey",
+    "marks": [
+     "wide_mouth"
+    ]
+   },
+   "variant_of": "hippo",
+   "variant": "baby",
+   "tris": 756,
+   "bytes": 57796,
+   "glb": "assets/animals/hippo_baby.glb",
+   "thumb": "assets/animals/hippo_baby.png"
+  },
+  {
+   "id": "hippo_rare",
+   "category": "animals",
+   "name": "Hippopotamus (albino)",
+   "size_m": [
+    1.5,
+    4.2,
+    1.5
+   ],
+   "generator": "quadruped",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "grey",
+    "marks": [
+     "wide_mouth"
+    ],
+    "recolour": "albino"
+   },
+   "variant_of": "hippo",
+   "variant": "rare",
+   "tris": 948,
+   "bytes": 73280,
+   "glb": "assets/animals/hippo_rare.glb",
+   "thumb": "assets/animals/hippo_rare.png"
+  },
+  {
    "id": "pygmy_hippo",
    "category": "animals",
    "name": "Pygmy hippopotamus",
@@ -165,6 +322,57 @@
    "bytes": 61780,
    "glb": "assets/animals/brown_bear.glb",
    "thumb": "assets/animals/brown_bear.png"
+  },
+  {
+   "id": "brown_bear_baby",
+   "category": "animals",
+   "name": "Brown bear (baby)",
+   "size_m": [
+    0.45,
+    1.08,
+    0.63
+   ],
+   "generator": "quadruped",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "europe",
+    "body": "brown",
+    "marks": [
+     "round_ears"
+    ]
+   },
+   "variant_of": "brown_bear",
+   "variant": "baby",
+   "tris": 812,
+   "bytes": 61788,
+   "glb": "assets/animals/brown_bear_baby.glb",
+   "thumb": "assets/animals/brown_bear_baby.png"
+  },
+  {
+   "id": "brown_bear_rare",
+   "category": "animals",
+   "name": "Brown bear (albino)",
+   "size_m": [
+    1.0,
+    2.4,
+    1.4
+   ],
+   "generator": "quadruped",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "europe",
+    "body": "brown",
+    "marks": [
+     "round_ears"
+    ],
+    "recolour": "albino"
+   },
+   "variant_of": "brown_bear",
+   "variant": "rare",
+   "tris": 812,
+   "bytes": 61788,
+   "glb": "assets/animals/brown_bear_rare.glb",
+   "thumb": "assets/animals/brown_bear_rare.png"
   },
   {
    "id": "polar_bear",
@@ -213,6 +421,59 @@
    "thumb": "assets/animals/giant_panda.png"
   },
   {
+   "id": "giant_panda_baby",
+   "category": "animals",
+   "name": "Giant panda (baby)",
+   "size_m": [
+    0.405,
+    0.765,
+    0.405
+   ],
+   "generator": "quadruped",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "asia",
+    "body": "white",
+    "marks": [
+     "panda_patches"
+    ]
+   },
+   "variant_of": "giant_panda",
+   "variant": "baby",
+   "tris": 1136,
+   "bytes": 86392,
+   "glb": "assets/animals/giant_panda_baby.glb",
+   "thumb": "assets/animals/giant_panda_baby.png"
+  },
+  {
+   "id": "giant_panda_rare",
+   "category": "animals",
+   "name": "Giant panda (brown (Qinling))",
+   "size_m": [
+    0.9,
+    1.7,
+    0.9
+   ],
+   "generator": "quadruped",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "asia",
+    "body": "white",
+    "marks": [
+     "panda_patches"
+    ],
+    "recolour": {
+     "black": "brown"
+    }
+   },
+   "variant_of": "giant_panda",
+   "variant": "rare",
+   "tris": 1136,
+   "bytes": 86392,
+   "glb": "assets/animals/giant_panda_rare.glb",
+   "thumb": "assets/animals/giant_panda_rare.png"
+  },
+  {
    "id": "red_panda",
    "category": "animals",
    "name": "Red panda",
@@ -235,6 +496,59 @@
    "bytes": 69096,
    "glb": "assets/animals/red_panda.glb",
    "thumb": "assets/animals/red_panda.png"
+  },
+  {
+   "id": "red_panda_baby",
+   "category": "animals",
+   "name": "Red panda (baby)",
+   "size_m": [
+    0.135,
+    0.45,
+    0.158
+   ],
+   "generator": "quadruped",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "asia",
+    "body": "rust",
+    "marks": [
+     "ringed_tail",
+     "white_face"
+    ]
+   },
+   "variant_of": "red_panda",
+   "variant": "baby",
+   "tris": 944,
+   "bytes": 69116,
+   "glb": "assets/animals/red_panda_baby.glb",
+   "thumb": "assets/animals/red_panda_baby.png"
+  },
+  {
+   "id": "red_panda_rare",
+   "category": "animals",
+   "name": "Red panda (albino)",
+   "size_m": [
+    0.3,
+    1.0,
+    0.35
+   ],
+   "generator": "quadruped",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "asia",
+    "body": "rust",
+    "marks": [
+     "ringed_tail",
+     "white_face"
+    ],
+    "recolour": "albino"
+   },
+   "variant_of": "red_panda",
+   "variant": "rare",
+   "tris": 944,
+   "bytes": 69108,
+   "glb": "assets/animals/red_panda_rare.glb",
+   "thumb": "assets/animals/red_panda_rare.png"
   },
   {
    "id": "sloth_bear",
@@ -307,6 +621,61 @@
    "bytes": 57908,
    "glb": "assets/animals/grey_wolf.glb",
    "thumb": "assets/animals/grey_wolf.png"
+  },
+  {
+   "id": "grey_wolf_baby",
+   "category": "animals",
+   "name": "Grey wolf (baby)",
+   "size_m": [
+    0.18,
+    0.675,
+    0.383
+   ],
+   "generator": "quadruped",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "north_america",
+    "body": "grey",
+    "marks": [
+     "pointed_ears",
+     "bushy_tail"
+    ],
+    "leg": 0.36
+   },
+   "variant_of": "grey_wolf",
+   "variant": "baby",
+   "tris": 764,
+   "bytes": 57916,
+   "glb": "assets/animals/grey_wolf_baby.glb",
+   "thumb": "assets/animals/grey_wolf_baby.png"
+  },
+  {
+   "id": "grey_wolf_rare",
+   "category": "animals",
+   "name": "Grey wolf (melanistic)",
+   "size_m": [
+    0.4,
+    1.5,
+    0.85
+   ],
+   "generator": "quadruped",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "north_america",
+    "body": "grey",
+    "marks": [
+     "pointed_ears",
+     "bushy_tail"
+    ],
+    "leg": 0.36,
+    "recolour": "melanistic"
+   },
+   "variant_of": "grey_wolf",
+   "variant": "rare",
+   "tris": 764,
+   "bytes": 57916,
+   "glb": "assets/animals/grey_wolf_rare.glb",
+   "thumb": "assets/animals/grey_wolf_rare.png"
   },
   {
    "id": "arctic_fox",
@@ -742,6 +1111,57 @@
    "thumb": "assets/animals/lion.png"
   },
   {
+   "id": "lion_baby",
+   "category": "animals",
+   "name": "Lion (baby)",
+   "size_m": [
+    0.27,
+    1.17,
+    0.54
+   ],
+   "generator": "bigcat",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "sand",
+    "marks": [
+     "mane"
+    ]
+   },
+   "variant_of": "lion",
+   "variant": "baby",
+   "tris": 1192,
+   "bytes": 91324,
+   "glb": "assets/animals/lion_baby.glb",
+   "thumb": "assets/animals/lion_baby.png"
+  },
+  {
+   "id": "lion_rare",
+   "category": "animals",
+   "name": "Lion (white)",
+   "size_m": [
+    0.6,
+    2.6,
+    1.2
+   ],
+   "generator": "bigcat",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "sand",
+    "marks": [
+     "mane"
+    ],
+    "recolour": "albino"
+   },
+   "variant_of": "lion",
+   "variant": "rare",
+   "tris": 1192,
+   "bytes": 91324,
+   "glb": "assets/animals/lion_rare.glb",
+   "thumb": "assets/animals/lion_rare.png"
+  },
+  {
    "id": "lioness",
    "category": "animals",
    "name": "Lioness",
@@ -788,6 +1208,57 @@
    "thumb": "assets/animals/bengal_tiger.png"
   },
   {
+   "id": "bengal_tiger_baby",
+   "category": "animals",
+   "name": "Bengal tiger (baby)",
+   "size_m": [
+    0.27,
+    1.26,
+    0.473
+   ],
+   "generator": "bigcat",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "asia",
+    "body": "orange",
+    "marks": [
+     "stripes"
+    ]
+   },
+   "variant_of": "bengal_tiger",
+   "variant": "baby",
+   "tris": 1812,
+   "bytes": 138712,
+   "glb": "assets/animals/bengal_tiger_baby.glb",
+   "thumb": "assets/animals/bengal_tiger_baby.png"
+  },
+  {
+   "id": "bengal_tiger_rare",
+   "category": "animals",
+   "name": "Bengal tiger (golden tabby)",
+   "size_m": [
+    0.6,
+    2.8,
+    1.05
+   ],
+   "generator": "bigcat",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "asia",
+    "body": "orange",
+    "marks": [
+     "stripes"
+    ],
+    "recolour": "golden"
+   },
+   "variant_of": "bengal_tiger",
+   "variant": "rare",
+   "tris": 1812,
+   "bytes": 138712,
+   "glb": "assets/animals/bengal_tiger_rare.glb",
+   "thumb": "assets/animals/bengal_tiger_rare.png"
+  },
+  {
    "id": "amur_tiger",
    "category": "animals",
    "name": "Amur tiger",
@@ -832,6 +1303,57 @@
    "bytes": 236884,
    "glb": "assets/animals/leopard.glb",
    "thumb": "assets/animals/leopard.png"
+  },
+  {
+   "id": "leopard_baby",
+   "category": "animals",
+   "name": "Leopard (baby)",
+   "size_m": [
+    0.225,
+    0.945,
+    0.338
+   ],
+   "generator": "bigcat",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "yellow",
+    "marks": [
+     "rosettes"
+    ]
+   },
+   "variant_of": "leopard",
+   "variant": "baby",
+   "tris": 2860,
+   "bytes": 236896,
+   "glb": "assets/animals/leopard_baby.glb",
+   "thumb": "assets/animals/leopard_baby.png"
+  },
+  {
+   "id": "leopard_rare",
+   "category": "animals",
+   "name": "Leopard (melanistic)",
+   "size_m": [
+    0.5,
+    2.1,
+    0.75
+   ],
+   "generator": "bigcat",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "yellow",
+    "marks": [
+     "rosettes"
+    ],
+    "recolour": "melanistic"
+   },
+   "variant_of": "leopard",
+   "variant": "rare",
+   "tris": 2860,
+   "bytes": 236892,
+   "glb": "assets/animals/leopard_rare.glb",
+   "thumb": "assets/animals/leopard_rare.png"
   },
   {
    "id": "snow_leopard",
@@ -906,6 +1428,61 @@
    "thumb": "assets/animals/cheetah.png"
   },
   {
+   "id": "cheetah_baby",
+   "category": "animals",
+   "name": "Cheetah (baby)",
+   "size_m": [
+    0.203,
+    0.9,
+    0.405
+   ],
+   "generator": "bigcat",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "yellow",
+    "marks": [
+     "spots",
+     "tear_lines"
+    ]
+   },
+   "variant_of": "cheetah",
+   "variant": "baby",
+   "tris": 2020,
+   "bytes": 164272,
+   "glb": "assets/animals/cheetah_baby.glb",
+   "thumb": "assets/animals/cheetah_baby.png"
+  },
+  {
+   "id": "cheetah_rare",
+   "category": "animals",
+   "name": "Cheetah (king pattern)",
+   "size_m": [
+    0.45,
+    2.0,
+    0.9
+   ],
+   "generator": "bigcat",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "yellow",
+    "marks": [
+     "spots",
+     "tear_lines"
+    ],
+    "recolour": {
+     "black": "brown"
+    }
+   },
+   "variant_of": "cheetah",
+   "variant": "rare",
+   "tris": 2020,
+   "bytes": 164272,
+   "glb": "assets/animals/cheetah_rare.glb",
+   "thumb": "assets/animals/cheetah_rare.png"
+  },
+  {
    "id": "cougar",
    "category": "animals",
    "name": "Cougar",
@@ -927,6 +1504,57 @@
    "bytes": 75884,
    "glb": "assets/animals/cougar.glb",
    "thumb": "assets/animals/cougar.png"
+  },
+  {
+   "id": "cougar_baby",
+   "category": "animals",
+   "name": "Cougar (baby)",
+   "size_m": [
+    0.225,
+    0.99,
+    0.36
+   ],
+   "generator": "bigcat",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "north_america",
+    "body": "tan",
+    "marks": [
+     "plain"
+    ]
+   },
+   "variant_of": "cougar",
+   "variant": "baby",
+   "tris": 988,
+   "bytes": 75896,
+   "glb": "assets/animals/cougar_baby.glb",
+   "thumb": "assets/animals/cougar_baby.png"
+  },
+  {
+   "id": "cougar_rare",
+   "category": "animals",
+   "name": "Cougar (melanistic)",
+   "size_m": [
+    0.5,
+    2.2,
+    0.8
+   ],
+   "generator": "bigcat",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "north_america",
+    "body": "tan",
+    "marks": [
+     "plain"
+    ],
+    "recolour": "melanistic"
+   },
+   "variant_of": "cougar",
+   "variant": "rare",
+   "tris": 988,
+   "bytes": 75896,
+   "glb": "assets/animals/cougar_rare.glb",
+   "thumb": "assets/animals/cougar_rare.png"
   },
   {
    "id": "eurasian_lynx",
@@ -1026,6 +1654,61 @@
    "thumb": "assets/animals/giraffe.png"
   },
   {
+   "id": "giraffe_baby",
+   "category": "animals",
+   "name": "Giraffe (baby)",
+   "size_m": [
+    0.45,
+    1.8,
+    2.34
+   ],
+   "generator": "hoofed",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "yellow",
+    "marks": [
+     "patches",
+     "long_neck",
+     "ossicones"
+    ]
+   },
+   "variant_of": "giraffe",
+   "variant": "baby",
+   "tris": 1740,
+   "bytes": 132956,
+   "glb": "assets/animals/giraffe_baby.glb",
+   "thumb": "assets/animals/giraffe_baby.png"
+  },
+  {
+   "id": "giraffe_rare",
+   "category": "animals",
+   "name": "Giraffe (leucistic)",
+   "size_m": [
+    1.0,
+    4.0,
+    5.2
+   ],
+   "generator": "hoofed",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "yellow",
+    "marks": [
+     "patches",
+     "long_neck",
+     "ossicones"
+    ],
+    "recolour": "albino"
+   },
+   "variant_of": "giraffe",
+   "variant": "rare",
+   "tris": 1740,
+   "bytes": 132920,
+   "glb": "assets/animals/giraffe_rare.glb",
+   "thumb": "assets/animals/giraffe_rare.png"
+  },
+  {
    "id": "okapi",
    "category": "animals",
    "name": "Okapi",
@@ -1070,6 +1753,59 @@
    "bytes": 165164,
    "glb": "assets/animals/plains_zebra.glb",
    "thumb": "assets/animals/plains_zebra.png"
+  },
+  {
+   "id": "plains_zebra_baby",
+   "category": "animals",
+   "name": "Plains zebra (baby)",
+   "size_m": [
+    0.27,
+    1.08,
+    0.63
+   ],
+   "generator": "hoofed",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "white",
+    "marks": [
+     "stripes"
+    ]
+   },
+   "variant_of": "plains_zebra",
+   "variant": "baby",
+   "tris": 2244,
+   "bytes": 165176,
+   "glb": "assets/animals/plains_zebra_baby.glb",
+   "thumb": "assets/animals/plains_zebra_baby.png"
+  },
+  {
+   "id": "plains_zebra_rare",
+   "category": "animals",
+   "name": "Plains zebra (golden)",
+   "size_m": [
+    0.6,
+    2.4,
+    1.4
+   ],
+   "generator": "hoofed",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "white",
+    "marks": [
+     "stripes"
+    ],
+    "recolour": {
+     "black": "brown"
+    }
+   },
+   "variant_of": "plains_zebra",
+   "variant": "rare",
+   "tris": 2244,
+   "bytes": 165172,
+   "glb": "assets/animals/plains_zebra_rare.glb",
+   "thumb": "assets/animals/plains_zebra_rare.png"
   },
   {
    "id": "grevys_zebra",
@@ -1117,6 +1853,57 @@
    "bytes": 70044,
    "glb": "assets/animals/dromedary.glb",
    "thumb": "assets/animals/dromedary.png"
+  },
+  {
+   "id": "dromedary_baby",
+   "category": "animals",
+   "name": "Dromedary camel (baby)",
+   "size_m": [
+    0.405,
+    1.35,
+    0.99
+   ],
+   "generator": "hoofed",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "tan",
+    "marks": [
+     "hump1"
+    ]
+   },
+   "variant_of": "dromedary",
+   "variant": "baby",
+   "tris": 936,
+   "bytes": 70084,
+   "glb": "assets/animals/dromedary_baby.glb",
+   "thumb": "assets/animals/dromedary_baby.png"
+  },
+  {
+   "id": "dromedary_rare",
+   "category": "animals",
+   "name": "Dromedary camel (white)",
+   "size_m": [
+    0.9,
+    3.0,
+    2.2
+   ],
+   "generator": "hoofed",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "tan",
+    "marks": [
+     "hump1"
+    ],
+    "recolour": "albino"
+   },
+   "variant_of": "dromedary",
+   "variant": "rare",
+   "tris": 936,
+   "bytes": 70052,
+   "glb": "assets/animals/dromedary_rare.glb",
+   "thumb": "assets/animals/dromedary_rare.png"
   },
   {
    "id": "bactrian_camel",
@@ -1212,6 +1999,57 @@
    "thumb": "assets/animals/american_bison.png"
   },
   {
+   "id": "american_bison_baby",
+   "category": "animals",
+   "name": "American bison (baby)",
+   "size_m": [
+    0.495,
+    1.44,
+    0.855
+   ],
+   "generator": "hoofed",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "north_america",
+    "body": "dark_brown",
+    "marks": [
+     "hump_fur"
+    ]
+   },
+   "variant_of": "american_bison",
+   "variant": "baby",
+   "tris": 1060,
+   "bytes": 78392,
+   "glb": "assets/animals/american_bison_baby.glb",
+   "thumb": "assets/animals/american_bison_baby.png"
+  },
+  {
+   "id": "american_bison_rare",
+   "category": "animals",
+   "name": "American bison (white)",
+   "size_m": [
+    1.1,
+    3.2,
+    1.9
+   ],
+   "generator": "hoofed",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "north_america",
+    "body": "dark_brown",
+    "marks": [
+     "hump_fur"
+    ],
+    "recolour": "albino"
+   },
+   "variant_of": "american_bison",
+   "variant": "rare",
+   "tris": 1060,
+   "bytes": 78388,
+   "glb": "assets/animals/american_bison_rare.glb",
+   "thumb": "assets/animals/american_bison_rare.png"
+  },
+  {
    "id": "european_bison",
    "category": "animals",
    "name": "European bison",
@@ -1281,6 +2119,57 @@
    "thumb": "assets/animals/reindeer.png"
   },
   {
+   "id": "reindeer_baby",
+   "category": "animals",
+   "name": "Reindeer (baby)",
+   "size_m": [
+    0.315,
+    0.9,
+    0.81
+   ],
+   "generator": "hoofed",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "arctic",
+    "body": "grey",
+    "marks": [
+     "antlers"
+    ]
+   },
+   "variant_of": "reindeer",
+   "variant": "baby",
+   "tris": 1012,
+   "bytes": 73868,
+   "glb": "assets/animals/reindeer_baby.glb",
+   "thumb": "assets/animals/reindeer_baby.png"
+  },
+  {
+   "id": "reindeer_rare",
+   "category": "animals",
+   "name": "Reindeer (white)",
+   "size_m": [
+    0.7,
+    2.0,
+    1.8
+   ],
+   "generator": "hoofed",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "arctic",
+    "body": "grey",
+    "marks": [
+     "antlers"
+    ],
+    "recolour": "albino"
+   },
+   "variant_of": "reindeer",
+   "variant": "rare",
+   "tris": 1012,
+   "bytes": 73828,
+   "glb": "assets/animals/reindeer_rare.glb",
+   "thumb": "assets/animals/reindeer_rare.png"
+  },
+  {
    "id": "red_deer",
    "category": "animals",
    "name": "Red deer",
@@ -1302,6 +2191,57 @@
    "bytes": 73856,
    "glb": "assets/animals/red_deer.glb",
    "thumb": "assets/animals/red_deer.png"
+  },
+  {
+   "id": "red_deer_baby",
+   "category": "animals",
+   "name": "Red deer (baby)",
+   "size_m": [
+    0.27,
+    0.99,
+    0.855
+   ],
+   "generator": "hoofed",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "europe",
+    "body": "brown",
+    "marks": [
+     "antlers"
+    ]
+   },
+   "variant_of": "red_deer",
+   "variant": "baby",
+   "tris": 1012,
+   "bytes": 73868,
+   "glb": "assets/animals/red_deer_baby.glb",
+   "thumb": "assets/animals/red_deer_baby.png"
+  },
+  {
+   "id": "red_deer_rare",
+   "category": "animals",
+   "name": "Red deer (albino)",
+   "size_m": [
+    0.6,
+    2.2,
+    1.9
+   ],
+   "generator": "hoofed",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "europe",
+    "body": "brown",
+    "marks": [
+     "antlers"
+    ],
+    "recolour": "albino"
+   },
+   "variant_of": "red_deer",
+   "variant": "rare",
+   "tris": 1012,
+   "bytes": 73868,
+   "glb": "assets/animals/red_deer_rare.glb",
+   "thumb": "assets/animals/red_deer_rare.png"
   },
   {
    "id": "sika_deer",
@@ -1586,6 +2526,57 @@
    "thumb": "assets/animals/chimpanzee.png"
   },
   {
+   "id": "chimpanzee_baby",
+   "category": "animals",
+   "name": "Chimpanzee (baby)",
+   "size_m": [
+    0.27,
+    0.27,
+    0.54
+   ],
+   "generator": "primate",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "black",
+    "marks": [
+     "pale_face"
+    ]
+   },
+   "variant_of": "chimpanzee",
+   "variant": "baby",
+   "tris": 1356,
+   "bytes": 102112,
+   "glb": "assets/animals/chimpanzee_baby.glb",
+   "thumb": "assets/animals/chimpanzee_baby.png"
+  },
+  {
+   "id": "chimpanzee_rare",
+   "category": "animals",
+   "name": "Chimpanzee (albino)",
+   "size_m": [
+    0.6,
+    0.6,
+    1.2
+   ],
+   "generator": "primate",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "black",
+    "marks": [
+     "pale_face"
+    ],
+    "recolour": "albino"
+   },
+   "variant_of": "chimpanzee",
+   "variant": "rare",
+   "tris": 1356,
+   "bytes": 102112,
+   "glb": "assets/animals/chimpanzee_rare.glb",
+   "thumb": "assets/animals/chimpanzee_rare.png"
+  },
+  {
    "id": "western_gorilla",
    "category": "animals",
    "name": "Western gorilla",
@@ -1609,6 +2600,57 @@
    "thumb": "assets/animals/western_gorilla.png"
   },
   {
+   "id": "western_gorilla_baby",
+   "category": "animals",
+   "name": "Western gorilla (baby)",
+   "size_m": [
+    0.45,
+    0.45,
+    0.765
+   ],
+   "generator": "primate",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "charcoal",
+    "marks": [
+     "silver_back"
+    ]
+   },
+   "variant_of": "western_gorilla",
+   "variant": "baby",
+   "tris": 1488,
+   "bytes": 112004,
+   "glb": "assets/animals/western_gorilla_baby.glb",
+   "thumb": "assets/animals/western_gorilla_baby.png"
+  },
+  {
+   "id": "western_gorilla_rare",
+   "category": "animals",
+   "name": "Western gorilla (albino)",
+   "size_m": [
+    1.0,
+    1.0,
+    1.7
+   ],
+   "generator": "primate",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "charcoal",
+    "marks": [
+     "silver_back"
+    ],
+    "recolour": "albino"
+   },
+   "variant_of": "western_gorilla",
+   "variant": "rare",
+   "tris": 1488,
+   "bytes": 112000,
+   "glb": "assets/animals/western_gorilla_rare.glb",
+   "thumb": "assets/animals/western_gorilla_rare.png"
+  },
+  {
    "id": "bornean_orangutan",
    "category": "animals",
    "name": "Bornean orangutan",
@@ -1630,6 +2672,57 @@
    "bytes": 112104,
    "glb": "assets/animals/bornean_orangutan.glb",
    "thumb": "assets/animals/bornean_orangutan.png"
+  },
+  {
+   "id": "bornean_orangutan_baby",
+   "category": "animals",
+   "name": "Bornean orangutan (baby)",
+   "size_m": [
+    0.405,
+    0.315,
+    0.585
+   ],
+   "generator": "primate",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "asia",
+    "body": "rust",
+    "marks": [
+     "long_arms"
+    ]
+   },
+   "variant_of": "bornean_orangutan",
+   "variant": "baby",
+   "tris": 1484,
+   "bytes": 112116,
+   "glb": "assets/animals/bornean_orangutan_baby.glb",
+   "thumb": "assets/animals/bornean_orangutan_baby.png"
+  },
+  {
+   "id": "bornean_orangutan_rare",
+   "category": "animals",
+   "name": "Bornean orangutan (golden)",
+   "size_m": [
+    0.9,
+    0.7,
+    1.3
+   ],
+   "generator": "primate",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "asia",
+    "body": "rust",
+    "marks": [
+     "long_arms"
+    ],
+    "recolour": "golden"
+   },
+   "variant_of": "bornean_orangutan",
+   "variant": "rare",
+   "tris": 1484,
+   "bytes": 112112,
+   "glb": "assets/animals/bornean_orangutan_rare.glb",
+   "thumb": "assets/animals/bornean_orangutan_rare.png"
   },
   {
    "id": "bonobo",
@@ -1678,6 +2771,57 @@
    "thumb": "assets/animals/ring_tailed_lemur.png"
   },
   {
+   "id": "ring_tailed_lemur_baby",
+   "category": "animals",
+   "name": "Ring-tailed lemur (baby)",
+   "size_m": [
+    0.135,
+    0.45,
+    0.203
+   ],
+   "generator": "primate",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "light_grey",
+    "marks": [
+     "ringed_tail"
+    ]
+   },
+   "variant_of": "ring_tailed_lemur",
+   "variant": "baby",
+   "tris": 1652,
+   "bytes": 121316,
+   "glb": "assets/animals/ring_tailed_lemur_baby.glb",
+   "thumb": "assets/animals/ring_tailed_lemur_baby.png"
+  },
+  {
+   "id": "ring_tailed_lemur_rare",
+   "category": "animals",
+   "name": "Ring-tailed lemur (melanistic)",
+   "size_m": [
+    0.3,
+    1.0,
+    0.45
+   ],
+   "generator": "primate",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "light_grey",
+    "marks": [
+     "ringed_tail"
+    ],
+    "recolour": "melanistic"
+   },
+   "variant_of": "ring_tailed_lemur",
+   "variant": "rare",
+   "tris": 1652,
+   "bytes": 121312,
+   "glb": "assets/animals/ring_tailed_lemur_rare.glb",
+   "thumb": "assets/animals/ring_tailed_lemur_rare.png"
+  },
+  {
    "id": "mandrill",
    "category": "animals",
    "name": "Mandrill",
@@ -1722,6 +2866,57 @@
    "bytes": 85872,
    "glb": "assets/animals/japanese_macaque.glb",
    "thumb": "assets/animals/japanese_macaque.png"
+  },
+  {
+   "id": "japanese_macaque_baby",
+   "category": "animals",
+   "name": "Japanese macaque (baby)",
+   "size_m": [
+    0.18,
+    0.27,
+    0.27
+   ],
+   "generator": "primate",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "asia",
+    "body": "light_grey",
+    "marks": [
+     "red_face"
+    ]
+   },
+   "variant_of": "japanese_macaque",
+   "variant": "baby",
+   "tris": 1124,
+   "bytes": 85888,
+   "glb": "assets/animals/japanese_macaque_baby.glb",
+   "thumb": "assets/animals/japanese_macaque_baby.png"
+  },
+  {
+   "id": "japanese_macaque_rare",
+   "category": "animals",
+   "name": "Japanese macaque (albino)",
+   "size_m": [
+    0.4,
+    0.6,
+    0.6
+   ],
+   "generator": "primate",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "asia",
+    "body": "light_grey",
+    "marks": [
+     "red_face"
+    ],
+    "recolour": "albino"
+   },
+   "variant_of": "japanese_macaque",
+   "variant": "rare",
+   "tris": 1124,
+   "bytes": 85884,
+   "glb": "assets/animals/japanese_macaque_rare.glb",
+   "thumb": "assets/animals/japanese_macaque_rare.png"
   },
   {
    "id": "golden_lion_tamarin",
@@ -1863,6 +3058,57 @@
    "thumb": "assets/animals/african_penguin.png"
   },
   {
+   "id": "african_penguin_baby",
+   "category": "animals",
+   "name": "African penguin (baby)",
+   "size_m": [
+    0.135,
+    0.135,
+    0.293
+   ],
+   "generator": "bird",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "black",
+    "marks": [
+     "chest_band"
+    ]
+   },
+   "variant_of": "african_penguin",
+   "variant": "baby",
+   "tris": 554,
+   "bytes": 43808,
+   "glb": "assets/animals/african_penguin_baby.glb",
+   "thumb": "assets/animals/african_penguin_baby.png"
+  },
+  {
+   "id": "african_penguin_rare",
+   "category": "animals",
+   "name": "African penguin (albino)",
+   "size_m": [
+    0.3,
+    0.3,
+    0.65
+   ],
+   "generator": "bird",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "black",
+    "marks": [
+     "chest_band"
+    ],
+    "recolour": "albino"
+   },
+   "variant_of": "african_penguin",
+   "variant": "rare",
+   "tris": 554,
+   "bytes": 43804,
+   "glb": "assets/animals/african_penguin_rare.glb",
+   "thumb": "assets/animals/african_penguin_rare.png"
+  },
+  {
    "id": "emperor_penguin",
    "category": "animals",
    "name": "Emperor penguin",
@@ -1910,6 +3156,59 @@
    "thumb": "assets/animals/greater_flamingo.png"
   },
   {
+   "id": "greater_flamingo_baby",
+   "category": "animals",
+   "name": "Greater flamingo (baby)",
+   "size_m": [
+    0.18,
+    0.27,
+    0.63
+   ],
+   "generator": "bird",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "pink",
+    "marks": [
+     "long_neck",
+     "long_legs"
+    ]
+   },
+   "variant_of": "greater_flamingo",
+   "variant": "baby",
+   "tris": 724,
+   "bytes": 55388,
+   "glb": "assets/animals/greater_flamingo_baby.glb",
+   "thumb": "assets/animals/greater_flamingo_baby.png"
+  },
+  {
+   "id": "greater_flamingo_rare",
+   "category": "animals",
+   "name": "Greater flamingo (white)",
+   "size_m": [
+    0.4,
+    0.6,
+    1.4
+   ],
+   "generator": "bird",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "pink",
+    "marks": [
+     "long_neck",
+     "long_legs"
+    ],
+    "recolour": "albino"
+   },
+   "variant_of": "greater_flamingo",
+   "variant": "rare",
+   "tris": 724,
+   "bytes": 55388,
+   "glb": "assets/animals/greater_flamingo_rare.glb",
+   "thumb": "assets/animals/greater_flamingo_rare.png"
+  },
+  {
    "id": "ostrich",
    "category": "animals",
    "name": "Common ostrich",
@@ -1935,6 +3234,61 @@
    "thumb": "assets/animals/ostrich.png"
   },
   {
+   "id": "ostrich_baby",
+   "category": "animals",
+   "name": "Common ostrich (baby)",
+   "size_m": [
+    0.36,
+    0.54,
+    1.08
+   ],
+   "generator": "bird",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "black",
+    "marks": [
+     "long_neck",
+     "long_legs",
+     "white_wings"
+    ]
+   },
+   "variant_of": "ostrich",
+   "variant": "baby",
+   "tris": 804,
+   "bytes": 61160,
+   "glb": "assets/animals/ostrich_baby.glb",
+   "thumb": "assets/animals/ostrich_baby.png"
+  },
+  {
+   "id": "ostrich_rare",
+   "category": "animals",
+   "name": "Common ostrich (albino)",
+   "size_m": [
+    0.8,
+    1.2,
+    2.4
+   ],
+   "generator": "bird",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "black",
+    "marks": [
+     "long_neck",
+     "long_legs",
+     "white_wings"
+    ],
+    "recolour": "albino"
+   },
+   "variant_of": "ostrich",
+   "variant": "rare",
+   "tris": 804,
+   "bytes": 61160,
+   "glb": "assets/animals/ostrich_rare.glb",
+   "thumb": "assets/animals/ostrich_rare.png"
+  },
+  {
    "id": "emu",
    "category": "animals",
    "name": "Emu",
@@ -1957,6 +3311,59 @@
    "bytes": 56148,
    "glb": "assets/animals/emu.glb",
    "thumb": "assets/animals/emu.png"
+  },
+  {
+   "id": "emu_baby",
+   "category": "animals",
+   "name": "Emu (baby)",
+   "size_m": [
+    0.27,
+    0.45,
+    0.81
+   ],
+   "generator": "bird",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "oceania",
+    "body": "brown",
+    "marks": [
+     "long_neck",
+     "shaggy"
+    ]
+   },
+   "variant_of": "emu",
+   "variant": "baby",
+   "tris": 740,
+   "bytes": 56164,
+   "glb": "assets/animals/emu_baby.glb",
+   "thumb": "assets/animals/emu_baby.png"
+  },
+  {
+   "id": "emu_rare",
+   "category": "animals",
+   "name": "Emu (white)",
+   "size_m": [
+    0.6,
+    1.0,
+    1.8
+   ],
+   "generator": "bird",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "oceania",
+    "body": "brown",
+    "marks": [
+     "long_neck",
+     "shaggy"
+    ],
+    "recolour": "albino"
+   },
+   "variant_of": "emu",
+   "variant": "rare",
+   "tris": 740,
+   "bytes": 56160,
+   "glb": "assets/animals/emu_rare.glb",
+   "thumb": "assets/animals/emu_rare.png"
   },
   {
    "id": "bald_eagle",
@@ -2031,6 +3438,59 @@
    "thumb": "assets/animals/scarlet_macaw.png"
   },
   {
+   "id": "scarlet_macaw_baby",
+   "category": "animals",
+   "name": "Scarlet macaw (baby)",
+   "size_m": [
+    0.113,
+    0.383,
+    0.27
+   ],
+   "generator": "bird",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "south_america",
+    "body": "red",
+    "marks": [
+     "long_tail",
+     "blue_yellow_wings"
+    ]
+   },
+   "variant_of": "scarlet_macaw",
+   "variant": "baby",
+   "tris": 530,
+   "bytes": 42380,
+   "glb": "assets/animals/scarlet_macaw_baby.glb",
+   "thumb": "assets/animals/scarlet_macaw_baby.png"
+  },
+  {
+   "id": "scarlet_macaw_rare",
+   "category": "animals",
+   "name": "Scarlet macaw (blue)",
+   "size_m": [
+    0.25,
+    0.85,
+    0.6
+   ],
+   "generator": "bird",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "south_america",
+    "body": "red",
+    "marks": [
+     "long_tail",
+     "blue_yellow_wings"
+    ],
+    "recolour": "blue"
+   },
+   "variant_of": "scarlet_macaw",
+   "variant": "rare",
+   "tris": 530,
+   "bytes": 42376,
+   "glb": "assets/animals/scarlet_macaw_rare.glb",
+   "thumb": "assets/animals/scarlet_macaw_rare.png"
+  },
+  {
    "id": "toco_toucan",
    "category": "animals",
    "name": "Toco toucan",
@@ -2075,6 +3535,57 @@
    "bytes": 44340,
    "glb": "assets/animals/indian_peafowl.glb",
    "thumb": "assets/animals/indian_peafowl.png"
+  },
+  {
+   "id": "indian_peafowl_baby",
+   "category": "animals",
+   "name": "Indian peafowl (baby)",
+   "size_m": [
+    0.225,
+    0.9,
+    0.495
+   ],
+   "generator": "bird",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "asia",
+    "body": "navy",
+    "marks": [
+     "fan_tail"
+    ]
+   },
+   "variant_of": "indian_peafowl",
+   "variant": "baby",
+   "tris": 550,
+   "bytes": 44356,
+   "glb": "assets/animals/indian_peafowl_baby.glb",
+   "thumb": "assets/animals/indian_peafowl_baby.png"
+  },
+  {
+   "id": "indian_peafowl_rare",
+   "category": "animals",
+   "name": "Indian peafowl (white)",
+   "size_m": [
+    0.5,
+    2.0,
+    1.1
+   ],
+   "generator": "bird",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "asia",
+    "body": "navy",
+    "marks": [
+     "fan_tail"
+    ],
+    "recolour": "albino"
+   },
+   "variant_of": "indian_peafowl",
+   "variant": "rare",
+   "tris": 550,
+   "bytes": 44352,
+   "glb": "assets/animals/indian_peafowl_rare.glb",
+   "thumb": "assets/animals/indian_peafowl_rare.png"
   },
   {
    "id": "kookaburra",
@@ -2240,6 +3751,57 @@
    "thumb": "assets/animals/nile_crocodile.png"
   },
   {
+   "id": "nile_crocodile_baby",
+   "category": "animals",
+   "name": "Nile crocodile (baby)",
+   "size_m": [
+    0.405,
+    2.025,
+    0.27
+   ],
+   "generator": "reptile",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "olive",
+    "marks": [
+     "scutes"
+    ]
+   },
+   "variant_of": "nile_crocodile",
+   "variant": "baby",
+   "tris": 912,
+   "bytes": 68928,
+   "glb": "assets/animals/nile_crocodile_baby.glb",
+   "thumb": "assets/animals/nile_crocodile_baby.png"
+  },
+  {
+   "id": "nile_crocodile_rare",
+   "category": "animals",
+   "name": "Nile crocodile (albino)",
+   "size_m": [
+    0.9,
+    4.5,
+    0.6
+   ],
+   "generator": "reptile",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "africa",
+    "body": "olive",
+    "marks": [
+     "scutes"
+    ],
+    "recolour": "albino"
+   },
+   "variant_of": "nile_crocodile",
+   "variant": "rare",
+   "tris": 912,
+   "bytes": 68920,
+   "glb": "assets/animals/nile_crocodile_rare.glb",
+   "thumb": "assets/animals/nile_crocodile_rare.png"
+  },
+  {
    "id": "american_alligator",
    "category": "animals",
    "name": "American alligator",
@@ -2262,6 +3824,59 @@
    "bytes": 71164,
    "glb": "assets/animals/american_alligator.glb",
    "thumb": "assets/animals/american_alligator.png"
+  },
+  {
+   "id": "american_alligator_baby",
+   "category": "animals",
+   "name": "American alligator (baby)",
+   "size_m": [
+    0.36,
+    1.8,
+    0.248
+   ],
+   "generator": "reptile",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "north_america",
+    "body": "charcoal",
+    "marks": [
+     "scutes",
+     "blunt_snout"
+    ]
+   },
+   "variant_of": "american_alligator",
+   "variant": "baby",
+   "tris": 944,
+   "bytes": 71176,
+   "glb": "assets/animals/american_alligator_baby.glb",
+   "thumb": "assets/animals/american_alligator_baby.png"
+  },
+  {
+   "id": "american_alligator_rare",
+   "category": "animals",
+   "name": "American alligator (leucistic)",
+   "size_m": [
+    0.8,
+    4.0,
+    0.55
+   ],
+   "generator": "reptile",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "north_america",
+    "body": "charcoal",
+    "marks": [
+     "scutes",
+     "blunt_snout"
+    ],
+    "recolour": "albino"
+   },
+   "variant_of": "american_alligator",
+   "variant": "rare",
+   "tris": 944,
+   "bytes": 71176,
+   "glb": "assets/animals/american_alligator_rare.glb",
+   "thumb": "assets/animals/american_alligator_rare.png"
   },
   {
    "id": "gharial",
@@ -2379,6 +3994,57 @@
    "thumb": "assets/animals/green_iguana.png"
   },
   {
+   "id": "green_iguana_baby",
+   "category": "animals",
+   "name": "Green iguana (baby)",
+   "size_m": [
+    0.113,
+    0.675,
+    0.158
+   ],
+   "generator": "reptile",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "south_america",
+    "body": "leaf",
+    "marks": [
+     "dorsal_spikes"
+    ]
+   },
+   "variant_of": "green_iguana",
+   "variant": "baby",
+   "tris": 442,
+   "bytes": 34872,
+   "glb": "assets/animals/green_iguana_baby.glb",
+   "thumb": "assets/animals/green_iguana_baby.png"
+  },
+  {
+   "id": "green_iguana_rare",
+   "category": "animals",
+   "name": "Green iguana (blue)",
+   "size_m": [
+    0.25,
+    1.5,
+    0.35
+   ],
+   "generator": "reptile",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "south_america",
+    "body": "leaf",
+    "marks": [
+     "dorsal_spikes"
+    ],
+    "recolour": "blue"
+   },
+   "variant_of": "green_iguana",
+   "variant": "rare",
+   "tris": 442,
+   "bytes": 34868,
+   "glb": "assets/animals/green_iguana_rare.glb",
+   "thumb": "assets/animals/green_iguana_rare.png"
+  },
+  {
    "id": "chameleon",
    "category": "animals",
    "name": "Panther chameleon",
@@ -2425,6 +4091,59 @@
    "bytes": 243680,
    "glb": "assets/animals/reticulated_python.glb",
    "thumb": "assets/animals/reticulated_python.png"
+  },
+  {
+   "id": "reticulated_python_baby",
+   "category": "animals",
+   "name": "Reticulated python (baby)",
+   "size_m": [
+    0.54,
+    0.54,
+    0.135
+   ],
+   "generator": "reptile",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "asia",
+    "body": "tan",
+    "marks": [
+     "coiled",
+     "net_pattern"
+    ]
+   },
+   "variant_of": "reticulated_python",
+   "variant": "baby",
+   "tris": 3104,
+   "bytes": 243692,
+   "glb": "assets/animals/reticulated_python_baby.glb",
+   "thumb": "assets/animals/reticulated_python_baby.png"
+  },
+  {
+   "id": "reticulated_python_rare",
+   "category": "animals",
+   "name": "Reticulated python (albino)",
+   "size_m": [
+    1.2,
+    1.2,
+    0.3
+   ],
+   "generator": "reptile",
+   "budget_tris": 5000,
+   "params": {
+    "continent": "asia",
+    "body": "tan",
+    "marks": [
+     "coiled",
+     "net_pattern"
+    ],
+    "recolour": "albino"
+   },
+   "variant_of": "reticulated_python",
+   "variant": "rare",
+   "tris": 3104,
+   "bytes": 243692,
+   "glb": "assets/animals/reticulated_python_rare.glb",
+   "thumb": "assets/animals/reticulated_python_rare.png"
   },
   {
    "id": "king_cobra",
