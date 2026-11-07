@@ -1,5 +1,7 @@
 {
- "facilities": [
+ "schema": "id, category, name, size_m [width x, length y, height z] metres (Blender Z up, front faces +Y), generator, budget_tris, params.",
+ "count": 70,
+ "assets": [
   {
    "id": "fence_wood_rail_straight",
    "category": "facilities",
@@ -878,6 +880,246 @@
    "params": {
     "family": "viewing",
     "variant": "pergola"
+   }
+  },
+  {
+   "id": "pen_petting_zoo_corral",
+   "category": "facilities",
+   "name": "Petting zoo corral fence",
+   "size_m": [
+    6.0,
+    6.0,
+    1.2
+   ],
+   "generator": "facilities",
+   "budget_tris": 2500,
+   "params": {
+    "family": "enclosure",
+    "variant": "petting_pen"
+   }
+  },
+  {
+   "id": "platform_giraffe_feeding",
+   "category": "facilities",
+   "name": "Giraffe feeding elevated deck",
+   "size_m": [
+    4.0,
+    4.0,
+    3.5
+   ],
+   "generator": "facilities",
+   "budget_tris": 3200,
+   "params": {
+    "family": "platform",
+    "variant": "giraffe_feeder"
+   }
+  },
+  {
+   "id": "dome_meerkat_viewing_bubble",
+   "category": "facilities",
+   "name": "Meerkat viewing acrylic bubble",
+   "size_m": [
+    1.5,
+    1.5,
+    0.9
+   ],
+   "generator": "facilities",
+   "budget_tris": 1800,
+   "params": {
+    "family": "viewing",
+    "variant": "acrylic_dome"
+   }
+  },
+  {
+   "id": "tunnel_underwater_aquarium",
+   "category": "facilities",
+   "name": "Underwater aquarium viewing tunnel",
+   "size_m": [
+    3.0,
+    4.0,
+    2.8
+   ],
+   "generator": "facilities",
+   "budget_tris": 3500,
+   "params": {
+    "family": "viewing",
+    "variant": "underwater_tunnel"
+   }
+  },
+  {
+   "id": "building_butterfly_hothouse",
+   "category": "facilities",
+   "name": "Butterfly hothouse greenhouse",
+   "size_m": [
+    8.0,
+    8.0,
+    4.5
+   ],
+   "generator": "facilities",
+   "budget_tris": 4200,
+   "params": {
+    "family": "building",
+    "variant": "greenhouse"
+   }
+  },
+  {
+   "id": "gate_safari_vehicle_airlock",
+   "category": "facilities",
+   "name": "Safari vehicle double gate airlock",
+   "size_m": [
+    4.5,
+    6.0,
+    3.2
+   ],
+   "generator": "facilities",
+   "budget_tris": 3800,
+   "params": {
+    "family": "gate",
+    "variant": "safari_airlock"
+   }
+  },
+  {
+   "id": "water_elephant_splash_pool",
+   "category": "facilities",
+   "name": "Elephant splash pool with ramp",
+   "size_m": [
+    8.0,
+    6.0,
+    1.5
+   ],
+   "generator": "facilities",
+   "budget_tris": 3000,
+   "params": {
+    "family": "water_feature",
+    "variant": "splash_pool"
+   }
+  },
+  {
+   "id": "water_flamingo_shallow_lagoon",
+   "category": "facilities",
+   "name": "Flamingo shallow lagoon with islet",
+   "size_m": [
+    7.0,
+    5.0,
+    0.8
+   ],
+   "generator": "facilities",
+   "budget_tris": 2800,
+   "params": {
+    "family": "water_feature",
+    "variant": "shallow_lagoon"
+   }
+  },
+  {
+   "id": "cave_bat_nocturnal_portal",
+   "category": "facilities",
+   "name": "Bat nocturnal rock cave entrance",
+   "size_m": [
+    4.0,
+    3.0,
+    3.0
+   ],
+   "generator": "facilities",
+   "budget_tris": 3600,
+   "params": {
+    "family": "building",
+    "variant": "rock_cave"
+   }
+  },
+  {
+   "id": "turnstile_bank_quad",
+   "category": "facilities",
+   "name": "Quad entrance turnstile bank",
+   "size_m": [
+    5.0,
+    1.8,
+    2.2
+   ],
+   "generator": "facilities",
+   "budget_tris": 3200,
+   "params": {
+    "family": "gate",
+    "variant": "turnstile_bank"
+   }
+  },
+  {
+   "id": "building_staff_breakroom",
+   "category": "facilities",
+   "name": "Staff breakroom modular unit",
+   "size_m": [
+    5.0,
+    4.0,
+    3.2
+   ],
+   "generator": "facilities",
+   "budget_tris": 3400,
+   "params": {
+    "family": "building",
+    "variant": "staff_quarters"
+   }
+  },
+  {
+   "id": "building_lost_and_found",
+   "category": "facilities",
+   "name": "Lost and found security outpost",
+   "size_m": [
+    2.5,
+    2.5,
+    2.8
+   ],
+   "generator": "facilities",
+   "budget_tris": 2200,
+   "params": {
+    "family": "kiosk",
+    "variant": "security_booth"
+   }
+  },
+  {
+   "id": "building_first_aid_station",
+   "category": "facilities",
+   "name": "First-aid care station",
+   "size_m": [
+    4.0,
+    3.5,
+    3.0
+   ],
+   "generator": "facilities",
+   "budget_tris": 3000,
+   "params": {
+    "family": "building",
+    "variant": "first_aid"
+   }
+  },
+  {
+   "id": "station_waste_compost_bay",
+   "category": "facilities",
+   "name": "Zoo compost and manure bay",
+   "size_m": [
+    4.0,
+    3.0,
+    1.8
+   ],
+   "generator": "facilities",
+   "budget_tris": 2100,
+   "params": {
+    "family": "utility",
+    "variant": "compost_bay"
+   }
+  },
+  {
+   "id": "shelter_otter_holts_rock",
+   "category": "facilities",
+   "name": "Otter holt rocky den",
+   "size_m": [
+    3.5,
+    3.0,
+    1.6
+   ],
+   "generator": "facilities",
+   "budget_tris": 2900,
+   "params": {
+    "family": "enclosure",
+    "variant": "otter_holt"
    }
   }
  ]
