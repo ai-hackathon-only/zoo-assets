@@ -174,12 +174,20 @@ def render_thumb(ob, path, res=256):
     radius = max(dims.length / 2, 0.005)
     cam_d = bpy.data.cameras.new("thumb_cam")
     cam_d.type = "ORTHO"
-    cam_d.ortho_scale = radius * 2.1
     cam = bpy.data.objects.new("thumb_cam", cam_d)
     sc.collection.objects.link(cam)
     direction = Vector((1.0, -1.4, 0.8)).normalized()
     cam.location = centre + direction * radius * 4
     cam.rotation_euler = (centre - cam.location).to_track_quat("-Z", "Y").to_euler()
+    # fit: project the 8 bounding-box corners on the camera's right/up axes, 8 % margin
+    rm = cam.rotation_euler.to_matrix()
+    right, up = rm.col[0], rm.col[1]
+    corners = [ob.matrix_world @ Vector(c) for c in ob.bound_box]
+    xs = [(c - centre).dot(right) for c in corners]
+    ys = [(c - centre).dot(up) for c in corners]
+    cx, cy = (max(xs) + min(xs)) / 2, (max(ys) + min(ys)) / 2
+    cam.location += right * cx + up * cy
+    cam_d.ortho_scale = max(max(xs) - min(xs), max(ys) - min(ys), 0.01) * 1.08
     cam_d.clip_start = radius * 0.1  # default 0.1 m would clip assets under ~5 cm
     cam_d.clip_end = radius * 10
     sc.camera = cam
