@@ -77,6 +77,11 @@
     <input id="density" type="range" min="0" max="1" step="0.05">
     <label for="population">Visitors and keepers <output id="population-out"></output></label>
     <input id="population" type="range" min="0" max="300" step="5">
+    <div class="row" style="margin:14px 0 0">
+      <button id="export" class="ghost" type="button" title="Download this zoo as layout.json">Export</button>
+      <button id="import" class="ghost" type="button" title="Load a layout.json file">Import</button>
+      <input id="import-file" type="file" accept="application/json,.json" hidden>
+    </div>
     <p class="meta" id="stats">Loading…</p>
     <p class="meta hud"><span id="fps">–</span> · <span id="first">loading</span></p>
   </section>
