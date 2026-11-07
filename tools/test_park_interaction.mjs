@@ -16,24 +16,27 @@ try {
   if (m) gpuInfo = m[1].trim();
 } catch (e) {}
 
+const isHeaded = process.argv.includes('--headed');
+
 console.log(`=== Testbed Environment ===`);
 console.log(`Machine: ${cpuInfo} · GPU: ${gpuInfo}`);
-console.log(`Browser: Google Chrome headless (angle / webgl)`);
+console.log(`Browser: Google Chrome ${isHeaded ? 'headed' : 'headless (angle / webgl)'}`);
 console.log(`Target URL: ${targetUrl}\n`);
 
 // Launch Chrome with remote debugging
 const chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const userDataDir = fs.mkdtempSync('/tmp/chrome-park-');
-const chrome = spawn(chromePath, [
-  '--headless=new',
+const chromeArgs = [
   '--remote-debugging-port=0',
   `--user-data-dir=${userDataDir}`,
   '--no-first-run',
   '--no-default-browser-check',
-  '--window-size=1280,800',
-  '--use-gl=angle',
-  '--enable-webgl'
-]);
+  '--window-size=1280,800'
+];
+if (!isHeaded) {
+  chromeArgs.unshift('--headless=new', '--use-gl=angle', '--enable-webgl');
+}
+const chrome = spawn(chromePath, chromeArgs);
 
 let wsUrl = '';
 chrome.stderr.on('data', d => {
@@ -127,10 +130,27 @@ console.log(`First frame hud: "${firstFrameText}"`);
 console.log(`Initial stats: "${statsText}"`);
 
 // Measure FPS while actively orbiting
-console.log('Sampling active rendering FPS over 3 seconds...');
+console.log('Sampling active rendering FPS while orbiting camera over 3 seconds...');
+await evalJs(`
+  let angle = 0;
+  window.__orbitInterval = setInterval(() => {
+    angle += 0.03;
+    if (window.__park?.camera) {
+      window.__park.camera.position.x = Math.sin(angle) * 300;
+      window.__park.camera.position.z = Math.cos(angle) * 300;
+      window.__park.camera.position.y = 120;
+      if (window.__park?.controls) {
+        window.__park.controls.target.set(0, 0, 0);
+      } else {
+        window.__park.camera.lookAt(0, 0, 0);
+      }
+    }
+  }, 16);
+`);
 await new Promise(r => setTimeout(r, 3000));
 fpsText = await evalJs("return document.getElementById('fps')?.innerText || ''");
-console.log(`Sustained FPS: "${fpsText}"`);
+await evalJs("clearInterval(window.__orbitInterval)");
+console.log(`Orbiting FPS: "${fpsText}"`);
 
 // 2. Interactive Controls Check
 console.log('\n--- 2. Interactive Controls Check ---');
