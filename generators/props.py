@@ -246,8 +246,10 @@ def _build_enrichment(W, L, H, variant, aid, p, z):
             tx = math.cos(rad) * dist
             ty = math.sin(rad) * dist
             z.cyl(tr, th, loc=(tx, ty, th / 2), colour="charcoal", seg=10)
+            z.cyl(tr * 0.50, th * 1.02, loc=(tx, ty, th / 2), colour="black", seg=8)
         # Top apex tire resting on bottom tier
         z.cyl(tr, th, loc=(0, 0, H - th / 2), colour="charcoal", seg=10)
+        z.cyl(tr * 0.50, th * 1.02, loc=(0, 0, H - th / 2), colour="black", seg=8)
 
     elif "puzzle_barrel" in variant:
         r = min(W, L) / 2
@@ -270,10 +272,11 @@ def _build_enrichment(W, L, H, variant, aid, p, z):
         z.box((W * 0.28, L * 1.02, H * 1.02), loc=(0, 0, H / 2), colour="tan")
 
     elif "ice_block_treat" in variant:
-        # Semitransparent ice treat with fish visible inside
-        z.box((W, L, H), loc=(0, 0, H / 2), colour="water")
-        # Frozen fish core
-        z.box((W * 0.45, L * 0.65, H * 0.25), loc=(0, 0, H / 2), colour="red")
+        # Ice block with red treat visibly protruding out the top
+        z.box((W, L, H * 0.85), loc=(0, 0, H * 0.425), colour="water")
+        # Bright red frozen meat treat chunk sticking out of the ice
+        z.box((W * 0.50, L * 0.60, H * 0.35), loc=(0, -L * 0.08, H * 0.75), colour="red")
+        z.ball(W * 0.18, loc=(0, L * 0.18, H * 0.75), colour="white", seg=6, rings=4)
 
     elif "scratch_post_timber" in variant:
         # Heavy timber post wrapped in sisal rope
@@ -291,23 +294,39 @@ def _build_enrichment(W, L, H, variant, aid, p, z):
             z.cyl(r * 1.05, 0.08, loc=(0, ly, r), colour="yellow", rot=(90, 0, 0), seg=8)
 
     elif "scent_marking_log" in variant:
+        # Long horizontal log with forked branch and rubbed scent patch
         r = min(W, H) / 2
         z.cyl(r, L * 0.95, loc=(0, 0, r), colour="dark_brown", rot=(90, 0, 0), seg=8)
-        # Drilled scent holes
-        for ly in (-0.3, 0.0, 0.3):
-            z.cyl(0.04, 0.08, loc=(0, ly, r * 1.01), colour="sand", seg=6)
+        # Forked branch sticking out/up within height tolerance (0.32m - 0.48m)
+        z.cyl(r * 0.45, 0.22, loc=(r * 0.3, 0.1, r + 0.05), colour="dark_brown", rot=(0, 60, 0), seg=6)
+        # Scent marking paste rub flat on top
+        z.box((r * 1.05, 0.35, 0.03), loc=(0, -0.25, r * 2.01), colour="sand")
 
     elif "rope_spiral_tug" in variant:
-        # Hanging spiral rope tug with knot
-        z.cyl(min(W, L) * 0.35, H * 0.85, loc=(0, 0, H * 0.50), colour="tan", seg=6)
-        # Big knot at bottom
-        z.ball(min(W, L) * 0.45, loc=(0, 0, H * 0.15), colour="sand", seg=8, rings=6)
+        # Hanging spiral braided rope tug
+        steps = 6
+        step_h = (H * 0.68) / steps
+        for s in range(steps):
+            sz = H * 0.22 + s * step_h
+            ang = s * 60
+            rad = math.radians(ang)
+            z.cyl(0.045, step_h * 1.1, loc=(math.cos(rad) * 0.025, math.sin(rad) * 0.025, sz), colour="tan", rot=(12, 12, ang), seg=6)
+        # Knotted ball at bottom
+        z.ball(min(W, L) * 0.40, loc=(0, 0, H * 0.14), colour="sand", seg=8, rings=6)
+        # Top hanging ring
+        z.cyl(0.02, H * 0.16, loc=(0, 0, H * 0.92), colour="light_grey", seg=4)
 
     elif "forage_bungee_net" in variant:
-        # Suspended bungee ball net
-        r = min(W, L) * 0.44
-        z.ball(r, loc=(0, 0, H * 0.40), colour="yellow", seg=8, rings=6)
-        z.cyl(0.02, H * 0.55, loc=(0, 0, H * 0.72), colour="charcoal", seg=4)
+        # Suspended bungee ball net: central food core inside elastic cage, top tether reaching H
+        r = min(W, L) * 0.42
+        # Ball centered at r so bottom touches Z=0
+        z.ball(r * 0.55, loc=(0, 0, r), colour="red", seg=6, rings=4)
+        z.cyl(r, 0.035, loc=(0, 0, r), colour="yellow", seg=10, r2=r)
+        z.cyl(r, 0.035, loc=(0, 0, r), colour="yellow", rot=(90, 0, 0), seg=10, r2=r)
+        z.cyl(r, 0.035, loc=(0, 0, r), colour="yellow", rot=(0, 90, 0), seg=10, r2=r)
+        # Suspension cable extending up to H
+        ch = H - 2 * r
+        z.cyl(0.02, ch, loc=(0, 0, 2 * r + ch / 2), colour="charcoal", seg=4)
 
     elif "bamboo_windchime_toy" in variant:
         # Central hanging bamboo suspension pole from floor to top board
@@ -335,7 +354,7 @@ def _build_enrichment(W, L, H, variant, aid, p, z):
         z.ball(r * 0.55, loc=(0, 0, H * 0.85), colour="red", seg=8, rings=6)
 
     elif "climbing_cargo_net" in variant:
-        # Large timber A-frame with rope grid
+        # Large timber frame with rope grid
         pw = 0.12
         post_h = H - pw
         # Vertical side posts
@@ -343,8 +362,15 @@ def _build_enrichment(W, L, H, variant, aid, p, z):
         z.box((pw, L * 0.90, post_h), loc=(W * 0.45, 0, post_h / 2), colour="dark_brown")
         # Top cross beam extending fully across
         z.box((W, L, pw), loc=(0, 0, H - pw / 2), colour="dark_brown")
-        # Mesh fill netting inside the frame
-        z.box((W * 0.82, 0.04, post_h * 0.92), loc=(0, 0, post_h / 2), colour="tan")
+        # Cargo netting: crossed rope grid
+        num_v = 4
+        for i in range(num_v):
+            rx = -W * 0.30 + i * (W * 0.60 / (num_v - 1))
+            z.cyl(0.018, post_h * 0.95, loc=(rx, 0, post_h / 2), colour="tan", seg=4)
+        num_h = 5
+        for i in range(num_h):
+            rz = post_h * 0.15 + i * (post_h * 0.70 / (num_h - 1))
+            z.cyl(0.018, W * 0.75, loc=(0, 0, rz), colour="tan", rot=(0, 90, 0), seg=4)
 
     elif "misting_rub_station" in variant:
         # Spray arch with scratch brush rollers
@@ -356,10 +382,11 @@ def _build_enrichment(W, L, H, variant, aid, p, z):
         z.cyl(0.14, H * 0.50, loc=(W * 0.40, 0, H * 0.40), colour="rust", seg=8)
 
     elif "splash_wading_tub" in variant:
-        # Shallow galvanized pool
+        # Shallow galvanized pool with wide rim and clear blue water
         r = min(W, L) / 2
-        z.cyl(r, H, loc=(0, 0, H / 2), colour="light_grey", seg=12, r2=r * 0.92)
-        z.cyl(r * 0.88, 0.04, loc=(0, 0, H * 0.82), colour="water", seg=10)
+        z.cyl(r, H * 0.90, loc=(0, 0, H * 0.45), colour="light_grey", seg=12, r2=r * 0.85)
+        z.cyl(r * 1.05, H * 0.12, loc=(0, 0, H * 0.85), colour="charcoal", seg=12)
+        z.cyl(r * 0.90, 0.03, loc=(0, 0, H * 0.78), colour="water", seg=10)
 
     elif "treat_labyrinth_plate" in variant:
         # Disc with labyrinth walls
@@ -413,26 +440,27 @@ def _build_shop(W, L, H, variant, aid, p, z):
         z.cyl(0.04, H * 0.55, loc=(0, -0.06, H * 0.50), colour="sand", rot=(10, 0, 0), seg=6)
         # Head
         z.ball(0.07, loc=(0, -0.12, H * 0.82), colour="sand", seg=6, rings=4)
-        # Spots
-        for sz in (H * 0.35, H * 0.55, H * 0.70):
-            z.cyl(0.046, 0.05, loc=(0, -0.06, sz), colour="brown", rot=(10, 0, 0), seg=6)
+        # Spots (spheres protruding from neck)
+        for sz, sy in ((H * 0.35, -0.05), (H * 0.55, -0.07), (H * 0.70, -0.09)):
+            z.ball(0.025, loc=(0.04, sy, sz), colour="brown", seg=4, rings=4)
+            z.ball(0.025, loc=(-0.04, sy, sz), colour="brown", seg=4, rings=4)
 
     elif "zoo_guide_brochure" in variant:
-        z.box((W, L, H), loc=(0, 0, H / 2), colour="teal")
-        z.box((W * 0.85, L * 0.85, H * 1.05), loc=(0, 0, H / 2), colour="white")
+        z.box((W, L, H * 0.90), loc=(0, 0, H * 0.45), colour="teal")
+        z.box((W * 0.85, L * 0.85, 0.002), loc=(0, 0, H * 0.901), colour="white")
 
     elif "postcard_carousel_rack" in variant:
         # Rotating 4-sided wire rack
-        z.cyl(0.03, H, loc=(0, 0, H / 2), colour="light_grey", seg=6)
         z.cyl(W * 0.45, 0.04, loc=(0, 0, 0.02), colour="charcoal", seg=8)
+        z.cyl(0.03, H - 0.04, loc=(0, 0, 0.04 + (H - 0.04) / 2), colour="light_grey", seg=6)
         # Postcard panels
-        z.box((W * 0.70, L * 0.70, H * 0.75), loc=(0, 0, H * 0.55), colour="white")
+        z.box((W * 0.70, L * 0.70, H * 0.70), loc=(0, 0, H * 0.58), colour="white")
 
     elif "animal_ear_headband" in variant:
-        z.cyl(0.09, 0.02, loc=(0, 0, 0.08), colour="black", rot=(90, 0, 0), seg=8, r2=0.09)
+        z.cyl(0.065, 0.02, loc=(0, 0, 0.07), colour="black", rot=(90, 0, 0), seg=8, r2=0.065)
         # Fuzzy ears
-        for ex in (-0.08, 0.08):
-            z.ball(0.04, loc=(ex, 0, 0.14), colour="orange", seg=6, rings=4)
+        for ex in (-0.06, 0.06):
+            z.ball(0.03, loc=(ex, 0, 0.12), colour="orange", seg=6, rings=4)
 
     elif "safari_pith_helmet" in variant:
         # Explorer hat
@@ -443,7 +471,7 @@ def _build_shop(W, L, H, variant, aid, p, z):
     elif "zoo_logo_hoodie" in variant:
         # Folded garment with colored logo patch
         z.box((W, L, H), loc=(0, 0, H / 2), colour="navy")
-        z.box((W * 0.40, L * 0.35, H * 1.04), loc=(0, 0, H / 2), colour="gold")
+        z.box((W * 0.40, L * 0.35, 0.003), loc=(0, 0, H + 0.0015), colour="gold")
 
     elif "ceramic_souvenir_mug" in variant:
         r = min(W, L) * 0.42
@@ -464,8 +492,8 @@ def _build_shop(W, L, H, variant, aid, p, z):
     elif "soft_pretzel_mustard" in variant:
         # Baked pretzel loop
         z.box((W * 0.85, L * 0.85, H * 0.70), loc=(0, 0, H * 0.35), colour="tan")
-        # Mustard dip cup
-        z.cyl(0.035, H * 0.90, loc=(W * 0.32, L * 0.30, H * 0.45), colour="yellow", seg=6)
+        # Mustard dip cup slightly offset above floor
+        z.cyl(0.035, H * 0.80, loc=(W * 0.32, L * 0.30, 0.01 + H * 0.40), colour="yellow", seg=6)
 
     elif "softserve_icecream_cone" in variant:
         r = min(W, L) / 2
@@ -480,19 +508,19 @@ def _build_shop(W, L, H, variant, aid, p, z):
         z.cyl(0.008, H * 0.35, loc=(0, 0, H * 0.92), colour="yellow", rot=(15, 0, 0), seg=4)
 
     elif "animal_sticker_sheet" in variant:
-        z.box((W, L, H), loc=(0, 0, H / 2), colour="white")
-        # Colorful sticker dots
+        z.box((W, L, H * 0.80), loc=(0, 0, H * 0.40), colour="white")
+        # Colorful sticker dots on top face
         for sx in (-0.04, 0.04):
             for sy in (-0.06, 0.0, 0.06):
-                z.box((0.025, 0.025, H * 1.05), loc=(sx, sy, H / 2), colour="teal")
+                z.box((0.025, 0.025, 0.002), loc=(sx, sy, H * 0.801), colour="teal")
 
     elif "keychain_spin_tree" in variant:
         # Counter rotating tree stand
-        z.cyl(0.025, H, loc=(0, 0, H / 2), colour="light_grey", seg=6)
         z.cyl(W * 0.45, 0.03, loc=(0, 0, 0.015), colour="charcoal", seg=8)
+        z.cyl(0.025, H - 0.03, loc=(0, 0, 0.03 + (H - 0.03) / 2), colour="light_grey", seg=6)
         for h_tier in (H * 0.45, H * 0.75):
-            z.box((W * 0.80, 0.03, 0.03), loc=(0, 0, h_tier), colour="light_grey")
-            z.box((0.03, L * 0.80, 0.03), loc=(0, 0, h_tier), colour="light_grey")
+            z.box((W * 0.80, 0.03, 0.025), loc=(0, 0, h_tier), colour="light_grey")
+            z.box((0.03, L * 0.80, 0.025), loc=(0, 0, h_tier + 0.028), colour="light_grey")
 
     elif "figurine_blind_box" in variant:
         z.box((W, L, H), loc=(0, 0, H / 2), colour="purple")
@@ -599,15 +627,17 @@ def _build_vet(W, L, H, aid, p, z):
             z.box((0.08, 0.04, 0.22), loc=(bx, 0, H * 0.85), colour="water")
 
     elif aid == "vet_recovery_stretcher":
-        # Folding canvas stretcher
+        # Folding canvas stretcher with support legs touching floor
         for sx in (-W * 0.42, W * 0.42):
-            z.cyl(0.03, L, loc=(sx, 0, H * 0.50), colour="tan", rot=(90, 0, 0), seg=6)
-        z.box((W * 0.78, L * 0.90, 0.04), loc=(0, 0, H * 0.50), colour="navy")
+            z.cyl(0.03, L, loc=(sx, 0, H - 0.03), colour="tan", rot=(90, 0, 0), seg=6)
+            for ly in (-L * 0.35, L * 0.35):
+                z.cyl(0.02, H - 0.03, loc=(sx, ly, (H - 0.03) / 2), colour="light_grey", seg=4)
+        z.box((W * 0.78, L * 0.90, 0.04), loc=(0, 0, H - 0.03), colour="navy")
 
     elif aid == "vet_heavy_transport_gurney":
         # Heavy transport gurney on locking wheels
-        z.box((W * 0.88, L * 0.92, H * 0.45), loc=(0, 0, H * 0.30), colour="charcoal")
-        z.box((W, L, 0.10), loc=(0, 0, H * 0.70), colour="forest")
+        z.box((W * 0.88, L * 0.92, H * 0.50), loc=(0, 0, H * 0.28), colour="charcoal")
+        z.box((W, L, H * 0.40), loc=(0, 0, H * 0.78), colour="forest")
 
     elif aid == "vet_incubator_brooder":
         # Brooder incubator with clear viewing hood
@@ -639,9 +669,14 @@ def _build_vet(W, L, H, aid, p, z):
     elif aid == "vet_first_aid_trunk":
         # Red emergency response chest with white cross
         z.box((W, L, H), loc=(0, 0, H / 2), colour="red")
-        # White medical cross (two non-overlapping boxes offset by 0.005 m in Y)
-        z.box((W * 0.35, 0.02, H * 0.15), loc=(0, -L * 0.505, H / 2), colour="white")
-        z.box((W * 0.15, 0.022, H * 0.35), loc=(0, -L * 0.506, H / 2), colour="white")
+        # Center square and 4 non-overlapping arms for the white cross
+        cw = min(W, H) * 0.12
+        yf = -L * 0.505
+        z.box((cw, 0.005, cw), loc=(0, yf, H / 2), colour="white")
+        z.box((cw, 0.005, cw), loc=(-cw, yf, H / 2), colour="white")
+        z.box((cw, 0.005, cw), loc=(cw, yf, H / 2), colour="white")
+        z.box((cw, 0.005, cw), loc=(0, yf, H / 2 - cw), colour="white")
+        z.box((cw, 0.005, cw), loc=(0, yf, H / 2 + cw), colour="white")
 
     elif aid == "vet_medicine_cabinet":
         # Wall cabinet with glass window doors
