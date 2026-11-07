@@ -382,11 +382,13 @@ def _build_enrichment(W, L, H, variant, aid, p, z):
         z.cyl(0.14, H * 0.50, loc=(W * 0.40, 0, H * 0.40), colour="rust", seg=8)
 
     elif "splash_wading_tub" in variant:
-        # Shallow galvanized pool with wide rim and clear blue water
+        # Shallow galvanized pool with dark rim and clear blue water
         r = min(W, L) / 2
-        z.cyl(r, H * 0.90, loc=(0, 0, H * 0.45), colour="light_grey", seg=12, r2=r * 0.85)
-        z.cyl(r * 1.05, H * 0.12, loc=(0, 0, H * 0.85), colour="charcoal", seg=12)
-        z.cyl(r * 0.90, 0.03, loc=(0, 0, H * 0.78), colour="water", seg=10)
+        z.cyl(r, H * 0.85, loc=(0, 0, H * 0.425), colour="light_grey", seg=12, r2=r * 0.85)
+        # Rim collar around the top
+        z.cyl(r * 1.04, H * 0.12, loc=(0, 0, H * 0.84), colour="charcoal", seg=12)
+        # Water pool surface sitting inside the rim
+        z.cyl(r * 0.86, 0.04, loc=(0, 0, H * 0.89), colour="water", seg=12)
 
     elif "treat_labyrinth_plate" in variant:
         # Disc with labyrinth walls
