@@ -34,6 +34,11 @@ Key capabilities:
 - **Top-Down Minimap**: Click any enclosure on the 2D overview to jump the 3D camera to that animal.
 - **Batch Rendering**: Loads each model file once and draws duplicate assets with instancing.
 
+Sample procedural layouts (desktop 1280 px / mobile 390 px):
+- Seed 42: [Desktop](docs/park/park-seed-42-1280px.png) · [Mobile](docs/park/park-seed-42-390px.png)
+- Seed 101: [Desktop](docs/park/park-seed-101-1280px.png) · [Mobile](docs/park/park-seed-101-390px.png)
+- Seed 777: [Desktop](docs/park/park-seed-777-1280px.png) · [Mobile](docs/park/park-seed-777-390px.png)
+
 ## Layout Generator Rules
 
 The layout engine (`park/generator.js`) is written in pure JavaScript with no DOM dependencies. It turns a settings object and a seed string into a structured layout matching `park/layout.schema.json`.
