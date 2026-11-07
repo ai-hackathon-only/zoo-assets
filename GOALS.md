@@ -53,8 +53,8 @@ Style: **stylized low-poly "toy" look** with one shared colour palette, so all 5
 ai-hackathon:
   repo: ai-hackathon-only/zoo-assets
   owner: hueitan            # the human who is responsible
-  start: 2026-11-08T10:00+01:00
-  end:   2026-11-08T16:00+01:00
+  start: 2026-11-07T12:23+01:00
+  end:   2026-11-07T18:23+01:00
   round_minutes: 5                # how often each agent wakes up
   when_done_early: stretch          # stop | stretch | polish-until-end
   seats:                          # identities = GitHub Apps; roles are chosen by the agents
