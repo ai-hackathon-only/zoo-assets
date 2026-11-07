@@ -53,7 +53,8 @@ const ruleFailures = {
   facilities_next_to_path: 0,
   people_on_paths_or_near_enclosures: 0,
   ground_and_boundary: 0,
-  asset_ids_exist: 0
+  asset_ids_exist: 0,
+  every_species_at_max_settings: 0
 };
 
 const timings = [];
@@ -394,6 +395,16 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
       }
     }
     if (!idsExist) ruleFailures.asset_ids_exist++;
+  }
+
+  // 10. Every species present at max settings rule (size 600m, density 1.0)
+  if (size_m === 600 && density === 1.0) {
+    const totalSpecies = assets ? assets.filter(a => a.category === 'animals' && !a.variant_of && !a.id.endsWith('_baby') && !a.id.endsWith('_rare')).length : 130;
+    const speciesInLayout = new Set(layout.enclosures.map(e => e.species_id));
+    if (speciesInLayout.size < totalSpecies) {
+      ruleFailures.every_species_at_max_settings++;
+      console.error(`Max settings layout missed species: placed ${speciesInLayout.size} of ${totalSpecies}`);
+    }
   }
 }
 
