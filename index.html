@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zoo Assets — 3D Low-Poly Asset Library</title>
+  <meta name="description" content="A curated collection of 500 low-poly, toy-style 3D assets crafted procedurally for web and game worlds.">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./vendor/three/three.module.js",
+      "three/addons/": "./vendor/three/"
+    }
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #f5f4ef;
+      --surface: #ffffff;
+      --surface-hover: #faf9f5;
+      --surface-raised: #fbfaf6;
+      --border: #e6e3d8;
+      --border-focus: #2d5a27;
+      --text: #1f2421;
+      --text-muted: #6b7566;
+      --text-dim: #8e9987;
+      --primary: #2d5a27;
+      --primary-light: #ebf3e8;
+      --primary-dark: #1b3817;
+      --accent: #d97736;
+      --accent-light: #fef1e8;
+      --shadow-sm: 0 1px 2px rgba(31, 36, 33, 0.05);
+      --shadow-md: 0 4px 12px rgba(31, 36, 33, 0.08);
+      --shadow-lg: 0 12px 32px rgba(31, 36, 33, 0.14);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --radius-pill: 9999px;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    ::selection {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 80px;
+    }
+
+    /* Header */
+    .header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 40px 24px 32px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+
+    .header-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      border-radius: var(--radius-pill);
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .header-desc {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 720px;
+      margin-bottom: 24px;
+    }
+
+    /* Controls Bar */
+    .controls {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .search-wrap {
+      position: relative;
+      flex: 1 1 320px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 16px 12px 42px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      color: var(--text);
+      background: var(--surface);
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(45, 90, 39, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      color: var(--text-dim);
+      pointer-events: none;
+    }
+
+    .status-count {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    /* Category Navigation */
+    .categories-bar {
+      max-width: 1400px;
+      margin: 24px auto 0;
+      padding: 0 24px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    .cat-tabs {
+      display: flex;
+      gap: 8px;
+      padding-bottom: 8px;
+    }
+
+    .cat-btn {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .cat-btn:hover {
+      background: var(--surface-hover);
+      color: var(--text);
+      border-color: #d4cfbe;
+    }
+
+    .cat-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .cat-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      font-size: 0.75rem;
+      border-radius: var(--radius-pill);
+      background: rgba(0, 0, 0, 0.06);
+    }
+
+    .cat-btn.active .cat-badge {
+      background: rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+    }
+
+    /* Main Grid */
+    .main {
+      max-width: 1400px;
+      margin: 28px auto 0;
+      padding: 0 24px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: #d1ccba;
+    }
+
+    .thumb-wrap {
+      aspect-ratio: 1;
+      background: #f0eee6;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .thumb-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover .thumb-img {
+      transform: scale(1.05);
+    }
+
+    .card-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--bg);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-family: ui-monospace, SFMono-Regular, monospace;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 80px 24px;
+      color: var(--text-muted);
+    }
+
+    /* Modal 3D Viewer */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 24, 22, 0.7);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal {
+      background: var(--surface);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 1000px;
+      height: 85vh;
+      max-height: 720px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    @media (min-width: 800px) {
+      .modal {
+        flex-direction: row;
+      }
+    }
+
+    .viewport-pane {
+      flex: 1 1 60%;
+      position: relative;
+      background: #e9e6dc;
+      overflow: hidden;
+    }
+
+    #three-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .viewport-overlay {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+
+    .ctrl-btns {
+      display: flex;
+      gap: 8px;
+      pointer-events: auto;
+    }
+
+    .ctrl-btn {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text);
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+    }
+
+    .ctrl-btn:hover {
+      background: #ffffff;
+    }
+
+    .hint-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.85);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      align-self: center;
+    }
+
+    .info-pane {
+      flex: 1 1 40%;
+      max-width: 380px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      border-left: 1px solid var(--border);
+      background: var(--surface);
+      overflow-y: auto;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: background 0.15s ease;
+    }
+
+    .close-btn:hover {
+      background: #ffffff;
+    }
+
+    .detail-heading {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.25;
+    }
+
+    .detail-id {
+      font-family: ui-monospace, SFMono-Regular, monospace;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+
+    .spec-table tr {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .spec-table th {
+      text-align: left;
+      padding: 10px 0;
+      color: var(--text-muted);
+      font-weight: 500;
+      width: 40%;
+    }
+
+    .spec-table td {
+      padding: 10px 0;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .download-btn {
+      margin-top: auto;
+      padding: 12px 18px;
+      background: var(--primary);
+      color: #ffffff;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.15s ease;
+    }
+
+    .download-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .loader-spinner {
+      position: absolute;
+      inset: 0;
+      background: rgba(233, 230, 220, 0.8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      z-index: 5;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <div class="title-row">
+        <h1>Zoo Assets</h1>
+        <span class="header-tag">500 Low-Poly 3D Assets</span>
+      </div>
+      <p class="header-desc">
+        A unified toy-style 3D asset library crafted procedurally for headless Blender. All models share one master UV palette and export as clean, lightweight web GLBs.
+      </p>
+      <div class="controls">
+        <div class="search-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="search-input" class="search-input" placeholder="Search by name, ID, category..." autocomplete="off">
+        </div>
+        <div id="status-count" class="status-count">Showing 500 assets</div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="categories-bar">
+    <div id="cat-tabs" class="cat-tabs">
+      <!-- Injected via JavaScript -->
+    </div>
+  </nav>
+
+  <main class="main">
+    <div id="asset-grid" class="grid">
+      <!-- Injected via JavaScript -->
+    </div>
+  </main>
+
+  <div id="modal-backdrop" class="modal-backdrop">
+    <div class="modal">
+      <button id="modal-close" class="close-btn" aria-label="Close modal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="viewport-pane">
+        <div id="viewer-loader" class="loader-spinner">
+          <span>Loading 3D asset...</span>
+        </div>
+        <canvas id="three-canvas"></canvas>
+        <div class="viewport-overlay">
+          <div class="ctrl-btns">
+            <button id="btn-rotate" class="ctrl-btn">Pause Auto-Rotate</button>
+            <button id="btn-wireframe" class="ctrl-btn">Wireframe</button>
+            <button id="btn-reset" class="ctrl-btn">Reset View</button>
+          </div>
+          <span class="hint-label">Drag to rotate • Scroll to zoom</span>
+        </div>
+      </div>
+      <div class="info-pane">
+        <div>
+          <div id="detail-id" class="detail-id">asset_id</div>
+          <h2 id="detail-title" class="detail-heading">Asset Name</h2>
+        </div>
+        <table class="spec-table">
+          <tbody>
+            <tr>
+              <th>Category</th>
+              <td id="detail-category">—</td>
+            </tr>
+            <tr>
+              <th>Dimensions</th>
+              <td id="detail-size">—</td>
+            </tr>
+            <tr>
+              <th>Generator</th>
+              <td id="detail-generator">—</td>
+            </tr>
+            <tr>
+              <th>Tri Budget</th>
+              <td id="detail-tri-budget">—</td>
+            </tr>
+          </tbody>
+        </table>
+        <a id="detail-download" class="download-btn" href="#" download>
+          Download GLB
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script id="embedded-assets" type="application/json">
+[{"id": "african_elephant", "category": "animals", "name": "African elephant", "size_m": [1.8, 5.5, 3.2], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "africa", "body": "grey", "marks": ["trunk", "tusks", "big_ears"]}}, {"id": "asian_elephant", "category": "animals", "name": "Asian elephant", "size_m": [1.6, 5.0, 2.7], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "asia", "body": "charcoal", "marks": ["trunk", "small_ears"]}}, {"id": "white_rhino", "category": "animals", "name": "White rhinoceros", "size_m": [1.4, 4.0, 1.8], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "africa", "body": "light_grey", "marks": ["horn2"]}}, {"id": "indian_rhino", "category": "animals", "name": "Indian rhinoceros", "size_m": [1.3, 3.6, 1.8], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "asia", "body": "grey", "marks": ["horn1", "plates"]}}, {"id": "hippo", "category": "animals", "name": "Hippopotamus", "size_m": [1.5, 4.2, 1.5], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "africa", "body": "grey", "marks": ["wide_mouth"]}}, {"id": "pygmy_hippo", "category": "animals", "name": "Pygmy hippopotamus", "size_m": [0.6, 1.7, 0.85], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "africa", "body": "charcoal", "marks": ["wide_mouth"]}}, {"id": "brown_bear", "category": "animals", "name": "Brown bear", "size_m": [1.0, 2.4, 1.4], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "europe", "body": "brown", "marks": ["round_ears"]}}, {"id": "polar_bear", "category": "animals", "name": "Polar bear", "size_m": [1.0, 2.5, 1.5], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "arctic", "body": "white", "marks": ["round_ears"]}}, {"id": "giant_panda", "category": "animals", "name": "Giant panda", "size_m": [0.9, 1.7, 0.9], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "asia", "body": "white", "marks": ["panda_patches"]}}, {"id": "red_panda", "category": "animals", "name": "Red panda", "size_m": [0.3, 1.0, 0.35], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "asia", "body": "rust", "marks": ["ringed_tail", "white_face"]}}, {"id": "sloth_bear", "category": "animals", "name": "Sloth bear", "size_m": [0.8, 1.8, 0.9], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "asia", "body": "black", "marks": ["chest_v", "fluffy_ears"]}}, {"id": "spectacled_bear", "category": "animals", "name": "Spectacled bear", "size_m": [0.8, 1.7, 0.85], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "south_america", "body": "black", "marks": ["face_rings"]}}, {"id": "grey_wolf", "category": "animals", "name": "Grey wolf", "size_m": [0.4, 1.5, 0.85], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "north_america", "body": "grey", "marks": ["pointed_ears", "bushy_tail"], "leg": 0.36}}, {"id": "arctic_fox", "category": "animals", "name": "Arctic fox", "size_m": [0.25, 0.9, 0.35], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "arctic", "body": "white", "marks": ["bushy_tail"]}}, {"id": "red_fox", "category": "animals", "name": "Red fox", "size_m": [0.25, 1.0, 0.4], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "europe", "body": "orange", "marks": ["white_tail_tip"]}}, {"id": "african_wild_dog", "category": "animals", "name": "African wild dog", "size_m": [0.35, 1.3, 0.75], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "africa", "body": "tan", "marks": ["patches", "big_ears"]}}, {"id": "meerkat", "category": "animals", "name": "Meerkat", "size_m": [0.12, 0.5, 0.3], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "africa", "body": "sand", "marks": ["upright", "eye_rings"]}}, {"id": "aardvark", "category": "animals", "name": "Aardvark", "size_m": [0.5, 1.8, 0.65], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "africa", "body": "pink", "marks": ["long_snout", "big_ears"]}}, {"id": "giant_anteater", "category": "animals", "name": "Giant anteater", "size_m": [0.5, 2.1, 0.9], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "south_america", "body": "charcoal", "marks": ["long_snout", "stripe_diag"]}}, {"id": "capybara", "category": "animals", "name": "Capybara", "size_m": [0.5, 1.3, 0.6], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "south_america", "body": "brown", "marks": ["blunt_snout", "small_ears"], "leg": 0.2, "snout": [1.0, 1.5]}}, {"id": "koala", "category": "animals", "name": "Koala", "size_m": [0.4, 0.7, 0.75], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "oceania", "body": "grey", "marks": ["fluffy_ears", "upright"]}}, {"id": "wombat", "category": "animals", "name": "Wombat", "size_m": [0.4, 1.1, 0.45], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "oceania", "body": "tan", "marks": ["blunt_snout"], "leg": 0.16, "snout": [1.4, 0.6]}}, {"id": "red_kangaroo", "category": "animals", "name": "Red kangaroo", "size_m": [0.6, 1.6, 1.6], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "oceania", "body": "rust", "marks": ["upright", "big_tail"]}}, {"id": "tasmanian_devil", "category": "animals", "name": "Tasmanian devil", "size_m": [0.3, 0.9, 0.35], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "oceania", "body": "black", "marks": ["chest_stripe"]}}, {"id": "platypus", "category": "animals", "name": "Platypus", "size_m": [0.25, 0.6, 0.18], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "oceania", "body": "brown", "marks": ["duck_bill", "flat_tail"]}}, {"id": "porcupine", "category": "animals", "name": "Crested porcupine", "size_m": [0.4, 0.9, 0.4], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "africa", "body": "black", "marks": ["quills"]}}, {"id": "american_beaver", "category": "animals", "name": "American beaver", "size_m": [0.35, 1.1, 0.4], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "north_america", "body": "brown", "marks": ["flat_tail"]}}, {"id": "raccoon", "category": "animals", "name": "Raccoon", "size_m": [0.3, 0.9, 0.4], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "north_america", "body": "grey", "marks": ["mask", "ringed_tail"]}}, {"id": "european_badger", "category": "animals", "name": "European badger", "size_m": [0.35, 0.9, 0.35], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "europe", "body": "grey", "marks": ["face_stripes"]}}, {"id": "river_otter", "category": "animals", "name": "Eurasian otter", "size_m": [0.25, 1.2, 0.35], "generator": "quadruped", "budget_tris": 5000, "params": {"continent": "europe", "body": "brown", "marks": ["long_tail"]}}, {"id": "lion", "category": "animals", "name": "Lion", "size_m": [0.6, 2.6, 1.2], "generator": "bigcat", "budget_tris": 5000, "params": {"continent": "africa", "body": "sand", "marks": ["mane"]}}, {"id": "lioness", "category": "animals", "name": "Lioness", "size_m": [0.55, 2.4, 1.05], "generator": "bigcat", "budget_tris": 5000, "params": {"continent": "africa", "body": "sand", "marks": ["plain"]}}, {"id": "bengal_tiger", "category": "animals", "name": "Bengal tiger", "size_m": [0.6, 2.8, 1.05], "generator": "bigcat", "budget_tris": 5000, "params": {"continent": "asia", "body": "orange", "marks": ["stripes"]}}, {"id": "amur_tiger", "category": "animals", "name": "Amur tiger", "size_m": [0.65, 3.0, 1.1], "generator": "bigcat", "budget_tris": 5000, "params": {"continent": "asia", "body": "cream", "marks": ["stripes"]}}, {"id": "leopard", "category": "animals", "name": "Leopard", "size_m": [0.5, 2.1, 0.75], "generator": "bigcat", "budget_tris": 5000, "params": {"continent": "africa", "body": "yellow", "marks": ["rosettes"]}}, {"id": "snow_leopard", "category": "animals", "name": "Snow leopard", "size_m": [0.5, 2.2, 0.65], "generator": "bigcat", "budget_tris": 5000, "params": {"continent": "asia", "body": "light_grey", "marks": ["rosettes", "thick_tail"]}}, {"id": "jaguar", "category": "animals", "name": "Jaguar", "size_m": [0.55, 2.2, 0.8], "generator": "bigcat", "budget_tris": 5000, "params": {"continent": "south_america", "body": "gold", "marks": ["rosettes_big", "stocky"]}}, {"id": "cheetah", "category": "animals", "name": "Cheetah", "size_m": [0.45, 2.0, 0.9], "generator": "bigcat", "budget_tris": 5000, "params": {"continent": "africa", "body": "yellow", "marks": ["spots", "tear_lines"]}}, {"id": "cougar", "category": "animals", "name": "Cougar", "size_m": [0.5, 2.2, 0.8], "generator": "bigcat", "budget_tris": 5000, "params": {"continent": "north_america", "body": "tan", "marks": ["plain"]}}, {"id": "eurasian_lynx", "category": "animals", "name": "Eurasian lynx", "size_m": [0.4, 1.3, 0.7], "generator": "bigcat", "budget_tris": 5000, "params": {"continent": "europe", "body": "tan", "marks": ["ear_tufts", "short_tail"]}}, {"id": "serval", "category": "animals", "name": "Serval", "size_m": [0.35, 1.2, 0.6], "generator": "bigcat", "budget_tris": 5000, "params": {"continent": "africa", "body": "yellow", "marks": ["spots", "big_ears", "long_legs"]}}, {"id": "black_panther", "category": "animals", "name": "Black panther", "size_m": [0.5, 2.1, 0.75], "generator": "bigcat", "budget_tris": 5000, "params": {"continent": "asia", "body": "black", "marks": ["plain"]}}, {"id": "giraffe", "category": "animals", "name": "Giraffe", "size_m": [1.0, 4.0, 5.2], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "africa", "body": "yellow", "marks": ["patches", "long_neck", "ossicones"]}}, {"id": "okapi", "category": "animals", "name": "Okapi", "size_m": [0.6, 2.4, 1.9], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "africa", "body": "dark_brown", "marks": ["leg_stripes"]}}, {"id": "plains_zebra", "category": "animals", "name": "Plains zebra", "size_m": [0.6, 2.4, 1.4], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "africa", "body": "white", "marks": ["stripes"]}}, {"id": "grevys_zebra", "category": "animals", "name": "Grevy's zebra", "size_m": [0.6, 2.7, 1.5], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "africa", "body": "white", "marks": ["thin_stripes", "big_ears"]}}, {"id": "dromedary", "category": "animals", "name": "Dromedary camel", "size_m": [0.9, 3.0, 2.2], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "africa", "body": "tan", "marks": ["hump1"]}}, {"id": "bactrian_camel", "category": "animals", "name": "Bactrian camel", "size_m": [1.0, 3.0, 2.2], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "asia", "body": "brown", "marks": ["hump2"]}}, {"id": "llama", "category": "animals", "name": "Llama", "size_m": [0.6, 1.8, 1.8], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "south_america", "body": "cream", "marks": ["long_neck", "banana_ears"]}}, {"id": "alpaca", "category": "animals", "name": "Alpaca", "size_m": [0.5, 1.5, 1.5], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "south_america", "body": "white", "marks": ["fluffy"]}}, {"id": "american_bison", "category": "animals", "name": "American bison", "size_m": [1.1, 3.2, 1.9], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "north_america", "body": "dark_brown", "marks": ["hump_fur"]}}, {"id": "european_bison", "category": "animals", "name": "European bison", "size_m": [1.0, 3.0, 1.9], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "europe", "body": "brown", "marks": ["hump_fur"]}}, {"id": "moose", "category": "animals", "name": "Moose", "size_m": [1.0, 3.0, 2.3], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "north_america", "body": "dark_brown", "marks": ["palm_antlers"]}}, {"id": "reindeer", "category": "animals", "name": "Reindeer", "size_m": [0.7, 2.0, 1.8], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "arctic", "body": "grey", "marks": ["antlers"]}}, {"id": "red_deer", "category": "animals", "name": "Red deer", "size_m": [0.6, 2.2, 1.9], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "europe", "body": "brown", "marks": ["antlers"]}}, {"id": "sika_deer", "category": "animals", "name": "Sika deer", "size_m": [0.5, 1.5, 1.3], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "asia", "body": "tan", "marks": ["spots", "antlers_small"]}}, {"id": "gemsbok", "category": "animals", "name": "Gemsbok", "size_m": [0.6, 2.2, 1.9], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "africa", "body": "light_grey", "marks": ["straight_horns", "face_mask"]}}, {"id": "impala", "category": "animals", "name": "Impala", "size_m": [0.5, 1.5, 1.3], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "africa", "body": "tan", "marks": ["lyre_horns"]}}, {"id": "greater_kudu", "category": "animals", "name": "Greater kudu", "size_m": [0.6, 2.3, 1.9], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "africa", "body": "grey", "marks": ["spiral_horns", "thin_stripes"]}}, {"id": "blue_wildebeest", "category": "animals", "name": "Blue wildebeest", "size_m": [0.7, 2.2, 1.6], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "africa", "body": "charcoal", "marks": ["beard", "curved_horns"]}}, {"id": "cape_buffalo", "category": "animals", "name": "Cape buffalo", "size_m": [1.0, 3.0, 1.6], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "africa", "body": "black", "marks": ["boss_horns"]}}, {"id": "warthog", "category": "animals", "name": "Warthog", "size_m": [0.5, 1.4, 0.75], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "africa", "body": "grey", "marks": ["tusks", "mane_strip"]}}, {"id": "tapir", "category": "animals", "name": "Malayan tapir", "size_m": [0.8, 2.2, 1.1], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "asia", "body": "black", "marks": ["saddle_white"]}}, {"id": "przewalskis_horse", "category": "animals", "name": "Przewalski's horse", "size_m": [0.6, 2.2, 1.4], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "asia", "body": "tan", "marks": ["upright_mane"]}}, {"id": "mountain_goat", "category": "animals", "name": "Mountain goat", "size_m": [0.5, 1.5, 1.0], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "north_america", "body": "white", "marks": ["beard", "small_horns"]}}, {"id": "markhor", "category": "animals", "name": "Markhor", "size_m": [0.5, 1.6, 1.1], "generator": "hoofed", "budget_tris": 5000, "params": {"continent": "asia", "body": "tan", "marks": ["corkscrew_horns"]}}, {"id": "chimpanzee", "category": "animals", "name": "Chimpanzee", "size_m": [0.6, 0.6, 1.2], "generator": "primate", "budget_tris": 5000, "params": {"continent": "africa", "body": "black", "marks": ["pale_face"]}}, {"id": "western_gorilla", "category": "animals", "name": "Western gorilla", "size_m": [1.0, 1.0, 1.7], "generator": "primate", "budget_tris": 5000, "params": {"continent": "africa", "body": "charcoal", "marks": ["silver_back"]}}, {"id": "bornean_orangutan", "category": "animals", "name": "Bornean orangutan", "size_m": [0.9, 0.7, 1.3], "generator": "primate", "budget_tris": 5000, "params": {"continent": "asia", "body": "rust", "marks": ["long_arms"]}}, {"id": "bonobo", "category": "animals", "name": "Bonobo", "size_m": [0.5, 0.5, 1.1], "generator": "primate", "budget_tris": 5000, "params": {"continent": "africa", "body": "black", "marks": ["parted_hair"]}}, {"id": "ring_tailed_lemur", "category": "animals", "name": "Ring-tailed lemur", "size_m": [0.3, 1.0, 0.45], "generator": "primate", "budget_tris": 5000, "params": {"continent": "africa", "body": "light_grey", "marks": ["ringed_tail"]}}, {"id": "mandrill", "category": "animals", "name": "Mandrill", "size_m": [0.5, 0.8, 0.8], "generator": "primate", "budget_tris": 5000, "params": {"continent": "africa", "body": "olive", "marks": ["red_blue_face"]}}, {"id": "japanese_macaque", "category": "animals", "name": "Japanese macaque", "size_m": [0.4, 0.6, 0.6], "generator": "primate", "budget_tris": 5000, "params": {"continent": "asia", "body": "light_grey", "marks": ["red_face"]}}, {"id": "golden_lion_tamarin", "category": "animals", "name": "Golden lion tamarin", "size_m": [0.15, 0.6, 0.25], "generator": "primate", "budget_tris": 5000, "params": {"continent": "south_america", "body": "orange", "marks": ["mane"]}}, {"id": "black_howler", "category": "animals", "name": "Black howler monkey", "size_m": [0.35, 1.2, 0.6], "generator": "primate", "budget_tris": 5000, "params": {"continent": "south_america", "body": "black", "marks": ["prehensile_tail"]}}, {"id": "proboscis_monkey", "category": "animals", "name": "Proboscis monkey", "size_m": [0.4, 1.3, 0.75], "generator": "primate", "budget_tris": 5000, "params": {"continent": "asia", "body": "orange", "marks": ["big_nose"]}}, {"id": "lar_gibbon", "category": "animals", "name": "Lar gibbon", "size_m": [0.4, 0.4, 0.6], "generator": "primate", "budget_tris": 5000, "params": {"continent": "asia", "body": "cream", "marks": ["long_arms", "face_ring"]}}, {"id": "common_squirrel_monkey", "category": "animals", "name": "Squirrel monkey", "size_m": [0.15, 0.7, 0.3], "generator": "primate", "budget_tris": 5000, "params": {"continent": "south_america", "body": "yellow", "marks": ["white_mask"]}}, {"id": "african_penguin", "category": "animals", "name": "African penguin", "size_m": [0.3, 0.3, 0.65], "generator": "bird", "budget_tris": 5000, "params": {"continent": "africa", "body": "black", "marks": ["chest_band"]}}, {"id": "emperor_penguin", "category": "animals", "name": "Emperor penguin", "size_m": [0.45, 0.45, 1.15], "generator": "bird", "budget_tris": 5000, "params": {"continent": "antarctica", "body": "black", "marks": ["yellow_ear"]}}, {"id": "greater_flamingo", "category": "animals", "name": "Greater flamingo", "size_m": [0.4, 0.6, 1.4], "generator": "bird", "budget_tris": 5000, "params": {"continent": "africa", "body": "pink", "marks": ["long_neck", "long_legs"]}}, {"id": "ostrich", "category": "animals", "name": "Common ostrich", "size_m": [0.8, 1.2, 2.4], "generator": "bird", "budget_tris": 5000, "params": {"continent": "africa", "body": "black", "marks": ["long_neck", "long_legs", "white_wings"]}}, {"id": "emu", "category": "animals", "name": "Emu", "size_m": [0.6, 1.0, 1.8], "generator": "bird", "budget_tris": 5000, "params": {"continent": "oceania", "body": "brown", "marks": ["long_neck", "shaggy"]}}, {"id": "bald_eagle", "category": "animals", "name": "Bald eagle", "size_m": [0.4, 0.8, 0.85], "generator": "bird", "budget_tris": 5000, "params": {"continent": "north_america", "body": "dark_brown", "marks": ["white_head", "hooked_beak"]}}, {"id": "snowy_owl", "category": "animals", "name": "Snowy owl", "size_m": [0.35, 0.4, 0.65], "generator": "bird", "budget_tris": 5000, "params": {"continent": "arctic", "body": "white", "marks": ["round_head", "black_flecks"]}}, {"id": "scarlet_macaw", "category": "animals", "name": "Scarlet macaw", "size_m": [0.25, 0.85, 0.6], "generator": "bird", "budget_tris": 5000, "params": {"continent": "south_america", "body": "red", "marks": ["long_tail", "blue_yellow_wings"]}}, {"id": "toco_toucan", "category": "animals", "name": "Toco toucan", "size_m": [0.2, 0.6, 0.45], "generator": "bird", "budget_tris": 5000, "params": {"continent": "south_america", "body": "black", "marks": ["big_orange_beak"]}}, {"id": "indian_peafowl", "category": "animals", "name": "Indian peafowl", "size_m": [0.5, 2.0, 1.1], "generator": "bird", "budget_tris": 5000, "params": {"continent": "asia", "body": "navy", "marks": ["fan_tail"]}}, {"id": "kookaburra", "category": "animals", "name": "Laughing kookaburra", "size_m": [0.15, 0.45, 0.35], "generator": "bird", "budget_tris": 5000, "params": {"continent": "oceania", "body": "cream", "marks": ["eye_stripe"]}}, {"id": "kiwi", "category": "animals", "name": "North Island brown kiwi", "size_m": [0.25, 0.5, 0.35], "generator": "bird", "budget_tris": 5000, "params": {"continent": "oceania", "body": "brown", "marks": ["long_beak"]}}, {"id": "white_stork", "category": "animals", "name": "White stork", "size_m": [0.4, 0.9, 1.1], "generator": "bird", "budget_tris": 5000, "params": {"continent": "europe", "body": "white", "marks": ["red_beak", "black_wings"]}}, {"id": "red_crowned_crane", "category": "animals", "name": "Red-crowned crane", "size_m": [0.4, 1.1, 1.5], "generator": "bird", "budget_tris": 5000, "params": {"continent": "asia", "body": "white", "marks": ["red_cap", "black_neck"]}}, {"id": "pelican", "category": "animals", "name": "Great white pelican", "size_m": [0.6, 1.6, 1.2], "generator": "bird", "budget_tris": 5000, "params": {"continent": "africa", "body": "white", "marks": ["pouch_beak"]}}, {"id": "shoebill", "category": "animals", "name": "Shoebill", "size_m": [0.5, 1.0, 1.3], "generator": "bird", "budget_tris": 5000, "params": {"continent": "africa", "body": "grey", "marks": ["shoe_beak"]}}, {"id": "nile_crocodile", "category": "animals", "name": "Nile crocodile", "size_m": [0.9, 4.5, 0.6], "generator": "reptile", "budget_tris": 5000, "params": {"continent": "africa", "body": "olive", "marks": ["scutes"]}}, {"id": "american_alligator", "category": "animals", "name": "American alligator", "size_m": [0.8, 4.0, 0.55], "generator": "reptile", "budget_tris": 5000, "params": {"continent": "north_america", "body": "charcoal", "marks": ["scutes", "blunt_snout"]}}, {"id": "gharial", "category": "animals", "name": "Gharial", "size_m": [0.7, 4.5, 0.5], "generator": "reptile", "budget_tris": 5000, "params": {"continent": "asia", "body": "olive", "marks": ["thin_snout"]}}, {"id": "galapagos_tortoise", "category": "animals", "name": "Galapagos giant tortoise", "size_m": [1.0, 1.5, 1.0], "generator": "reptile", "budget_tris": 5000, "params": {"continent": "south_america", "body": "charcoal", "marks": ["dome_shell"]}}, {"id": "green_sea_turtle", "category": "animals", "name": "Green sea turtle", "size_m": [0.9, 1.2, 0.4], "generator": "reptile", "budget_tris": 5000, "params": {"continent": "ocean", "body": "olive", "marks": ["flippers"]}}, {"id": "komodo_dragon", "category": "animals", "name": "Komodo dragon", "size_m": [0.6, 2.8, 0.6], "generator": "reptile", "budget_tris": 5000, "params": {"continent": "asia", "body": "grey", "marks": ["long_tail"]}}, {"id": "green_iguana", "category": "animals", "name": "Green iguana", "size_m": [0.25, 1.5, 0.35], "generator": "reptile", "budget_tris": 5000, "params": {"continent": "south_america", "body": "leaf", "marks": ["dorsal_spikes"]}}, {"id": "chameleon", "category": "animals", "name": "Panther chameleon", "size_m": [0.1, 0.45, 0.2], "generator": "reptile", "budget_tris": 5000, "params": {"continent": "africa", "body": "lime", "marks": ["curled_tail", "casque"]}}, {"id": "reticulated_python", "category": "animals", "name": "Reticulated python", "size_m": [1.2, 1.2, 0.3], "generator": "reptile", "budget_tris": 5000, "params": {"continent": "asia", "body": "tan", "marks": ["coiled", "net_pattern"]}}, {"id": "king_cobra", "category": "animals", "name": "King cobra", "size_m": [0.8, 0.8, 1.0], "generator": "reptile", "budget_tris": 5000, "params": {"continent": "asia", "body": "olive", "marks": ["hood_up"]}}, {"id": "poison_dart_frog", "category": "animals", "name": "Blue poison dart frog", "size_m": [0.06, 0.06, 0.04], "generator": "reptile", "budget_tris": 5000, "params": {"continent": "south_america", "body": "sky", "marks": ["black_spots"]}}, {"id": "axolotl", "category": "animals", "name": "Axolotl", "size_m": [0.08, 0.25, 0.06], "generator": "reptile", "budget_tris": 5000, "params": {"continent": "north_america", "body": "pink", "marks": ["gills"]}}, {"id": "bottlenose_dolphin", "category": "animals", "name": "Bottlenose dolphin", "size_m": [0.8, 3.0, 0.8], "generator": "sea", "budget_tris": 5000, "params": {"continent": "ocean", "body": "grey", "marks": ["dorsal_fin"]}}, {"id": "orca_calf", "category": "animals", "name": "Orca calf", "size_m": [0.9, 2.6, 0.9], "generator": "sea", "budget_tris": 5000, "params": {"continent": "ocean", "body": "black", "marks": ["white_patches"]}}, {"id": "california_sea_lion", "category": "animals", "name": "California sea lion", "size_m": [0.6, 2.0, 1.0], "generator": "sea", "budget_tris": 5000, "params": {"continent": "north_america", "body": "brown", "marks": ["upright_flippers"]}}, {"id": "harbour_seal", "category": "animals", "name": "Harbour seal", "size_m": [0.5, 1.7, 0.5], "generator": "sea", "budget_tris": 5000, "params": {"continent": "europe", "body": "light_grey", "marks": ["spots"]}}, {"id": "walrus", "category": "animals", "name": "Pacific walrus", "size_m": [1.4, 3.0, 1.2], "generator": "sea", "budget_tris": 5000, "params": {"continent": "arctic", "body": "tan", "marks": ["tusks", "whiskers"]}}, {"id": "manatee", "category": "animals", "name": "West Indian manatee", "size_m": [1.0, 3.2, 0.9], "generator": "sea", "budget_tris": 5000, "params": {"continent": "north_america", "body": "grey", "marks": ["paddle_tail"]}}, {"id": "great_white_shark", "category": "animals", "name": "Great white shark", "size_m": [1.0, 4.5, 1.3], "generator": "sea", "budget_tris": 5000, "params": {"continent": "ocean", "body": "grey", "marks": ["white_belly", "dorsal_fin"]}}, {"id": "manta_ray", "category": "animals", "name": "Giant manta ray", "size_m": [4.0, 3.0, 0.6], "generator": "sea", "budget_tris": 5000, "params": {"continent": "ocean", "body": "navy", "marks": ["cephalic_fins"]}}, {"id": "green_moray", "category": "animals", "name": "Green moray", "size_m": [0.5, 1.8, 0.3], "generator": "sea", "budget_tris": 5000, "params": {"continent": "ocean", "body": "leaf", "marks": ["open_mouth"]}}, {"id": "clownfish", "category": "animals", "name": "Clownfish", "size_m": [0.04, 0.11, 0.06], "generator": "sea", "budget_tris": 5000, "params": {"continent": "ocean", "body": "orange", "marks": ["white_bands"]}}, {"id": "blue_tang", "category": "animals", "name": "Blue tang", "size_m": [0.05, 0.25, 0.18], "generator": "sea", "budget_tris": 5000, "params": {"continent": "ocean", "body": "navy", "marks": ["yellow_tail"]}}, {"id": "giant_pacific_octopus", "category": "animals", "name": "Giant Pacific octopus", "size_m": [2.0, 2.0, 0.6], "generator": "sea", "budget_tris": 5000, "params": {"continent": "ocean", "body": "rust", "marks": ["arms8"]}}, {"id": "moon_jellyfish", "category": "animals", "name": "Moon jellyfish", "size_m": [0.35, 0.35, 0.4], "generator": "sea", "budget_tris": 5000, "params": {"continent": "ocean", "body": "lavender", "marks": ["bell", "tentacles"]}}, {"id": "sea_otter", "category": "animals", "name": "Sea otter", "size_m": [0.4, 1.3, 0.35], "generator": "sea", "budget_tris": 5000, "params": {"continent": "north_america", "body": "brown", "marks": ["floating_back"]}}, {"id": "monarch_butterfly", "category": "animals", "name": "Monarch butterfly", "size_m": [0.1, 0.06, 0.03], "generator": "insect", "budget_tris": 5000, "params": {"continent": "north_america", "body": "orange", "marks": ["black_veins"]}}, {"id": "goliath_beetle", "category": "animals", "name": "Goliath beetle", "size_m": [0.06, 0.11, 0.05], "generator": "insect", "budget_tris": 5000, "params": {"continent": "africa", "body": "white", "marks": ["black_stripes"]}}, {"id": "leafcutter_ant", "category": "animals", "name": "Leafcutter ant", "size_m": [0.01, 0.02, 0.01], "generator": "insect", "budget_tris": 5000, "params": {"continent": "south_america", "body": "rust", "marks": ["carry_leaf"]}}, {"id": "honey_bee", "category": "animals", "name": "Western honey bee", "size_m": [0.02, 0.015, 0.01], "generator": "insect", "budget_tris": 5000, "params": {"continent": "europe", "body": "yellow", "marks": ["black_bands"]}}, {"id": "emperor_scorpion", "category": "animals", "name": "Emperor scorpion", "size_m": [0.08, 0.2, 0.06], "generator": "insect", "budget_tris": 5000, "params": {"continent": "africa", "body": "black", "marks": ["curled_tail"]}}, {"id": "mexican_redknee_tarantula", "category": "animals", "name": "Mexican red-knee tarantula", "size_m": [0.14, 0.14, 0.05], "generator": "insect", "budget_tris": 5000, "params": {"continent": "north_america", "body": "black", "marks": ["orange_knees"]}}, {"id": "giant_african_snail", "category": "animals", "name": "Giant African land snail", "size_m": [0.08, 0.2, 0.1], "generator": "insect", "budget_tris": 5000, "params": {"continent": "africa", "body": "brown", "marks": ["spiral_shell"]}}, {"id": "stick_insect", "category": "animals", "name": "Giant prickly stick insect", "size_m": [0.03, 0.2, 0.03], "generator": "insect", "budget_tris": 5000, "params": {"continent": "oceania", "body": "tan", "marks": ["thin"]}}, {"id": "praying_mantis", "category": "animals", "name": "Orchid mantis", "size_m": [0.03, 0.07, 0.04], "generator": "insect", "budget_tris": 5000, "params": {"continent": "asia", "body": "pink", "marks": ["petal_legs"]}}, {"id": "atlas_moth", "category": "animals", "name": "Atlas moth", "size_m": [0.25, 0.15, 0.03], "generator": "insect", "budget_tris": 5000, "params": {"continent": "asia", "body": "rust", "marks": ["eye_spots"]}}, {"id": "fence_wood_rail_straight", "category": "facilities", "name": "Wooden rail fence (straight)", "size_m": [3.0, 0.25, 1.2], "generator": "facilities", "budget_tris": 1500, "params": {"family": "fence_wood", "variant": "straight"}}, {"id": "fence_wood_rail_corner", "category": "facilities", "name": "Wooden rail fence (corner)", "size_m": [1.5, 1.5, 1.2], "generator": "facilities", "budget_tris": 1500, "params": {"family": "fence_wood", "variant": "corner"}}, {"id": "fence_wood_post", "category": "facilities", "name": "Wooden fence post", "size_m": [0.25, 0.25, 1.3], "generator": "facilities", "budget_tris": 500, "params": {"family": "fence_wood", "variant": "post"}}, {"id": "fence_chainlink_panel", "category": "facilities", "name": "Chainlink fence panel", "size_m": [2.5, 0.15, 2.0], "generator": "facilities", "budget_tris": 2500, "params": {"family": "fence_chainlink", "variant": "panel"}}, {"id": "fence_chainlink_post", "category": "facilities", "name": "Chainlink fence post", "size_m": [0.2, 0.2, 2.2], "generator": "facilities", "budget_tris": 600, "params": {"family": "fence_chainlink", "variant": "post"}}, {"id": "wall_glass_viewing_panel", "category": "facilities", "name": "Glass viewing barrier panel", "size_m": [2.0, 0.3, 1.6], "generator": "facilities", "budget_tris": 2000, "params": {"family": "wall_glass", "variant": "panel"}}, {"id": "wall_glass_viewing_curved", "category": "facilities", "name": "Curved glass viewing barrier", "size_m": [2.5, 1.0, 1.6], "generator": "facilities", "budget_tris": 3000, "params": {"family": "wall_glass", "variant": "curved"}}, {"id": "wall_stone_perimeter_low", "category": "facilities", "name": "Low stone barrier wall", "size_m": [3.0, 0.5, 0.8], "generator": "facilities", "budget_tris": 2500, "params": {"family": "wall_stone", "variant": "low"}}, {"id": "wall_stone_perimeter_tall", "category": "facilities", "name": "Tall stone perimeter wall", "size_m": [3.0, 0.6, 2.5], "generator": "facilities", "budget_tris": 3500, "params": {"family": "wall_stone", "variant": "tall"}}, {"id": "fence_bamboo_panel", "category": "facilities", "name": "Bamboo enclosure fence", "size_m": [2.0, 0.15, 1.8], "generator": "facilities", "budget_tris": 2000, "params": {"family": "fence_bamboo", "variant": "panel"}}, {"id": "fence_rope_stanchions", "category": "facilities", "name": "Rope boundary stanchions", "size_m": [2.5, 0.3, 0.9], "generator": "facilities", "budget_tris": 1200, "params": {"family": "fence_rope", "variant": "stanchion"}}, {"id": "barrier_moat_trench", "category": "facilities", "name": "Dry moat trench barrier", "size_m": [4.0, 2.0, 1.5], "generator": "facilities", "budget_tris": 3000, "params": {"family": "moat", "variant": "trench"}}, {"id": "gate_entrance_arch_grand", "category": "facilities", "name": "Grand zoo entrance archway", "size_m": [6.0, 1.2, 4.5], "generator": "facilities", "budget_tris": 5000, "params": {"family": "gate", "variant": "arch"}}, {"id": "gate_paddock_double_wood", "category": "facilities", "name": "Timber paddock double gate", "size_m": [4.0, 0.25, 1.8], "generator": "facilities", "budget_tris": 2500, "params": {"family": "gate", "variant": "paddock_double"}}, {"id": "gate_visitor_turnstile", "category": "facilities", "name": "Tripod security turnstile", "size_m": [0.8, 0.8, 1.1], "generator": "facilities", "budget_tris": 2000, "params": {"family": "gate", "variant": "turnstile"}}, {"id": "gate_ticket_barrier", "category": "facilities", "name": "Automated ticket barrier gate", "size_m": [1.2, 0.4, 1.1], "generator": "facilities", "budget_tris": 1800, "params": {"family": "gate", "variant": "ticket_barrier"}}, {"id": "gate_keeper_metal_slide", "category": "facilities", "name": "Keeper metal sliding gate", "size_m": [3.5, 0.2, 2.2], "generator": "facilities", "budget_tris": 2500, "params": {"family": "gate", "variant": "keeper_slide"}}, {"id": "gate_pedestrian_wicket", "category": "facilities", "name": "Single wooden wicket gate", "size_m": [1.2, 0.15, 1.2], "generator": "facilities", "budget_tris": 1200, "params": {"family": "gate", "variant": "wicket"}}, {"id": "shelter_animal_night_brick", "category": "facilities", "name": "Brick animal night den", "size_m": [5.0, 4.0, 3.0], "generator": "facilities", "budget_tris": 5000, "params": {"family": "shelter", "variant": "night_brick"}}, {"id": "shelter_animal_timber_lean", "category": "facilities", "name": "Wooden paddock lean-to shelter", "size_m": [4.5, 3.5, 2.8], "generator": "facilities", "budget_tris": 3500, "params": {"family": "shelter", "variant": "timber_lean"}}, {"id": "pavilion_viewing_safari", "category": "facilities", "name": "Safari viewing gazebo pavilion", "size_m": [5.0, 5.0, 3.8], "generator": "facilities", "budget_tris": 4500, "params": {"family": "pavilion", "variant": "safari"}}, {"id": "canopy_walkway_straight", "category": "facilities", "name": "Elevated canopy walkway", "size_m": [4.0, 2.2, 3.5], "generator": "facilities", "budget_tris": 3500, "params": {"family": "canopy", "variant": "straight"}}, {"id": "canopy_walkway_ramp", "category": "facilities", "name": "Canopy walkway access ramp", "size_m": [6.0, 2.2, 2.5], "generator": "facilities", "budget_tris": 3500, "params": {"family": "canopy", "variant": "ramp"}}, {"id": "building_reptile_house", "category": "facilities", "name": "Reptile vivarium house", "size_m": [8.0, 6.0, 4.5], "generator": "facilities", "budget_tris": 6000, "params": {"family": "building", "variant": "reptile_house"}}, {"id": "building_aquarium_dome", "category": "facilities", "name": "Aquarium dome pavilion", "size_m": [7.0, 7.0, 4.8], "generator": "facilities", "budget_tris": 6500, "params": {"family": "building", "variant": "aquarium_dome"}}, {"id": "building_aviary_walkthrough", "category": "facilities", "name": "Walk-through aviary dome", "size_m": [8.0, 8.0, 5.5], "generator": "facilities", "budget_tris": 6500, "params": {"family": "building", "variant": "aviary"}}, {"id": "building_keeper_shed", "category": "facilities", "name": "Keeper tool and equipment shed", "size_m": [3.5, 3.0, 2.6], "generator": "facilities", "budget_tris": 3500, "params": {"family": "building", "variant": "shed"}}, {"id": "building_vet_clinic", "category": "facilities", "name": "Zoo veterinary clinic", "size_m": [7.0, 5.5, 3.6], "generator": "facilities", "budget_tris": 5500, "params": {"family": "building", "variant": "clinic"}}, {"id": "building_quarantine_bay", "category": "facilities", "name": "Animal quarantine station", "size_m": [6.0, 4.5, 3.2], "generator": "facilities", "budget_tris": 4500, "params": {"family": "building", "variant": "quarantine"}}, {"id": "building_hay_barn", "category": "facilities", "name": "Open feed and hay storage barn", "size_m": [6.0, 5.0, 4.0], "generator": "facilities", "budget_tris": 4000, "params": {"family": "building", "variant": "hay_barn"}}, {"id": "building_public_restroom", "category": "facilities", "name": "Park public restroom pavilion", "size_m": [5.5, 4.0, 3.2], "generator": "facilities", "budget_tris": 4000, "params": {"family": "building", "variant": "restroom"}}, {"id": "kiosk_ticketing_booth", "category": "facilities", "name": "Admission ticketing kiosk", "size_m": [2.2, 2.0, 2.8], "generator": "facilities", "budget_tris": 3000, "params": {"family": "kiosk", "variant": "ticket"}}, {"id": "kiosk_ice_cream", "category": "facilities", "name": "Ice cream vendor kiosk", "size_m": [2.5, 2.2, 2.9], "generator": "facilities", "budget_tris": 3500, "params": {"family": "kiosk", "variant": "ice_cream"}}, {"id": "kiosk_pretzel_snack", "category": "facilities", "name": "Pretzel & snack food kiosk", "size_m": [2.6, 2.2, 2.9], "generator": "facilities", "budget_tris": 3500, "params": {"family": "kiosk", "variant": "snack"}}, {"id": "kiosk_souvenir_stand", "category": "facilities", "name": "Souvenir & toy gift stand", "size_m": [3.0, 2.4, 2.8], "generator": "facilities", "budget_tris": 4000, "params": {"family": "kiosk", "variant": "souvenir"}}, {"id": "kiosk_beverage_bar", "category": "facilities", "name": "Coffee and cold drink bar", "size_m": [2.5, 2.2, 2.9], "generator": "facilities", "budget_tris": 3500, "params": {"family": "kiosk", "variant": "beverage"}}, {"id": "booth_visitor_info", "category": "facilities", "name": "Zoo visitor info kiosk", "size_m": [3.0, 3.0, 3.2], "generator": "facilities", "budget_tris": 3500, "params": {"family": "kiosk", "variant": "info"}}, {"id": "stand_ice_slush", "category": "facilities", "name": "Mobile slushie cart stand", "size_m": [1.8, 1.2, 2.2], "generator": "facilities", "budget_tris": 2500, "params": {"family": "kiosk", "variant": "cart"}}, {"id": "path_asphalt_straight", "category": "facilities", "name": "Paved asphalt walkway (straight)", "size_m": [3.0, 4.0, 0.05], "generator": "facilities", "budget_tris": 800, "params": {"family": "path", "variant": "asphalt_straight"}}, {"id": "path_asphalt_junction_t", "category": "facilities", "name": "Paved asphalt path (T-junction)", "size_m": [4.0, 4.0, 0.05], "generator": "facilities", "budget_tris": 1200, "params": {"family": "path", "variant": "asphalt_t"}}, {"id": "path_cobblestone_straight", "category": "facilities", "name": "Cobblestone pathway segment", "size_m": [2.2, 4.0, 0.05], "generator": "facilities", "budget_tris": 1500, "params": {"family": "path", "variant": "cobblestone"}}, {"id": "path_wood_boardwalk", "category": "facilities", "name": "Planked timber boardwalk", "size_m": [2.4, 4.0, 0.15], "generator": "facilities", "budget_tris": 1500, "params": {"family": "path", "variant": "boardwalk"}}, {"id": "path_gravel_trail", "category": "facilities", "name": "Natural gravel nature trail", "size_m": [2.0, 4.0, 0.05], "generator": "facilities", "budget_tris": 800, "params": {"family": "path", "variant": "gravel"}}, {"id": "bridge_timber_footbridge", "category": "facilities", "name": "Timber pedestrian arch bridge", "size_m": [2.2, 5.0, 1.4], "generator": "facilities", "budget_tris": 3500, "params": {"family": "bridge", "variant": "timber"}}, {"id": "bridge_stone_arch", "category": "facilities", "name": "Rustic stone pedestrian bridge", "size_m": [2.5, 5.5, 1.8], "generator": "facilities", "budget_tris": 4000, "params": {"family": "bridge", "variant": "stone"}}, {"id": "water_penguin_pool", "category": "facilities", "name": "Sunken penguin pool with diving rocks", "size_m": [5.0, 4.0, 1.2], "generator": "facilities", "budget_tris": 4500, "params": {"family": "water", "variant": "penguin_pool"}}, {"id": "water_hippo_mud_pond", "category": "facilities", "name": "Hippo mud pond wallow basin", "size_m": [6.0, 5.0, 1.0], "generator": "facilities", "budget_tris": 4000, "params": {"family": "water", "variant": "hippo_pond"}}, {"id": "water_decorative_fountain", "category": "facilities", "name": "Tiered circular plaza fountain", "size_m": [3.5, 3.5, 2.2], "generator": "facilities", "budget_tris": 4000, "params": {"family": "water", "variant": "fountain"}}, {"id": "water_duck_pond", "category": "facilities", "name": "Natural duck pond basin", "size_m": [4.5, 4.5, 0.8], "generator": "facilities", "budget_tris": 3500, "params": {"family": "water", "variant": "duck_pond"}}, {"id": "water_alligator_swamp", "category": "facilities", "name": "Marsh swamp pool with fallen log", "size_m": [5.5, 4.5, 1.0], "generator": "facilities", "budget_tris": 4500, "params": {"family": "water", "variant": "swamp"}}, {"id": "water_rock_waterfall", "category": "facilities", "name": "Cascading rock waterfall feature", "size_m": [3.5, 3.0, 2.6], "generator": "facilities", "budget_tris": 5000, "params": {"family": "water", "variant": "waterfall"}}, {"id": "feature_safari_sunshade", "category": "facilities", "name": "Tensile fabric sunshade canopy", "size_m": [4.5, 4.5, 3.2], "generator": "facilities", "budget_tris": 2500, "params": {"family": "viewing", "variant": "sunshade"}}, {"id": "tower_wooden_observation", "category": "facilities", "name": "Timber observation lookout tower", "size_m": [3.5, 3.5, 6.5], "generator": "facilities", "budget_tris": 5500, "params": {"family": "viewing", "variant": "tower"}}, {"id": "terrace_glass_overlook", "category": "facilities", "name": "Cantilevered glass overlook deck", "size_m": [3.5, 4.0, 2.2], "generator": "facilities", "budget_tris": 3500, "params": {"family": "viewing", "variant": "glass_deck"}}, {"id": "pergola_picnic_shaded", "category": "facilities", "name": "Timber shaded picnic pergola", "size_m": [4.0, 3.0, 2.8], "generator": "facilities", "budget_tris": 3000, "params": {"family": "viewing", "variant": "pergola"}}, {"id": "pen_petting_zoo_corral", "category": "facilities", "name": "Petting zoo corral fence", "size_m": [6.0, 6.0, 1.2], "generator": "facilities", "budget_tris": 2500, "params": {"family": "enclosure", "variant": "petting_pen"}}, {"id": "platform_giraffe_feeding", "category": "facilities", "name": "Giraffe feeding elevated deck", "size_m": [4.0, 4.0, 3.5], "generator": "facilities", "budget_tris": 3200, "params": {"family": "platform", "variant": "giraffe_feeder"}}, {"id": "dome_meerkat_viewing_bubble", "category": "facilities", "name": "Meerkat viewing acrylic bubble", "size_m": [1.5, 1.5, 0.9], "generator": "facilities", "budget_tris": 1800, "params": {"family": "viewing", "variant": "acrylic_dome"}}, {"id": "tunnel_underwater_aquarium", "category": "facilities", "name": "Underwater aquarium viewing tunnel", "size_m": [3.0, 4.0, 2.8], "generator": "facilities", "budget_tris": 3500, "params": {"family": "viewing", "variant": "underwater_tunnel"}}, {"id": "building_butterfly_hothouse", "category": "facilities", "name": "Butterfly hothouse greenhouse", "size_m": [8.0, 8.0, 4.5], "generator": "facilities", "budget_tris": 4200, "params": {"family": "building", "variant": "greenhouse"}}, {"id": "gate_safari_vehicle_airlock", "category": "facilities", "name": "Safari vehicle double gate airlock", "size_m": [4.5, 6.0, 3.2], "generator": "facilities", "budget_tris": 3800, "params": {"family": "gate", "variant": "safari_airlock"}}, {"id": "water_elephant_splash_pool", "category": "facilities", "name": "Elephant splash pool with ramp", "size_m": [8.0, 6.0, 1.5], "generator": "facilities", "budget_tris": 3000, "params": {"family": "water_feature", "variant": "splash_pool"}}, {"id": "water_flamingo_shallow_lagoon", "category": "facilities", "name": "Flamingo shallow lagoon with islet", "size_m": [7.0, 5.0, 0.8], "generator": "facilities", "budget_tris": 2800, "params": {"family": "water_feature", "variant": "shallow_lagoon"}}, {"id": "cave_bat_nocturnal_portal", "category": "facilities", "name": "Bat nocturnal rock cave entrance", "size_m": [4.0, 3.0, 3.0], "generator": "facilities", "budget_tris": 3600, "params": {"family": "building", "variant": "rock_cave"}}, {"id": "turnstile_bank_quad", "category": "facilities", "name": "Quad entrance turnstile bank", "size_m": [5.0, 1.8, 2.2], "generator": "facilities", "budget_tris": 3200, "params": {"family": "gate", "variant": "turnstile_bank"}}, {"id": "building_staff_breakroom", "category": "facilities", "name": "Staff breakroom modular unit", "size_m": [5.0, 4.0, 3.2], "generator": "facilities", "budget_tris": 3400, "params": {"family": "building", "variant": "staff_quarters"}}, {"id": "building_lost_and_found", "category": "facilities", "name": "Lost and found security outpost", "size_m": [2.5, 2.5, 2.8], "generator": "facilities", "budget_tris": 2200, "params": {"family": "kiosk", "variant": "security_booth"}}, {"id": "building_first_aid_station", "category": "facilities", "name": "First-aid care station", "size_m": [4.0, 3.5, 3.0], "generator": "facilities", "budget_tris": 3000, "params": {"family": "building", "variant": "first_aid"}}, {"id": "station_waste_compost_bay", "category": "facilities", "name": "Zoo compost and manure bay", "size_m": [4.0, 3.0, 1.8], "generator": "facilities", "budget_tris": 2100, "params": {"family": "utility", "variant": "compost_bay"}}, {"id": "shelter_otter_holts_rock", "category": "facilities", "name": "Otter holt rocky den", "size_m": [3.5, 3.0, 1.6], "generator": "facilities", "budget_tris": 2900, "params": {"family": "enclosure", "variant": "otter_holt"}}, {"id": "keeper_safari_lead_01", "category": "keepers", "name": "Zoo Keeper: Safari Team Lead", "size_m": [0.6, 0.4, 1.88], "generator": "human", "budget_tris": 3000, "params": {"role_type": "keeper", "build": "tall", "skin_tone": "tan", "uniform": "khaki", "tool": "clipboard"}}, {"id": "keeper_carnivore_specialist_02", "category": "keepers", "name": "Zoo Keeper: Carnivore Keeper", "size_m": [0.65, 0.45, 1.82], "generator": "human", "budget_tris": 3000, "params": {"role_type": "keeper", "build": "athletic", "skin_tone": "dark", "uniform": "olive", "tool": "meat_tongs"}}, {"id": "keeper_aquatic_feeder_03", "category": "keepers", "name": "Zoo Keeper: Aquarium Caretaker", "size_m": [0.6, 0.4, 1.75], "generator": "human", "budget_tris": 3000, "params": {"role_type": "keeper", "build": "athletic", "skin_tone": "fair", "uniform": "navy", "tool": "fish_bucket"}}, {"id": "keeper_primate_caregiver_04", "category": "keepers", "name": "Zoo Keeper: Primate Enrichment Keeper", "size_m": [0.55, 0.38, 1.7], "generator": "human", "budget_tris": 3000, "params": {"role_type": "keeper", "build": "slim", "skin_tone": "medium", "uniform": "khaki", "tool": "puzzle_box"}}, {"id": "keeper_vet_surgeon_05", "category": "keepers", "name": "Zoo Keeper: Lead Zoo Veterinarian", "size_m": [0.55, 0.38, 1.78], "generator": "human", "budget_tris": 3000, "params": {"role_type": "keeper", "build": "slim", "skin_tone": "fair", "uniform": "teal_scrubs", "tool": "med_kit"}}, {"id": "keeper_vet_assistant_06", "category": "keepers", "name": "Zoo Keeper: Vet Assistant", "size_m": [0.5, 0.35, 1.62], "generator": "human", "budget_tris": 3000, "params": {"role_type": "keeper", "build": "petite", "skin_tone": "dark", "uniform": "teal_scrubs", "tool": "scanner"}}, {"id": "keeper_aviary_curator_07", "category": "keepers", "name": "Zoo Keeper: Aviary Curator", "size_m": [0.6, 0.4, 1.76], "generator": "human", "budget_tris": 3000, "params": {"role_type": "keeper", "build": "athletic", "skin_tone": "medium", "uniform": "green", "tool": "seed_scoop"}}, {"id": "keeper_herpetologist_08", "category": "keepers", "name": "Zoo Keeper: Reptile Specialist", "size_m": [0.55, 0.38, 1.8], "generator": "human", "budget_tris": 3000, "params": {"role_type": "keeper", "build": "slim", "skin_tone": "tan", "uniform": "camo_khaki", "tool": "snake_hook"}}, {"id": "keeper_elephant_keeper_09", "category": "keepers", "name": "Zoo Keeper: Elephant Keeper", "size_m": [0.75, 0.5, 1.92], "generator": "human", "budget_tris": 3000, "params": {"role_type": "keeper", "build": "stocky", "skin_tone": "dark", "uniform": "heavy_work", "tool": "shovel"}}, {"id": "keeper_ungulate_feeder_10", "category": "keepers", "name": "Zoo Keeper: Hoofed Stock Keeper", "size_m": [0.65, 0.42, 1.84], "generator": "human", "budget_tris": 3000, "params": {"role_type": "keeper", "build": "athletic", "skin_tone": "fair", "uniform": "khaki", "tool": "pitchfork"}}, {"id": "keeper_arctic_curator_11", "category": "keepers", "name": "Zoo Keeper: Arctic Habitat Keeper", "size_m": [0.75, 0.5, 1.8], "generator": "human", "budget_tris": 3000, "params": {"role_type": "keeper", "build": "stocky", "skin_tone": "fair", "uniform": "parka_blue", "tool": "ice_pick"}}, {"id": "keeper_nocturnal_keeper_12", "category": "keepers", "name": "Zoo Keeper: Nocturnal House Keeper", "size_m": [0.55, 0.38, 1.72], "generator": "human", "budget_tris": 3000, "params": {"role_type": "keeper", "build": "slim", "skin_tone": "dark", "uniform": "charcoal", "tool": "red_flashlight"}}, {"id": "keeper_nursery_nurse_13", "category": "keepers", "name": "Zoo Keeper: Animal Nursery Nurse", "size_m": [0.52, 0.36, 1.64], "generator": "human", "budget_tris": 3000, "params": {"role_type": "keeper", "build": "petite", "skin_tone": "medium", "uniform": "white_apron", "tool": "nursing_bottle"}}, {"id": "keeper_grounds_landscaper_14", "category": "keepers", "name": "Zoo Keeper: Zoo Landscaper", "size_m": [0.62, 0.42, 1.78], "generator": "human", "budget_tris": 3000, "params": {"role_type": "keeper", "build": "athletic", "skin_tone": "tan", "uniform": "orange_vest", "tool": "rake"}}, {"id": "keeper_maintenance_tech_15", "category": "keepers", "name": "Zoo Keeper: Habitat Maintenance Tech", "size_m": [0.7, 0.48, 1.85], "generator": "human", "budget_tris": 3000, "params": {"role_type": "keeper", "build": "stocky", "skin_tone": "medium", "uniform": "blue_overalls", "tool": "toolbox"}}, {"id": "keeper_security_ranger_16", "category": "keepers", "name": "Zoo Keeper: Zoo Ranger / Security", "size_m": [0.65, 0.42, 1.86], "generator": "human", "budget_tris": 3000, "params": {"role_type": "keeper", "build": "athletic", "skin_tone": "dark", "uniform": "ranger_tan", "tool": "radio_holster"}}, {"id": "keeper_education_guide_17", "category": "keepers", "name": "Zoo Keeper: Educational Safari Guide", "size_m": [0.56, 0.38, 1.74], "generator": "human", "budget_tris": 3000, "params": {"role_type": "keeper", "build": "slim", "skin_tone": "fair", "uniform": "yellow_polo", "tool": "megaphone"}}, {"id": "keeper_penguin_keeper_18", "category": "keepers", "name": "Zoo Keeper: Penguin Colony Caretaker", "size_m": [0.62, 0.42, 1.72], "generator": "human", "budget_tris": 3000, "params": {"role_type": "keeper", "build": "athletic", "skin_tone": "tan", "uniform": "waders_blue", "tool": "feed_pail"}}, {"id": "keeper_botanist_curator_19", "category": "keepers", "name": "Zoo Keeper: Botanical Habitat Curator", "size_m": [0.52, 0.36, 1.65], "generator": "human", "budget_tris": 3000, "params": {"role_type": "keeper", "build": "petite", "skin_tone": "fair", "uniform": "green_smock", "tool": "pruning_shears"}}, {"id": "keeper_apprentice_keeper_20", "category": "keepers", "name": "Zoo Keeper: Junior Apprentice Keeper", "size_m": [0.55, 0.38, 1.68], "generator": "human", "budget_tris": 3000, "params": {"role_type": "keeper", "build": "slim", "skin_tone": "medium", "uniform": "khaki_vest", "tool": "broom"}}, {"id": "visitor_tourist_camera_01", "category": "visitors", "name": "Visitor: Tourist with DSLR Camera", "size_m": [0.6, 0.4, 1.78], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "athletic", "skin_tone": "fair", "outfit": "casual_polo", "accessory": "camera"}}, {"id": "visitor_tourist_sunhat_02", "category": "visitors", "name": "Visitor: Tourist with Sunhat", "size_m": [0.55, 0.38, 1.68], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "slim", "skin_tone": "tan", "outfit": "summer_dress", "accessory": "tote_bag"}}, {"id": "visitor_child_balloon_03", "category": "visitors", "name": "Visitor: Excited Child with Balloon", "size_m": [0.45, 0.35, 1.15], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "child", "skin_tone": "dark", "outfit": "tshirt_shorts", "accessory": "balloon"}}, {"id": "visitor_child_icecream_04", "category": "visitors", "name": "Visitor: Child Licking Ice Cream", "size_m": [0.42, 0.32, 1.1], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "child", "skin_tone": "fair", "outfit": "overalls", "accessory": "ice_cream"}}, {"id": "visitor_child_cap_05", "category": "visitors", "name": "Visitor: Child with Safari Cap", "size_m": [0.44, 0.34, 1.2], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "child", "skin_tone": "medium", "outfit": "safari_kids", "accessory": "binoculars_toy"}}, {"id": "visitor_toddler_waddling_06", "category": "visitors", "name": "Visitor: Toddler Waddling", "size_m": [0.38, 0.3, 0.88], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "toddler", "skin_tone": "fair", "outfit": "onesie_yellow", "accessory": "none"}}, {"id": "visitor_teen_phone_07", "category": "visitors", "name": "Visitor: Teenager Browsing Phone", "size_m": [0.55, 0.38, 1.72], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "slim", "skin_tone": "medium", "outfit": "hoodie_jeans", "accessory": "smartphone"}}, {"id": "visitor_teen_skateboard_08", "category": "visitors", "name": "Visitor: Teen with Backpack", "size_m": [0.6, 0.4, 1.75], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "athletic", "skin_tone": "dark", "outfit": "graphic_tee", "accessory": "backpack"}}, {"id": "visitor_senior_cane_09", "category": "visitors", "name": "Visitor: Grandfather with Wooden Cane", "size_m": [0.58, 0.45, 1.7], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "senior", "skin_tone": "fair", "outfit": "cardigan", "accessory": "cane"}}, {"id": "visitor_senior_sunvisor_10", "category": "visitors", "name": "Visitor: Grandmother with Sun Visor", "size_m": [0.55, 0.4, 1.62], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "senior", "skin_tone": "tan", "outfit": "blouse_skirt", "accessory": "umbrella"}}, {"id": "visitor_family_dad_backpack_11", "category": "visitors", "name": "Visitor: Father Carrying Heavy Daypack", "size_m": [0.7, 0.48, 1.84], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "stocky", "skin_tone": "fair", "outfit": "cargo_hiking", "accessory": "heavy_pack"}}, {"id": "visitor_family_mom_stroller_12", "category": "visitors", "name": "Visitor: Mother Pushing Stroller", "size_m": [0.6, 0.5, 1.7], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "slim", "skin_tone": "dark", "outfit": "activewear", "accessory": "stroller_handle"}}, {"id": "visitor_wildlife_photographer_13", "category": "visitors", "name": "Visitor: Pro Wildlife Photographer", "size_m": [0.65, 0.45, 1.82], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "athletic", "skin_tone": "medium", "outfit": "camo_vest", "accessory": "tripod_rig"}}, {"id": "visitor_art_student_14", "category": "visitors", "name": "Visitor: Art Student Sketching", "size_m": [0.55, 0.38, 1.66], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "slim", "skin_tone": "fair", "outfit": "boho_jacket", "accessory": "sketchbook"}}, {"id": "visitor_school_trip_scout_15", "category": "visitors", "name": "Visitor: School Scout on Field Trip", "size_m": [0.45, 0.35, 1.25], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "child", "skin_tone": "tan", "outfit": "scout_uniform", "accessory": "field_notebook"}}, {"id": "visitor_school_chaperone_16", "category": "visitors", "name": "Visitor: School Field Trip Leader", "size_m": [0.62, 0.42, 1.76], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "athletic", "skin_tone": "dark", "outfit": "hi_vis_yellow", "accessory": "clipboard_whistle"}}, {"id": "visitor_zoology_student_17", "category": "visitors", "name": "Visitor: Zoology Graduate Student", "size_m": [0.58, 0.4, 1.74], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "slim", "skin_tone": "medium", "outfit": "vest_khaki", "accessory": "digital_recorder"}}, {"id": "visitor_souvenir_shopper_18", "category": "visitors", "name": "Visitor: Visitor with Souvenir Bags", "size_m": [0.6, 0.42, 1.68], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "athletic", "skin_tone": "fair", "outfit": "shopping_chic", "accessory": "gift_bags"}}, {"id": "visitor_jogger_sport_19", "category": "visitors", "name": "Visitor: Morning Zoo Jogger", "size_m": [0.6, 0.38, 1.8], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "athletic", "skin_tone": "dark", "outfit": "running_shorts", "accessory": "water_flask"}}, {"id": "visitor_snack_muncher_20", "category": "visitors", "name": "Visitor: Visitor Eating Soft Pretzel", "size_m": [0.68, 0.46, 1.78], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "stocky", "skin_tone": "tan", "outfit": "denim_jacket", "accessory": "pretzel"}}, {"id": "visitor_bird_watcher_21", "category": "visitors", "name": "Visitor: Binoculars Bird Watcher", "size_m": [0.56, 0.4, 1.72], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "slim", "skin_tone": "fair", "outfit": "outdoor_vest", "accessory": "binoculars_neck"}}, {"id": "visitor_wheelchair_user_22", "category": "visitors", "name": "Visitor: Visitor in Active Wheelchair", "size_m": [0.85, 0.95, 1.3], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "seated", "skin_tone": "medium", "outfit": "casual_jacket", "accessory": "wheelchair"}}, {"id": "visitor_parent_shoulder_kid_23", "category": "visitors", "name": "Visitor: Parent with Kid on Shoulders", "size_m": [0.65, 0.45, 2.15], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "tall", "skin_tone": "dark", "outfit": "casual_shirt", "accessory": "kid_rider"}}, {"id": "visitor_twin_kid_boy_24", "category": "visitors", "name": "Visitor: Zoo Explorer Twin A", "size_m": [0.44, 0.34, 1.18], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "child", "skin_tone": "fair", "outfit": "explorer_hat", "accessory": "map_sheet"}}, {"id": "visitor_twin_kid_girl_25", "category": "visitors", "name": "Visitor: Zoo Explorer Twin B", "size_m": [0.44, 0.34, 1.18], "generator": "human", "budget_tris": 2000, "params": {"role_type": "visitor", "build": "child", "skin_tone": "fair", "outfit": "explorer_hat", "accessory": "compass"}}, {"id": "acacia_tree", "category": "plants", "name": "Umbrella acacia tree", "size_m": [6, 6, 7], "generator": "plant", "budget_tris": 2000, "params": {"kind": "tree_flat", "trunk": "brown", "leaf": "olive"}}, {"id": "baobab_tree", "category": "plants", "name": "Baobab tree", "size_m": [5, 5, 9], "generator": "plant", "budget_tris": 2000, "params": {"kind": "tree_bottle", "trunk": "tan", "leaf": "leaf"}}, {"id": "oak_tree", "category": "plants", "name": "Oak tree", "size_m": [8, 8, 12], "generator": "plant", "budget_tris": 2000, "params": {"kind": "tree_round", "trunk": "brown", "leaf": "leaf"}}, {"id": "birch_tree", "category": "plants", "name": "Birch tree", "size_m": [4, 4, 10], "generator": "plant", "budget_tris": 2000, "params": {"kind": "tree_oval", "trunk": "white", "leaf": "lime"}}, {"id": "pine_tree", "category": "plants", "name": "Pine tree", "size_m": [4, 4, 12], "generator": "plant", "budget_tris": 2000, "params": {"kind": "tree_cone", "trunk": "dark_brown", "leaf": "forest"}}, {"id": "spruce_tree", "category": "plants", "name": "Spruce tree", "size_m": [3.5, 3.5, 10], "generator": "plant", "budget_tris": 2000, "params": {"kind": "tree_cone", "trunk": "dark_brown", "leaf": "forest", "tiers": 5}}, {"id": "palm_tree", "category": "plants", "name": "Coconut palm", "size_m": [5, 5, 9], "generator": "plant", "budget_tris": 2000, "params": {"kind": "palm", "trunk": "tan", "leaf": "leaf"}}, {"id": "date_palm", "category": "plants", "name": "Date palm", "size_m": [5, 5, 8], "generator": "plant", "budget_tris": 2000, "params": {"kind": "palm", "trunk": "brown", "leaf": "olive"}}, {"id": "eucalyptus_tree", "category": "plants", "name": "Eucalyptus tree", "size_m": [5, 5, 11], "generator": "plant", "budget_tris": 2000, "params": {"kind": "tree_oval", "trunk": "light_grey", "leaf": "olive"}}, {"id": "bamboo_clump", "category": "plants", "name": "Bamboo clump", "size_m": [2, 2, 6], "generator": "plant", "budget_tris": 2000, "params": {"kind": "bamboo", "stem": "lime", "leaf": "leaf"}}, {"id": "willow_tree", "category": "plants", "name": "Weeping willow", "size_m": [7, 7, 9], "generator": "plant", "budget_tris": 2000, "params": {"kind": "tree_weeping", "trunk": "brown", "leaf": "lime"}}, {"id": "maple_tree_autumn", "category": "plants", "name": "Maple tree in autumn", "size_m": [6, 6, 9], "generator": "plant", "budget_tris": 2000, "params": {"kind": "tree_round", "trunk": "brown", "leaf": "orange"}}, {"id": "cherry_tree_blossom", "category": "plants", "name": "Cherry tree in blossom", "size_m": [5, 5, 6], "generator": "plant", "budget_tris": 2000, "params": {"kind": "tree_round", "trunk": "dark_brown", "leaf": "pink"}}, {"id": "dead_tree", "category": "plants", "name": "Bare dead tree", "size_m": [4, 4, 7], "generator": "plant", "budget_tris": 2000, "params": {"kind": "tree_bare", "trunk": "grey"}}, {"id": "mangrove_tree", "category": "plants", "name": "Mangrove tree", "size_m": [4, 4, 5], "generator": "plant", "budget_tris": 2000, "params": {"kind": "tree_roots", "trunk": "brown", "leaf": "forest"}}, {"id": "kapok_tree", "category": "plants", "name": "Rainforest kapok tree", "size_m": [8, 8, 15], "generator": "plant", "budget_tris": 2000, "params": {"kind": "tree_flat", "trunk": "light_grey", "leaf": "forest"}}, {"id": "cypress_tree", "category": "plants", "name": "Italian cypress", "size_m": [1.5, 1.5, 9], "generator": "plant", "budget_tris": 2000, "params": {"kind": "tree_column", "trunk": "brown", "leaf": "forest"}}, {"id": "joshua_tree", "category": "plants", "name": "Joshua tree", "size_m": [3, 3, 5], "generator": "plant", "budget_tris": 2000, "params": {"kind": "tree_branchy", "trunk": "tan", "leaf": "olive"}}, {"id": "saguaro_cactus", "category": "plants", "name": "Saguaro cactus", "size_m": [1.5, 0.6, 5], "generator": "plant", "budget_tris": 2000, "params": {"kind": "cactus_arms", "body": "leaf"}}, {"id": "barrel_cactus", "category": "plants", "name": "Barrel cactus", "size_m": [0.6, 0.6, 0.8], "generator": "plant", "budget_tris": 2000, "params": {"kind": "cactus_ball", "body": "leaf", "flower": "yellow"}}, {"id": "prickly_pear", "category": "plants", "name": "Prickly pear cactus", "size_m": [1.2, 0.6, 1.3], "generator": "plant", "budget_tris": 2000, "params": {"kind": "cactus_pads", "body": "lime", "flower": "red"}}, {"id": "agave_plant", "category": "plants", "name": "Agave", "size_m": [1.5, 1.5, 1], "generator": "plant", "budget_tris": 2000, "params": {"kind": "rosette", "leaf": "teal"}}, {"id": "aloe_plant", "category": "plants", "name": "Aloe", "size_m": [0.8, 0.8, 0.6], "generator": "plant", "budget_tris": 2000, "params": {"kind": "rosette", "leaf": "olive"}}, {"id": "tree_fern", "category": "plants", "name": "Tree fern", "size_m": [3, 3, 4], "generator": "plant", "budget_tris": 2000, "params": {"kind": "palm", "trunk": "dark_brown", "leaf": "forest"}}, {"id": "fern_bush", "category": "plants", "name": "Fern", "size_m": [1, 1, 0.7], "generator": "plant", "budget_tris": 2000, "params": {"kind": "fern", "leaf": "leaf"}}, {"id": "round_shrub", "category": "plants", "name": "Round shrub", "size_m": [1.5, 1.5, 1.2], "generator": "plant", "budget_tris": 2000, "params": {"kind": "shrub_round", "leaf": "leaf"}}, {"id": "box_hedge", "category": "plants", "name": "Box hedge section", "size_m": [2, 0.6, 1], "generator": "plant", "budget_tris": 2000, "params": {"kind": "hedge", "leaf": "forest"}}, {"id": "hedge_corner", "category": "plants", "name": "Hedge corner", "size_m": [1, 1, 1], "generator": "plant", "budget_tris": 2000, "params": {"kind": "hedge_corner", "leaf": "forest"}}, {"id": "topiary_ball", "category": "plants", "name": "Topiary ball in pot", "size_m": [0.8, 0.8, 1.4], "generator": "plant", "budget_tris": 2000, "params": {"kind": "topiary", "leaf": "forest", "pot": "rust"}}, {"id": "flowering_shrub", "category": "plants", "name": "Flowering shrub", "size_m": [1.4, 1.4, 1.1], "generator": "plant", "budget_tris": 2000, "params": {"kind": "shrub_round", "leaf": "leaf", "flower": "lavender"}}, {"id": "rhododendron_bush", "category": "plants", "name": "Rhododendron bush", "size_m": [2, 2, 1.8], "generator": "plant", "budget_tris": 2000, "params": {"kind": "shrub_round", "leaf": "forest", "flower": "purple"}}, {"id": "berry_bush", "category": "plants", "name": "Berry bush", "size_m": [1.2, 1.2, 1], "generator": "plant", "budget_tris": 2000, "params": {"kind": "shrub_round", "leaf": "leaf", "flower": "red"}}, {"id": "tall_grass_clump", "category": "plants", "name": "Tall grass clump", "size_m": [0.8, 0.8, 1], "generator": "plant", "budget_tris": 2000, "params": {"kind": "grass", "leaf": "lime"}}, {"id": "savanna_grass", "category": "plants", "name": "Dry savanna grass", "size_m": [1, 1, 0.9], "generator": "plant", "budget_tris": 2000, "params": {"kind": "grass", "leaf": "sand"}}, {"id": "pampas_grass", "category": "plants", "name": "Pampas grass", "size_m": [1.5, 1.5, 2.2], "generator": "plant", "budget_tris": 2000, "params": {"kind": "grass_plume", "leaf": "olive", "plume": "cream"}}, {"id": "reeds_clump", "category": "plants", "name": "Reeds", "size_m": [1, 1, 1.8], "generator": "plant", "budget_tris": 2000, "params": {"kind": "reeds", "leaf": "olive", "head": "brown"}}, {"id": "papyrus_clump", "category": "plants", "name": "Papyrus", "size_m": [1.2, 1.2, 2.5], "generator": "plant", "budget_tris": 2000, "params": {"kind": "grass_plume", "leaf": "leaf", "plume": "lime"}}, {"id": "water_lily", "category": "plants", "name": "Water lily pads", "size_m": [1.2, 1.2, 0.1], "generator": "plant", "budget_tris": 2000, "params": {"kind": "lily", "leaf": "leaf", "flower": "pink"}}, {"id": "lotus_flower", "category": "plants", "name": "Lotus flower", "size_m": [0.6, 0.6, 0.5], "generator": "plant", "budget_tris": 2000, "params": {"kind": "lily", "leaf": "forest", "flower": "pink", "stem": true}}, {"id": "sunflower_patch", "category": "plants", "name": "Sunflower patch", "size_m": [1, 1, 1.8], "generator": "plant", "budget_tris": 2000, "params": {"kind": "flower_patch", "flower": "yellow", "stem": "leaf"}}, {"id": "tulip_bed", "category": "plants", "name": "Tulip bed", "size_m": [1.5, 0.8, 0.4], "generator": "plant", "budget_tris": 2000, "params": {"kind": "flower_bed", "flower": "red", "stem": "leaf"}}, {"id": "daisy_patch", "category": "plants", "name": "Daisy patch", "size_m": [0.8, 0.8, 0.3], "generator": "plant", "budget_tris": 2000, "params": {"kind": "flower_patch", "flower": "white", "stem": "leaf"}}, {"id": "lavender_bush", "category": "plants", "name": "Lavender bush", "size_m": [0.8, 0.8, 0.6], "generator": "plant", "budget_tris": 2000, "params": {"kind": "shrub_round", "leaf": "olive", "flower": "lavender"}}, {"id": "flower_planter_box", "category": "plants", "name": "Planter box with flowers", "size_m": [1.2, 0.5, 0.8], "generator": "plant", "budget_tris": 2000, "params": {"kind": "planter", "box": "brown", "flower": "orange"}}, {"id": "round_flower_pot", "category": "plants", "name": "Round flower pot", "size_m": [0.6, 0.6, 0.7], "generator": "plant", "budget_tris": 2000, "params": {"kind": "planter_round", "box": "rust", "flower": "yellow"}}, {"id": "hanging_vine", "category": "plants", "name": "Hanging jungle vines", "size_m": [1, 0.3, 3], "generator": "plant", "budget_tris": 2000, "params": {"kind": "vine", "leaf": "forest"}}, {"id": "ivy_wall_patch", "category": "plants", "name": "Ivy wall patch", "size_m": [2, 0.2, 2], "generator": "plant", "budget_tris": 2000, "params": {"kind": "ivy", "leaf": "leaf"}}, {"id": "mushroom_cluster", "category": "plants", "name": "Mushroom cluster", "size_m": [0.4, 0.4, 0.2], "generator": "plant", "budget_tris": 2000, "params": {"kind": "mushroom", "cap": "red", "stem": "cream"}}, {"id": "tree_stump", "category": "plants", "name": "Tree stump", "size_m": [0.8, 0.8, 0.5], "generator": "plant", "budget_tris": 2000, "params": {"kind": "stump", "bark": "brown", "top": "tan"}}, {"id": "banana_plant", "category": "plants", "name": "Banana plant", "size_m": [2.5, 2.5, 4], "generator": "plant", "budget_tris": 2000, "params": {"kind": "banana", "stem": "lime", "leaf": "leaf"}}, {"id": "monstera_plant", "category": "plants", "name": "Monstera plant", "size_m": [1.2, 1.2, 1.2], "generator": "plant", "budget_tris": 2000, "params": {"kind": "big_leaf", "leaf": "forest"}}, {"id": "bromeliad", "category": "plants", "name": "Bromeliad", "size_m": [0.5, 0.5, 0.4], "generator": "plant", "budget_tris": 2000, "params": {"kind": "rosette", "leaf": "leaf", "flower": "red"}}, {"id": "bonsai_pine", "category": "plants", "name": "Bonsai pine on stand", "size_m": [0.5, 0.4, 0.5], "generator": "plant", "budget_tris": 2000, "params": {"kind": "bonsai", "trunk": "dark_brown", "leaf": "forest", "pot": "navy"}}, {"id": "kelp_strand", "category": "plants", "name": "Kelp strand (aquarium)", "size_m": [0.6, 0.6, 3], "generator": "plant", "budget_tris": 2000, "params": {"kind": "kelp", "leaf": "olive"}}, {"id": "coral_cluster", "category": "plants", "name": "Coral cluster (aquarium)", "size_m": [0.8, 0.8, 0.6], "generator": "plant", "budget_tris": 2000, "params": {"kind": "coral", "colour": "pink"}}, {"id": "boulder_small", "category": "landscape", "name": "Small boulder", "size_m": [0.6, 0.5, 0.4], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "boulder", "rock": "grey"}}, {"id": "boulder_medium", "category": "landscape", "name": "Medium boulder", "size_m": [1.4, 1.2, 1], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "boulder", "rock": "grey"}}, {"id": "boulder_large", "category": "landscape", "name": "Large boulder", "size_m": [3, 2.5, 2], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "boulder", "rock": "charcoal"}}, {"id": "sandstone_boulder", "category": "landscape", "name": "Sandstone boulder", "size_m": [2, 1.6, 1.4], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "boulder", "rock": "sand"}}, {"id": "red_rock", "category": "landscape", "name": "Red desert rock", "size_m": [2.5, 2, 2], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "boulder", "rock": "rust"}}, {"id": "flat_rock", "category": "landscape", "name": "Flat basking rock", "size_m": [2, 1.5, 0.4], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "slab", "rock": "light_grey"}}, {"id": "stepping_stones", "category": "landscape", "name": "Stepping stones", "size_m": [3, 0.6, 0.15], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "stones_row", "rock": "grey", "count": 5}}, {"id": "rock_pile", "category": "landscape", "name": "Rock pile", "size_m": [1.5, 1.5, 0.8], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "pile", "rock": "grey"}}, {"id": "pebble_patch", "category": "landscape", "name": "Pebble patch", "size_m": [1, 1, 0.1], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "pebbles", "rock": "light_grey"}}, {"id": "rock_arch", "category": "landscape", "name": "Rock arch", "size_m": [4, 1.5, 3], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "arch", "rock": "tan"}}, {"id": "cliff_wall", "category": "landscape", "name": "Cliff wall section", "size_m": [4, 1.5, 4], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "cliff", "rock": "grey"}}, {"id": "cliff_corner", "category": "landscape", "name": "Cliff wall corner", "size_m": [2.5, 2.5, 4], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "cliff_corner", "rock": "grey"}}, {"id": "rock_cave", "category": "landscape", "name": "Rock cave entrance", "size_m": [4, 3, 3], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "cave", "rock": "charcoal"}}, {"id": "kopje_outcrop", "category": "landscape", "name": "Savanna rock outcrop", "size_m": [5, 4, 2.5], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "outcrop", "rock": "tan"}}, {"id": "termite_mound", "category": "landscape", "name": "Termite mound", "size_m": [1.2, 1.2, 2.5], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "mound_spire", "soil": "rust"}}, {"id": "ice_floe", "category": "landscape", "name": "Ice floe", "size_m": [3, 2, 0.4], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "slab", "rock": "white"}}, {"id": "iceberg_rock", "category": "landscape", "name": "Iceberg rock", "size_m": [2.5, 2, 1.8], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "boulder", "rock": "white", "accent": "sky"}}, {"id": "snow_mound", "category": "landscape", "name": "Snow mound", "size_m": [2, 2, 0.8], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "mound", "soil": "white"}}, {"id": "grass_hill", "category": "landscape", "name": "Grassy hill", "size_m": [6, 6, 1.5], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "mound", "soil": "leaf"}}, {"id": "sand_dune", "category": "landscape", "name": "Sand dune", "size_m": [5, 3, 1.2], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "dune", "soil": "sand"}}, {"id": "dirt_mound", "category": "landscape", "name": "Dirt mound", "size_m": [2, 2, 0.6], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "mound", "soil": "brown"}}, {"id": "pond_small", "category": "landscape", "name": "Small pond", "size_m": [3, 2.5, 0.3], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "pond", "water": "water", "rim": "grey"}}, {"id": "stream_section", "category": "landscape", "name": "Stream section", "size_m": [4, 1.5, 0.2], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "stream", "water": "water", "rim": "grey"}}, {"id": "fallen_log", "category": "landscape", "name": "Fallen log", "size_m": [3, 0.6, 0.6], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "log", "bark": "brown", "end": "tan"}}, {"id": "hollow_log", "category": "landscape", "name": "Hollow log", "size_m": [2, 0.8, 0.8], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "log_hollow", "bark": "dark_brown", "end": "tan"}}, {"id": "driftwood", "category": "landscape", "name": "Driftwood", "size_m": [2, 0.5, 0.4], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "log", "bark": "light_grey", "end": "cream"}}, {"id": "climbing_tree_trunk", "category": "landscape", "name": "Bare climbing trunk", "size_m": [2, 2, 5], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "tree_bare", "trunk": "brown"}}, {"id": "root_tangle", "category": "landscape", "name": "Root tangle", "size_m": [2, 2, 0.8], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "roots", "bark": "dark_brown"}}, {"id": "grass_tile", "category": "landscape", "name": "Grass ground tile", "size_m": [2, 2, 0.1], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "tile", "top": "leaf"}}, {"id": "sand_tile", "category": "landscape", "name": "Sand ground tile", "size_m": [2, 2, 0.1], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "tile", "top": "sand"}}, {"id": "dirt_tile", "category": "landscape", "name": "Dirt ground tile", "size_m": [2, 2, 0.1], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "tile", "top": "brown"}}, {"id": "snow_tile", "category": "landscape", "name": "Snow ground tile", "size_m": [2, 2, 0.1], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "tile", "top": "white"}}, {"id": "gravel_tile", "category": "landscape", "name": "Gravel ground tile", "size_m": [2, 2, 0.1], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "tile", "top": "light_grey"}}, {"id": "mulch_tile", "category": "landscape", "name": "Bark mulch ground tile", "size_m": [2, 2, 0.1], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "tile", "top": "rust"}}, {"id": "rock_ledge", "category": "landscape", "name": "Rock ledge", "size_m": [3, 1.2, 1.5], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "ledge", "rock": "grey"}}, {"id": "sandbank", "category": "landscape", "name": "Sandbank", "size_m": [3, 2, 0.3], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "mound", "soil": "sand"}}, {"id": "lava_rock", "category": "landscape", "name": "Volcanic lava rock", "size_m": [1.5, 1.2, 1], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "boulder", "rock": "black"}}, {"id": "mossy_rock", "category": "landscape", "name": "Mossy rock", "size_m": [1.5, 1.2, 1], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "boulder", "rock": "grey", "accent": "leaf"}}, {"id": "rock_column", "category": "landscape", "name": "Basalt rock column", "size_m": [1, 1, 3], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "column", "rock": "charcoal"}}, {"id": "crystal_rock", "category": "landscape", "name": "Crystal geode rock", "size_m": [1, 0.8, 0.8], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "boulder", "rock": "charcoal", "accent": "lavender"}}, {"id": "pond_island", "category": "landscape", "name": "Small pond island", "size_m": [2, 2, 0.5], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "mound", "soil": "leaf", "rim": "sand"}}, {"id": "hay_mound", "category": "landscape", "name": "Hay mound", "size_m": [1.5, 1.5, 0.7], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "mound", "soil": "yellow"}}, {"id": "stalagmite_group", "category": "landscape", "name": "Stalagmite group", "size_m": [1.5, 1.5, 2], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "spires", "rock": "tan"}}, {"id": "tide_pool_rocks", "category": "landscape", "name": "Tide pool rocks", "size_m": [2.5, 2, 0.6], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "pond", "water": "water", "rim": "charcoal"}}, {"id": "canyon_wall", "category": "landscape", "name": "Layered canyon wall", "size_m": [4, 1.5, 3.5], "generator": "landscape", "budget_tris": 2000, "params": {"kind": "cliff", "rock": "rust", "accent": "sand"}}, {"id": "flag_pole", "category": "decor", "name": "Flag pole with zoo flag", "size_m": [0.6, 0.3, 6], "generator": "decor", "budget_tris": 2000, "params": {"kind": "flag", "pole": "light_grey", "cloth": "leaf"}}, {"id": "banner_pole", "category": "decor", "name": "Lamp-post banner", "size_m": [0.6, 0.3, 3], "generator": "decor", "budget_tris": 2000, "params": {"kind": "banner", "pole": "charcoal", "cloth": "orange"}}, {"id": "bunting_string", "category": "decor", "name": "Bunting string", "size_m": [4, 0.1, 0.5], "generator": "decor", "budget_tris": 2000, "params": {"kind": "bunting", "cloth": "red"}}, {"id": "patio_umbrella", "category": "decor", "name": "Patio umbrella", "size_m": [2.5, 2.5, 2.5], "generator": "decor", "budget_tris": 2000, "params": {"kind": "umbrella", "pole": "white", "cloth": "red"}}, {"id": "striped_parasol", "category": "decor", "name": "Striped parasol", "size_m": [2, 2, 2.3], "generator": "decor", "budget_tris": 2000, "params": {"kind": "umbrella", "pole": "white", "cloth": "yellow", "stripe": "white"}}, {"id": "cafe_table_set", "category": "decor", "name": "Cafe table with chairs", "size_m": [1.6, 1.6, 0.9], "generator": "decor", "budget_tris": 2000, "params": {"kind": "table_set", "wood": "tan", "metal": "charcoal"}}, {"id": "picnic_blanket", "category": "decor", "name": "Picnic blanket", "size_m": [1.5, 1.2, 0.05], "generator": "decor", "budget_tris": 2000, "params": {"kind": "blanket", "cloth": "red", "stripe": "white"}}, {"id": "stone_planter", "category": "decor", "name": "Stone planter", "size_m": [1, 1, 0.6], "generator": "decor", "budget_tris": 2000, "params": {"kind": "planter_square", "stone": "light_grey", "plant": "leaf"}}, {"id": "hanging_basket", "category": "decor", "name": "Hanging flower basket", "size_m": [0.5, 0.5, 0.6], "generator": "decor", "budget_tris": 2000, "params": {"kind": "basket", "weave": "tan", "flower": "pink"}}, {"id": "garden_arch", "category": "decor", "name": "Garden arch with roses", "size_m": [1.6, 0.6, 2.5], "generator": "decor", "budget_tris": 2000, "params": {"kind": "arch_frame", "frame": "white", "flower": "red"}}, {"id": "gazebo_small", "category": "decor", "name": "Small garden gazebo", "size_m": [3, 3, 3], "generator": "decor", "budget_tris": 2000, "params": {"kind": "gazebo", "frame": "white", "roof": "teal"}}, {"id": "sundial", "category": "decor", "name": "Sundial", "size_m": [0.5, 0.5, 1], "generator": "decor", "budget_tris": 2000, "params": {"kind": "sundial", "stone": "light_grey", "metal": "gold"}}, {"id": "bird_bath", "category": "decor", "name": "Bird bath", "size_m": [0.6, 0.6, 0.9], "generator": "decor", "budget_tris": 2000, "params": {"kind": "bird_bath", "stone": "light_grey", "water": "water"}}, {"id": "animal_statue_lion", "category": "decor", "name": "Stone lion statue", "size_m": [0.8, 1.6, 1.4], "generator": "decor", "budget_tris": 2000, "params": {"kind": "statue", "stone": "light_grey", "shape": "cat"}}, {"id": "animal_statue_elephant", "category": "decor", "name": "Stone elephant statue", "size_m": [1, 1.6, 1.4], "generator": "decor", "budget_tris": 2000, "params": {"kind": "statue", "stone": "light_grey", "shape": "elephant"}}, {"id": "giant_egg_sculpture", "category": "decor", "name": "Giant egg sculpture", "size_m": [0.8, 0.8, 1.2], "generator": "decor", "budget_tris": 2000, "params": {"kind": "egg", "body": "cream", "spot": "brown"}}, {"id": "footprint_paver", "category": "decor", "name": "Animal footprint paver", "size_m": [0.6, 0.6, 0.05], "generator": "decor", "budget_tris": 2000, "params": {"kind": "paver", "stone": "grey", "print": "dark_brown"}}, {"id": "height_chart", "category": "decor", "name": "'How tall are you?' giraffe chart", "size_m": [0.5, 0.1, 2.2], "generator": "decor", "budget_tris": 2000, "params": {"kind": "height_chart", "board": "yellow", "mark": "brown"}}, {"id": "photo_cutout_board", "category": "decor", "name": "Photo cut-out board", "size_m": [1.6, 0.1, 2], "generator": "decor", "budget_tris": 2000, "params": {"kind": "cutout", "board": "leaf", "frame": "brown"}}, {"id": "wooden_barrel", "category": "decor", "name": "Wooden barrel", "size_m": [0.6, 0.6, 0.9], "generator": "decor", "budget_tris": 2000, "params": {"kind": "barrel", "wood": "brown", "band": "charcoal"}}, {"id": "wooden_crate", "category": "decor", "name": "Wooden crate", "size_m": [0.8, 0.8, 0.8], "generator": "decor", "budget_tris": 2000, "params": {"kind": "crate", "wood": "tan"}}, {"id": "crate_stack", "category": "decor", "name": "Stack of crates", "size_m": [1.6, 0.8, 1.6], "generator": "decor", "budget_tris": 2000, "params": {"kind": "crate_stack", "wood": "tan"}}, {"id": "lantern_string", "category": "decor", "name": "Lantern string", "size_m": [4, 0.2, 0.6], "generator": "decor", "budget_tris": 2000, "params": {"kind": "lanterns", "wire": "charcoal", "light": "yellow"}}, {"id": "tiki_torch", "category": "decor", "name": "Tiki torch", "size_m": [0.3, 0.3, 1.8], "generator": "decor", "budget_tris": 2000, "params": {"kind": "torch", "pole": "tan", "flame": "orange"}}, {"id": "wind_chime", "category": "decor", "name": "Wind chime", "size_m": [0.3, 0.3, 0.6], "generator": "decor", "budget_tris": 2000, "params": {"kind": "chime", "wood": "tan", "metal": "light_grey"}}, {"id": "weather_vane", "category": "decor", "name": "Weather vane", "size_m": [0.8, 0.8, 1.5], "generator": "decor", "budget_tris": 2000, "params": {"kind": "vane", "metal": "charcoal", "accent": "gold"}}, {"id": "painted_rock", "category": "decor", "name": "Painted animal rock", "size_m": [0.3, 0.3, 0.2], "generator": "decor", "budget_tris": 2000, "params": {"kind": "painted_rock", "rock": "grey", "paint": "orange"}}, {"id": "garden_trellis", "category": "decor", "name": "Garden trellis with vine", "size_m": [1.2, 0.2, 2], "generator": "decor", "budget_tris": 2000, "params": {"kind": "trellis", "frame": "white", "plant": "leaf"}}, {"id": "bird_feeder_post", "category": "decor", "name": "Wild bird feeder post", "size_m": [0.4, 0.4, 1.8], "generator": "decor", "budget_tris": 2000, "params": {"kind": "feeder", "pole": "brown", "roof": "red"}}, {"id": "garden_wishing_well", "category": "decor", "name": "Wishing well", "size_m": [1.4, 1.4, 2], "generator": "decor", "budget_tris": 2000, "params": {"kind": "well", "stone": "grey", "roof": "rust"}}, {"id": "keeper_golf_cart", "category": "vehicles", "name": "Keeper golf cart", "size_m": [1.2, 2.4, 1.8], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "cart", "body": "leaf", "roof": "white"}, "tris": 544, "bytes": 35924, "glb": "assets/vehicles/keeper_golf_cart.glb", "thumb": "assets/vehicles/keeper_golf_cart.png"}, {"id": "utility_truck", "category": "vehicles", "name": "Zoo utility pickup truck", "size_m": [2, 5, 2], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "pickup", "body": "white", "accent": "leaf"}, "tris": 416, "bytes": 29004, "glb": "assets/vehicles/utility_truck.glb", "thumb": "assets/vehicles/utility_truck.png"}, {"id": "safari_jeep", "category": "vehicles", "name": "Safari jeep", "size_m": [1.9, 4.2, 2], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "jeep", "body": "sand", "accent": "dark_brown"}, "tris": 552, "bytes": 36732, "glb": "assets/vehicles/safari_jeep.glb", "thumb": "assets/vehicles/safari_jeep.png"}, {"id": "safari_bus", "category": "vehicles", "name": "Open safari bus", "size_m": [2.5, 8, 3], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "bus_open", "body": "olive", "roof": "cream"}, "tris": 784, "bytes": 51176, "glb": "assets/vehicles/safari_bus.glb", "thumb": "assets/vehicles/safari_bus.png"}, {"id": "zoo_train_engine", "category": "vehicles", "name": "Zoo train engine", "size_m": [1.4, 3, 2.2], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "train_engine", "body": "red", "accent": "yellow"}, "tris": 708, "bytes": 48688, "glb": "assets/vehicles/zoo_train_engine.glb", "thumb": "assets/vehicles/zoo_train_engine.png"}, {"id": "zoo_train_carriage", "category": "vehicles", "name": "Zoo train carriage", "size_m": [1.4, 3, 2], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "train_car", "body": "sky", "roof": "white"}, "tris": 780, "bytes": 50404, "glb": "assets/vehicles/zoo_train_carriage.glb", "thumb": "assets/vehicles/zoo_train_carriage.png"}, {"id": "tractor", "category": "vehicles", "name": "Small tractor", "size_m": [1.6, 3, 2.4], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "tractor", "body": "red", "wheel": "black"}, "tris": 480, "bytes": 31684, "glb": "assets/vehicles/tractor.glb", "thumb": "assets/vehicles/tractor.png"}, {"id": "feed_trailer", "category": "vehicles", "name": "Feed trailer", "size_m": [1.6, 2.5, 1.2], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "trailer", "body": "grey", "load": "yellow"}, "tris": 188, "bytes": 13808, "glb": "assets/vehicles/feed_trailer.glb", "thumb": "assets/vehicles/feed_trailer.png"}, {"id": "animal_transport_truck", "category": "vehicles", "name": "Animal transport truck", "size_m": [2.5, 8, 3.5], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "box_truck", "body": "white", "accent": "forest"}, "tris": 504, "bytes": 34160, "glb": "assets/vehicles/animal_transport_truck.glb", "thumb": "assets/vehicles/animal_transport_truck.png"}, {"id": "vet_van", "category": "vehicles", "name": "Vet van", "size_m": [2, 5, 2.4], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "van", "body": "white", "accent": "red"}, "tris": 392, "bytes": 27312, "glb": "assets/vehicles/vet_van.glb", "thumb": "assets/vehicles/vet_van.png"}, {"id": "ice_cream_cart", "category": "vehicles", "name": "Ice cream cart", "size_m": [1, 1.8, 2], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "push_cart", "body": "pink", "roof": "white"}, "tris": 314, "bytes": 21736, "glb": "assets/vehicles/ice_cream_cart.glb", "thumb": "assets/vehicles/ice_cream_cart.png"}, {"id": "delivery_van", "category": "vehicles", "name": "Delivery van", "size_m": [2, 5, 2.5], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "van", "body": "sky", "accent": "navy"}, "tris": 356, "bytes": 24788, "glb": "assets/vehicles/delivery_van.glb", "thumb": "assets/vehicles/delivery_van.png"}, {"id": "wheelbarrow", "category": "vehicles", "name": "Wheelbarrow", "size_m": [0.7, 1.5, 0.7], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "wheelbarrow", "body": "leaf", "wheel": "black"}, "tris": 148, "bytes": 11256, "glb": "assets/vehicles/wheelbarrow.glb", "thumb": "assets/vehicles/wheelbarrow.png"}, {"id": "hand_cart", "category": "vehicles", "name": "Hand cart", "size_m": [0.8, 1.4, 1], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "hand_cart", "body": "brown", "wheel": "black"}, "tris": 156, "bytes": 12076, "glb": "assets/vehicles/hand_cart.glb", "thumb": "assets/vehicles/hand_cart.png"}, {"id": "stroller", "category": "vehicles", "name": "Baby stroller", "size_m": [0.6, 0.9, 1.1], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "stroller", "body": "navy", "wheel": "black"}, "tris": 204, "bytes": 14668, "glb": "assets/vehicles/stroller.glb", "thumb": "assets/vehicles/stroller.png"}, {"id": "wheelchair", "category": "vehicles", "name": "Wheelchair", "size_m": [0.65, 1, 0.95], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "wheelchair", "body": "charcoal", "wheel": "black"}, "tris": 296, "bytes": 20596, "glb": "assets/vehicles/wheelchair.glb", "thumb": "assets/vehicles/wheelchair.png"}, {"id": "bicycle", "category": "vehicles", "name": "Bicycle", "size_m": [0.6, 1.8, 1.1], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "bicycle", "body": "teal", "wheel": "black"}, "tris": 232, "bytes": 16364, "glb": "assets/vehicles/bicycle.glb", "thumb": "assets/vehicles/bicycle.png"}, {"id": "kick_scooter", "category": "vehicles", "name": "Kick scooter", "size_m": [0.4, 1, 1], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "scooter", "body": "orange", "wheel": "black"}, "tris": 120, "bytes": 9560, "glb": "assets/vehicles/kick_scooter.glb", "thumb": "assets/vehicles/kick_scooter.png"}, {"id": "pedal_boat", "category": "vehicles", "name": "Pedal boat", "size_m": [1.5, 2.5, 1.2], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "boat", "body": "yellow", "accent": "white"}, "tris": 168, "bytes": 12912, "glb": "assets/vehicles/pedal_boat.glb", "thumb": "assets/vehicles/pedal_boat.png"}, {"id": "rowing_boat", "category": "vehicles", "name": "Rowing boat", "size_m": [1.2, 3.5, 0.6], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "boat", "body": "brown", "accent": "cream"}, "tris": 116, "bytes": 9532, "glb": "assets/vehicles/rowing_boat.glb", "thumb": "assets/vehicles/rowing_boat.png"}, {"id": "keeper_quad_bike", "category": "vehicles", "name": "Keeper quad bike", "size_m": [1.2, 2, 1.2], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "quad", "body": "forest", "wheel": "black"}, "tris": 340, "bytes": 23180, "glb": "assets/vehicles/keeper_quad_bike.glb", "thumb": "assets/vehicles/keeper_quad_bike.png"}, {"id": "lawn_mower", "category": "vehicles", "name": "Ride-on lawn mower", "size_m": [1, 1.8, 1.1], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "mower", "body": "leaf", "wheel": "black"}, "tris": 300, "bytes": 20620, "glb": "assets/vehicles/lawn_mower.glb", "thumb": "assets/vehicles/lawn_mower.png"}, {"id": "forklift", "category": "vehicles", "name": "Forklift", "size_m": [1.2, 2.5, 2.2], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "forklift", "body": "yellow", "wheel": "black"}, "tris": 408, "bytes": 27412, "glb": "assets/vehicles/forklift.glb", "thumb": "assets/vehicles/forklift.png"}, {"id": "water_tanker", "category": "vehicles", "name": "Water tanker trailer", "size_m": [1.8, 3.5, 1.8], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "tanker", "body": "water", "wheel": "black"}, "tris": 436, "bytes": 31684, "glb": "assets/vehicles/water_tanker.glb", "thumb": "assets/vehicles/water_tanker.png"}, {"id": "sky_tram_gondola", "category": "vehicles", "name": "Sky tram gondola cabin", "size_m": [1.8, 1.8, 2.3], "generator": "vehicle", "budget_tris": 2000, "params": {"kind": "gondola", "body": "red", "window": "sky"}, "tris": 132, "bytes": 10404, "glb": "assets/vehicles/sky_tram_gondola.glb", "thumb": "assets/vehicles/sky_tram_gondola.png"}, {"id": "food_hay_bale_square_01", "category": "food", "name": "Food: Standard Timothy Hay Bale", "size_m": [0.9, 0.5, 0.45], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "food", "variant": "hay_bale_square"}}, {"id": "food_hay_bale_round_02", "category": "food", "name": "Food: Giant Round Pasture Silage Bale", "size_m": [1.5, 1.5, 1.2], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "food", "variant": "hay_bale_round"}}, {"id": "food_meat_rib_slab_03", "category": "food", "name": "Food: Raw Beef Rib Feeding Slab", "size_m": [0.6, 0.35, 0.15], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "food", "variant": "meat_rib_slab"}}, {"id": "food_fish_bucket_herring_04", "category": "food", "name": "Food: Galvanized Pail Packed with Fish", "size_m": [0.4, 0.4, 0.45], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "food", "variant": "fish_bucket_herring"}}, {"id": "food_eucalyptus_bundle_05", "category": "food", "name": "Food: Fresh Eucalyptus Branch Bundle", "size_m": [0.6, 0.6, 1.2], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "food", "variant": "eucalyptus_bundle"}}, {"id": "food_bamboo_stalk_sheaf_06", "category": "food", "name": "Food: Tied Giant Bamboo Sheaf", "size_m": [0.5, 0.5, 2.0], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "food", "variant": "bamboo_stalk_sheaf"}}, {"id": "food_fruit_crate_mixed_07", "category": "food", "name": "Food: Slatted Wood Crate of Apples & Citrus", "size_m": [0.6, 0.4, 0.3], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "food", "variant": "fruit_crate_mixed"}}, {"id": "food_veggie_bushel_roots_08", "category": "food", "name": "Food: Woven Basket of Root Veggies", "size_m": [0.5, 0.5, 0.45], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "food", "variant": "veggie_bushel_roots"}}, {"id": "food_seed_pellet_trough_09", "category": "food", "name": "Food: Hanging Zinc Seed & Grain Trough", "size_m": [1.2, 0.4, 0.35], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "food", "variant": "seed_pellet_trough"}}, {"id": "food_insect_larva_dish_10", "category": "food", "name": "Food: Ceramic Mealworm & Cricket Bowl", "size_m": [0.35, 0.35, 0.15], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "food", "variant": "insect_larva_dish"}}, {"id": "food_salt_lick_mineral_11", "category": "food", "name": "Food: Hanging Red Mineral Salt Block", "size_m": [0.3, 0.3, 0.3], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "food", "variant": "salt_lick_mineral"}}, {"id": "food_raw_marrow_bone_12", "category": "food", "name": "Food: Large Bovine Marrow Knuckle Bone", "size_m": [0.5, 0.2, 0.2], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "food", "variant": "raw_marrow_bone"}}, {"id": "food_browse_wall_rack_13", "category": "food", "name": "Food: Wall-Mounted Forage Browse Rack", "size_m": [1.4, 0.35, 1.0], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "food", "variant": "browse_wall_rack"}}, {"id": "food_slow_feeder_haynet_14", "category": "food", "name": "Food: Suspended Knotted Hay Net", "size_m": [0.7, 0.7, 1.1], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "food", "variant": "slow_feeder_haynet"}}, {"id": "food_nectar_tube_feeder_15", "category": "food", "name": "Food: Glass Hummingbird Nectar Tube", "size_m": [0.25, 0.25, 0.6], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "food", "variant": "nectar_tube_feeder"}}, {"id": "food_carnivore_nutrient_loaf_16", "category": "food", "name": "Food: Pressed Carnivore Nutrient Block", "size_m": [0.4, 0.25, 0.2], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "food", "variant": "carnivore_nutrient_loaf"}}, {"id": "food_watermelon_enrich_treat_17", "category": "food", "name": "Food: Quartered Carved Watermelon", "size_m": [0.4, 0.4, 0.35], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "food", "variant": "watermelon_enrich_treat"}}, {"id": "food_krill_shrimp_pail_18", "category": "food", "name": "Food: Aquatic Krill & Squid Feeder Tub", "size_m": [0.45, 0.45, 0.4], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "food", "variant": "krill_shrimp_pail"}}, {"id": "food_pellet_feed_sack_19", "category": "food", "name": "Food: Jute Pelletized Animal Feed Sack", "size_m": [0.5, 0.35, 0.75], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "food", "variant": "pellet_feed_sack"}}, {"id": "food_water_drink_trough_20", "category": "food", "name": "Food: Cast Concrete Heated Waterer", "size_m": [1.1, 0.6, 0.5], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "food", "variant": "water_drink_trough"}}, {"id": "enrich_boomer_ball_lg_01", "category": "enrichment", "name": "Enrichment: Heavy-Duty Boomer Ball Large", "size_m": [1.0, 1.0, 1.0], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "enrichment", "variant": "boomer_ball_lg"}}, {"id": "enrich_boomer_ball_sm_02", "category": "enrichment", "name": "Enrichment: Small Carnivore Play Ball", "size_m": [0.4, 0.4, 0.4], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "enrichment", "variant": "boomer_ball_sm"}}, {"id": "enrich_tire_swing_single_03", "category": "enrichment", "name": "Enrichment: Single Hanging Tire Swing", "size_m": [0.8, 0.8, 1.8], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "enrichment", "variant": "tire_swing_single"}}, {"id": "enrich_tire_pyramid_04", "category": "enrichment", "name": "Enrichment: Stacked Enrichment Tires", "size_m": [1.6, 1.6, 1.2], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "enrichment", "variant": "tire_pyramid"}}, {"id": "enrich_puzzle_barrel_05", "category": "enrichment", "name": "Enrichment: Rolling Feeder Barrel with Holes", "size_m": [0.7, 0.7, 1.0], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "enrichment", "variant": "puzzle_barrel"}}, {"id": "enrich_firehose_cube_06", "category": "enrichment", "name": "Enrichment: Woven Firehose Chew Cube", "size_m": [0.6, 0.6, 0.6], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "enrichment", "variant": "firehose_cube"}}, {"id": "enrich_ice_block_treat_07", "category": "enrichment", "name": "Enrichment: Frozen Fish & Fruit Block", "size_m": [0.5, 0.5, 0.5], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "enrichment", "variant": "ice_block_treat"}}, {"id": "enrich_scratch_post_timber_08", "category": "enrichment", "name": "Enrichment: Heavy Timber Scratching Post", "size_m": [0.6, 0.6, 2.2], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "enrichment", "variant": "scratch_post_timber"}}, {"id": "enrich_floating_log_buoy_09", "category": "enrichment", "name": "Enrichment: Floating Otter Log Buoy", "size_m": [0.5, 1.8, 0.5], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "enrichment", "variant": "floating_log_buoy"}}, {"id": "enrich_scent_marking_log_10", "category": "enrichment", "name": "Enrichment: Perforated Herb Scent Log", "size_m": [0.4, 1.4, 0.4], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "enrichment", "variant": "scent_marking_log"}}, {"id": "enrich_rope_spiral_tug_11", "category": "enrichment", "name": "Enrichment: Braided Hemp Rope Spiral Tug", "size_m": [0.3, 0.3, 2.0], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "enrichment", "variant": "rope_spiral_tug"}}, {"id": "enrich_forage_bungee_net_12", "category": "enrichment", "name": "Enrichment: Bungee Suspended Forage Net", "size_m": [0.7, 0.7, 1.5], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "enrichment", "variant": "forage_bungee_net"}}, {"id": "enrich_bamboo_windchime_toy_13", "category": "enrichment", "name": "Enrichment: Primate Clatter Chime Toy", "size_m": [0.5, 0.5, 1.6], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "enrichment", "variant": "bamboo_windchime_toy"}}, {"id": "enrich_primate_puzzle_box_14", "category": "enrichment", "name": "Enrichment: Clear Primate Slider Maze Box", "size_m": [0.8, 0.4, 0.6], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "enrichment", "variant": "primate_puzzle_box"}}, {"id": "enrich_rubber_wobble_cone_15", "category": "enrichment", "name": "Enrichment: Weighted Wobble Cone Feeder", "size_m": [0.6, 0.6, 0.8], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "enrichment", "variant": "rubber_wobble_cone"}}, {"id": "enrich_climbing_cargo_net_16", "category": "enrichment", "name": "Enrichment: Rope Climbing Wall Net", "size_m": [2.5, 0.2, 2.0], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "enrichment", "variant": "climbing_cargo_net"}}, {"id": "enrich_misting_rub_station_17", "category": "enrichment", "name": "Enrichment: Overhead Misting Post Station", "size_m": [1.0, 0.8, 2.4], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "enrichment", "variant": "misting_rub_station"}}, {"id": "enrich_splash_wading_tub_18", "category": "enrichment", "name": "Enrichment: Reinforced Splash Tub", "size_m": [1.5, 1.5, 0.6], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "enrichment", "variant": "splash_wading_tub"}}, {"id": "enrich_treat_labyrinth_plate_19", "category": "enrichment", "name": "Enrichment: Ground Grazing Forage Maze", "size_m": [1.2, 1.2, 0.25], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "enrichment", "variant": "treat_labyrinth_plate"}}, {"id": "enrich_floating_plastic_ring_20", "category": "enrichment", "name": "Enrichment: Pygmy Hippo Floating Toy Ring", "size_m": [0.9, 0.9, 0.3], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "enrichment", "variant": "floating_plastic_ring"}}, {"id": "shop_plush_lion_toy_01", "category": "shop", "name": "Shop Item: Souvenir Plush Stuffed Lion", "size_m": [0.3, 0.4, 0.35], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "shop", "variant": "plush_lion_toy"}}, {"id": "shop_plush_elephant_toy_02", "category": "shop", "name": "Shop Item: Souvenir Plush Stuffed Elephant", "size_m": [0.35, 0.45, 0.35], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "shop", "variant": "plush_elephant_toy"}}, {"id": "shop_plush_penguin_toy_03", "category": "shop", "name": "Shop Item: Souvenir Plush Stuffed Penguin", "size_m": [0.25, 0.25, 0.35], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "shop", "variant": "plush_penguin_toy"}}, {"id": "shop_plush_giraffe_toy_04", "category": "shop", "name": "Shop Item: Souvenir Plush Tall Giraffe", "size_m": [0.3, 0.4, 0.7], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "shop", "variant": "plush_giraffe_toy"}}, {"id": "shop_zoo_guide_brochure_05", "category": "shop", "name": "Shop Item: Folded Zoo Illustrated Map Brochure", "size_m": [0.15, 0.25, 0.02], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "shop", "variant": "zoo_guide_brochure"}}, {"id": "shop_postcard_carousel_rack_06", "category": "shop", "name": "Shop Item: Rotating Wire Postcard Stand", "size_m": [0.45, 0.45, 0.9], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "shop", "variant": "postcard_carousel_rack"}}, {"id": "shop_animal_ear_headband_07", "category": "shop", "name": "Shop Item: Tiger Stripe Ear Headband", "size_m": [0.2, 0.18, 0.15], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "shop", "variant": "animal_ear_headband"}}, {"id": "shop_safari_pith_helmet_08", "category": "shop", "name": "Shop Item: Childrens Khaki Safari Sun Hat", "size_m": [0.3, 0.32, 0.18], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "shop", "variant": "safari_pith_helmet"}}, {"id": "shop_zoo_logo_hoodie_09", "category": "shop", "name": "Shop Item: Folded Zoo Souvenir Hoodie Stack", "size_m": [0.4, 0.35, 0.25], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "shop", "variant": "zoo_logo_hoodie"}}, {"id": "shop_ceramic_souvenir_mug_10", "category": "shop", "name": "Shop Item: Stoneware Animal Mug", "size_m": [0.14, 0.11, 0.11], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "shop", "variant": "ceramic_souvenir_mug"}}, {"id": "shop_steel_water_bottle_11", "category": "shop", "name": "Shop Item: Branded Insulated Eco Flask", "size_m": [0.09, 0.09, 0.26], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "shop", "variant": "steel_water_bottle"}}, {"id": "shop_spiral_rainbow_lollipop_12", "category": "shop", "name": "Shop Item: Jumbo Swirl Zoo Lollipop", "size_m": [0.16, 0.03, 0.35], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "shop", "variant": "spiral_rainbow_lollipop"}}, {"id": "shop_soft_pretzel_mustard_13", "category": "shop", "name": "Shop Item: Salted Jumbo Pretzel in Paper Tray", "size_m": [0.22, 0.2, 0.06], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "shop", "variant": "soft_pretzel_mustard"}}, {"id": "shop_softserve_icecream_cone_14", "category": "shop", "name": "Shop Item: Swirled Soft-Serve Waffle Cone", "size_m": [0.09, 0.09, 0.22], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "shop", "variant": "softserve_icecream_cone"}}, {"id": "shop_fountain_soda_cup_15", "category": "shop", "name": "Shop Item: Lidded Zoo Soda Cup with Straw", "size_m": [0.11, 0.11, 0.2], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "shop", "variant": "fountain_soda_cup"}}, {"id": "shop_animal_sticker_sheet_16", "category": "shop", "name": "Shop Item: Holographic Wild Animal Sticker Sheet", "size_m": [0.18, 0.25, 0.01], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "shop", "variant": "animal_sticker_sheet"}}, {"id": "shop_keychain_spin_tree_17", "category": "shop", "name": "Shop Item: Countertop Metal Keychain Spinner", "size_m": [0.35, 0.35, 0.6], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "shop", "variant": "keychain_spin_tree"}}, {"id": "shop_figurine_blind_box_18", "category": "shop", "name": "Shop Item: Collectible Miniature Animal Blind Box", "size_m": [0.08, 0.08, 0.1], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "shop", "variant": "figurine_blind_box"}}, {"id": "shop_toy_plastic_binoculars_19", "category": "shop", "name": "Shop Item: Kid Safari Toy Binoculars", "size_m": [0.16, 0.14, 0.07], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "shop", "variant": "toy_plastic_binoculars"}}, {"id": "shop_helium_tiger_balloon_20", "category": "shop", "name": "Shop Item: Foil Animal Head Helium Balloon", "size_m": [0.45, 0.2, 0.5], "generator": "props", "budget_tris": 2000, "params": {"prop_family": "shop", "variant": "helium_tiger_balloon"}}, {"id": "vet_exam_table", "category": "vet_equipment", "name": "Veterinary Examination Table", "size_m": [1.2, 0.7, 0.9], "generator": "props", "budget_tris": 1200, "params": {"type": "table", "material": "stainless", "primary_color": "light_grey", "mat_color": "teal"}}, {"id": "vet_mobile_ultrasound", "category": "vet_equipment", "name": "Mobile Ultrasound Cart", "size_m": [0.6, 0.6, 1.3], "generator": "props", "budget_tris": 1400, "params": {"type": "cart", "has_screen": true, "primary_color": "light_grey", "screen_color": "teal"}}, {"id": "vet_digital_scale_large", "category": "vet_equipment", "name": "Walk-on Heavy Duty Animal Scale", "size_m": [2.0, 1.2, 0.15], "generator": "props", "budget_tris": 600, "params": {"type": "scale", "primary_color": "charcoal", "display_color": "red"}}, {"id": "vet_digital_scale_small", "category": "vet_equipment", "name": "Tabletop Small Animal Scale", "size_m": [0.5, 0.4, 0.1], "generator": "props", "budget_tris": 500, "params": {"type": "scale", "primary_color": "white", "display_color": "water"}}, {"id": "vet_surgical_light", "category": "vet_equipment", "name": "Overhead Vet Surgical Lamp", "size_m": [0.8, 0.8, 1.9], "generator": "props", "budget_tris": 1100, "params": {"type": "lamp", "arm_color": "light_grey", "lamp_color": "yellow"}}, {"id": "vet_anesthesia_machine", "category": "vet_equipment", "name": "Veterinary Anesthesia Station", "size_m": [0.6, 0.6, 1.4], "generator": "props", "budget_tris": 1500, "params": {"type": "machine", "tank_color": "sky", "frame_color": "white"}}, {"id": "vet_xray_portable", "category": "vet_equipment", "name": "Portable Field X-Ray Unit", "size_m": [0.5, 0.4, 0.8], "generator": "props", "budget_tris": 1000, "params": {"type": "scanner", "case_color": "orange", "metal_color": "grey"}}, {"id": "vet_instrument_tray", "category": "vet_equipment", "name": "Surgical Instrument Mayo Tray", "size_m": [0.5, 0.4, 0.95], "generator": "props", "budget_tris": 800, "params": {"type": "tray", "stand_color": "light_grey", "tray_color": "teal"}}, {"id": "vet_iv_drip_stand", "category": "vet_equipment", "name": "Wheeled IV Drip Stand", "size_m": [0.5, 0.5, 1.8], "generator": "props", "budget_tris": 900, "params": {"type": "pole", "stand_color": "light_grey", "bag_color": "water"}}, {"id": "vet_recovery_stretcher", "category": "vet_equipment", "name": "Canvas Animal Transport Stretcher", "size_m": [1.8, 0.7, 0.25], "generator": "props", "budget_tris": 700, "params": {"type": "stretcher", "fabric_color": "navy", "pole_color": "tan"}}, {"id": "vet_heavy_transport_gurney", "category": "vet_equipment", "name": "Heavy Duty Mobile Animal Gurney", "size_m": [2.2, 1.0, 0.75], "generator": "props", "budget_tris": 1600, "params": {"type": "gurney", "frame_color": "charcoal", "pad_color": "forest"}}, {"id": "vet_incubator_brooder", "category": "vet_equipment", "name": "Wildlife Care Incubator Unit", "size_m": [0.8, 0.6, 0.6], "generator": "props", "budget_tris": 1100, "params": {"type": "box", "case_color": "cream", "window_color": "sky"}}, {"id": "vet_microscope_station", "category": "vet_equipment", "name": "Lab Diagnostic Microscope", "size_m": [0.35, 0.3, 0.45], "generator": "props", "budget_tris": 900, "params": {"type": "optical", "body_color": "charcoal", "lens_color": "yellow"}}, {"id": "vet_centrifuge_unit", "category": "vet_equipment", "name": "Clinical Benchtop Centrifuge", "size_m": [0.4, 0.4, 0.3], "generator": "props", "budget_tris": 700, "params": {"type": "device", "body_color": "white", "lid_color": "teal"}}, {"id": "vet_dart_rifle_case", "category": "vet_equipment", "name": "Dart Gun & Field Case", "size_m": [1.1, 0.35, 0.15], "generator": "props", "budget_tris": 850, "params": {"type": "case", "case_color": "olive", "trim_color": "black"}}, {"id": "vet_first_aid_trunk", "category": "vet_equipment", "name": "Zoo Emergency Vet First Aid Trunk", "size_m": [0.7, 0.45, 0.4], "generator": "props", "budget_tris": 600, "params": {"type": "trunk", "box_color": "red", "cross_color": "white"}}, {"id": "vet_medicine_cabinet", "category": "vet_equipment", "name": "Secure Wall Veterinary Medicine Cabinet", "size_m": [0.6, 0.25, 0.8], "generator": "props", "budget_tris": 750, "params": {"type": "cabinet", "body_color": "white", "glass_color": "sky"}}, {"id": "vet_capture_net_pole", "category": "vet_equipment", "name": "Telescoping Animal Capture Net", "size_m": [0.6, 2.2, 0.6], "generator": "props", "budget_tris": 800, "params": {"type": "pole", "net_color": "sand", "handle_color": "rust"}}, {"id": "vet_oxygen_cylinder_trolley", "category": "vet_equipment", "name": "Mobile Dual Oxygen Cylinder Trolley", "size_m": [0.45, 0.4, 1.1], "generator": "props", "budget_tris": 1000, "params": {"type": "trolley", "tank_color": "leaf", "frame_color": "black"}}, {"id": "vet_hydrotherapy_tank", "category": "vet_equipment", "name": "Animal Rehabilitation Hydrotherapy Tub", "size_m": [2.4, 1.2, 0.9], "generator": "props", "budget_tris": 1700, "params": {"type": "tub", "tub_color": "teal", "water_color": "water"}}, {"id": "bench_park_wood_classic", "category": "benches_lamps_bins_signs", "name": "Classic Wooden Park Bench", "size_m": [1.5, 0.6, 0.85], "generator": "facilities", "budget_tris": 1200, "params": {"family": "bench", "variant": "wood_classic"}}, {"id": "bench_cast_iron_ornate", "category": "benches_lamps_bins_signs", "name": "Victorian Cast Iron Bench", "size_m": [1.6, 0.65, 0.9], "generator": "facilities", "budget_tris": 1500, "params": {"family": "bench", "variant": "cast_iron"}}, {"id": "bench_concrete_modern", "category": "benches_lamps_bins_signs", "name": "Modern Curved Concrete Bench", "size_m": [1.8, 0.7, 0.45], "generator": "facilities", "budget_tris": 800, "params": {"family": "bench", "variant": "concrete_modern"}}, {"id": "bench_rustic_log", "category": "benches_lamps_bins_signs", "name": "Rustic Split-Log Bench", "size_m": [1.4, 0.5, 0.5], "generator": "facilities", "budget_tris": 600, "params": {"family": "bench", "variant": "rustic_log"}}, {"id": "bench_picnic_table_combo", "category": "benches_lamps_bins_signs", "name": "Integrated Timber Picnic Table", "size_m": [1.8, 1.5, 0.75], "generator": "facilities", "budget_tris": 1400, "params": {"family": "bench", "variant": "picnic_combo"}}, {"id": "lamp_post_victorian_single", "category": "benches_lamps_bins_signs", "name": "Victorian Gaslight Lamp Post", "size_m": [0.5, 0.5, 3.2], "generator": "facilities", "budget_tris": 1200, "params": {"family": "lamp", "variant": "victorian_single"}}, {"id": "lamp_post_victorian_double", "category": "benches_lamps_bins_signs", "name": "Victorian Twin-Lantern Post", "size_m": [0.9, 0.5, 3.5], "generator": "facilities", "budget_tris": 1600, "params": {"family": "lamp", "variant": "victorian_double"}}, {"id": "lamp_post_modern_led", "category": "benches_lamps_bins_signs", "name": "Modern Minimalist LED Column", "size_m": [0.3, 0.3, 2.8], "generator": "facilities", "budget_tris": 600, "params": {"family": "lamp", "variant": "modern_led"}}, {"id": "lamp_bollard_solar", "category": "benches_lamps_bins_signs", "name": "Solar Walkway Bollard Light", "size_m": [0.25, 0.25, 0.9], "generator": "facilities", "budget_tris": 500, "params": {"family": "lamp", "variant": "solar_bollard"}}, {"id": "bin_waste_general_timber", "category": "benches_lamps_bins_signs", "name": "Timber Slat Park Trash Can", "size_m": [0.5, 0.5, 0.9], "generator": "facilities", "budget_tris": 900, "params": {"family": "bin", "variant": "timber_slat"}}, {"id": "bin_recycle_dual_metal", "category": "benches_lamps_bins_signs", "name": "Dual Stream Recycling Station", "size_m": [0.8, 0.45, 0.95], "generator": "facilities", "budget_tris": 1100, "params": {"family": "bin", "variant": "recycle_dual"}}, {"id": "bin_solar_compactor", "category": "benches_lamps_bins_signs", "name": "Solar Powered Waste Compactor", "size_m": [0.7, 0.7, 1.2], "generator": "facilities", "budget_tris": 800, "params": {"family": "bin", "variant": "solar_compactor"}}, {"id": "bin_animal_proof_bear", "category": "benches_lamps_bins_signs", "name": "Heavy-Duty Animal-Proof Waste Bin", "size_m": [0.6, 0.6, 1.0], "generator": "facilities", "budget_tris": 950, "params": {"family": "bin", "variant": "animal_proof"}}, {"id": "sign_direction_fingerpost", "category": "benches_lamps_bins_signs", "name": "Wooden 4-Way Directional Fingerpost", "size_m": [0.8, 0.8, 2.6], "generator": "facilities", "budget_tris": 850, "params": {"family": "sign", "variant": "fingerpost"}}, {"id": "sign_zoo_map_board", "category": "benches_lamps_bins_signs", "name": "Freestanding Zoo Directory Map Board", "size_m": [1.8, 0.4, 2.0], "generator": "facilities", "budget_tris": 1200, "params": {"family": "sign", "variant": "map_board"}}, {"id": "sign_exhibit_info_plaque", "category": "benches_lamps_bins_signs", "name": "Angled Habitat Info Lectern", "size_m": [0.6, 0.5, 1.1], "generator": "facilities", "budget_tris": 700, "params": {"family": "sign", "variant": "info_lectern"}}, {"id": "sign_warning_caution_barrier", "category": "benches_lamps_bins_signs", "name": "Caution Animal Area A-Frame Sign", "size_m": [0.5, 0.4, 0.7], "generator": "facilities", "budget_tris": 500, "params": {"family": "sign", "variant": "caution_a_frame"}}, {"id": "sign_entrance_totem_monolith", "category": "benches_lamps_bins_signs", "name": "Modern Entrance Directory Totem", "size_m": [0.6, 0.6, 3.0], "generator": "facilities", "budget_tris": 800, "params": {"family": "sign", "variant": "totem_monolith"}}, {"id": "drinking_fountain_pedestal", "category": "benches_lamps_bins_signs", "name": "Dual-Height Public Drinking Fountain", "size_m": [0.6, 0.4, 1.0], "generator": "facilities", "budget_tris": 900, "params": {"family": "amenity", "variant": "drinking_fountain"}}, {"id": "misting_cooling_station", "category": "benches_lamps_bins_signs", "name": "Visitor Walkthrough Cooling Mist Arch", "size_m": [2.0, 0.8, 2.5], "generator": "facilities", "budget_tris": 1400, "params": {"family": "amenity", "variant": "mist_arch"}}]
+  </script>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/OrbitControls.js';
+    import { GLTFLoader } from 'three/addons/GLTFLoader.js';
+
+    // State
+    let assets = [];
+    try {
+      assets = JSON.parse(document.getElementById('embedded-assets').textContent);
+    } catch (e) {
+      console.error("Failed to parse embedded assets:", e);
+    }
+
+    let currentCategory = 'all';
+    let searchQuery = '';
+
+    const catTabsEl = document.getElementById('cat-tabs');
+    const assetGridEl = document.getElementById('asset-grid');
+    const statusCountEl = document.getElementById('status-count');
+    const searchInputEl = document.getElementById('search-input');
+
+    // Modals & 3D Elements
+    const modalBackdrop = document.getElementById('modal-backdrop');
+    const modalClose = document.getElementById('modal-close');
+    const detailId = document.getElementById('detail-id');
+    const detailTitle = document.getElementById('detail-title');
+    const detailCategory = document.getElementById('detail-category');
+    const detailSize = document.getElementById('detail-size');
+    const detailGenerator = document.getElementById('detail-generator');
+    const detailTriBudget = document.getElementById('detail-tri-budget');
+    const detailDownload = document.getElementById('detail-download');
+    const viewerLoader = document.getElementById('viewer-loader');
+    const threeCanvas = document.getElementById('three-canvas');
+
+    const btnRotate = document.getElementById('btn-rotate');
+    const btnWireframe = document.getElementById('btn-wireframe');
+    const btnReset = document.getElementById('btn-reset');
+
+    // Build Category Tabs
+    const catCounts = {};
+    assets.forEach(a => {
+      catCounts[a.category] = (catCounts[a.category] || 0) + 1;
+    });
+
+    const categories = ['all', ...Object.keys(catCounts).sort()];
+
+    catTabsEl.innerHTML = categories.map(cat => {
+      const count = cat === 'all' ? assets.length : catCounts[cat];
+      const label = cat === 'all' ? 'All' : cat.replace(/_/g, ' ');
+      return `<button class="cat-btn ${cat === 'all' ? 'active' : ''}" data-cat="${cat}">
+        <span style="text-transform: capitalize;">${label}</span>
+        <span class="cat-badge">${count}</span>
+      </button>`;
+    }).join('');
+
+    // Tab Click Handlers
+    catTabsEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('.cat-btn');
+      if (!btn) return;
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCategory = btn.dataset.cat;
+      renderGrid();
+    });
+
+    // Search Input Handler
+    searchInputEl.addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim().toLowerCase();
+      renderGrid();
+    });
+
+    // Render Grid
+    function renderGrid() {
+      const filtered = assets.filter(a => {
+        const matchesCat = currentCategory === 'all' || a.category === currentCategory;
+        const matchesSearch = !searchQuery || 
+          a.name.toLowerCase().includes(searchQuery) || 
+          a.id.toLowerCase().includes(searchQuery) ||
+          a.category.toLowerCase().includes(searchQuery);
+        return matchesCat && matchesSearch;
+      });
+
+      statusCountEl.textContent = `Showing ${filtered.length} of ${assets.length} assets`;
+
+      if (filtered.length === 0) {
+        assetGridEl.innerHTML = `<div class="empty-state">
+          <p style="font-size: 1.1rem; font-weight: 500; margin-bottom: 8px;">No assets match your search</p>
+          <p style="font-size: 0.9rem;">Try selecting another category or clearing your filter.</p>
+        </div>`;
+        return;
+      }
+
+      assetGridEl.innerHTML = filtered.map(a => {
+        const sizeStr = a.size_m ? `${a.size_m[0]} × ${a.size_m[1]} × ${a.size_m[2]} m` : '';
+        const thumbUrl = `assets/${a.category}/${a.id}.png`;
+        return `<div class="card" data-id="${a.id}">
+          <div class="thumb-wrap">
+            <img class="thumb-img" src="${thumbUrl}" alt="${a.name}" loading="lazy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' fill=\'%23ccc\'><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\'>3D</text></svg>'">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">${a.name}</h3>
+            <div class="card-meta">
+              <span class="tag">${a.category.replace(/_/g, ' ')}</span>
+              <span style="font-size: 0.75rem;">${sizeStr}</span>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    renderGrid();
+
+    // Three.js Setup
+    let renderer, scene, camera, controls;
+    let currentModel = null;
+    let autoRotate = true;
+    let wireframeMode = false;
+    let defaultCameraPosition = new THREE.Vector3();
+    let defaultTarget = new THREE.Vector3();
+
+    function initThree() {
+      const width = threeCanvas.clientWidth || 600;
+      const height = threeCanvas.clientHeight || 500;
+
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0xe9e6dc);
+
+      camera = new THREE.PerspectiveCamera(40, width / height, 0.05, 50);
+      camera.position.set(2, 1.8, 2.5);
+
+      renderer = new THREE.WebGLRenderer({ canvas: threeCanvas, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(width, height, false);
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.1;
+
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.05;
+      controls.autoRotate = autoRotate;
+      controls.autoRotateSpeed = 2.0;
+      controls.maxPolarAngle = Math.PI / 2 + 0.05;
+
+      // Soft Lights
+      const hemiLight = new THREE.HemisphereLight(0xffffff, 0xc4beaf, 1.2);
+      scene.add(hemiLight);
+
+      const dirLight = new THREE.DirectionalLight(0xfff8e8, 1.4);
+      dirLight.position.set(3, 5, 4);
+      scene.add(dirLight);
+
+      const fillLight = new THREE.DirectionalLight(0xdde8f8, 0.6);
+      fillLight.position.set(-3, 3, -3);
+      scene.add(fillLight);
+
+      // Shadow floor circle
+      const floorGeo = new THREE.CircleGeometry(2, 32);
+      const floorMat = new THREE.MeshBasicMaterial({
+        color: 0xded9cc,
+        depthWrite: false
+      });
+      const floor = new THREE.Mesh(floorGeo, floorMat);
+      floor.rotation.x = -Math.PI / 2;
+      floor.position.y = -0.001;
+      scene.add(floor);
+
+      function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener('resize', () => {
+        if (!modalBackdrop.classList.contains('open')) return;
+        const w = threeCanvas.clientWidth;
+        const h = threeCanvas.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h, false);
+      });
+    }
+
+    initThree();
+
+    // Card Click -> Open 3D Modal
+    assetGridEl.addEventListener('click', (e) => {
+      const card = e.target.closest('.card');
+      if (!card) return;
+      const asset = assets.find(a => a.id === card.dataset.id);
+      if (!asset) return;
+      openAssetModal(asset);
+    });
+
+    const gltfLoader = new GLTFLoader();
+
+    function openAssetModal(asset) {
+      detailId.textContent = asset.id;
+      detailTitle.textContent = asset.name;
+      detailCategory.textContent = asset.category.replace(/_/g, ' ');
+      detailSize.textContent = asset.size_m ? `${asset.size_m[0]} × ${asset.size_m[1]} × ${asset.size_m[2]} m` : 'N/A';
+      detailGenerator.textContent = asset.generator || 'procedural';
+      detailTriBudget.textContent = asset.budget_tris ? `${asset.budget_tris.toLocaleString()} tris` : 'N/A';
+      
+      const glbUrl = `assets/${asset.category}/${asset.id}.glb`;
+      detailDownload.href = glbUrl;
+      detailDownload.setAttribute('download', `${asset.id}.glb`);
+
+      modalBackdrop.classList.add('open');
+      viewerLoader.style.display = 'flex';
+
+      // Resize renderer after pane displayed
+      setTimeout(() => {
+        const w = threeCanvas.clientWidth;
+        const h = threeCanvas.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h, false);
+      }, 50);
+
+      // Remove previous model
+      if (currentModel) {
+        scene.remove(currentModel);
+        currentModel = null;
+      }
+
+      gltfLoader.load(glbUrl, (gltf) => {
+        currentModel = gltf.scene;
+        scene.add(currentModel);
+
+        // Frame camera around model bounding box
+        const bbox = new THREE.Box3().setFromObject(currentModel);
+        const center = bbox.getCenter(new THREE.Vector3());
+        const size = bbox.getSize(new THREE.Vector3());
+
+        const maxDim = Math.max(size.x, size.y, size.z, 0.1);
+        const dist = maxDim * 2.2;
+
+        controls.target.set(center.x, center.y, center.z);
+        camera.position.set(center.x + dist * 0.7, center.y + dist * 0.6, center.z + dist * 0.9);
+        camera.lookAt(controls.target);
+
+        defaultCameraPosition.copy(camera.position);
+        defaultTarget.copy(controls.target);
+
+        wireframeMode = false;
+        btnWireframe.textContent = 'Wireframe';
+
+        viewerLoader.style.display = 'none';
+      }, undefined, (err) => {
+        console.warn('Failed loading GLB:', err);
+        viewerLoader.innerHTML = `<span>Preview render (GLB pending)</span>`;
+      });
+    }
+
+    function closeModal() {
+      modalBackdrop.classList.remove('open');
+      if (currentModel) {
+        scene.remove(currentModel);
+        currentModel = null;
+      }
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', (e) => {
+      if (e.target === modalBackdrop) closeModal();
+    });
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Viewport Controls
+    btnRotate.addEventListener('click', () => {
+      autoRotate = !autoRotate;
+      controls.autoRotate = autoRotate;
+      btnRotate.textContent = autoRotate ? 'Pause Auto-Rotate' : 'Resume Auto-Rotate';
+    });
+
+    btnWireframe.addEventListener('click', () => {
+      wireframeMode = !wireframeMode;
+      btnWireframe.textContent = wireframeMode ? 'Shaded' : 'Wireframe';
+      if (currentModel) {
+        currentModel.traverse((child) => {
+          if (child.isMesh && child.material) {
+            child.material.wireframe = wireframeMode;
+          }
+        });
+      }
+    });
+
+    btnReset.addEventListener('click', () => {
+      camera.position.copy(defaultCameraPosition);
+      controls.target.copy(defaultTarget);
+      controls.update();
+    });
+  </script>
+</body>
+</html>
