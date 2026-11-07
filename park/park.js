@@ -322,9 +322,10 @@ function collectPlacements(L) {
       const d = Math.hypot(node.x - p.position[0], node.y - p.position[1]);
       if (d < minDist) { minDist = d; closestNode = node; }
     }
-    const targetNode = (closestNode && closestNode.neighbors.length > 0)
-      ? closestNode.neighbors[Math.floor(Math.random() * closestNode.neighbors.length)]
-      : closestNode;
+
+    // Smoothly walk from spawn position to closest path node, then continue onto graph
+    const spawnNode = { x: p.position[0], y: p.position[1], neighbors: closestNode ? [closestNode] : [] };
+    const targetNode = closestNode || spawnNode;
 
     const entity = {
       type: p.role,
@@ -334,7 +335,7 @@ function collectPlacements(L) {
       z: p.position[2] || 0,
       rotDeg: p.rotation_deg,
       speed: (p.role === 'keeper' ? 1.2 : 0.8) + (Math.random() * 0.4),
-      currentNode: closestNode,
+      currentNode: spawnNode,
       targetNode: targetNode,
       prevNode: null,
       progress: 0,
@@ -374,6 +375,7 @@ async function build(s, given = null) {
         if (item.entity) {
           item.entity.bindings.push({ im, index: i, local: part.local });
           dynamicMeshes.add(im);
+          im.frustumCulled = false;
         }
       });
       im.instanceMatrix.needsUpdate = true;
