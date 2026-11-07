@@ -1,6 +1,6 @@
 {
   "schema": "id, category, name, size_m [width x, length y, height z] metres (Blender Z up, front faces +Y), generator, budget_tris, params.",
-  "count": 105,
+  "count": 125,
   "assets": [
     {
       "id": "keeper_safari_lead_01",
@@ -1815,6 +1815,348 @@
       "params": {
         "prop_family": "shop",
         "variant": "helium_tiger_balloon"
+      }
+    },
+    {
+      "id": "vet_exam_table",
+      "category": "vet_equipment",
+      "name": "Veterinary Examination Table",
+      "size_m": [
+        1.2,
+        0.7,
+        0.9
+      ],
+      "generator": "props",
+      "budget_tris": 1200,
+      "params": {
+        "type": "table",
+        "material": "stainless",
+        "primary_color": "light_grey",
+        "mat_color": "teal"
+      }
+    },
+    {
+      "id": "vet_mobile_ultrasound",
+      "category": "vet_equipment",
+      "name": "Mobile Ultrasound Cart",
+      "size_m": [
+        0.6,
+        0.6,
+        1.3
+      ],
+      "generator": "props",
+      "budget_tris": 1400,
+      "params": {
+        "type": "cart",
+        "has_screen": true,
+        "primary_color": "light_grey",
+        "screen_color": "teal"
+      }
+    },
+    {
+      "id": "vet_digital_scale_large",
+      "category": "vet_equipment",
+      "name": "Walk-on Heavy Duty Animal Scale",
+      "size_m": [
+        2.0,
+        1.2,
+        0.15
+      ],
+      "generator": "props",
+      "budget_tris": 600,
+      "params": {
+        "type": "scale",
+        "primary_color": "charcoal",
+        "display_color": "red"
+      }
+    },
+    {
+      "id": "vet_digital_scale_small",
+      "category": "vet_equipment",
+      "name": "Tabletop Small Animal Scale",
+      "size_m": [
+        0.5,
+        0.4,
+        0.1
+      ],
+      "generator": "props",
+      "budget_tris": 500,
+      "params": {
+        "type": "scale",
+        "primary_color": "white",
+        "display_color": "water"
+      }
+    },
+    {
+      "id": "vet_surgical_light",
+      "category": "vet_equipment",
+      "name": "Overhead Vet Surgical Lamp",
+      "size_m": [
+        0.8,
+        0.8,
+        1.9
+      ],
+      "generator": "props",
+      "budget_tris": 1100,
+      "params": {
+        "type": "lamp",
+        "arm_color": "light_grey",
+        "lamp_color": "yellow"
+      }
+    },
+    {
+      "id": "vet_anesthesia_machine",
+      "category": "vet_equipment",
+      "name": "Veterinary Anesthesia Station",
+      "size_m": [
+        0.6,
+        0.6,
+        1.4
+      ],
+      "generator": "props",
+      "budget_tris": 1500,
+      "params": {
+        "type": "machine",
+        "tank_color": "sky",
+        "frame_color": "white"
+      }
+    },
+    {
+      "id": "vet_xray_portable",
+      "category": "vet_equipment",
+      "name": "Portable Field X-Ray Unit",
+      "size_m": [
+        0.5,
+        0.4,
+        0.8
+      ],
+      "generator": "props",
+      "budget_tris": 1000,
+      "params": {
+        "type": "scanner",
+        "case_color": "orange",
+        "metal_color": "grey"
+      }
+    },
+    {
+      "id": "vet_instrument_tray",
+      "category": "vet_equipment",
+      "name": "Surgical Instrument Mayo Tray",
+      "size_m": [
+        0.5,
+        0.4,
+        0.95
+      ],
+      "generator": "props",
+      "budget_tris": 800,
+      "params": {
+        "type": "tray",
+        "stand_color": "light_grey",
+        "tray_color": "teal"
+      }
+    },
+    {
+      "id": "vet_iv_drip_stand",
+      "category": "vet_equipment",
+      "name": "Wheeled IV Drip Stand",
+      "size_m": [
+        0.5,
+        0.5,
+        1.8
+      ],
+      "generator": "props",
+      "budget_tris": 900,
+      "params": {
+        "type": "pole",
+        "stand_color": "light_grey",
+        "bag_color": "water"
+      }
+    },
+    {
+      "id": "vet_recovery_stretcher",
+      "category": "vet_equipment",
+      "name": "Canvas Animal Transport Stretcher",
+      "size_m": [
+        1.8,
+        0.7,
+        0.25
+      ],
+      "generator": "props",
+      "budget_tris": 700,
+      "params": {
+        "type": "stretcher",
+        "fabric_color": "navy",
+        "pole_color": "tan"
+      }
+    },
+    {
+      "id": "vet_heavy_transport_gurney",
+      "category": "vet_equipment",
+      "name": "Heavy Duty Mobile Animal Gurney",
+      "size_m": [
+        2.2,
+        1.0,
+        0.75
+      ],
+      "generator": "props",
+      "budget_tris": 1600,
+      "params": {
+        "type": "gurney",
+        "frame_color": "charcoal",
+        "pad_color": "forest"
+      }
+    },
+    {
+      "id": "vet_incubator_brooder",
+      "category": "vet_equipment",
+      "name": "Wildlife Care Incubator Unit",
+      "size_m": [
+        0.8,
+        0.6,
+        0.6
+      ],
+      "generator": "props",
+      "budget_tris": 1100,
+      "params": {
+        "type": "box",
+        "case_color": "cream",
+        "window_color": "sky"
+      }
+    },
+    {
+      "id": "vet_microscope_station",
+      "category": "vet_equipment",
+      "name": "Lab Diagnostic Microscope",
+      "size_m": [
+        0.35,
+        0.3,
+        0.45
+      ],
+      "generator": "props",
+      "budget_tris": 900,
+      "params": {
+        "type": "optical",
+        "body_color": "charcoal",
+        "lens_color": "yellow"
+      }
+    },
+    {
+      "id": "vet_centrifuge_unit",
+      "category": "vet_equipment",
+      "name": "Clinical Benchtop Centrifuge",
+      "size_m": [
+        0.4,
+        0.4,
+        0.3
+      ],
+      "generator": "props",
+      "budget_tris": 700,
+      "params": {
+        "type": "device",
+        "body_color": "white",
+        "lid_color": "teal"
+      }
+    },
+    {
+      "id": "vet_dart_rifle_case",
+      "category": "vet_equipment",
+      "name": "Dart Gun & Field Case",
+      "size_m": [
+        1.1,
+        0.35,
+        0.15
+      ],
+      "generator": "props",
+      "budget_tris": 850,
+      "params": {
+        "type": "case",
+        "case_color": "olive",
+        "trim_color": "black"
+      }
+    },
+    {
+      "id": "vet_first_aid_trunk",
+      "category": "vet_equipment",
+      "name": "Zoo Emergency Vet First Aid Trunk",
+      "size_m": [
+        0.7,
+        0.45,
+        0.4
+      ],
+      "generator": "props",
+      "budget_tris": 600,
+      "params": {
+        "type": "trunk",
+        "box_color": "red",
+        "cross_color": "white"
+      }
+    },
+    {
+      "id": "vet_medicine_cabinet",
+      "category": "vet_equipment",
+      "name": "Secure Wall Veterinary Medicine Cabinet",
+      "size_m": [
+        0.6,
+        0.25,
+        0.8
+      ],
+      "generator": "props",
+      "budget_tris": 750,
+      "params": {
+        "type": "cabinet",
+        "body_color": "white",
+        "glass_color": "sky"
+      }
+    },
+    {
+      "id": "vet_capture_net_pole",
+      "category": "vet_equipment",
+      "name": "Telescoping Animal Capture Net",
+      "size_m": [
+        0.6,
+        2.2,
+        0.6
+      ],
+      "generator": "props",
+      "budget_tris": 800,
+      "params": {
+        "type": "pole",
+        "net_color": "sand",
+        "handle_color": "rust"
+      }
+    },
+    {
+      "id": "vet_oxygen_cylinder_trolley",
+      "category": "vet_equipment",
+      "name": "Mobile Dual Oxygen Cylinder Trolley",
+      "size_m": [
+        0.45,
+        0.4,
+        1.1
+      ],
+      "generator": "props",
+      "budget_tris": 1000,
+      "params": {
+        "type": "trolley",
+        "tank_color": "leaf",
+        "frame_color": "black"
+      }
+    },
+    {
+      "id": "vet_hydrotherapy_tank",
+      "category": "vet_equipment",
+      "name": "Animal Rehabilitation Hydrotherapy Tub",
+      "size_m": [
+        2.4,
+        1.2,
+        0.9
+      ],
+      "generator": "props",
+      "budget_tris": 1700,
+      "params": {
+        "type": "tub",
+        "tub_color": "teal",
+        "water_color": "water"
       }
     }
   ]
