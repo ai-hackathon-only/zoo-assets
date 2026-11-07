@@ -226,11 +226,7 @@ def _build_gate(W, L, H, variant, aid, z):
 # --- BUILDINGS & SHELTERS ---
 
 def _build_building(W, L, H, variant, aid, z):
-    wall_col = "cream"
-    roof_col = "rust"
-    if variant == "reptile_house":
-        wall_col, roof_col = "tan", "forest"
-    elif variant == "aquarium_dome":
+    if variant == "aquarium_dome":
         z.cyl(min(W, L) * 0.48, H * 0.38, loc=(0, 0, H * 0.19), colour="sand", seg=12)
         z.ball(min(W, L) * 0.46, loc=(0, 0, H * 0.4), scale=(1, 1, 0.78), colour="teal", seg=12, rings=8)
         z.box((W * 0.32, L * 0.28, H * 0.38), loc=(0, -L * 0.43, H * 0.2), colour="sand")
@@ -242,11 +238,26 @@ def _build_building(W, L, H, variant, aid, z):
         z.box((W * 0.25, L * 0.22, H * 0.38), loc=(0, -L * 0.45, H * 0.2), colour="charcoal")
         return
     elif variant == "greenhouse":
-        z.box((W * 0.95, L * 0.95, H * 0.18), loc=(0, 0, H * 0.09), colour="sand")
-        z.box((W * 0.9, L * 0.9, H * 0.48), loc=(0, 0, H * 0.4), colour="teal")
-        z.box((W * 0.92, L * 0.92, H * 0.36), loc=(0, 0, H * 0.78), colour="teal", taper=0.3)
-        z.box((W * 0.94, 0.12, H * 0.8), loc=(0, 0, H * 0.45), colour="white")
-        z.box((0.12, L * 0.94, H * 0.8), loc=(0, 0, H * 0.45), colour="white")
+        # Butterfly hothouse: Victorian glasshouse with stone foundation, glass panels, clean white framing
+        base_h = H * 0.2
+        wall_h = H * 0.45
+        roof_h = H * 0.35
+        # Masonry foundation (widest base)
+        z.box((W * 0.96, L * 0.96, base_h), loc=(0, 0, base_h * 0.5), colour="sand")
+        # Glass wall structure (inset slightly from base)
+        z.box((W * 0.88, L * 0.88, wall_h), loc=(0, 0, base_h + wall_h * 0.5), colour="sky")
+        # White framing posts sunk into foundation to prevent coplanar z-fighting
+        for x in (-W * 0.445, W * 0.445):
+            for y in (-L * 0.445, L * 0.445):
+                z.box((0.16, 0.16, wall_h + 0.1), loc=(x, y, base_h - 0.05 + (wall_h + 0.1) * 0.5), colour="white")
+        # Glass pitched roof (inset from base, resting cleanly on walls)
+        roof_z = base_h + wall_h
+        z.box((W * 0.89, L * 0.89, roof_h), loc=(0, 0, roof_z + roof_h * 0.5), colour="sky", taper=0.35)
+        # White roof ridge cap (rests cleanly on top)
+        z.box((0.16, L * 0.91, 0.08), loc=(0, 0, roof_z + roof_h * 0.96), colour="white")
+        # Double entrance door standing proud from front wall
+        z.box((W * 0.24, 0.08, wall_h * 0.78), loc=(0, -L * 0.465, base_h + 0.03 + wall_h * 0.39), colour="white")
+        z.box((W * 0.18, 0.12, wall_h * 0.70), loc=(0, -L * 0.465, base_h + 0.03 + wall_h * 0.39), colour="teal")
         return
     elif variant == "rock_cave":
         z.box((W * 0.95, L * 0.9, H * 0.85), loc=(0, 0, H * 0.425), colour="charcoal", taper=0.85)
@@ -254,22 +265,112 @@ def _build_building(W, L, H, variant, aid, z):
         z.ball(W * 0.3, loc=(W * 0.3, -L * 0.3, H * 0.4), scale=(1, 1.2, 0.9), colour="grey", seg=7, rings=5)
         z.box((W * 0.45, L * 0.25, H * 0.52), loc=(0, -L * 0.39, 0.02 + H * 0.26), colour="black")
         return
-    elif variant in ("clinic", "first_aid"):
-        wall_col, roof_col = "white", "teal"
-    elif variant == "quarantine":
-        wall_col, roof_col = "light_grey", "charcoal"
-    elif variant == "hay_barn":
-        wall_col, roof_col = "rust", "dark_brown"
-    elif variant == "restroom":
-        wall_col, roof_col = "cream", "navy"
-    elif variant == "staff_quarters":
-        wall_col, roof_col = "tan", "forest"
 
+    # Specialized building variants
+    if variant == "hay_barn":
+        body_h = H * 0.65
+        roof_h = H * 0.35
+        # Red barn body
+        z.box((W * 0.9, L * 0.9, body_h), loc=(0, 0, body_h * 0.5), colour="rust")
+        # Pitch barn roof
+        z.box((W * 0.98, L * 0.98, roof_h), loc=(0, 0, body_h + roof_h * 0.5), colour="dark_brown", taper=0.3)
+        # Double barn door with white frame and X-cross braces
+        door_w, door_h = W * 0.4, body_h * 0.65
+        z.box((door_w, 0.08, door_h), loc=(0, -L * 0.455, 0.03 + door_h * 0.5), colour="dark_brown")
+        z.box((door_w * 0.9, 0.1, 0.08), loc=(0, -L * 0.455, 0.03 + door_h * 0.5), rot=(0, 30, 0), colour="white")
+        z.box((door_w * 0.9, 0.1, 0.08), loc=(0, -L * 0.455, 0.03 + door_h * 0.5), rot=(0, -30, 0), colour="white")
+        # Upper hayloft opening with visible hay bale
+        z.box((W * 0.25, 0.08, H * 0.18), loc=(0, -L * 0.455, body_h * 0.88), colour="dark_brown")
+        z.box((W * 0.18, 0.12, H * 0.12), loc=(0, -L * 0.45, body_h * 0.86), colour="yellow")
+        return
+
+    elif variant == "reptile_house":
+        body_h = H * 0.68
+        roof_h = H * 0.32
+        # Desert stone walls with dark jungle green roof
+        z.box((W * 0.9, L * 0.9, body_h), loc=(0, 0, body_h * 0.5), colour="tan")
+        z.box((W * 0.98, L * 0.98, roof_h), loc=(0, 0, body_h + roof_h * 0.5), colour="forest", taper=0.4)
+        # Entry door
+        door_w, door_h = W * 0.24, body_h * 0.7
+        z.box((door_w, 0.08, door_h), loc=(0, -L * 0.455, 0.03 + door_h * 0.5), colour="dark_brown")
+        # Prominent green canopy sign above entrance
+        z.box((W * 0.45, 0.25, 0.12), loc=(0, -L * 0.46, body_h * 0.82), colour="leaf")
+        # Large front terrarium viewing windows with sky glass
+        z.box((W * 0.22, 0.06, body_h * 0.42), loc=(-W * 0.28, -L * 0.455, body_h * 0.5), colour="sky")
+        z.box((W * 0.22, 0.06, body_h * 0.42), loc=(W * 0.28, -L * 0.455, body_h * 0.5), colour="sky")
+        return
+
+    elif variant == "restroom":
+        body_h = H * 0.72
+        roof_h = H * 0.28
+        # Cream clean tile building with navy hip roof
+        z.box((W * 0.9, L * 0.9, body_h), loc=(0, 0, body_h * 0.5), colour="cream")
+        z.box((W * 0.98, L * 0.98, roof_h), loc=(0, 0, body_h + roof_h * 0.5), colour="navy", taper=0.35)
+        # Dual doors (men / women) side by side
+        door_w, door_h = W * 0.22, body_h * 0.68
+        z.box((door_w, 0.08, door_h), loc=(-W * 0.22, -L * 0.455, 0.03 + door_h * 0.5), colour="navy")
+        z.box((door_w, 0.08, door_h), loc=(W * 0.22, -L * 0.455, 0.03 + door_h * 0.5), colour="navy")
+        # Restroom sign markers above doors
+        z.box((door_w * 0.6, 0.1, 0.12), loc=(-W * 0.22, -L * 0.455, body_h * 0.85), colour="sky")
+        z.box((door_w * 0.6, 0.1, 0.12), loc=(W * 0.22, -L * 0.455, body_h * 0.85), colour="pink")
+        # Rooftop ventilation pipe
+        z.cyl(0.12, 0.45, loc=(W * 0.28, L * 0.2, H + 0.15), colour="charcoal", seg=6)
+        return
+
+    elif variant == "shed":
+        # Keeper tool shed: rustic timber siding, single door with latch, side lean-to roof
+        body_h = H * 0.72
+        roof_h = H * 0.28
+        z.box((W * 0.9, L * 0.9, body_h), loc=(0, 0, body_h * 0.5), colour="brown")
+        # Mono-pitch slanted shed roof
+        z.box((W * 0.98, L * 1.02, 0.14), loc=(0, 0, body_h + 0.1), rot=(-12, 0, 0), colour="dark_brown")
+        door_w, door_h = W * 0.35, body_h * 0.75
+        z.box((door_w, 0.08, door_h), loc=(0, -L * 0.455, 0.03 + door_h * 0.5), colour="dark_brown")
+        z.box((0.08, 0.1, 0.12), loc=(door_w * 0.3, -L * 0.46, body_h * 0.45), colour="charcoal")
+        # Side wall tool rack / broom handle
+        z.cyl(0.04, body_h * 0.8, loc=(W * 0.465, 0, body_h * 0.5), rot=(0, 10, 0), colour="tan", seg=6)
+        return
+
+    elif variant == "quarantine":
+        # Quarantine bay: reinforced concrete, security barred windows, heavy gate with hazard sign
+        body_h = H * 0.72
+        roof_h = H * 0.28
+        z.box((W * 0.9, L * 0.9, body_h), loc=(0, 0, body_h * 0.5), colour="light_grey")
+        z.box((W * 0.98, L * 0.98, roof_h), loc=(0, 0, body_h + roof_h * 0.5), colour="charcoal", taper=0.5)
+        # Heavy steel roll-up door
+        door_w, door_h = W * 0.48, body_h * 0.72
+        z.box((door_w, 0.08, door_h), loc=(0, -L * 0.455, 0.03 + door_h * 0.5), colour="grey")
+        # Yellow caution banner stripe above door
+        z.box((door_w * 1.1, 0.1, 0.15), loc=(0, -L * 0.455, body_h * 0.84), colour="yellow")
+        # Security slit windows
+        z.box((W * 0.15, 0.06, 0.15), loc=(-W * 0.32, -L * 0.455, body_h * 0.65), colour="charcoal")
+        z.box((W * 0.15, 0.06, 0.15), loc=(W * 0.32, -L * 0.455, body_h * 0.65), colour="charcoal")
+        return
+
+    elif variant == "staff_quarters":
+        # Staff breakroom: warm modern clubhouse with covered entry porch and roof vent
+        body_h = H * 0.72
+        roof_h = H * 0.28
+        z.box((W * 0.9, L * 0.9, body_h), loc=(0, 0, body_h * 0.5), colour="tan")
+        z.box((W * 0.98, L * 0.98, roof_h), loc=(0, 0, body_h + roof_h * 0.5), colour="forest", taper=0.35)
+        # Entry door
+        door_w, door_h = W * 0.25, body_h * 0.7
+        z.box((door_w, 0.08, door_h), loc=(0, -L * 0.455, 0.03 + door_h * 0.5), colour="dark_brown")
+        # Covered entry porch awning
+        z.box((door_w * 1.4, 0.45, 0.08), loc=(0, -L * 0.52, body_h * 0.8), colour="dark_brown")
+        z.cyl(0.04, body_h * 0.78, loc=(-door_w * 0.65, -L * 0.55, body_h * 0.39), colour="dark_brown", seg=6)
+        z.cyl(0.04, body_h * 0.78, loc=(door_w * 0.65, -L * 0.55, body_h * 0.39), colour="dark_brown", seg=6)
+        # Windows
+        z.box((W * 0.2, 0.06, body_h * 0.35), loc=(-W * 0.28, -L * 0.455, body_h * 0.55), colour="sky")
+        z.box((W * 0.2, 0.06, body_h * 0.35), loc=(W * 0.28, -L * 0.455, body_h * 0.55), colour="sky")
+        return
+
+    # Fallback clinic / first aid / generic
+    wall_col, roof_col = "white", "teal"
     body_h = H * 0.7
     roof_h = H * 0.3
     z.box((W * 0.9, L * 0.9, body_h), loc=(0, 0, body_h * 0.5), colour=wall_col)
     z.box((W * 0.98, L * 0.98, roof_h), loc=(0, 0, body_h + roof_h * 0.5), colour=roof_col, taper=0.4)
-    # Door starts 3cm above ground to prevent coplanar floor overlap
     door_w, door_h = W * 0.22, body_h * 0.72
     z.box((door_w, 0.08, door_h), loc=(0, -L * 0.455, 0.03 + door_h * 0.5), colour="dark_brown")
     z.box((W * 0.2, 0.06, body_h * 0.35), loc=(-W * 0.28, -L * 0.455, body_h * 0.55), colour="sky")
