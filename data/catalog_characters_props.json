@@ -1,6 +1,6 @@
 {
   "schema": "id, category, name, size_m [width x, length y, height z] metres (Blender Z up, front faces +Y), generator, budget_tris, params.",
-  "count": 140,
+  "count": 125,
   "assets": [
     {
       "id": "keeper_safari_lead_01",
@@ -1818,7 +1818,7 @@
       }
     },
     {
-      "id": "vet_exam_table_01",
+      "id": "vet_exam_table",
       "category": "vet_equipment",
       "name": "Veterinary Examination Table",
       "size_m": [
@@ -1836,7 +1836,7 @@
       }
     },
     {
-      "id": "vet_mobile_ultrasound_02",
+      "id": "vet_mobile_ultrasound",
       "category": "vet_equipment",
       "name": "Mobile Ultrasound Cart",
       "size_m": [
@@ -1854,7 +1854,7 @@
       }
     },
     {
-      "id": "vet_digital_scale_large_03",
+      "id": "vet_digital_scale_large",
       "category": "vet_equipment",
       "name": "Walk-on Heavy Duty Animal Scale",
       "size_m": [
@@ -1871,7 +1871,7 @@
       }
     },
     {
-      "id": "vet_digital_scale_small_04",
+      "id": "vet_digital_scale_small",
       "category": "vet_equipment",
       "name": "Tabletop Small Animal Scale",
       "size_m": [
@@ -1888,7 +1888,7 @@
       }
     },
     {
-      "id": "vet_surgical_light_05",
+      "id": "vet_surgical_light",
       "category": "vet_equipment",
       "name": "Overhead Vet Surgical Lamp",
       "size_m": [
@@ -1905,7 +1905,7 @@
       }
     },
     {
-      "id": "vet_anesthesia_machine_06",
+      "id": "vet_anesthesia_machine",
       "category": "vet_equipment",
       "name": "Veterinary Anesthesia Station",
       "size_m": [
@@ -1922,7 +1922,7 @@
       }
     },
     {
-      "id": "vet_xray_portable_07",
+      "id": "vet_xray_portable",
       "category": "vet_equipment",
       "name": "Portable Field X-Ray Unit",
       "size_m": [
@@ -1939,7 +1939,7 @@
       }
     },
     {
-      "id": "vet_instrument_tray_08",
+      "id": "vet_instrument_tray",
       "category": "vet_equipment",
       "name": "Surgical Instrument Mayo Tray",
       "size_m": [
@@ -1956,7 +1956,7 @@
       }
     },
     {
-      "id": "vet_iv_drip_stand_09",
+      "id": "vet_iv_drip_stand",
       "category": "vet_equipment",
       "name": "Wheeled IV Drip Stand",
       "size_m": [
@@ -1973,7 +1973,7 @@
       }
     },
     {
-      "id": "vet_recovery_stretcher_10",
+      "id": "vet_recovery_stretcher",
       "category": "vet_equipment",
       "name": "Canvas Animal Transport Stretcher",
       "size_m": [
@@ -1990,7 +1990,7 @@
       }
     },
     {
-      "id": "vet_heavy_transport_gurney_11",
+      "id": "vet_heavy_transport_gurney",
       "category": "vet_equipment",
       "name": "Heavy Duty Mobile Animal Gurney",
       "size_m": [
@@ -2007,7 +2007,7 @@
       }
     },
     {
-      "id": "vet_incubator_brooder_12",
+      "id": "vet_incubator_brooder",
       "category": "vet_equipment",
       "name": "Wildlife Care Incubator Unit",
       "size_m": [
@@ -2024,7 +2024,7 @@
       }
     },
     {
-      "id": "vet_microscope_station_13",
+      "id": "vet_microscope_station",
       "category": "vet_equipment",
       "name": "Lab Diagnostic Microscope",
       "size_m": [
@@ -2041,7 +2041,7 @@
       }
     },
     {
-      "id": "vet_centrifuge_unit_14",
+      "id": "vet_centrifuge_unit",
       "category": "vet_equipment",
       "name": "Clinical Benchtop Centrifuge",
       "size_m": [
@@ -2058,7 +2058,7 @@
       }
     },
     {
-      "id": "vet_dart_rifle_case_15",
+      "id": "vet_dart_rifle_case",
       "category": "vet_equipment",
       "name": "Dart Gun & Field Case",
       "size_m": [
@@ -2075,7 +2075,7 @@
       }
     },
     {
-      "id": "vet_first_aid_trunk_16",
+      "id": "vet_first_aid_trunk",
       "category": "vet_equipment",
       "name": "Zoo Emergency Vet First Aid Trunk",
       "size_m": [
@@ -2092,7 +2092,7 @@
       }
     },
     {
-      "id": "vet_medicine_cabinet_17",
+      "id": "vet_medicine_cabinet",
       "category": "vet_equipment",
       "name": "Secure Wall Veterinary Medicine Cabinet",
       "size_m": [
@@ -2109,7 +2109,7 @@
       }
     },
     {
-      "id": "vet_capture_net_pole_18",
+      "id": "vet_capture_net_pole",
       "category": "vet_equipment",
       "name": "Telescoping Animal Capture Net",
       "size_m": [
@@ -2126,7 +2126,7 @@
       }
     },
     {
-      "id": "vet_oxygen_cylinder_trolley_19",
+      "id": "vet_oxygen_cylinder_trolley",
       "category": "vet_equipment",
       "name": "Mobile Dual Oxygen Cylinder Trolley",
       "size_m": [
@@ -2143,7 +2143,7 @@
       }
     },
     {
-      "id": "vet_hydrotherapy_tank_20",
+      "id": "vet_hydrotherapy_tank",
       "category": "vet_equipment",
       "name": "Animal Rehabilitation Hydrotherapy Tub",
       "size_m": [
@@ -2157,263 +2157,6 @@
         "type": "tub",
         "tub_color": "teal",
         "water_color": "water"
-      }
-    },
-    {
-      "id": "vehicle_safari_jeep_01",
-      "category": "vehicles",
-      "name": "Zoo Tour Safari Open Jeep",
-      "size_m": [
-        1.9,
-        4.2,
-        2.1
-      ],
-      "generator": "props",
-      "budget_tris": 2000,
-      "params": {
-        "type": "jeep",
-        "body_color": "sand",
-        "trim_color": "dark_brown",
-        "seats": 6
-      }
-    },
-    {
-      "id": "vehicle_feed_tractor_02",
-      "category": "vehicles",
-      "name": "Utility Farm Feed Tractor",
-      "size_m": [
-        1.8,
-        3.2,
-        2.0
-      ],
-      "generator": "props",
-      "budget_tris": 2000,
-      "params": {
-        "type": "tractor",
-        "body_color": "leaf",
-        "wheel_color": "yellow"
-      }
-    },
-    {
-      "id": "vehicle_electric_cart_03",
-      "category": "vehicles",
-      "name": "Electric Keeper Utility Cart",
-      "size_m": [
-        1.3,
-        2.6,
-        1.7
-      ],
-      "generator": "props",
-      "budget_tris": 1800,
-      "params": {
-        "type": "cart",
-        "body_color": "white",
-        "roof_color": "teal"
-      }
-    },
-    {
-      "id": "vehicle_vet_ambulance_04",
-      "category": "vehicles",
-      "name": "Zoo Animal Rescue Ambulance Buggy",
-      "size_m": [
-        1.6,
-        3.4,
-        2.0
-      ],
-      "generator": "props",
-      "budget_tris": 2000,
-      "params": {
-        "type": "ambulance",
-        "body_color": "white",
-        "cross_color": "red",
-        "light_color": "sky"
-      }
-    },
-    {
-      "id": "vehicle_waste_sweeper_05",
-      "category": "vehicles",
-      "name": "Compact Path Sweeper Vehicle",
-      "size_m": [
-        1.2,
-        2.4,
-        1.8
-      ],
-      "generator": "props",
-      "budget_tris": 1900,
-      "params": {
-        "type": "sweeper",
-        "body_color": "orange",
-        "brush_color": "charcoal"
-      }
-    },
-    {
-      "id": "vehicle_mini_train_engine_06",
-      "category": "vehicles",
-      "name": "Zoo Express Mini Train Locomotive",
-      "size_m": [
-        1.4,
-        3.8,
-        2.2
-      ],
-      "generator": "props",
-      "budget_tris": 2000,
-      "params": {
-        "type": "locomotive",
-        "body_color": "navy",
-        "trim_color": "yellow"
-      }
-    },
-    {
-      "id": "vehicle_mini_train_passenger_07",
-      "category": "vehicles",
-      "name": "Zoo Express Open Passenger Carriage",
-      "size_m": [
-        1.4,
-        3.5,
-        1.9
-      ],
-      "generator": "props",
-      "budget_tris": 1800,
-      "params": {
-        "type": "carriage",
-        "body_color": "navy",
-        "roof_color": "cream"
-      }
-    },
-    {
-      "id": "vehicle_visitor_tram_08",
-      "category": "vehicles",
-      "name": "Electric Guided Visitor Tram",
-      "size_m": [
-        1.8,
-        5.0,
-        2.2
-      ],
-      "generator": "props",
-      "budget_tris": 2000,
-      "params": {
-        "type": "tram",
-        "body_color": "water",
-        "roof_color": "white"
-      }
-    },
-    {
-      "id": "vehicle_heavy_wheelbarrow_09",
-      "category": "vehicles",
-      "name": "Keeper Two-Wheel Heavy Duty Barrow",
-      "size_m": [
-        0.8,
-        1.5,
-        0.75
-      ],
-      "generator": "props",
-      "budget_tris": 800,
-      "params": {
-        "type": "wheelbarrow",
-        "tub_color": "forest",
-        "wheel_color": "black"
-      }
-    },
-    {
-      "id": "vehicle_keeper_bicycle_10",
-      "category": "vehicles",
-      "name": "Staff Cargo Delivery Bicycle",
-      "size_m": [
-        0.6,
-        1.8,
-        1.05
-      ],
-      "generator": "props",
-      "budget_tris": 1200,
-      "params": {
-        "type": "bike",
-        "frame_color": "rust",
-        "basket_color": "tan"
-      }
-    },
-    {
-      "id": "vehicle_electric_patrol_scooter_11",
-      "category": "vehicles",
-      "name": "Security Electric Stand-up Scooter",
-      "size_m": [
-        0.55,
-        1.2,
-        1.25
-      ],
-      "generator": "props",
-      "budget_tris": 900,
-      "params": {
-        "type": "scooter",
-        "body_color": "charcoal",
-        "accent_color": "orange"
-      }
-    },
-    {
-      "id": "vehicle_flatbed_hay_trailer_12",
-      "category": "vehicles",
-      "name": "Tractor Hitch Flatbed Hay Trailer",
-      "size_m": [
-        1.8,
-        3.6,
-        1.1
-      ],
-      "generator": "props",
-      "budget_tris": 1400,
-      "params": {
-        "type": "trailer",
-        "wood_color": "brown",
-        "frame_color": "grey"
-      }
-    },
-    {
-      "id": "vehicle_lawn_care_mower_13",
-      "category": "vehicles",
-      "name": "Ride-on Turf Mower",
-      "size_m": [
-        1.3,
-        2.1,
-        1.4
-      ],
-      "generator": "props",
-      "budget_tris": 1700,
-      "params": {
-        "type": "mower",
-        "deck_color": "red",
-        "seat_color": "black"
-      }
-    },
-    {
-      "id": "vehicle_water_tank_buggy_14",
-      "category": "vehicles",
-      "name": "Mobile Habitat Water Tank Trailer",
-      "size_m": [
-        1.6,
-        3.0,
-        1.6
-      ],
-      "generator": "props",
-      "budget_tris": 1600,
-      "params": {
-        "type": "tanker",
-        "tank_color": "teal",
-        "chassis_color": "grey"
-      }
-    },
-    {
-      "id": "vehicle_mobile_vet_clinic_van_15",
-      "category": "vehicles",
-      "name": "Mobile Zoological Clinic Van",
-      "size_m": [
-        2.0,
-        4.8,
-        2.4
-      ],
-      "generator": "props",
-      "budget_tris": 2000,
-      "params": {
-        "type": "van",
-        "body_color": "cream",
-        "stripe_color": "leaf"
       }
     }
   ]
