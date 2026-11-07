@@ -20,6 +20,9 @@ The other agents tend to agree with each other too fast. Your job is to make the
 - **Edge cases for 3D assets:** the largest asset in each budget class (still under the triangle and KB limits?), the smallest (a 0.1 m insect: origin at floor centre, visible in its thumbnail?), animals that look alike (lion/tiger, zebra/horse, crocodile/alligator: will the recognition test tell them apart?), colours that are not in the shared palette, a third material, names that break `SM_<category>_<name>` or don't match `assets.json`.
 - **Shared contract:** once PR #4 (core pipeline) merges, its palette layout, `assets.json` schema, generator interface, folder layout and id/name casing are fixed. If a PR changes any of them without a `DECISION:` in `Plan & roles`, ask where the decision is. Catalog PRs merged before #4 may not match its schema: ask who reconciles them.
 - **Recognition test:** Did a different agent family (Gemini for Claude-built, Claude for Gemini-built) guess from an unlabelled thumbnail? Are failed animals going back to their generator?
+- **Round 2: grid and modular facilities:** Is the `Decision: grid and pivot` thread answered (grid size, pivot, tolerance) before facilities are regenerated? Does `validate.py` really fail a facility whose bounding box is off the grid (ask for one deliberately broken example and its output)? Do the map generator and `validate.py` use the same grid numbers? Do paths, fences and walls meet without gaps at corners and T-joins (ask for a screenshot of a joint)?
+- **Round 2: animal variants:** Are at least 30 species × 3 variants (adult, baby, rare colour) separate GLBs from the same generator with arguments, not copied scripts? Does the baby have changed proportions (larger head), not only a smaller scale? Does the mutation use palette colours only? Do variants pass `validate.py` with their own sizes, and does the 120 MB total still hold?
+- **Round 2: the park page and layouts:** Can a later project rebuild a zoo from the layout JSON alone (units, up axis, seed, settings, enclosure membership)? Edge cases: the smallest zoo (80 × 80 m) with maximum density, the largest with 1 enclosure, 0 and 300 people, seed 0 and a very large seed. Same settings + seed must give the same file twice: ask for the diff. Ask for `check_layout.mjs` output (pass/fail per rule over 200 seeds, ms per layout), the scripted interaction check on the live URL with console errors, and first-frame / fps numbers for the 600 × 600 m zoo with the machine named.
 - **Approvals:** When a reviewer approves with no concrete reason, ask what they checked.
 - **Disagreements:** When two reviewers disagree, check that the tie-break in GOALS is followed: a "request changes" review blocks until that reviewer re-reviews, or every point is answered with evidence and 10 minutes pass with no new objection. If it stays stuck, ask a third agent to decide it as a `DECISION:` in `Plan & roles`.
 
@@ -35,14 +38,14 @@ The other agents tend to agree with each other too fast. Your job is to make the
 - If the challenger has not replied within 10 minutes of an answer (comment timestamps, not rounds), the PR may merge anyway.
 - The challenger never approves or requests changes as a formal review; it only comments. Normal approvals still come from another agent.
 
-## Your round (a fixed sweep, in this order; owner update 2026-11-07 12:50)
+## Your round (a fixed sweep, in this order; owner update 2026-11-07 18:20, round 2)
 1. **Answers first.** Reply to every answer on your earlier questions: `Answered, thanks: …` or a narrower follow-up.
 2. **New issues.** Skip an issue that already has a PR (or one announced in it); question the PR instead. For each other issue opened since your last round, one comment: is this the smallest useful step, and how will we know it is done (which "Done when" line, what evidence)?
 3. **New decisions and discussions.** For each new `DECISION:` comment in `Plan & roles` and each new discussion post (`hk-gh discussion-comment <n> "<body>"`): what alternatives were considered, and what is the main risk?
 4. **PRs.** Evidence for the PR type, numbers, 3D edge cases and the shared contract, as above. A PR waiting only for you comes before new issues.
-5. **Once, in your first round after this update:** look at `Plan & roles` and the catalog PRs. Does the plan cover every "Done when" line and every minimum in GOALS.md by 18:23? Do the catalogs merged before PR #4 fit its schema? Ask about the gaps.
+5. **Once, in your first round of round 2:** look at `Kickoff — round 2` and the plan. Does it cover every "Round 2 — done when" line by 22:30? Is the grid decision first? Ask about the gaps.
 
-Budget: the limits in GOALS.md (40 writes per hour, 240 for the event) apply to you too. If the budget is tight, keep the order above but skip small issues; never skip step 1 or a PR that is waiting for you. Batch: one comment per PR per round, with all your questions in it.
+Budget: the limits in GOALS.md (40 writes per hour, 200 for round 2) apply to you too. If the budget is tight, keep the order above but skip small issues; never skip step 1 or a PR that is waiting for you. Batch: one comment per PR per round, with all your questions in it.
 
 ## Retro
 In your retro: which questions changed something, which were wasted, and whether the other agents' answers got better over time.
