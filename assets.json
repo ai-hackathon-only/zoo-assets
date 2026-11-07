@@ -3055,8 +3055,8 @@
    "category": "facilities",
    "name": "Wooden rail fence (straight)",
    "size_m": [
-    3.0,
-    0.25,
+    2.0,
+    0.5,
     1.2
    ],
    "generator": "facilities",
@@ -3066,7 +3066,7 @@
     "variant": "straight"
    },
    "tris": 180,
-   "bytes": 14560,
+   "bytes": 14496,
    "glb": "assets/facilities/fence_wood_rail_straight.glb",
    "thumb": "assets/facilities/fence_wood_rail_straight.png"
   },
@@ -3075,8 +3075,8 @@
    "category": "facilities",
    "name": "Wooden rail fence (corner)",
    "size_m": [
-    1.5,
-    1.5,
+    2.0,
+    2.0,
     1.2
    ],
    "generator": "facilities",
@@ -3086,7 +3086,7 @@
     "variant": "corner"
    },
    "tris": 96,
-   "bytes": 8668,
+   "bytes": 8600,
    "glb": "assets/facilities/fence_wood_rail_corner.glb",
    "thumb": "assets/facilities/fence_wood_rail_corner.png"
   },
@@ -3095,8 +3095,8 @@
    "category": "facilities",
    "name": "Wooden fence post",
    "size_m": [
-    0.25,
-    0.25,
+    0.5,
+    0.5,
     1.3
    ],
    "generator": "facilities",
@@ -3106,7 +3106,7 @@
     "variant": "post"
    },
    "tris": 24,
-   "bytes": 3612,
+   "bytes": 3552,
    "glb": "assets/facilities/fence_wood_post.glb",
    "thumb": "assets/facilities/fence_wood_post.png"
   },
@@ -3115,8 +3115,8 @@
    "category": "facilities",
    "name": "Chainlink fence panel",
    "size_m": [
-    2.5,
-    0.15,
+    2.0,
+    0.5,
     2.0
    ],
    "generator": "facilities",
@@ -3126,7 +3126,7 @@
     "variant": "panel"
    },
    "tris": 100,
-   "bytes": 8692,
+   "bytes": 8612,
    "glb": "assets/facilities/fence_chainlink_panel.glb",
    "thumb": "assets/facilities/fence_chainlink_panel.png"
   },
@@ -3135,8 +3135,8 @@
    "category": "facilities",
    "name": "Chainlink fence post",
    "size_m": [
-    0.2,
-    0.2,
+    0.5,
+    0.5,
     2.2
    ],
    "generator": "facilities",
@@ -3146,7 +3146,7 @@
     "variant": "post"
    },
    "tris": 120,
-   "bytes": 10604,
+   "bytes": 10544,
    "glb": "assets/facilities/fence_chainlink_post.glb",
    "thumb": "assets/facilities/fence_chainlink_post.png"
   },
@@ -3156,7 +3156,7 @@
    "name": "Glass viewing barrier panel",
    "size_m": [
     2.0,
-    0.3,
+    0.5,
     1.6
    ],
    "generator": "facilities",
@@ -3166,7 +3166,7 @@
     "variant": "panel"
    },
    "tris": 60,
-   "bytes": 6120,
+   "bytes": 6088,
    "glb": "assets/facilities/wall_glass_viewing_panel.glb",
    "thumb": "assets/facilities/wall_glass_viewing_panel.png"
   },
@@ -3175,8 +3175,8 @@
    "category": "facilities",
    "name": "Curved glass viewing barrier",
    "size_m": [
-    2.5,
-    1.0,
+    2.0,
+    2.0,
     1.6
    ],
    "generator": "facilities",
@@ -3186,7 +3186,7 @@
     "variant": "curved"
    },
    "tris": 84,
-   "bytes": 7776,
+   "bytes": 7764,
    "glb": "assets/facilities/wall_glass_viewing_curved.glb",
    "thumb": "assets/facilities/wall_glass_viewing_curved.png"
   },
@@ -3195,7 +3195,7 @@
    "category": "facilities",
    "name": "Low stone barrier wall",
    "size_m": [
-    3.0,
+    2.0,
     0.5,
     0.8
    ],
@@ -3206,7 +3206,7 @@
     "variant": "low"
    },
    "tris": 48,
-   "bytes": 5308,
+   "bytes": 5244,
    "glb": "assets/facilities/wall_stone_perimeter_low.glb",
    "thumb": "assets/facilities/wall_stone_perimeter_low.png"
   },
@@ -3215,8 +3215,8 @@
    "category": "facilities",
    "name": "Tall stone perimeter wall",
    "size_m": [
-    3.0,
-    0.6,
+    2.0,
+    0.5,
     2.5
    ],
    "generator": "facilities",
@@ -3226,7 +3226,7 @@
     "variant": "tall"
    },
    "tris": 48,
-   "bytes": 5296,
+   "bytes": 5232,
    "glb": "assets/facilities/wall_stone_perimeter_tall.glb",
    "thumb": "assets/facilities/wall_stone_perimeter_tall.png"
   },
@@ -3236,7 +3236,7 @@
    "name": "Bamboo enclosure fence",
    "size_m": [
     2.0,
-    0.15,
+    0.5,
     1.8
    ],
    "generator": "facilities",
@@ -3246,7 +3246,7 @@
     "variant": "panel"
    },
    "tris": 316,
-   "bytes": 22276,
+   "bytes": 22212,
    "glb": "assets/facilities/fence_bamboo_panel.glb",
    "thumb": "assets/facilities/fence_bamboo_panel.png"
   },
@@ -3255,8 +3255,8 @@
    "category": "facilities",
    "name": "Rope boundary stanchions",
    "size_m": [
-    2.5,
-    0.3,
+    2.0,
+    0.5,
     0.9
    ],
    "generator": "facilities",
@@ -3266,7 +3266,7 @@
     "variant": "stanchion"
    },
    "tris": 324,
-   "bytes": 25400,
+   "bytes": 25336,
    "glb": "assets/facilities/fence_rope_stanchions.glb",
    "thumb": "assets/facilities/fence_rope_stanchions.png"
   },
@@ -3286,7 +3286,7 @@
     "variant": "trench"
    },
    "tris": 48,
-   "bytes": 5296,
+   "bytes": 5216,
    "glb": "assets/facilities/barrier_moat_trench.glb",
    "thumb": "assets/facilities/barrier_moat_trench.png"
   },
@@ -3296,7 +3296,7 @@
    "name": "Grand zoo entrance archway",
    "size_m": [
     6.0,
-    1.2,
+    2.0,
     4.5
    ],
    "generator": "facilities",
@@ -3306,7 +3306,7 @@
     "variant": "arch"
    },
    "tris": 96,
-   "bytes": 8656,
+   "bytes": 8588,
    "glb": "assets/facilities/gate_entrance_arch_grand.glb",
    "thumb": "assets/facilities/gate_entrance_arch_grand.png"
   },
@@ -3316,7 +3316,7 @@
    "name": "Timber paddock double gate",
    "size_m": [
     4.0,
-    0.25,
+    0.5,
     1.8
    ],
    "generator": "facilities",
@@ -3326,7 +3326,7 @@
     "variant": "paddock_double"
    },
    "tris": 72,
-   "bytes": 6992,
+   "bytes": 6932,
    "glb": "assets/facilities/gate_paddock_double_wood.glb",
    "thumb": "assets/facilities/gate_paddock_double_wood.png"
   },
@@ -3335,8 +3335,8 @@
    "category": "facilities",
    "name": "Tripod security turnstile",
    "size_m": [
-    0.8,
-    0.8,
+    2.0,
+    0.5,
     1.1
    ],
    "generator": "facilities",
@@ -3346,7 +3346,7 @@
     "variant": "turnstile"
    },
    "tris": 76,
-   "bytes": 7012,
+   "bytes": 6948,
    "glb": "assets/facilities/gate_visitor_turnstile.glb",
    "thumb": "assets/facilities/gate_visitor_turnstile.png"
   },
@@ -3355,8 +3355,8 @@
    "category": "facilities",
    "name": "Automated ticket barrier gate",
    "size_m": [
-    1.2,
-    0.4,
+    2.0,
+    0.5,
     1.1
    ],
    "generator": "facilities",
@@ -3366,7 +3366,7 @@
     "variant": "ticket_barrier"
    },
    "tris": 60,
-   "bytes": 6144,
+   "bytes": 6080,
    "glb": "assets/facilities/gate_ticket_barrier.glb",
    "thumb": "assets/facilities/gate_ticket_barrier.png"
   },
@@ -3375,8 +3375,8 @@
    "category": "facilities",
    "name": "Keeper metal sliding gate",
    "size_m": [
-    3.5,
-    0.2,
+    4.0,
+    0.5,
     2.2
    ],
    "generator": "facilities",
@@ -3386,7 +3386,7 @@
     "variant": "keeper_slide"
    },
    "tris": 60,
-   "bytes": 6148,
+   "bytes": 6088,
    "glb": "assets/facilities/gate_keeper_metal_slide.glb",
    "thumb": "assets/facilities/gate_keeper_metal_slide.png"
   },
@@ -3395,8 +3395,8 @@
    "category": "facilities",
    "name": "Single wooden wicket gate",
    "size_m": [
-    1.2,
-    0.15,
+    2.0,
+    0.5,
     1.2
    ],
    "generator": "facilities",
@@ -3406,7 +3406,7 @@
     "variant": "wicket"
    },
    "tris": 48,
-   "bytes": 5308,
+   "bytes": 5244,
    "glb": "assets/facilities/gate_pedestrian_wicket.glb",
    "thumb": "assets/facilities/gate_pedestrian_wicket.png"
   },
@@ -3415,7 +3415,7 @@
    "category": "facilities",
    "name": "Brick animal night den",
    "size_m": [
-    5.0,
+    6.0,
     4.0,
     3.0
    ],
@@ -3426,7 +3426,7 @@
     "variant": "night_brick"
    },
    "tris": 36,
-   "bytes": 4468,
+   "bytes": 4384,
    "glb": "assets/facilities/shelter_animal_night_brick.glb",
    "thumb": "assets/facilities/shelter_animal_night_brick.png"
   },
@@ -3435,8 +3435,8 @@
    "category": "facilities",
    "name": "Wooden paddock lean-to shelter",
    "size_m": [
-    4.5,
-    3.5,
+    4.0,
+    4.0,
     2.8
    ],
    "generator": "facilities",
@@ -3446,7 +3446,7 @@
     "variant": "timber_lean"
    },
    "tris": 96,
-   "bytes": 8676,
+   "bytes": 8608,
    "glb": "assets/facilities/shelter_animal_timber_lean.glb",
    "thumb": "assets/facilities/shelter_animal_timber_lean.png"
   },
@@ -3455,8 +3455,8 @@
    "category": "facilities",
    "name": "Safari viewing gazebo pavilion",
    "size_m": [
-    5.0,
-    5.0,
+    6.0,
+    6.0,
     3.8
    ],
    "generator": "facilities",
@@ -3466,7 +3466,7 @@
     "variant": "safari"
    },
    "tris": 96,
-   "bytes": 8616,
+   "bytes": 8600,
    "glb": "assets/facilities/pavilion_viewing_safari.glb",
    "thumb": "assets/facilities/pavilion_viewing_safari.png"
   },
@@ -3476,7 +3476,7 @@
    "name": "Elevated canopy walkway",
    "size_m": [
     4.0,
-    2.2,
+    2.0,
     3.5
    ],
    "generator": "facilities",
@@ -3486,7 +3486,7 @@
     "variant": "straight"
    },
    "tris": 108,
-   "bytes": 9512,
+   "bytes": 9428,
    "glb": "assets/facilities/canopy_walkway_straight.glb",
    "thumb": "assets/facilities/canopy_walkway_straight.png"
   },
@@ -3496,7 +3496,7 @@
    "name": "Canopy walkway access ramp",
    "size_m": [
     6.0,
-    2.2,
+    2.0,
     2.5
    ],
    "generator": "facilities",
@@ -3506,7 +3506,7 @@
     "variant": "ramp"
    },
    "tris": 84,
-   "bytes": 7820,
+   "bytes": 7740,
    "glb": "assets/facilities/canopy_walkway_ramp.glb",
    "thumb": "assets/facilities/canopy_walkway_ramp.png"
   },
@@ -3526,7 +3526,7 @@
     "variant": "reptile_house"
    },
    "tris": 72,
-   "bytes": 6972,
+   "bytes": 6904,
    "glb": "assets/facilities/building_reptile_house.glb",
    "thumb": "assets/facilities/building_reptile_house.png"
   },
@@ -3535,8 +3535,8 @@
    "category": "facilities",
    "name": "Aquarium dome pavilion",
    "size_m": [
-    7.0,
-    7.0,
+    8.0,
+    8.0,
     4.8
    ],
    "generator": "facilities",
@@ -3546,7 +3546,7 @@
     "variant": "aquarium_dome"
    },
    "tris": 236,
-   "bytes": 18724,
+   "bytes": 18660,
    "glb": "assets/facilities/building_aquarium_dome.glb",
    "thumb": "assets/facilities/building_aquarium_dome.png"
   },
@@ -3566,7 +3566,7 @@
     "variant": "aviary"
    },
    "tris": 224,
-   "bytes": 17896,
+   "bytes": 17816,
    "glb": "assets/facilities/building_aviary_walkthrough.glb",
    "thumb": "assets/facilities/building_aviary_walkthrough.png"
   },
@@ -3575,8 +3575,8 @@
    "category": "facilities",
    "name": "Keeper tool and equipment shed",
    "size_m": [
-    3.5,
-    3.0,
+    4.0,
+    4.0,
     2.6
    ],
    "generator": "facilities",
@@ -3586,7 +3586,7 @@
     "variant": "shed"
    },
    "tris": 68,
-   "bytes": 6576,
+   "bytes": 6508,
    "glb": "assets/facilities/building_keeper_shed.glb",
    "thumb": "assets/facilities/building_keeper_shed.png"
   },
@@ -3595,8 +3595,8 @@
    "category": "facilities",
    "name": "Zoo veterinary clinic",
    "size_m": [
-    7.0,
-    5.5,
+    8.0,
+    6.0,
     3.6
    ],
    "generator": "facilities",
@@ -3606,7 +3606,7 @@
     "variant": "clinic"
    },
    "tris": 84,
-   "bytes": 7820,
+   "bytes": 7756,
    "glb": "assets/facilities/building_vet_clinic.glb",
    "thumb": "assets/facilities/building_vet_clinic.png"
   },
@@ -3616,7 +3616,7 @@
    "name": "Animal quarantine station",
    "size_m": [
     6.0,
-    4.5,
+    4.0,
     3.2
    ],
    "generator": "facilities",
@@ -3626,7 +3626,7 @@
     "variant": "quarantine"
    },
    "tris": 72,
-   "bytes": 6988,
+   "bytes": 6920,
    "glb": "assets/facilities/building_quarantine_bay.glb",
    "thumb": "assets/facilities/building_quarantine_bay.png"
   },
@@ -3636,7 +3636,7 @@
    "name": "Open feed and hay storage barn",
    "size_m": [
     6.0,
-    5.0,
+    6.0,
     4.0
    ],
    "generator": "facilities",
@@ -3646,7 +3646,7 @@
     "variant": "hay_barn"
    },
    "tris": 84,
-   "bytes": 7796,
+   "bytes": 7732,
    "glb": "assets/facilities/building_hay_barn.glb",
    "thumb": "assets/facilities/building_hay_barn.png"
   },
@@ -3655,7 +3655,7 @@
    "category": "facilities",
    "name": "Park public restroom pavilion",
    "size_m": [
-    5.5,
+    6.0,
     4.0,
     3.2
    ],
@@ -3666,7 +3666,7 @@
     "variant": "restroom"
    },
    "tris": 92,
-   "bytes": 8264,
+   "bytes": 8196,
    "glb": "assets/facilities/building_public_restroom.glb",
    "thumb": "assets/facilities/building_public_restroom.png"
   },
@@ -3675,7 +3675,7 @@
    "category": "facilities",
    "name": "Admission ticketing kiosk",
    "size_m": [
-    2.2,
+    2.0,
     2.0,
     2.8
    ],
@@ -3686,7 +3686,7 @@
     "variant": "ticket"
    },
    "tris": 48,
-   "bytes": 5304,
+   "bytes": 5232,
    "glb": "assets/facilities/kiosk_ticketing_booth.glb",
    "thumb": "assets/facilities/kiosk_ticketing_booth.png"
   },
@@ -3695,8 +3695,8 @@
    "category": "facilities",
    "name": "Ice cream vendor kiosk",
    "size_m": [
-    2.5,
-    2.2,
+    2.0,
+    2.0,
     2.9
    ],
    "generator": "facilities",
@@ -3706,7 +3706,7 @@
     "variant": "ice_cream"
    },
    "tris": 142,
-   "bytes": 12512,
+   "bytes": 12448,
    "glb": "assets/facilities/kiosk_ice_cream.glb",
    "thumb": "assets/facilities/kiosk_ice_cream.png"
   },
@@ -3715,8 +3715,8 @@
    "category": "facilities",
    "name": "Pretzel & snack food kiosk",
    "size_m": [
-    2.6,
-    2.2,
+    2.0,
+    2.0,
     2.9
    ],
    "generator": "facilities",
@@ -3726,7 +3726,7 @@
     "variant": "snack"
    },
    "tris": 48,
-   "bytes": 5300,
+   "bytes": 5232,
    "glb": "assets/facilities/kiosk_pretzel_snack.glb",
    "thumb": "assets/facilities/kiosk_pretzel_snack.png"
   },
@@ -3735,8 +3735,8 @@
    "category": "facilities",
    "name": "Souvenir & toy gift stand",
    "size_m": [
-    3.0,
-    2.4,
+    4.0,
+    2.0,
     2.8
    ],
    "generator": "facilities",
@@ -3746,7 +3746,7 @@
     "variant": "souvenir"
    },
    "tris": 48,
-   "bytes": 5300,
+   "bytes": 5232,
    "glb": "assets/facilities/kiosk_souvenir_stand.glb",
    "thumb": "assets/facilities/kiosk_souvenir_stand.png"
   },
@@ -3755,8 +3755,8 @@
    "category": "facilities",
    "name": "Coffee and cold drink bar",
    "size_m": [
-    2.5,
-    2.2,
+    2.0,
+    2.0,
     2.9
    ],
    "generator": "facilities",
@@ -3766,7 +3766,7 @@
     "variant": "beverage"
    },
    "tris": 48,
-   "bytes": 5296,
+   "bytes": 5228,
    "glb": "assets/facilities/kiosk_beverage_bar.glb",
    "thumb": "assets/facilities/kiosk_beverage_bar.png"
   },
@@ -3775,8 +3775,8 @@
    "category": "facilities",
    "name": "Zoo visitor info kiosk",
    "size_m": [
-    3.0,
-    3.0,
+    2.0,
+    2.0,
     3.2
    ],
    "generator": "facilities",
@@ -3786,7 +3786,7 @@
     "variant": "info"
    },
    "tris": 72,
-   "bytes": 6980,
+   "bytes": 6912,
    "glb": "assets/facilities/booth_visitor_info.glb",
    "thumb": "assets/facilities/booth_visitor_info.png"
   },
@@ -3795,8 +3795,8 @@
    "category": "facilities",
    "name": "Mobile slushie cart stand",
    "size_m": [
-    1.8,
-    1.2,
+    2.0,
+    2.0,
     2.2
    ],
    "generator": "facilities",
@@ -3806,7 +3806,7 @@
     "variant": "cart"
    },
    "tris": 126,
-   "bytes": 10240,
+   "bytes": 10172,
    "glb": "assets/facilities/stand_ice_slush.glb",
    "thumb": "assets/facilities/stand_ice_slush.png"
   },
@@ -3815,7 +3815,7 @@
    "category": "facilities",
    "name": "Paved asphalt walkway (straight)",
    "size_m": [
-    3.0,
+    2.0,
     4.0,
     0.05
    ],
@@ -3826,7 +3826,7 @@
     "variant": "asphalt_straight"
    },
    "tris": 36,
-   "bytes": 4460,
+   "bytes": 4392,
    "glb": "assets/facilities/path_asphalt_straight.glb",
    "thumb": "assets/facilities/path_asphalt_straight.png"
   },
@@ -3846,7 +3846,7 @@
     "variant": "asphalt_t"
    },
    "tris": 36,
-   "bytes": 4464,
+   "bytes": 4396,
    "glb": "assets/facilities/path_asphalt_junction_t.glb",
    "thumb": "assets/facilities/path_asphalt_junction_t.png"
   },
@@ -3855,7 +3855,7 @@
    "category": "facilities",
    "name": "Cobblestone pathway segment",
    "size_m": [
-    2.2,
+    2.0,
     4.0,
     0.05
    ],
@@ -3866,7 +3866,7 @@
     "variant": "cobblestone"
    },
    "tris": 12,
-   "bytes": 2784,
+   "bytes": 2716,
    "glb": "assets/facilities/path_cobblestone_straight.glb",
    "thumb": "assets/facilities/path_cobblestone_straight.png"
   },
@@ -3875,7 +3875,7 @@
    "category": "facilities",
    "name": "Planked timber boardwalk",
    "size_m": [
-    2.4,
+    2.0,
     4.0,
     0.15
    ],
@@ -3886,7 +3886,7 @@
     "variant": "boardwalk"
    },
    "tris": 144,
-   "bytes": 12024,
+   "bytes": 11956,
    "glb": "assets/facilities/path_wood_boardwalk.glb",
    "thumb": "assets/facilities/path_wood_boardwalk.png"
   },
@@ -3906,7 +3906,7 @@
     "variant": "gravel"
    },
    "tris": 12,
-   "bytes": 2768,
+   "bytes": 2700,
    "glb": "assets/facilities/path_gravel_trail.glb",
    "thumb": "assets/facilities/path_gravel_trail.png"
   },
@@ -3915,8 +3915,8 @@
    "category": "facilities",
    "name": "Timber pedestrian arch bridge",
    "size_m": [
-    2.2,
-    5.0,
+    2.0,
+    6.0,
     1.4
    ],
    "generator": "facilities",
@@ -3926,7 +3926,7 @@
     "variant": "timber"
    },
    "tris": 156,
-   "bytes": 12848,
+   "bytes": 12804,
    "glb": "assets/facilities/bridge_timber_footbridge.glb",
    "thumb": "assets/facilities/bridge_timber_footbridge.png"
   },
@@ -3935,8 +3935,8 @@
    "category": "facilities",
    "name": "Rustic stone pedestrian bridge",
    "size_m": [
-    2.5,
-    5.5,
+    2.0,
+    6.0,
     1.8
    ],
    "generator": "facilities",
@@ -3946,7 +3946,7 @@
     "variant": "stone"
    },
    "tris": 36,
-   "bytes": 4448,
+   "bytes": 4384,
    "glb": "assets/facilities/bridge_stone_arch.glb",
    "thumb": "assets/facilities/bridge_stone_arch.png"
   },
@@ -3955,7 +3955,7 @@
    "category": "facilities",
    "name": "Sunken penguin pool with diving rocks",
    "size_m": [
-    5.0,
+    6.0,
     4.0,
     1.2
    ],
@@ -3966,7 +3966,7 @@
     "variant": "penguin_pool"
    },
    "tris": 24,
-   "bytes": 3612,
+   "bytes": 3544,
    "glb": "assets/facilities/water_penguin_pool.glb",
    "thumb": "assets/facilities/water_penguin_pool.png"
   },
@@ -3976,7 +3976,7 @@
    "name": "Hippo mud pond wallow basin",
    "size_m": [
     6.0,
-    5.0,
+    6.0,
     1.0
    ],
    "generator": "facilities",
@@ -3986,7 +3986,7 @@
     "variant": "hippo_pond"
    },
    "tris": 24,
-   "bytes": 3612,
+   "bytes": 3532,
    "glb": "assets/facilities/water_hippo_mud_pond.glb",
    "thumb": "assets/facilities/water_hippo_mud_pond.png"
   },
@@ -3995,8 +3995,8 @@
    "category": "facilities",
    "name": "Tiered circular plaza fountain",
    "size_m": [
-    3.5,
-    3.5,
+    4.0,
+    4.0,
     2.2
    ],
    "generator": "facilities",
@@ -4006,7 +4006,7 @@
     "variant": "fountain"
    },
    "tris": 232,
-   "bytes": 17048,
+   "bytes": 16980,
    "glb": "assets/facilities/water_decorative_fountain.glb",
    "thumb": "assets/facilities/water_decorative_fountain.png"
   },
@@ -4015,8 +4015,8 @@
    "category": "facilities",
    "name": "Natural duck pond basin",
    "size_m": [
-    4.5,
-    4.5,
+    4.0,
+    4.0,
     0.8
    ],
    "generator": "facilities",
@@ -4026,7 +4026,7 @@
     "variant": "duck_pond"
    },
    "tris": 24,
-   "bytes": 3608,
+   "bytes": 3536,
    "glb": "assets/facilities/water_duck_pond.glb",
    "thumb": "assets/facilities/water_duck_pond.png"
   },
@@ -4035,8 +4035,8 @@
    "category": "facilities",
    "name": "Marsh swamp pool with fallen log",
    "size_m": [
-    5.5,
-    4.5,
+    6.0,
+    4.0,
     1.0
    ],
    "generator": "facilities",
@@ -4046,7 +4046,7 @@
     "variant": "swamp"
    },
    "tris": 24,
-   "bytes": 3616,
+   "bytes": 3532,
    "glb": "assets/facilities/water_alligator_swamp.glb",
    "thumb": "assets/facilities/water_alligator_swamp.png"
   },
@@ -4055,8 +4055,8 @@
    "category": "facilities",
    "name": "Cascading rock waterfall feature",
    "size_m": [
-    3.5,
-    3.0,
+    4.0,
+    4.0,
     2.6
    ],
    "generator": "facilities",
@@ -4066,7 +4066,7 @@
     "variant": "waterfall"
    },
    "tris": 36,
-   "bytes": 4456,
+   "bytes": 4388,
    "glb": "assets/facilities/water_rock_waterfall.glb",
    "thumb": "assets/facilities/water_rock_waterfall.png"
   },
@@ -4075,8 +4075,8 @@
    "category": "facilities",
    "name": "Tensile fabric sunshade canopy",
    "size_m": [
-    4.5,
-    4.5,
+    4.0,
+    4.0,
     3.2
    ],
    "generator": "facilities",
@@ -4086,7 +4086,7 @@
     "variant": "sunshade"
    },
    "tris": 92,
-   "bytes": 7876,
+   "bytes": 7808,
    "glb": "assets/facilities/feature_safari_sunshade.glb",
    "thumb": "assets/facilities/feature_safari_sunshade.png"
   },
@@ -4095,8 +4095,8 @@
    "category": "facilities",
    "name": "Timber observation lookout tower",
    "size_m": [
-    3.5,
-    3.5,
+    4.0,
+    4.0,
     6.5
    ],
    "generator": "facilities",
@@ -4106,7 +4106,7 @@
     "variant": "tower"
    },
    "tris": 120,
-   "bytes": 10332,
+   "bytes": 10268,
    "glb": "assets/facilities/tower_wooden_observation.glb",
    "thumb": "assets/facilities/tower_wooden_observation.png"
   },
@@ -4115,7 +4115,7 @@
    "category": "facilities",
    "name": "Cantilevered glass overlook deck",
    "size_m": [
-    3.5,
+    4.0,
     4.0,
     2.2
    ],
@@ -4126,7 +4126,7 @@
     "variant": "glass_deck"
    },
    "tris": 60,
-   "bytes": 6144,
+   "bytes": 6080,
    "glb": "assets/facilities/terrace_glass_overlook.glb",
    "thumb": "assets/facilities/terrace_glass_overlook.png"
   },
@@ -4136,7 +4136,7 @@
    "name": "Timber shaded picnic pergola",
    "size_m": [
     4.0,
-    3.0,
+    4.0,
     2.8
    ],
    "generator": "facilities",
@@ -4146,7 +4146,7 @@
     "variant": "pergola"
    },
    "tris": 120,
-   "bytes": 10344,
+   "bytes": 10276,
    "glb": "assets/facilities/pergola_picnic_shaded.glb",
    "thumb": "assets/facilities/pergola_picnic_shaded.png"
   },
@@ -4166,7 +4166,7 @@
     "variant": "petting_pen"
    },
    "tris": 108,
-   "bytes": 9508,
+   "bytes": 9440,
    "glb": "assets/facilities/pen_petting_zoo_corral.glb",
    "thumb": "assets/facilities/pen_petting_zoo_corral.png"
   },
@@ -4186,7 +4186,7 @@
     "variant": "giraffe_feeder"
    },
    "tris": 84,
-   "bytes": 7832,
+   "bytes": 7748,
    "glb": "assets/facilities/platform_giraffe_feeding.glb",
    "thumb": "assets/facilities/platform_giraffe_feeding.png"
   },
@@ -4195,8 +4195,8 @@
    "category": "facilities",
    "name": "Meerkat viewing acrylic bubble",
    "size_m": [
-    1.5,
-    1.5,
+    2.0,
+    2.0,
     0.9
    ],
    "generator": "facilities",
@@ -4206,7 +4206,7 @@
     "variant": "acrylic_dome"
    },
    "tris": 112,
-   "bytes": 10440,
+   "bytes": 10372,
    "glb": "assets/facilities/dome_meerkat_viewing_bubble.glb",
    "thumb": "assets/facilities/dome_meerkat_viewing_bubble.png"
   },
@@ -4215,7 +4215,7 @@
    "category": "facilities",
    "name": "Underwater aquarium viewing tunnel",
    "size_m": [
-    3.0,
+    4.0,
     4.0,
     2.8
    ],
@@ -4226,7 +4226,7 @@
     "variant": "underwater_tunnel"
    },
    "tris": 48,
-   "bytes": 5308,
+   "bytes": 5244,
    "glb": "assets/facilities/tunnel_underwater_aquarium.glb",
    "thumb": "assets/facilities/tunnel_underwater_aquarium.png"
   },
@@ -4246,7 +4246,7 @@
     "variant": "greenhouse"
    },
    "tris": 120,
-   "bytes": 10344,
+   "bytes": 10276,
    "glb": "assets/facilities/building_butterfly_hothouse.glb",
    "thumb": "assets/facilities/building_butterfly_hothouse.png"
   },
@@ -4255,7 +4255,7 @@
    "category": "facilities",
    "name": "Safari vehicle double gate airlock",
    "size_m": [
-    4.5,
+    4.0,
     6.0,
     3.2
    ],
@@ -4266,7 +4266,7 @@
     "variant": "safari_airlock"
    },
    "tris": 96,
-   "bytes": 8676,
+   "bytes": 8608,
    "glb": "assets/facilities/gate_safari_vehicle_airlock.glb",
    "thumb": "assets/facilities/gate_safari_vehicle_airlock.png"
   },
@@ -4286,7 +4286,7 @@
     "variant": "splash_pool"
    },
    "tris": 24,
-   "bytes": 3628,
+   "bytes": 3544,
    "glb": "assets/facilities/water_elephant_splash_pool.glb",
    "thumb": "assets/facilities/water_elephant_splash_pool.png"
   },
@@ -4295,8 +4295,8 @@
    "category": "facilities",
    "name": "Flamingo shallow lagoon with islet",
    "size_m": [
-    7.0,
-    5.0,
+    8.0,
+    6.0,
     0.8
    ],
    "generator": "facilities",
@@ -4306,7 +4306,7 @@
     "variant": "shallow_lagoon"
    },
    "tris": 24,
-   "bytes": 3632,
+   "bytes": 3564,
    "glb": "assets/facilities/water_flamingo_shallow_lagoon.glb",
    "thumb": "assets/facilities/water_flamingo_shallow_lagoon.png"
   },
@@ -4316,7 +4316,7 @@
    "name": "Bat nocturnal rock cave entrance",
    "size_m": [
     4.0,
-    3.0,
+    4.0,
     3.0
    ],
    "generator": "facilities",
@@ -4326,7 +4326,7 @@
     "variant": "rock_cave"
    },
    "tris": 136,
-   "bytes": 12368,
+   "bytes": 12288,
    "glb": "assets/facilities/cave_bat_nocturnal_portal.glb",
    "thumb": "assets/facilities/cave_bat_nocturnal_portal.png"
   },
@@ -4335,8 +4335,8 @@
    "category": "facilities",
    "name": "Quad entrance turnstile bank",
    "size_m": [
-    5.0,
-    1.8,
+    4.0,
+    2.0,
     2.2
    ],
    "generator": "facilities",
@@ -4346,7 +4346,7 @@
     "variant": "turnstile_bank"
    },
    "tris": 356,
-   "bytes": 25588,
+   "bytes": 25520,
    "glb": "assets/facilities/turnstile_bank_quad.glb",
    "thumb": "assets/facilities/turnstile_bank_quad.png"
   },
@@ -4355,7 +4355,7 @@
    "category": "facilities",
    "name": "Staff breakroom modular unit",
    "size_m": [
-    5.0,
+    6.0,
     4.0,
     3.2
    ],
@@ -4366,7 +4366,7 @@
     "variant": "staff_quarters"
    },
    "tris": 112,
-   "bytes": 9532,
+   "bytes": 9468,
    "glb": "assets/facilities/building_staff_breakroom.glb",
    "thumb": "assets/facilities/building_staff_breakroom.png"
   },
@@ -4375,8 +4375,8 @@
    "category": "facilities",
    "name": "Lost and found security outpost",
    "size_m": [
-    2.5,
-    2.5,
+    2.0,
+    2.0,
     2.8
    ],
    "generator": "facilities",
@@ -4386,7 +4386,7 @@
     "variant": "security_booth"
    },
    "tris": 48,
-   "bytes": 5304,
+   "bytes": 5236,
    "glb": "assets/facilities/building_lost_and_found.glb",
    "thumb": "assets/facilities/building_lost_and_found.png"
   },
@@ -4396,7 +4396,7 @@
    "name": "First-aid care station",
    "size_m": [
     4.0,
-    3.5,
+    4.0,
     3.0
    ],
    "generator": "facilities",
@@ -4406,7 +4406,7 @@
     "variant": "first_aid"
    },
    "tris": 84,
-   "bytes": 7816,
+   "bytes": 7752,
    "glb": "assets/facilities/building_first_aid_station.glb",
    "thumb": "assets/facilities/building_first_aid_station.png"
   },
@@ -4416,7 +4416,7 @@
    "name": "Zoo compost and manure bay",
    "size_m": [
     4.0,
-    3.0,
+    4.0,
     1.8
    ],
    "generator": "facilities",
@@ -4426,7 +4426,7 @@
     "variant": "compost_bay"
    },
    "tris": 96,
-   "bytes": 8672,
+   "bytes": 8608,
    "glb": "assets/facilities/station_waste_compost_bay.glb",
    "thumb": "assets/facilities/station_waste_compost_bay.png"
   },
@@ -4435,8 +4435,8 @@
    "category": "facilities",
    "name": "Otter holt rocky den",
    "size_m": [
-    3.5,
-    3.0,
+    4.0,
+    4.0,
     1.6
    ],
    "generator": "facilities",
@@ -4446,7 +4446,7 @@
     "variant": "otter_holt"
    },
    "tris": 24,
-   "bytes": 3624,
+   "bytes": 3556,
    "glb": "assets/facilities/shelter_otter_holts_rock.glb",
    "thumb": "assets/facilities/shelter_otter_holts_rock.png"
   },
