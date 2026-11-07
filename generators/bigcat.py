@@ -3,13 +3,13 @@
 size_m = [width, length nose-to-tail, height to top of head]. params:
   body: fur colour (palette name); belly: underside/muzzle colour (default cream);
   marks: list of "mane", "stripes", "rosettes", "rosettes_big", "spots", "tear_lines",
-         "thick_tail", "short_tail", "ear_tufts", "big_ears", "plain".
+         "thick_tail", "short_tail", "ear_tufts", "big_ears", "long_legs" (serval), "stocky" (jaguar), "plain".
 Markings are thin shells on the body surface, so they read in a 256 px thumbnail.
 """
 import math
 
 import bpy
-from mathutils import Matrix
+from mathutils import Matrix, Vector
 
 DARK = {"black": "charcoal"}  # mark colour on very dark fur
 
@@ -31,10 +31,10 @@ def build(a, z):
 
     tail_frac = 0.12 if "short_tail" in marks else 0.32
     body_len = L * (1 - tail_frac) * 0.72  # torso; head sticks out in front
-    leg_h = H * 0.34
-    torso_h = H * 0.44
+    leg_h = H * (0.46 if "long_legs" in marks else 0.34)
+    torso_h = H * (0.34 if "long_legs" in marks else 0.44)
     bz = leg_h + torso_h * 0.45
-    br = (W * 0.46, body_len / 2, torso_h / 2)
+    br = (W * (0.56 if "stocky" in marks else 0.46), body_len / 2, torso_h / 2 * (1.12 if "stocky" in marks else 1))
     by = L / 2 - L * 0.13 - br[1]  # torso centre (y = 0 is the middle of the full length)
     z.ball(1, loc=(0, by, bz), colour=fur, scale=br, seg=12, rings=8)
     z.ball(1, loc=(0, by, bz - br[2] * 0.35), colour=belly, scale=(br[0] * 0.8, br[1] * 0.85, br[2] * 0.7), seg=10, rings=6)
@@ -48,7 +48,7 @@ def build(a, z):
                    scale=(1, 1.3, 0.6), seg=8, rings=4)
 
     # neck and head
-    hr = min(W * 0.4, H * 0.21)
+    hr = min(W * 0.4, H * 0.21) * (1.2 if "stocky" in marks else 0.8 if "long_legs" in marks else 1)
     hy, hz = by + br[1] + hr * 0.35, H - hr * 1.05
     z.cyl(hr * 0.75, hz - bz, loc=(0, (by + br[1] * 0.7 + hy) / 2, (bz + hz) / 2), colour=fur, rot=(-35, 0, 0), seg=8)
     if "mane" in marks and fur in ("sand", "tan", "orange"):  # lion mane; tamarins use other generators
@@ -101,11 +101,17 @@ def build(a, z):
             for j, u in enumerate((-1.6, -1.0, -0.4, 0.4, 1.0, 1.6)):
                 v = -1.05 + i * 0.42 + (0.2 if j % 2 else 0)
                 c = _on_body((0, by, bz), br, u, v, 1.0)
-                tilt = (i * 23 + j * 41) % 90  # own angle per spot: no coplanar caps (z-fighting check)
-                z.ball(sr, loc=c, colour=ink, rot=(tilt, tilt * 0.7, j * 17), seg=6, rings=3)
-                if ring:  # lighter centre makes a rosette
-                    c2 = _on_body((0, by, bz), br, u, v, 1.0 + sr * 0.6 / max(br))
-                    z.ball(sr * 0.55, loc=c2, colour="tan" if fur != "tan" else "brown", rot=(tilt + 31, 13, tilt), seg=5, rings=3)
+                # flat disc lying on the coat: z axis along the ellipsoid normal, small spin per spot (z-fighting check)
+                n = Vector(((c[0]) / br[0] ** 2, (c[1] - by) / br[1] ** 2, (c[2] - bz) / br[2] ** 2)).normalized()
+                q = n.to_track_quat("Z", "Y").to_euler()
+                rot = (math.degrees(q.x), math.degrees(q.y), math.degrees(q.z) + (i * 23 + j * 41) % 60)
+                z.ball(sr, loc=c, colour=ink, scale=(1, 1, 0.3), rot=rot, seg=7, rings=3)
+                if ring:  # lighter centre makes a rosette; jaguar ("stocky") also gets a dark dot inside
+                    c2 = Vector(c) + n * sr * 0.22
+                    rot2 = (rot[0], rot[1], rot[2] + 29)  # turned, so its faces never line up with the ring
+                    z.ball(sr * 0.6, loc=c2, colour="tan" if fur != "tan" else "brown", scale=(1, 1, 0.3), rot=rot2, seg=6, rings=3)
+                    if "stocky" in marks:
+                        z.ball(sr * 0.22, loc=Vector(c) + n * sr * 0.36, colour=ink, scale=(1, 1, 0.4), rot=rot, seg=5, rings=2)
 
     # face -Y (front toward the thumbnail camera; glTF +Z)
     turn = Matrix.Rotation(math.pi, 4, "Z")
