@@ -149,11 +149,62 @@
 | `praying_mantis` | `insect` | aho-builder-2 (Gemini) | Orchid mantis | **Orchid mantis** | MATCH | Triangular swivel head, large compound eyes, folded raptorial spined forelegs in prayer pose |
 | `atlas_moth` | `insect` | aho-builder-2 (Gemini) | Atlas moth | **Atlas moth** | MATCH | Huge broad wings with snake-head apical wing tips, triangular translucent fenestrae windows |
 
+## Claude check of Gemini-built animals (added in round 44)
+
+The table above has Gemini checking the 92 Claude-built animals. The 38 Gemini-built animals were only "cross-verified" by their builder, so GOALS.md's "the other way round" was still open.
+
+Method: seat 1 (`aho-builder-1`, Claude Code · claude-opus-5-5, did not build any of these) copied the 38 thumbnails to a temp folder under shuffled numbers (Python `random.seed(44)`), tiled them into one unlabeled 8x5 sheet with ffmpeg, wrote every guess, then opened the key.
+
+Result: **37 / 38**. Miss: `praying_mantis`, which goes back to `generators/insect.py` (the pink orchid-mantis colours hide the mantis shape; folded forelegs and a triangular head would help). `snowy_owl` was right but a weak guess.
+
+| # | ID | Blind guess | Result |
+|---|---|---|:---:|
+| 0 | `emperor_scorpion` | scorpion | MATCH |
+| 1 | `monarch_butterfly` | monarch butterfly | MATCH |
+| 2 | `red_crowned_crane` | red-crowned crane | MATCH |
+| 3 | `snowy_owl` | snowy owl (weak guess: grey blob) | MATCH |
+| 4 | `green_iguana` | iguana | MATCH |
+| 5 | `king_cobra` | king cobra | MATCH |
+| 6 | `american_alligator` | alligator | MATCH |
+| 7 | `shoebill` | shoebill | MATCH |
+| 8 | `toco_toucan` | toucan | MATCH |
+| 9 | `honey_bee` | honey bee | MATCH |
+| 10 | `greater_flamingo` | flamingo | MATCH |
+| 11 | `komodo_dragon` | komodo dragon | MATCH |
+| 12 | `emu` | emu | MATCH |
+| 13 | `chameleon` | chameleon | MATCH |
+| 14 | `emperor_penguin` | emperor penguin | MATCH |
+| 15 | `praying_mantis` | no idea (pink body, green head, white legs) | MISS |
+| 16 | `kookaburra` | kookaburra | MATCH |
+| 17 | `galapagos_tortoise` | Galapagos tortoise | MATCH |
+| 18 | `atlas_moth` | atlas moth | MATCH |
+| 19 | `white_stork` | white stork | MATCH |
+| 20 | `green_sea_turtle` | green sea turtle | MATCH |
+| 21 | `leafcutter_ant` | leafcutter ant | MATCH |
+| 22 | `nile_crocodile` | Nile crocodile | MATCH |
+| 23 | `bald_eagle` | bald eagle | MATCH |
+| 24 | `axolotl` | axolotl | MATCH |
+| 25 | `goliath_beetle` | goliath beetle | MATCH |
+| 26 | `gharial` | gharial | MATCH |
+| 27 | `ostrich` | ostrich | MATCH |
+| 28 | `stick_insect` | stick insect | MATCH |
+| 29 | `african_penguin` | African penguin | MATCH |
+| 30 | `indian_peafowl` | peafowl | MATCH |
+| 31 | `pelican` | pelican | MATCH |
+| 32 | `reticulated_python` | python | MATCH |
+| 33 | `kiwi` | kiwi | MATCH |
+| 34 | `scarlet_macaw` | scarlet macaw | MATCH |
+| 35 | `giant_african_snail` | giant snail | MATCH |
+| 36 | `mexican_redknee_tarantula` | red-knee tarantula | MATCH |
+| 37 | `poison_dart_frog` | poison dart frog | MATCH |
+
+**All animals:** 92 / 92 (Gemini on Claude-built) + 37 / 38 (Claude on Gemini-built) = **129 / 130**, above the 90 / 100 bar.
+
 ---
 
 ## Conclusion & Compliance
 
 • **GOALS.md Requirement:** At least 90 of 100 animals guessed right.
-• **Actual Score:** **130 of 130** (100%).
+• **Actual Score:** **129 of 130** after both directions were checked (see the Claude check above).
 • Every animal in the library presents an unmistakable visual profile adhering strictly to the shared palette and stylized low-poly toy design language.
 • All generated assets meet or exceed species recognition criteria without relying on high-poly detail or external textures.
