@@ -51,10 +51,10 @@ def _build_crocodilian(a, z, W, L, H, body, marks):
         for xi in (-W * 0.10, W * 0.10):
             z.box((W * 0.07, L * 0.03, scute_h), loc=(xi, L * yi, torso_z + scute_h * 0.45), colour="dark_brown", taper=0.2)
 
-    # Tail tapering into +Y (length within 30% of L)
+    # Tail tapering into +Y (tip points toward +Y away from head with rot=(-90,0,0))
     tail_len = L * 0.32
-    z.cyl(H * 0.32, tail_len * 0.6, loc=(0, L * 0.20, H * 0.38), rot=(90, 0, 0), colour=body, seg=8, r2=H * 0.20)
-    z.cone(H * 0.20, tail_len * 0.6, loc=(0, L * 0.20 + tail_len * 0.55, H * 0.34), rot=(90, 0, 0), colour=body, seg=7)
+    z.cyl(H * 0.32, tail_len * 0.6, loc=(0, L * 0.20, H * 0.38), rot=(-90, 0, 0), colour=body, seg=8, r2=H * 0.20)
+    z.cone(H * 0.20, tail_len * 0.6, loc=(0, L * 0.20 + tail_len * 0.55, H * 0.34), rot=(-90, 0, 0), colour=body, seg=7)
     for yi in (0.16, 0.24, 0.32):
         z.box((W * 0.04, L * 0.03, H * 0.22), loc=(0, L * yi, H * 0.48), colour="dark_brown", taper=0.2)
 
@@ -73,14 +73,18 @@ def _build_crocodilian(a, z, W, L, H, body, marks):
     if "thin_snout" in marks:  # Gharial
         z.cyl(H * 0.09, L * 0.24, loc=(0, -L * 0.36, H * 0.40), rot=(90, 0, 0), colour=body, seg=7)
         z.ball(H * 0.12, loc=(0, -L * 0.50, H * 0.41), colour="dark_brown", scale=(1.2, 1.0, 1.0), seg=6, rings=4)
-    elif "blunt_snout" in marks:  # American Alligator (wide U-shaped snout)
-        z.box((W * 0.34, L * 0.20, H * 0.22), loc=(0, -L * 0.34, H * 0.40), colour=body, taper=0.82)
-        z.ball(H * 0.10, loc=(0, -L * 0.44, H * 0.40), colour="charcoal", scale=(1.6, 0.8, 1.0), seg=6, rings=4)
-    else:  # Nile Crocodile (tapered V-shaped snout)
-        z.box((W * 0.28, L * 0.22, H * 0.22), loc=(0, -L * 0.35, H * 0.40), colour=body, taper=0.55)
-        # Subtle protruding white teeth studs
-        z.mirror_x(z.cone, H * 0.03, H * 0.08, loc=(W * 0.10, -L * 0.35, H * 0.48), rot=(180, 0, 0), colour="cream", seg=4)
-        z.mirror_x(z.cone, H * 0.03, H * 0.08, loc=(W * 0.06, -L * 0.42, H * 0.48), rot=(180, 0, 0), colour="cream", seg=4)
+    elif "blunt_snout" in marks:  # American Alligator (distinctive wide, flat U-shaped snout)
+        z.box((W * 0.44, L * 0.22, H * 0.18), loc=(0, -L * 0.34, H * 0.40), colour=body, taper=0.88)
+        z.ball(1, loc=(0, -L * 0.45, H * 0.40), scale=(W * 0.20, L * 0.07, H * 0.09), colour=body, seg=8, rings=5)
+        # Big raised nostrils at snout tip
+        z.mirror_x(z.ball, H * 0.06, loc=(W * 0.10, -L * 0.46, H * 0.48), colour="dark_brown", seg=5, rings=3)
+    else:  # Nile Crocodile (distinctive narrow, tapered V-shaped snout with prominent white teeth)
+        z.box((W * 0.26, L * 0.26, H * 0.18), loc=(0, -L * 0.36, H * 0.40), colour=body, taper=0.35)
+        z.ball(1, loc=(0, -L * 0.48, H * 0.40), scale=(W * 0.08, L * 0.05, H * 0.08), colour=body, seg=6, rings=4)
+        # Visible white teeth studs along jaw line (notably the 4th lower tooth)
+        z.mirror_x(z.cone, H * 0.035, H * 0.09, loc=(W * 0.09, -L * 0.32, H * 0.47), rot=(180, 0, 0), colour="cream", seg=4)
+        z.mirror_x(z.cone, H * 0.045, H * 0.12, loc=(W * 0.07, -L * 0.39, H * 0.47), rot=(180, 0, 0), colour="cream", seg=4)
+        z.mirror_x(z.cone, H * 0.03, H * 0.08, loc=(W * 0.04, -L * 0.45, H * 0.47), rot=(180, 0, 0), colour="cream", seg=4)
 
     # Splayed legs - cylinders end cleanly above foot box floor to avoid coplanar bottom faces
     for side in (-1, 1):
@@ -117,7 +121,7 @@ def _build_turtle(a, z, W, L, H, body, marks):
         z.mirror_x(z.box, (W * 0.16, L * 0.10, H * 0.08), loc=(W * 0.32, -L * 0.24, H * 0.04), colour="charcoal")
         z.mirror_x(z.box, (W * 0.16, L * 0.10, H * 0.08), loc=(W * 0.32, L * 0.22, H * 0.04), colour="charcoal")
         # Tail
-        z.cone(H * 0.06, L * 0.14, loc=(0, L * 0.42, H * 0.26), rot=(90, 0, 0), colour="grey", seg=5)
+        z.cone(H * 0.06, L * 0.14, loc=(0, L * 0.42, H * 0.26), rot=(-90, 0, 0), colour="grey", seg=5)
 
     else:  # Green sea turtle (streamlined flippers)
         # Streamlined shell with full height H
@@ -140,7 +144,7 @@ def _build_turtle(a, z, W, L, H, body, marks):
                   rot=(0, -side * 15, side * 30), colour=body, taper=0.55)
 
         # Small tail
-        z.cone(H * 0.05, L * 0.12, loc=(0, L * 0.44, H * 0.28), rot=(90, 0, 0), colour=body, seg=5)
+        z.cone(H * 0.05, L * 0.12, loc=(0, L * 0.44, H * 0.28), rot=(-90, 0, 0), colour=body, seg=5)
 
 
 def _build_lizard(a, z, W, L, H, body, marks):
@@ -173,8 +177,8 @@ def _build_lizard(a, z, W, L, H, body, marks):
         z.ball(1, loc=(0, -L * 0.05, H * 0.44), scale=(W * 0.32, L * 0.20, H * 0.26), colour=body, seg=10, rings=6)
         # Tail (total length well within 30% of L = 1.5)
         tail_l = L * 0.34
-        z.cyl(H * 0.14, tail_l * 0.6, loc=(0, L * 0.20, H * 0.40), rot=(88, 0, 6), colour=body, seg=7, r2=H * 0.09)
-        z.cone(H * 0.09, tail_l * 0.6, loc=(0, L * 0.20 + tail_l * 0.55, H * 0.36), rot=(90, 0, 12), colour="lime", seg=6)
+        z.cyl(H * 0.14, tail_l * 0.6, loc=(0, L * 0.20, H * 0.40), rot=(-88, 0, 6), colour=body, seg=7, r2=H * 0.09)
+        z.cone(H * 0.09, tail_l * 0.6, loc=(0, L * 0.20 + tail_l * 0.55, H * 0.36), rot=(-90, 0, 12), colour="lime", seg=6)
 
         # Tall dorsal comb spikes reaching full H
         for yi in (-0.18, -0.12, -0.06, 0.0, 0.06, 0.12):
@@ -204,8 +208,8 @@ def _build_lizard(a, z, W, L, H, body, marks):
 
         # Tail - kept within overall length target
         tail_l = L * 0.28
-        z.cyl(H * 0.24, tail_l * 0.55, loc=(0, L * 0.20, H * 0.42), rot=(86, 0, 5), colour=body, seg=8, r2=H * 0.16)
-        z.cone(H * 0.16, tail_l * 0.55, loc=(0, L * 0.20 + tail_l * 0.50, H * 0.38), rot=(88, 0, 10), colour=body, seg=7)
+        z.cyl(H * 0.24, tail_l * 0.55, loc=(0, L * 0.20, H * 0.42), rot=(-86, 0, 5), colour=body, seg=8, r2=H * 0.16)
+        z.cone(H * 0.16, tail_l * 0.55, loc=(0, L * 0.20 + tail_l * 0.50, H * 0.38), rot=(-88, 0, 10), colour=body, seg=7)
 
         # Neck and heavy head
         z.cyl(H * 0.26, L * 0.14, loc=(0, -L * 0.18, H * 0.50), rot=(90, 0, 0), colour=body, seg=8)
@@ -214,8 +218,10 @@ def _build_lizard(a, z, W, L, H, body, marks):
         z.mirror_x(z.ball, H * 0.06, loc=(W * 0.15, -L * 0.30, H * 0.70), colour="yellow", seg=5, rings=3)
         z.mirror_x(z.ball, H * 0.03, loc=(W * 0.16, -L * 0.31, H * 0.70), colour="black", seg=4, rings=3)
         # Red forked tongue extending from snout
-        z.box((W * 0.04, L * 0.12, H * 0.015), loc=(0, -L * 0.44, H * 0.44), colour="red")
-        z.mirror_x(z.box, (W * 0.02, L * 0.04, H * 0.01), loc=(W * 0.02, -L * 0.50, H * 0.44), rot=(0, 0, 25), colour="red")
+        z.box((W * 0.04, L * 0.12, H * 0.018), loc=(0, -L * 0.44, H * 0.44), colour="red")
+        for side in (-1, 1):
+            z.box((W * 0.02, L * 0.05, H * 0.012), loc=(side * W * 0.02, -L * 0.50, H * 0.44),
+                  rot=(side * 5, 0, side * 25), colour="red")
 
         # Powerful muscular splayed legs - cylinders end above foot box
         for side in (-1, 1):
@@ -229,81 +235,100 @@ def _build_lizard(a, z, W, L, H, body, marks):
 
 def _build_snake(a, z, W, L, H, body, marks):
     if "hood_up" in marks:  # King cobra (W=0.8, L=0.8, H=1.0)
-        # Coiled base rings on floor
+        # Continuous overlapping coiled base rings on floor (solid unbroken snake body)
         r_base = W * 0.36
-        for step in range(10):
-            ang = step * (2 * math.pi / 10)
-            x = math.cos(ang) * r_base
-            y = math.sin(ang) * r_base + L * 0.06
-            z.ball(H * 0.08, loc=(x, y, H * 0.08), colour=body, seg=6, rings=4)
+        num_coils = 32
+        for step in range(num_coils):
+            t = step / (num_coils - 1.0)
+            ang = t * 2.8 * math.pi
+            r_coil = r_base * (1.0 - 0.22 * t)
+            x = math.cos(ang) * r_coil
+            y = math.sin(ang) * r_coil + L * 0.04
+            z_c = H * 0.08 + t * H * 0.06
+            ball_r = H * 0.08 * (1.0 - 0.15 * t)
+            rot_c = (step * 19.3 % 360, step * 23.7 % 360, (ang * 180 / math.pi) % 360)
+            z.ball(ball_r, loc=(x, y, z_c), rot=rot_c, colour=body, seg=7, rings=5)
 
-        # Rising vertical S-curve neck reaching near top H
-        z.cyl(H * 0.08, H * 0.32, loc=(0, -L * 0.08, H * 0.30), rot=(-12, 0, 0), colour=body, seg=7)
-        z.cyl(H * 0.07, H * 0.32, loc=(0, -L * 0.14, H * 0.58), rot=(-15, 0, 0), colour=body, seg=7)
+        # Rising vertical S-curve neck
+        z.cyl(H * 0.08, H * 0.26, loc=(0, -L * 0.05, H * 0.26), rot=(-12, 0, 0), colour=body, seg=8)
+        z.cyl(H * 0.075, H * 0.26, loc=(0, -L * 0.10, H * 0.48), rot=(-15, 0, 0), colour=body, seg=8)
 
-        # Flared hood
-        z.box((W * 0.44, L * 0.05, H * 0.30), loc=(0, -L * 0.15, H * 0.65), rot=(-15, 0, 0), colour=body, taper=0.72)
-        # Non-coplanar yellow and black hood markings (offset slightly in Y)
-        z.box((W * 0.24, L * 0.05, H * 0.18), loc=(0, -L * 0.15 + 0.026, H * 0.65), rot=(-15, 0, 0), colour="yellow", taper=0.6)
-        z.box((W * 0.10, L * 0.05, H * 0.08), loc=(0, -L * 0.15 + 0.052, H * 0.65), rot=(-15, 0, 0), colour="black")
+        # Flared iconic cobra hood (wide flattened curved oval shield)
+        z.ball(1, loc=(0, -L * 0.14, H * 0.68), scale=(W * 0.38, L * 0.05, H * 0.20), rot=(-15, 0, 0), colour=body, seg=12, rings=6)
+        # Underside pale throat bands
+        z.ball(1, loc=(0, -L * 0.14 - 0.025, H * 0.67), scale=(W * 0.22, L * 0.035, H * 0.16), rot=(-15, 0, 0), colour="yellow", seg=10, rings=5)
+        # Dorsal "spectacle" / chevron hood markings in yellow and black
+        z.ball(1, loc=(0, -L * 0.14 + 0.025, H * 0.69), scale=(W * 0.24, L * 0.035, H * 0.13), rot=(-15, 0, 0), colour="yellow", seg=10, rings=5)
+        z.mirror_x(z.ball, 1, loc=(W * 0.10, -L * 0.14 + 0.035, H * 0.70), scale=(W * 0.05, L * 0.025, H * 0.05), colour="black", seg=6, rings=4)
 
         # Head atop hood reaching H = 0.96m
-        z.box((W * 0.18, L * 0.20, H * 0.14), loc=(0, -L * 0.22, H * 0.88), colour=body, taper=0.6)
-        z.mirror_x(z.ball, H * 0.03, loc=(W * 0.08, -L * 0.22, H * 0.91), colour="black", seg=5, rings=3)
+        z.box((W * 0.20, L * 0.22, H * 0.13), loc=(0, -L * 0.22, H * 0.88), colour=body, taper=0.55)
+        z.mirror_x(z.ball, H * 0.035, loc=(W * 0.09, -L * 0.22, H * 0.91), colour="black", seg=5, rings=3)
         # Forked red tongue
-        z.box((W * 0.03, L * 0.12, H * 0.015), loc=(0, -L * 0.32, H * 0.86), colour="red")
-        z.mirror_x(z.box, (W * 0.015, L * 0.04, H * 0.01), loc=(W * 0.015, -L * 0.38, H * 0.86), rot=(0, 0, 25), colour="red")
+        z.box((W * 0.03, L * 0.14, H * 0.018), loc=(0, -L * 0.34, H * 0.86), colour="red")
+        for side in (-1, 1):
+            z.box((W * 0.016, L * 0.06, H * 0.012), loc=(side * W * 0.02, -L * 0.42, H * 0.86),
+                  rot=(side * 5, 0, side * 30), colour="red")
 
-    else:  # Reticulated python (coiled spiral, W=1.2, L=1.2, H=0.3)
-        # Multi-tiered spiral coils reaching H ~ 0.28m
-        r_outer = W * 0.38
-        for i in range(14):
-            ang = i * (2 * math.pi / 14)
-            x = math.cos(ang) * r_outer
-            y = math.sin(ang) * r_outer
-            col = "tan" if i % 2 == 0 else "dark_brown"
-            z.ball(H * 0.24, loc=(x, y, H * 0.24), colour=col, seg=6, rings=5)
+    else:  # Reticulated python (continuous spiral coil, W=1.2, L=1.2, H=0.3)
+        # Dense overlapping spiral coils forming a thick continuous body
+        num_pts = 46
+        r_outer = W * 0.42
+        for i in range(num_pts):
+            t = i / (num_pts - 1.0)
+            ang = t * 3.8 * math.pi
+            r_coil = (1.0 - 0.58 * t) * r_outer
+            x = math.cos(ang) * r_coil
+            y = math.sin(ang) * r_coil
+            z_c = H * 0.22 + t * H * 0.32
+            r_seg = H * 0.26 * (1.0 - 0.22 * t)
+            col = "tan" if (i // 2) % 2 == 0 else "dark_brown"
+            rot_ball = (i * 17.3 % 360, i * 29.1 % 360, (ang * 180 / math.pi) % 360)
+            z.ball(r_seg, loc=(x, y, z_c), rot=rot_ball, colour=col, seg=8, rings=5)
 
-        r_inner = W * 0.20
-        for i in range(8):
-            ang = i * (2 * math.pi / 8) + 0.3
-            x = math.cos(ang) * r_inner
-            y = math.sin(ang) * r_inner
-            col = "dark_brown" if i % 2 == 0 else "tan"
-            z.ball(H * 0.22, loc=(x, y, H * 0.44), colour=col, seg=6, rings=5)
+        # Neck rising up from center of spiral
+        z.cyl(H * 0.20, H * 0.30, loc=(0, -L * 0.08, H * 0.60), rot=(-30, 0, 0), colour="tan", seg=8)
 
-        # Head raised on top coil facing -Y reaching ~ 0.28m (scaled with H)
-        z.box((W * 0.16, L * 0.22, H * 0.22), loc=(0, -L * 0.16, H * 0.68), colour=body, taper=0.65)
-        # Diamond markings on head
-        z.box((W * 0.06, L * 0.10, H * 0.04), loc=(0, -L * 0.16, H * 0.80), colour="dark_brown", taper=0.3)
-        z.mirror_x(z.ball, H * 0.05, loc=(W * 0.07, -L * 0.16, H * 0.74), colour="orange", seg=5, rings=3)
-        z.mirror_x(z.ball, H * 0.025, loc=(W * 0.075, -L * 0.17, H * 0.74), colour="black", seg=4, rings=3)
-        z.box((W * 0.03, L * 0.10, H * 0.015), loc=(0, -L * 0.28, H * 0.62), colour="red")
+        # Large triangular arrowhead head
+        z.box((W * 0.24, L * 0.26, H * 0.20), loc=(0, -L * 0.22, H * 0.72), colour="tan", taper=0.52)
+        # Diamond crown pattern on top of head
+        z.box((W * 0.12, L * 0.16, H * 0.05), loc=(0, -L * 0.22, H * 0.83), colour="dark_brown", taper=0.3)
+        # Predatory orange eyes
+        z.mirror_x(z.ball, H * 0.055, loc=(W * 0.11, -L * 0.22, H * 0.76), colour="orange", seg=5, rings=3)
+        z.mirror_x(z.ball, H * 0.03, loc=(W * 0.115, -L * 0.23, H * 0.76), colour="black", seg=4, rings=3)
+        # Forked red tongue
+        z.box((W * 0.03, L * 0.14, H * 0.018), loc=(0, -L * 0.36, H * 0.66), colour="red")
+        for side in (-1, 1):
+            z.box((W * 0.016, L * 0.06, H * 0.012), loc=(side * W * 0.02, -L * 0.44, H * 0.66),
+                  rot=(side * 5, 0, side * 30), colour="red")
 
 
 def _build_frog(a, z, W, L, H, body, marks):
     # Blue poison dart frog (W=0.06, L=0.06, H=0.04)
-    # Squat rounded body
+    # Squat rounded vibrant blue body
     z.ball(1, loc=(0, L * 0.04, H * 0.44), scale=(W * 0.34, L * 0.36, H * 0.34), colour=body, seg=10, rings=6)
 
     # Big bulbous frog eyes
     z.mirror_x(z.ball, H * 0.28, loc=(W * 0.24, -L * 0.16, H * 0.74), colour=body, seg=7, rings=5)
     z.mirror_x(z.ball, H * 0.18, loc=(W * 0.26, -L * 0.20, H * 0.76), colour="black", seg=6, rings=4)
 
-    # Black spots on back (slightly offset so non-coplanar)
-    z.box((W * 0.10, L * 0.08, H * 0.04), loc=(0, -L * 0.02, H * 0.72), colour="black", taper=0.5)
-    z.mirror_x(z.box, (W * 0.08, L * 0.08, H * 0.04), loc=(W * 0.16, L * 0.10, H * 0.66), colour="black", taper=0.5)
-    z.box((W * 0.08, L * 0.08, H * 0.04), loc=(0, L * 0.22, H * 0.60), colour="black", taper=0.5)
+    # Crisp black spots across blue back
+    z.ball(H * 0.09, loc=(0, -L * 0.05, H * 0.78), colour="black", seg=5, rings=3)
+    z.mirror_x(z.ball, H * 0.08, loc=(W * 0.16, L * 0.04, H * 0.74), colour="black", seg=5, rings=3)
+    z.ball(H * 0.08, loc=(0, L * 0.18, H * 0.70), colour="black", seg=5, rings=3)
 
-    # Folded muscular hind legs
+    # Folded muscular hind legs (blue like the body, no black lump!)
     for side in (-1, 1):
         z.ball(1, loc=(side * W * 0.36, L * 0.14, H * 0.34), scale=(W * 0.16, L * 0.24, H * 0.20),
-               rot=(20, side * 20, 0), colour="black", seg=6, rings=4)
-        z.box((W * 0.10, L * 0.12, H * 0.03), loc=(side * W * 0.38, L * 0.05, H * 0.04), colour="black")
+               rot=(20, side * 20, 0), colour=body, seg=6, rings=4)
+        # Black spots on thighs
+        z.ball(H * 0.07, loc=(side * W * 0.38, L * 0.16, H * 0.48), colour="black", seg=5, rings=3)
+        # Small toe pads
+        z.box((W * 0.10, L * 0.12, H * 0.03), loc=(side * W * 0.38, L * 0.05, H * 0.04), colour="charcoal")
         # Front arms propping frog up
         z.cyl(H * 0.08, H * 0.38, loc=(side * W * 0.24, -L * 0.14, H * 0.22),
-              rot=(15, -side * 15, 0), colour="black", seg=5)
-        z.box((W * 0.08, L * 0.08, H * 0.02), loc=(side * W * 0.24, -L * 0.22, H * 0.03), colour="black")
+              rot=(15, -side * 15, 0), colour=body, seg=5)
+        z.box((W * 0.08, L * 0.08, H * 0.02), loc=(side * W * 0.24, -L * 0.22, H * 0.03), colour="charcoal")
 
 
 def _build_axolotl(a, z, W, L, H, body, marks):
