@@ -1,0 +1,1821 @@
+{
+  "schema": "id, category, name, size_m [width x, length y, height z] metres (Blender Z up, front faces +Y), generator, budget_tris, params.",
+  "count": 105,
+  "assets": [
+    {
+      "id": "keeper_safari_lead_01",
+      "category": "keepers",
+      "name": "Zoo Keeper: Safari Team Lead",
+      "size_m": [
+        0.6,
+        0.4,
+        1.88
+      ],
+      "generator": "human",
+      "budget_tris": 3000,
+      "params": {
+        "role_type": "keeper",
+        "build": "tall",
+        "skin_tone": "tan",
+        "uniform": "khaki",
+        "tool": "clipboard"
+      }
+    },
+    {
+      "id": "keeper_carnivore_specialist_02",
+      "category": "keepers",
+      "name": "Zoo Keeper: Carnivore Keeper",
+      "size_m": [
+        0.65,
+        0.45,
+        1.82
+      ],
+      "generator": "human",
+      "budget_tris": 3000,
+      "params": {
+        "role_type": "keeper",
+        "build": "athletic",
+        "skin_tone": "dark",
+        "uniform": "olive",
+        "tool": "meat_tongs"
+      }
+    },
+    {
+      "id": "keeper_aquatic_feeder_03",
+      "category": "keepers",
+      "name": "Zoo Keeper: Aquarium Caretaker",
+      "size_m": [
+        0.6,
+        0.4,
+        1.75
+      ],
+      "generator": "human",
+      "budget_tris": 3000,
+      "params": {
+        "role_type": "keeper",
+        "build": "athletic",
+        "skin_tone": "fair",
+        "uniform": "navy",
+        "tool": "fish_bucket"
+      }
+    },
+    {
+      "id": "keeper_primate_caregiver_04",
+      "category": "keepers",
+      "name": "Zoo Keeper: Primate Enrichment Keeper",
+      "size_m": [
+        0.55,
+        0.38,
+        1.7
+      ],
+      "generator": "human",
+      "budget_tris": 3000,
+      "params": {
+        "role_type": "keeper",
+        "build": "slim",
+        "skin_tone": "medium",
+        "uniform": "khaki",
+        "tool": "puzzle_box"
+      }
+    },
+    {
+      "id": "keeper_vet_surgeon_05",
+      "category": "keepers",
+      "name": "Zoo Keeper: Lead Zoo Veterinarian",
+      "size_m": [
+        0.55,
+        0.38,
+        1.78
+      ],
+      "generator": "human",
+      "budget_tris": 3000,
+      "params": {
+        "role_type": "keeper",
+        "build": "slim",
+        "skin_tone": "fair",
+        "uniform": "teal_scrubs",
+        "tool": "med_kit"
+      }
+    },
+    {
+      "id": "keeper_vet_assistant_06",
+      "category": "keepers",
+      "name": "Zoo Keeper: Vet Assistant",
+      "size_m": [
+        0.5,
+        0.35,
+        1.62
+      ],
+      "generator": "human",
+      "budget_tris": 3000,
+      "params": {
+        "role_type": "keeper",
+        "build": "petite",
+        "skin_tone": "dark",
+        "uniform": "teal_scrubs",
+        "tool": "scanner"
+      }
+    },
+    {
+      "id": "keeper_aviary_curator_07",
+      "category": "keepers",
+      "name": "Zoo Keeper: Aviary Curator",
+      "size_m": [
+        0.6,
+        0.4,
+        1.76
+      ],
+      "generator": "human",
+      "budget_tris": 3000,
+      "params": {
+        "role_type": "keeper",
+        "build": "athletic",
+        "skin_tone": "medium",
+        "uniform": "green",
+        "tool": "seed_scoop"
+      }
+    },
+    {
+      "id": "keeper_herpetologist_08",
+      "category": "keepers",
+      "name": "Zoo Keeper: Reptile Specialist",
+      "size_m": [
+        0.55,
+        0.38,
+        1.8
+      ],
+      "generator": "human",
+      "budget_tris": 3000,
+      "params": {
+        "role_type": "keeper",
+        "build": "slim",
+        "skin_tone": "tan",
+        "uniform": "camo_khaki",
+        "tool": "snake_hook"
+      }
+    },
+    {
+      "id": "keeper_elephant_keeper_09",
+      "category": "keepers",
+      "name": "Zoo Keeper: Elephant Keeper",
+      "size_m": [
+        0.75,
+        0.5,
+        1.92
+      ],
+      "generator": "human",
+      "budget_tris": 3000,
+      "params": {
+        "role_type": "keeper",
+        "build": "stocky",
+        "skin_tone": "dark",
+        "uniform": "heavy_work",
+        "tool": "shovel"
+      }
+    },
+    {
+      "id": "keeper_ungulate_feeder_10",
+      "category": "keepers",
+      "name": "Zoo Keeper: Hoofed Stock Keeper",
+      "size_m": [
+        0.65,
+        0.42,
+        1.84
+      ],
+      "generator": "human",
+      "budget_tris": 3000,
+      "params": {
+        "role_type": "keeper",
+        "build": "athletic",
+        "skin_tone": "fair",
+        "uniform": "khaki",
+        "tool": "pitchfork"
+      }
+    },
+    {
+      "id": "keeper_arctic_curator_11",
+      "category": "keepers",
+      "name": "Zoo Keeper: Arctic Habitat Keeper",
+      "size_m": [
+        0.75,
+        0.5,
+        1.8
+      ],
+      "generator": "human",
+      "budget_tris": 3000,
+      "params": {
+        "role_type": "keeper",
+        "build": "stocky",
+        "skin_tone": "fair",
+        "uniform": "parka_blue",
+        "tool": "ice_pick"
+      }
+    },
+    {
+      "id": "keeper_nocturnal_keeper_12",
+      "category": "keepers",
+      "name": "Zoo Keeper: Nocturnal House Keeper",
+      "size_m": [
+        0.55,
+        0.38,
+        1.72
+      ],
+      "generator": "human",
+      "budget_tris": 3000,
+      "params": {
+        "role_type": "keeper",
+        "build": "slim",
+        "skin_tone": "dark",
+        "uniform": "charcoal",
+        "tool": "red_flashlight"
+      }
+    },
+    {
+      "id": "keeper_nursery_nurse_13",
+      "category": "keepers",
+      "name": "Zoo Keeper: Animal Nursery Nurse",
+      "size_m": [
+        0.52,
+        0.36,
+        1.64
+      ],
+      "generator": "human",
+      "budget_tris": 3000,
+      "params": {
+        "role_type": "keeper",
+        "build": "petite",
+        "skin_tone": "medium",
+        "uniform": "white_apron",
+        "tool": "nursing_bottle"
+      }
+    },
+    {
+      "id": "keeper_grounds_landscaper_14",
+      "category": "keepers",
+      "name": "Zoo Keeper: Zoo Landscaper",
+      "size_m": [
+        0.62,
+        0.42,
+        1.78
+      ],
+      "generator": "human",
+      "budget_tris": 3000,
+      "params": {
+        "role_type": "keeper",
+        "build": "athletic",
+        "skin_tone": "tan",
+        "uniform": "orange_vest",
+        "tool": "rake"
+      }
+    },
+    {
+      "id": "keeper_maintenance_tech_15",
+      "category": "keepers",
+      "name": "Zoo Keeper: Habitat Maintenance Tech",
+      "size_m": [
+        0.7,
+        0.48,
+        1.85
+      ],
+      "generator": "human",
+      "budget_tris": 3000,
+      "params": {
+        "role_type": "keeper",
+        "build": "stocky",
+        "skin_tone": "medium",
+        "uniform": "blue_overalls",
+        "tool": "toolbox"
+      }
+    },
+    {
+      "id": "keeper_security_ranger_16",
+      "category": "keepers",
+      "name": "Zoo Keeper: Zoo Ranger / Security",
+      "size_m": [
+        0.65,
+        0.42,
+        1.86
+      ],
+      "generator": "human",
+      "budget_tris": 3000,
+      "params": {
+        "role_type": "keeper",
+        "build": "athletic",
+        "skin_tone": "dark",
+        "uniform": "ranger_tan",
+        "tool": "radio_holster"
+      }
+    },
+    {
+      "id": "keeper_education_guide_17",
+      "category": "keepers",
+      "name": "Zoo Keeper: Educational Safari Guide",
+      "size_m": [
+        0.56,
+        0.38,
+        1.74
+      ],
+      "generator": "human",
+      "budget_tris": 3000,
+      "params": {
+        "role_type": "keeper",
+        "build": "slim",
+        "skin_tone": "fair",
+        "uniform": "yellow_polo",
+        "tool": "megaphone"
+      }
+    },
+    {
+      "id": "keeper_penguin_keeper_18",
+      "category": "keepers",
+      "name": "Zoo Keeper: Penguin Colony Caretaker",
+      "size_m": [
+        0.62,
+        0.42,
+        1.72
+      ],
+      "generator": "human",
+      "budget_tris": 3000,
+      "params": {
+        "role_type": "keeper",
+        "build": "athletic",
+        "skin_tone": "tan",
+        "uniform": "waders_blue",
+        "tool": "feed_pail"
+      }
+    },
+    {
+      "id": "keeper_botanist_curator_19",
+      "category": "keepers",
+      "name": "Zoo Keeper: Botanical Habitat Curator",
+      "size_m": [
+        0.52,
+        0.36,
+        1.65
+      ],
+      "generator": "human",
+      "budget_tris": 3000,
+      "params": {
+        "role_type": "keeper",
+        "build": "petite",
+        "skin_tone": "fair",
+        "uniform": "green_smock",
+        "tool": "pruning_shears"
+      }
+    },
+    {
+      "id": "keeper_apprentice_keeper_20",
+      "category": "keepers",
+      "name": "Zoo Keeper: Junior Apprentice Keeper",
+      "size_m": [
+        0.55,
+        0.38,
+        1.68
+      ],
+      "generator": "human",
+      "budget_tris": 3000,
+      "params": {
+        "role_type": "keeper",
+        "build": "slim",
+        "skin_tone": "medium",
+        "uniform": "khaki_vest",
+        "tool": "broom"
+      }
+    },
+    {
+      "id": "visitor_tourist_camera_01",
+      "category": "visitors",
+      "name": "Visitor: Tourist with DSLR Camera",
+      "size_m": [
+        0.6,
+        0.4,
+        1.78
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "athletic",
+        "skin_tone": "fair",
+        "outfit": "casual_polo",
+        "accessory": "camera"
+      }
+    },
+    {
+      "id": "visitor_tourist_sunhat_02",
+      "category": "visitors",
+      "name": "Visitor: Tourist with Sunhat",
+      "size_m": [
+        0.55,
+        0.38,
+        1.68
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "slim",
+        "skin_tone": "tan",
+        "outfit": "summer_dress",
+        "accessory": "tote_bag"
+      }
+    },
+    {
+      "id": "visitor_child_balloon_03",
+      "category": "visitors",
+      "name": "Visitor: Excited Child with Balloon",
+      "size_m": [
+        0.45,
+        0.35,
+        1.15
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "child",
+        "skin_tone": "dark",
+        "outfit": "tshirt_shorts",
+        "accessory": "balloon"
+      }
+    },
+    {
+      "id": "visitor_child_icecream_04",
+      "category": "visitors",
+      "name": "Visitor: Child Licking Ice Cream",
+      "size_m": [
+        0.42,
+        0.32,
+        1.1
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "child",
+        "skin_tone": "fair",
+        "outfit": "overalls",
+        "accessory": "ice_cream"
+      }
+    },
+    {
+      "id": "visitor_child_cap_05",
+      "category": "visitors",
+      "name": "Visitor: Child with Safari Cap",
+      "size_m": [
+        0.44,
+        0.34,
+        1.2
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "child",
+        "skin_tone": "medium",
+        "outfit": "safari_kids",
+        "accessory": "binoculars_toy"
+      }
+    },
+    {
+      "id": "visitor_toddler_waddling_06",
+      "category": "visitors",
+      "name": "Visitor: Toddler Waddling",
+      "size_m": [
+        0.38,
+        0.3,
+        0.88
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "toddler",
+        "skin_tone": "fair",
+        "outfit": "onesie_yellow",
+        "accessory": "none"
+      }
+    },
+    {
+      "id": "visitor_teen_phone_07",
+      "category": "visitors",
+      "name": "Visitor: Teenager Browsing Phone",
+      "size_m": [
+        0.55,
+        0.38,
+        1.72
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "slim",
+        "skin_tone": "medium",
+        "outfit": "hoodie_jeans",
+        "accessory": "smartphone"
+      }
+    },
+    {
+      "id": "visitor_teen_skateboard_08",
+      "category": "visitors",
+      "name": "Visitor: Teen with Backpack",
+      "size_m": [
+        0.6,
+        0.4,
+        1.75
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "athletic",
+        "skin_tone": "dark",
+        "outfit": "graphic_tee",
+        "accessory": "backpack"
+      }
+    },
+    {
+      "id": "visitor_senior_cane_09",
+      "category": "visitors",
+      "name": "Visitor: Grandfather with Wooden Cane",
+      "size_m": [
+        0.58,
+        0.45,
+        1.7
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "senior",
+        "skin_tone": "fair",
+        "outfit": "cardigan",
+        "accessory": "cane"
+      }
+    },
+    {
+      "id": "visitor_senior_sunvisor_10",
+      "category": "visitors",
+      "name": "Visitor: Grandmother with Sun Visor",
+      "size_m": [
+        0.55,
+        0.4,
+        1.62
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "senior",
+        "skin_tone": "tan",
+        "outfit": "blouse_skirt",
+        "accessory": "umbrella"
+      }
+    },
+    {
+      "id": "visitor_family_dad_backpack_11",
+      "category": "visitors",
+      "name": "Visitor: Father Carrying Heavy Daypack",
+      "size_m": [
+        0.7,
+        0.48,
+        1.84
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "stocky",
+        "skin_tone": "fair",
+        "outfit": "cargo_hiking",
+        "accessory": "heavy_pack"
+      }
+    },
+    {
+      "id": "visitor_family_mom_stroller_12",
+      "category": "visitors",
+      "name": "Visitor: Mother Pushing Stroller",
+      "size_m": [
+        0.6,
+        0.5,
+        1.7
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "slim",
+        "skin_tone": "dark",
+        "outfit": "activewear",
+        "accessory": "stroller_handle"
+      }
+    },
+    {
+      "id": "visitor_wildlife_photographer_13",
+      "category": "visitors",
+      "name": "Visitor: Pro Wildlife Photographer",
+      "size_m": [
+        0.65,
+        0.45,
+        1.82
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "athletic",
+        "skin_tone": "medium",
+        "outfit": "camo_vest",
+        "accessory": "tripod_rig"
+      }
+    },
+    {
+      "id": "visitor_art_student_14",
+      "category": "visitors",
+      "name": "Visitor: Art Student Sketching",
+      "size_m": [
+        0.55,
+        0.38,
+        1.66
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "slim",
+        "skin_tone": "fair",
+        "outfit": "boho_jacket",
+        "accessory": "sketchbook"
+      }
+    },
+    {
+      "id": "visitor_school_trip_scout_15",
+      "category": "visitors",
+      "name": "Visitor: School Scout on Field Trip",
+      "size_m": [
+        0.45,
+        0.35,
+        1.25
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "child",
+        "skin_tone": "tan",
+        "outfit": "scout_uniform",
+        "accessory": "field_notebook"
+      }
+    },
+    {
+      "id": "visitor_school_chaperone_16",
+      "category": "visitors",
+      "name": "Visitor: School Field Trip Leader",
+      "size_m": [
+        0.62,
+        0.42,
+        1.76
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "athletic",
+        "skin_tone": "dark",
+        "outfit": "hi_vis_yellow",
+        "accessory": "clipboard_whistle"
+      }
+    },
+    {
+      "id": "visitor_zoology_student_17",
+      "category": "visitors",
+      "name": "Visitor: Zoology Graduate Student",
+      "size_m": [
+        0.58,
+        0.4,
+        1.74
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "slim",
+        "skin_tone": "medium",
+        "outfit": "vest_khaki",
+        "accessory": "digital_recorder"
+      }
+    },
+    {
+      "id": "visitor_souvenir_shopper_18",
+      "category": "visitors",
+      "name": "Visitor: Visitor with Souvenir Bags",
+      "size_m": [
+        0.6,
+        0.42,
+        1.68
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "athletic",
+        "skin_tone": "fair",
+        "outfit": "shopping_chic",
+        "accessory": "gift_bags"
+      }
+    },
+    {
+      "id": "visitor_jogger_sport_19",
+      "category": "visitors",
+      "name": "Visitor: Morning Zoo Jogger",
+      "size_m": [
+        0.6,
+        0.38,
+        1.8
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "athletic",
+        "skin_tone": "dark",
+        "outfit": "running_shorts",
+        "accessory": "water_flask"
+      }
+    },
+    {
+      "id": "visitor_snack_muncher_20",
+      "category": "visitors",
+      "name": "Visitor: Visitor Eating Soft Pretzel",
+      "size_m": [
+        0.68,
+        0.46,
+        1.78
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "stocky",
+        "skin_tone": "tan",
+        "outfit": "denim_jacket",
+        "accessory": "pretzel"
+      }
+    },
+    {
+      "id": "visitor_bird_watcher_21",
+      "category": "visitors",
+      "name": "Visitor: Binoculars Bird Watcher",
+      "size_m": [
+        0.56,
+        0.4,
+        1.72
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "slim",
+        "skin_tone": "fair",
+        "outfit": "outdoor_vest",
+        "accessory": "binoculars_neck"
+      }
+    },
+    {
+      "id": "visitor_wheelchair_user_22",
+      "category": "visitors",
+      "name": "Visitor: Visitor in Active Wheelchair",
+      "size_m": [
+        0.85,
+        0.95,
+        1.3
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "seated",
+        "skin_tone": "medium",
+        "outfit": "casual_jacket",
+        "accessory": "wheelchair"
+      }
+    },
+    {
+      "id": "visitor_parent_shoulder_kid_23",
+      "category": "visitors",
+      "name": "Visitor: Parent with Kid on Shoulders",
+      "size_m": [
+        0.65,
+        0.45,
+        2.15
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "tall",
+        "skin_tone": "dark",
+        "outfit": "casual_shirt",
+        "accessory": "kid_rider"
+      }
+    },
+    {
+      "id": "visitor_twin_kid_boy_24",
+      "category": "visitors",
+      "name": "Visitor: Zoo Explorer Twin A",
+      "size_m": [
+        0.44,
+        0.34,
+        1.18
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "child",
+        "skin_tone": "fair",
+        "outfit": "explorer_hat",
+        "accessory": "map_sheet"
+      }
+    },
+    {
+      "id": "visitor_twin_kid_girl_25",
+      "category": "visitors",
+      "name": "Visitor: Zoo Explorer Twin B",
+      "size_m": [
+        0.44,
+        0.34,
+        1.18
+      ],
+      "generator": "human",
+      "budget_tris": 2000,
+      "params": {
+        "role_type": "visitor",
+        "build": "child",
+        "skin_tone": "fair",
+        "outfit": "explorer_hat",
+        "accessory": "compass"
+      }
+    },
+    {
+      "id": "enrich_boomer_ball_lg_01",
+      "category": "enrichment",
+      "name": "Enrichment: Heavy-Duty Boomer Ball Large",
+      "size_m": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "enrichment",
+        "variant": "boomer_ball_lg"
+      }
+    },
+    {
+      "id": "enrich_boomer_ball_sm_02",
+      "category": "enrichment",
+      "name": "Enrichment: Small Carnivore Play Ball",
+      "size_m": [
+        0.4,
+        0.4,
+        0.4
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "enrichment",
+        "variant": "boomer_ball_sm"
+      }
+    },
+    {
+      "id": "enrich_tire_swing_single_03",
+      "category": "enrichment",
+      "name": "Enrichment: Single Hanging Tire Swing",
+      "size_m": [
+        0.8,
+        0.8,
+        1.8
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "enrichment",
+        "variant": "tire_swing_single"
+      }
+    },
+    {
+      "id": "enrich_tire_pyramid_04",
+      "category": "enrichment",
+      "name": "Enrichment: Stacked Enrichment Tires",
+      "size_m": [
+        1.6,
+        1.6,
+        1.2
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "enrichment",
+        "variant": "tire_pyramid"
+      }
+    },
+    {
+      "id": "enrich_puzzle_barrel_05",
+      "category": "enrichment",
+      "name": "Enrichment: Rolling Feeder Barrel with Holes",
+      "size_m": [
+        0.7,
+        0.7,
+        1.0
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "enrichment",
+        "variant": "puzzle_barrel"
+      }
+    },
+    {
+      "id": "enrich_firehose_cube_06",
+      "category": "enrichment",
+      "name": "Enrichment: Woven Firehose Chew Cube",
+      "size_m": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "enrichment",
+        "variant": "firehose_cube"
+      }
+    },
+    {
+      "id": "enrich_ice_block_treat_07",
+      "category": "enrichment",
+      "name": "Enrichment: Frozen Fish & Fruit Block",
+      "size_m": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "enrichment",
+        "variant": "ice_block_treat"
+      }
+    },
+    {
+      "id": "enrich_scratch_post_timber_08",
+      "category": "enrichment",
+      "name": "Enrichment: Heavy Timber Scratching Post",
+      "size_m": [
+        0.6,
+        0.6,
+        2.2
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "enrichment",
+        "variant": "scratch_post_timber"
+      }
+    },
+    {
+      "id": "enrich_floating_log_buoy_09",
+      "category": "enrichment",
+      "name": "Enrichment: Floating Otter Log Buoy",
+      "size_m": [
+        0.5,
+        1.8,
+        0.5
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "enrichment",
+        "variant": "floating_log_buoy"
+      }
+    },
+    {
+      "id": "enrich_scent_marking_log_10",
+      "category": "enrichment",
+      "name": "Enrichment: Perforated Herb Scent Log",
+      "size_m": [
+        0.4,
+        1.4,
+        0.4
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "enrichment",
+        "variant": "scent_marking_log"
+      }
+    },
+    {
+      "id": "enrich_rope_spiral_tug_11",
+      "category": "enrichment",
+      "name": "Enrichment: Braided Hemp Rope Spiral Tug",
+      "size_m": [
+        0.3,
+        0.3,
+        2.0
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "enrichment",
+        "variant": "rope_spiral_tug"
+      }
+    },
+    {
+      "id": "enrich_forage_bungee_net_12",
+      "category": "enrichment",
+      "name": "Enrichment: Bungee Suspended Forage Net",
+      "size_m": [
+        0.7,
+        0.7,
+        1.5
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "enrichment",
+        "variant": "forage_bungee_net"
+      }
+    },
+    {
+      "id": "enrich_bamboo_windchime_toy_13",
+      "category": "enrichment",
+      "name": "Enrichment: Primate Clatter Chime Toy",
+      "size_m": [
+        0.5,
+        0.5,
+        1.6
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "enrichment",
+        "variant": "bamboo_windchime_toy"
+      }
+    },
+    {
+      "id": "enrich_primate_puzzle_box_14",
+      "category": "enrichment",
+      "name": "Enrichment: Clear Primate Slider Maze Box",
+      "size_m": [
+        0.8,
+        0.4,
+        0.6
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "enrichment",
+        "variant": "primate_puzzle_box"
+      }
+    },
+    {
+      "id": "enrich_rubber_wobble_cone_15",
+      "category": "enrichment",
+      "name": "Enrichment: Weighted Wobble Cone Feeder",
+      "size_m": [
+        0.6,
+        0.6,
+        0.8
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "enrichment",
+        "variant": "rubber_wobble_cone"
+      }
+    },
+    {
+      "id": "enrich_climbing_cargo_net_16",
+      "category": "enrichment",
+      "name": "Enrichment: Rope Climbing Wall Net",
+      "size_m": [
+        2.5,
+        0.2,
+        2.0
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "enrichment",
+        "variant": "climbing_cargo_net"
+      }
+    },
+    {
+      "id": "enrich_misting_rub_station_17",
+      "category": "enrichment",
+      "name": "Enrichment: Overhead Misting Post Station",
+      "size_m": [
+        1.0,
+        0.8,
+        2.4
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "enrichment",
+        "variant": "misting_rub_station"
+      }
+    },
+    {
+      "id": "enrich_splash_wading_tub_18",
+      "category": "enrichment",
+      "name": "Enrichment: Reinforced Splash Tub",
+      "size_m": [
+        1.5,
+        1.5,
+        0.6
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "enrichment",
+        "variant": "splash_wading_tub"
+      }
+    },
+    {
+      "id": "enrich_treat_labyrinth_plate_19",
+      "category": "enrichment",
+      "name": "Enrichment: Ground Grazing Forage Maze",
+      "size_m": [
+        1.2,
+        1.2,
+        0.25
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "enrichment",
+        "variant": "treat_labyrinth_plate"
+      }
+    },
+    {
+      "id": "enrich_floating_plastic_ring_20",
+      "category": "enrichment",
+      "name": "Enrichment: Pygmy Hippo Floating Toy Ring",
+      "size_m": [
+        0.9,
+        0.9,
+        0.3
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "enrichment",
+        "variant": "floating_plastic_ring"
+      }
+    },
+    {
+      "id": "food_hay_bale_square_01",
+      "category": "food",
+      "name": "Food: Standard Timothy Hay Bale",
+      "size_m": [
+        0.9,
+        0.5,
+        0.45
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "food",
+        "variant": "hay_bale_square"
+      }
+    },
+    {
+      "id": "food_hay_bale_round_02",
+      "category": "food",
+      "name": "Food: Giant Round Pasture Silage Bale",
+      "size_m": [
+        1.5,
+        1.5,
+        1.2
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "food",
+        "variant": "hay_bale_round"
+      }
+    },
+    {
+      "id": "food_meat_rib_slab_03",
+      "category": "food",
+      "name": "Food: Raw Beef Rib Feeding Slab",
+      "size_m": [
+        0.6,
+        0.35,
+        0.15
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "food",
+        "variant": "meat_rib_slab"
+      }
+    },
+    {
+      "id": "food_fish_bucket_herring_04",
+      "category": "food",
+      "name": "Food: Galvanized Pail Packed with Fish",
+      "size_m": [
+        0.4,
+        0.4,
+        0.45
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "food",
+        "variant": "fish_bucket_herring"
+      }
+    },
+    {
+      "id": "food_eucalyptus_bundle_05",
+      "category": "food",
+      "name": "Food: Fresh Eucalyptus Branch Bundle",
+      "size_m": [
+        0.6,
+        0.6,
+        1.2
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "food",
+        "variant": "eucalyptus_bundle"
+      }
+    },
+    {
+      "id": "food_bamboo_stalk_sheaf_06",
+      "category": "food",
+      "name": "Food: Tied Giant Bamboo Sheaf",
+      "size_m": [
+        0.5,
+        0.5,
+        2.0
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "food",
+        "variant": "bamboo_stalk_sheaf"
+      }
+    },
+    {
+      "id": "food_fruit_crate_mixed_07",
+      "category": "food",
+      "name": "Food: Slatted Wood Crate of Apples & Citrus",
+      "size_m": [
+        0.6,
+        0.4,
+        0.3
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "food",
+        "variant": "fruit_crate_mixed"
+      }
+    },
+    {
+      "id": "food_veggie_bushel_roots_08",
+      "category": "food",
+      "name": "Food: Woven Basket of Root Veggies",
+      "size_m": [
+        0.5,
+        0.5,
+        0.45
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "food",
+        "variant": "veggie_bushel_roots"
+      }
+    },
+    {
+      "id": "food_seed_pellet_trough_09",
+      "category": "food",
+      "name": "Food: Hanging Zinc Seed & Grain Trough",
+      "size_m": [
+        1.2,
+        0.4,
+        0.35
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "food",
+        "variant": "seed_pellet_trough"
+      }
+    },
+    {
+      "id": "food_insect_larva_dish_10",
+      "category": "food",
+      "name": "Food: Ceramic Mealworm & Cricket Bowl",
+      "size_m": [
+        0.35,
+        0.35,
+        0.15
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "food",
+        "variant": "insect_larva_dish"
+      }
+    },
+    {
+      "id": "food_salt_lick_mineral_11",
+      "category": "food",
+      "name": "Food: Hanging Red Mineral Salt Block",
+      "size_m": [
+        0.3,
+        0.3,
+        0.3
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "food",
+        "variant": "salt_lick_mineral"
+      }
+    },
+    {
+      "id": "food_raw_marrow_bone_12",
+      "category": "food",
+      "name": "Food: Large Bovine Marrow Knuckle Bone",
+      "size_m": [
+        0.5,
+        0.2,
+        0.2
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "food",
+        "variant": "raw_marrow_bone"
+      }
+    },
+    {
+      "id": "food_browse_wall_rack_13",
+      "category": "food",
+      "name": "Food: Wall-Mounted Forage Browse Rack",
+      "size_m": [
+        1.4,
+        0.35,
+        1.0
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "food",
+        "variant": "browse_wall_rack"
+      }
+    },
+    {
+      "id": "food_slow_feeder_haynet_14",
+      "category": "food",
+      "name": "Food: Suspended Knotted Hay Net",
+      "size_m": [
+        0.7,
+        0.7,
+        1.1
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "food",
+        "variant": "slow_feeder_haynet"
+      }
+    },
+    {
+      "id": "food_nectar_tube_feeder_15",
+      "category": "food",
+      "name": "Food: Glass Hummingbird Nectar Tube",
+      "size_m": [
+        0.25,
+        0.25,
+        0.6
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "food",
+        "variant": "nectar_tube_feeder"
+      }
+    },
+    {
+      "id": "food_carnivore_nutrient_loaf_16",
+      "category": "food",
+      "name": "Food: Pressed Carnivore Nutrient Block",
+      "size_m": [
+        0.4,
+        0.25,
+        0.2
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "food",
+        "variant": "carnivore_nutrient_loaf"
+      }
+    },
+    {
+      "id": "food_watermelon_enrich_treat_17",
+      "category": "food",
+      "name": "Food: Quartered Carved Watermelon",
+      "size_m": [
+        0.4,
+        0.4,
+        0.35
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "food",
+        "variant": "watermelon_enrich_treat"
+      }
+    },
+    {
+      "id": "food_krill_shrimp_pail_18",
+      "category": "food",
+      "name": "Food: Aquatic Krill & Squid Feeder Tub",
+      "size_m": [
+        0.45,
+        0.45,
+        0.4
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "food",
+        "variant": "krill_shrimp_pail"
+      }
+    },
+    {
+      "id": "food_pellet_feed_sack_19",
+      "category": "food",
+      "name": "Food: Jute Pelletized Animal Feed Sack",
+      "size_m": [
+        0.5,
+        0.35,
+        0.75
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "food",
+        "variant": "pellet_feed_sack"
+      }
+    },
+    {
+      "id": "food_water_drink_trough_20",
+      "category": "food",
+      "name": "Food: Cast Concrete Heated Waterer",
+      "size_m": [
+        1.1,
+        0.6,
+        0.5
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "food",
+        "variant": "water_drink_trough"
+      }
+    },
+    {
+      "id": "shop_plush_lion_toy_01",
+      "category": "shop",
+      "name": "Shop Item: Souvenir Plush Stuffed Lion",
+      "size_m": [
+        0.3,
+        0.4,
+        0.35
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "shop",
+        "variant": "plush_lion_toy"
+      }
+    },
+    {
+      "id": "shop_plush_elephant_toy_02",
+      "category": "shop",
+      "name": "Shop Item: Souvenir Plush Stuffed Elephant",
+      "size_m": [
+        0.35,
+        0.45,
+        0.35
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "shop",
+        "variant": "plush_elephant_toy"
+      }
+    },
+    {
+      "id": "shop_plush_penguin_toy_03",
+      "category": "shop",
+      "name": "Shop Item: Souvenir Plush Stuffed Penguin",
+      "size_m": [
+        0.25,
+        0.25,
+        0.35
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "shop",
+        "variant": "plush_penguin_toy"
+      }
+    },
+    {
+      "id": "shop_plush_giraffe_toy_04",
+      "category": "shop",
+      "name": "Shop Item: Souvenir Plush Tall Giraffe",
+      "size_m": [
+        0.3,
+        0.4,
+        0.7
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "shop",
+        "variant": "plush_giraffe_toy"
+      }
+    },
+    {
+      "id": "shop_zoo_guide_brochure_05",
+      "category": "shop",
+      "name": "Shop Item: Folded Zoo Illustrated Map Brochure",
+      "size_m": [
+        0.15,
+        0.25,
+        0.02
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "shop",
+        "variant": "zoo_guide_brochure"
+      }
+    },
+    {
+      "id": "shop_postcard_carousel_rack_06",
+      "category": "shop",
+      "name": "Shop Item: Rotating Wire Postcard Stand",
+      "size_m": [
+        0.45,
+        0.45,
+        0.9
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "shop",
+        "variant": "postcard_carousel_rack"
+      }
+    },
+    {
+      "id": "shop_animal_ear_headband_07",
+      "category": "shop",
+      "name": "Shop Item: Tiger Stripe Ear Headband",
+      "size_m": [
+        0.2,
+        0.18,
+        0.15
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "shop",
+        "variant": "animal_ear_headband"
+      }
+    },
+    {
+      "id": "shop_safari_pith_helmet_08",
+      "category": "shop",
+      "name": "Shop Item: Childrens Khaki Safari Sun Hat",
+      "size_m": [
+        0.3,
+        0.32,
+        0.18
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "shop",
+        "variant": "safari_pith_helmet"
+      }
+    },
+    {
+      "id": "shop_zoo_logo_hoodie_09",
+      "category": "shop",
+      "name": "Shop Item: Folded Zoo Souvenir Hoodie Stack",
+      "size_m": [
+        0.4,
+        0.35,
+        0.25
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "shop",
+        "variant": "zoo_logo_hoodie"
+      }
+    },
+    {
+      "id": "shop_ceramic_souvenir_mug_10",
+      "category": "shop",
+      "name": "Shop Item: Stoneware Animal Mug",
+      "size_m": [
+        0.14,
+        0.11,
+        0.11
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "shop",
+        "variant": "ceramic_souvenir_mug"
+      }
+    },
+    {
+      "id": "shop_steel_water_bottle_11",
+      "category": "shop",
+      "name": "Shop Item: Branded Insulated Eco Flask",
+      "size_m": [
+        0.09,
+        0.09,
+        0.26
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "shop",
+        "variant": "steel_water_bottle"
+      }
+    },
+    {
+      "id": "shop_spiral_rainbow_lollipop_12",
+      "category": "shop",
+      "name": "Shop Item: Jumbo Swirl Zoo Lollipop",
+      "size_m": [
+        0.16,
+        0.03,
+        0.35
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "shop",
+        "variant": "spiral_rainbow_lollipop"
+      }
+    },
+    {
+      "id": "shop_soft_pretzel_mustard_13",
+      "category": "shop",
+      "name": "Shop Item: Salted Jumbo Pretzel in Paper Tray",
+      "size_m": [
+        0.22,
+        0.2,
+        0.06
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "shop",
+        "variant": "soft_pretzel_mustard"
+      }
+    },
+    {
+      "id": "shop_softserve_icecream_cone_14",
+      "category": "shop",
+      "name": "Shop Item: Swirled Soft-Serve Waffle Cone",
+      "size_m": [
+        0.09,
+        0.09,
+        0.22
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "shop",
+        "variant": "softserve_icecream_cone"
+      }
+    },
+    {
+      "id": "shop_fountain_soda_cup_15",
+      "category": "shop",
+      "name": "Shop Item: Lidded Zoo Soda Cup with Straw",
+      "size_m": [
+        0.11,
+        0.11,
+        0.2
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "shop",
+        "variant": "fountain_soda_cup"
+      }
+    },
+    {
+      "id": "shop_animal_sticker_sheet_16",
+      "category": "shop",
+      "name": "Shop Item: Holographic Wild Animal Sticker Sheet",
+      "size_m": [
+        0.18,
+        0.25,
+        0.01
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "shop",
+        "variant": "animal_sticker_sheet"
+      }
+    },
+    {
+      "id": "shop_keychain_spin_tree_17",
+      "category": "shop",
+      "name": "Shop Item: Countertop Metal Keychain Spinner",
+      "size_m": [
+        0.35,
+        0.35,
+        0.6
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "shop",
+        "variant": "keychain_spin_tree"
+      }
+    },
+    {
+      "id": "shop_figurine_blind_box_18",
+      "category": "shop",
+      "name": "Shop Item: Collectible Miniature Animal Blind Box",
+      "size_m": [
+        0.08,
+        0.08,
+        0.1
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "shop",
+        "variant": "figurine_blind_box"
+      }
+    },
+    {
+      "id": "shop_toy_plastic_binoculars_19",
+      "category": "shop",
+      "name": "Shop Item: Kid Safari Toy Binoculars",
+      "size_m": [
+        0.16,
+        0.14,
+        0.07
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "shop",
+        "variant": "toy_plastic_binoculars"
+      }
+    },
+    {
+      "id": "shop_helium_tiger_balloon_20",
+      "category": "shop",
+      "name": "Shop Item: Foil Animal Head Helium Balloon",
+      "size_m": [
+        0.45,
+        0.2,
+        0.5
+      ],
+      "generator": "props",
+      "budget_tris": 2000,
+      "params": {
+        "prop_family": "shop",
+        "variant": "helium_tiger_balloon"
+      }
+    }
+  ]
+}
