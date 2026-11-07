@@ -140,6 +140,100 @@ function placement(pos, rotDeg, half, scale = [1, 1, 1]) {
   return m;
 }
 
+// ---------- dynamic living scene (pathfinding & NPC simulation) ----------
+let dynamicEntities = [];
+const dynamicMeshes = new Set();
+let simRunning = true;
+let lastSimTime = performance.now();
+
+const _posVec = new THREE.Vector3();
+const _scaleVec = new THREE.Vector3(1, 1, 1);
+const _quat = new THREE.Quaternion();
+const _upAxis = new THREE.Vector3(0, 1, 0);
+const _dynMatrix = new THREE.Matrix4();
+const _tmpMatrix = new THREE.Matrix4();
+
+function updatePlacementMatrix(m, pos, rotDeg, half, scale = [1, 1, 1]) {
+  _quat.setFromAxisAngle(_upAxis, THREE.MathUtils.degToRad(-(rotDeg || 0)));
+  _posVec.set(pos[0] - half, pos[2] || 0, pos[1] - half);
+  _scaleVec.set(...scale);
+  m.compose(_posVec, _quat, _scaleVec);
+  return m;
+}
+
+function updateSimulation(dt, half) {
+  for (const ent of dynamicEntities) {
+    if (ent.type === 'visitor' || ent.type === 'keeper') {
+      if (ent.waitTimer > 0) {
+        ent.waitTimer -= dt;
+      } else if (ent.currentNode && ent.targetNode && ent.currentNode !== ent.targetNode) {
+        const segDist = Math.hypot(ent.targetNode.x - ent.currentNode.x, ent.targetNode.y - ent.currentNode.y);
+        ent.progress += (ent.speed * dt) / Math.max(0.1, segDist);
+        if (ent.progress >= 1) {
+          ent.curX = ent.targetNode.x;
+          ent.curY = ent.targetNode.y;
+          ent.prevNode = ent.currentNode;
+          ent.currentNode = ent.targetNode;
+          ent.progress = 0;
+
+          const candidates = ent.currentNode.neighbors.filter((n) => n !== ent.prevNode);
+          const next = (candidates.length > 0)
+            ? candidates[Math.floor(Math.random() * candidates.length)]
+            : (ent.currentNode.neighbors[0] || ent.currentNode);
+          ent.targetNode = next;
+
+          if (Math.random() < 0.25) {
+            ent.waitTimer = 1.0 + Math.random() * 2.5;
+          }
+        } else {
+          ent.curX = (1 - ent.progress) * ent.currentNode.x + ent.progress * ent.targetNode.x;
+          ent.curY = (1 - ent.progress) * ent.currentNode.y + ent.progress * ent.targetNode.y;
+          const dx = ent.targetNode.x - ent.currentNode.x;
+          const dy = ent.targetNode.y - ent.currentNode.y;
+          if (Math.hypot(dx, dy) > 0.01) {
+            ent.rotDeg = Math.atan2(dx, dy) * (180 / Math.PI);
+          }
+        }
+      }
+    } else if (ent.type === 'animal') {
+      if (ent.state === 'idle') {
+        ent.waitTimer -= dt;
+        if (ent.waitTimer <= 0) {
+          const b = ent.bounds;
+          ent.targetX = b.minX + Math.random() * Math.max(0.1, b.maxX - b.minX);
+          ent.targetY = b.minY + Math.random() * Math.max(0.1, b.maxY - b.minY);
+          ent.state = 'walk';
+        }
+      } else if (ent.state === 'walk') {
+        const dx = ent.targetX - ent.curX;
+        const dy = ent.targetY - ent.curY;
+        const dist = Math.hypot(dx, dy);
+        const step = ent.speed * dt;
+        if (dist <= step || dist < 0.05) {
+          ent.curX = ent.targetX;
+          ent.curY = ent.targetY;
+          ent.state = 'idle';
+          ent.waitTimer = 2.0 + Math.random() * 4.0;
+        } else {
+          ent.curX += (dx / dist) * step;
+          ent.curY += (dy / dist) * step;
+          ent.rotDeg = Math.atan2(dx, dy) * (180 / Math.PI);
+        }
+      }
+    }
+
+    updatePlacementMatrix(_dynMatrix, [ent.curX, ent.curY, ent.z], ent.rotDeg, half);
+    for (const b of ent.bindings) {
+      _tmpMatrix.multiplyMatrices(_dynMatrix, b.local);
+      b.im.setMatrixAt(b.index, _tmpMatrix);
+    }
+  }
+
+  for (const im of dynamicMeshes) {
+    im.instanceMatrix.needsUpdate = true;
+  }
+}
+
 // ---------- build ----------
 let layout = null;
 let buildToken = 0;
@@ -149,12 +243,59 @@ const GATE_ASSET = 'gate_pedestrian_wicket';
 function collectPlacements(L) {
   const half = L.boundary.width_m / 2;
   const groups = new Map();
-  const add = (id, m) => { if (!groups.has(id)) groups.set(id, []); groups.get(id).push(m); };
+  dynamicEntities = [];
+  dynamicMeshes.clear();
+
+  const add = (id, m, entity = null) => {
+    if (!groups.has(id)) groups.set(id, []);
+    groups.get(id).push({ m, entity });
+  };
+
   add(L.entrance.asset_id, placement(L.entrance.position, L.entrance.rotation_deg, half));
   for (const p of L.paths) add(PATH_ASSET, placement(p.position, 0, half, [1, 1, 0.5])); // tile is 2 x 4 m
+
+  // Build path navigation graph for people
+  const pathGraph = new Map();
+  const tileKey = (x, y) => `${Math.round(x)},${Math.round(y)}`;
+  for (const p of L.paths) {
+    const k = tileKey(p.position[0], p.position[1]);
+    pathGraph.set(k, { x: p.position[0], y: p.position[1], neighbors: [] });
+  }
+  for (const node of pathGraph.values()) {
+    for (const [dx, dy] of [[GRID_M, 0], [-GRID_M, 0], [0, GRID_M], [0, -GRID_M]]) {
+      const neighbor = pathGraph.get(tileKey(node.x + dx, node.y + dy));
+      if (neighbor) node.neighbors.push(neighbor);
+    }
+  }
+
   for (const e of L.enclosures) {
-    for (const a of e.animals) add(a.asset_id, placement(a.position, a.rotation_deg, half));
     const b = e.bounds, gx = e.gate_position[0], gy = e.gate_position[1];
+    const pad = Math.max(1.2, (e.animals[0]?.size_m || 1.5) * 0.45);
+    const minX = Math.min(b.min_x + pad, e.center[0]);
+    const maxX = Math.max(b.max_x - pad, e.center[0]);
+    const minY = Math.min(b.min_y + pad, e.center[1]);
+    const maxY = Math.max(b.max_y - pad, e.center[1]);
+
+    for (const a of e.animals) {
+      const entity = {
+        type: 'animal',
+        id: a.id,
+        curX: a.position[0],
+        curY: a.position[1],
+        z: a.position[2] || 0,
+        rotDeg: a.rotation_deg,
+        speed: 0.6 + Math.random() * 0.5,
+        state: 'idle',
+        waitTimer: 1.0 + Math.random() * 4.0,
+        targetX: a.position[0],
+        targetY: a.position[1],
+        bounds: { minX, maxX, minY, maxY },
+        bindings: []
+      };
+      dynamicEntities.push(entity);
+      add(a.asset_id, placement(a.position, a.rotation_deg, half), entity);
+    }
+
     // fence pieces are 2 m long along X; the gate tile gets a 2 m wicket gate (same grid footprint).
     for (let x = b.min_x; x < b.max_x - 0.01; x += GRID_M) {
       for (const y of [b.min_y, b.max_y]) {
@@ -169,9 +310,42 @@ function collectPlacements(L) {
       }
     }
   }
-  for (const k of ['facilities', 'decorations', 'people']) {
+
+  for (const k of ['facilities', 'decorations']) {
     for (const o of L[k]) add(o.asset_id, placement(o.position, o.rotation_deg, half));
   }
+
+  // Dynamic people (visitors and keepers)
+  for (const p of L.people) {
+    let closestNode = null, minDist = Infinity;
+    for (const node of pathGraph.values()) {
+      const d = Math.hypot(node.x - p.position[0], node.y - p.position[1]);
+      if (d < minDist) { minDist = d; closestNode = node; }
+    }
+
+    // Smoothly walk from spawn position to closest path node, then continue onto graph
+    const spawnNode = { x: p.position[0], y: p.position[1], neighbors: closestNode ? [closestNode] : [] };
+    const targetNode = closestNode || spawnNode;
+
+    const entity = {
+      type: p.role,
+      id: p.id,
+      curX: p.position[0],
+      curY: p.position[1],
+      z: p.position[2] || 0,
+      rotDeg: p.rotation_deg,
+      speed: (p.role === 'keeper' ? 1.2 : 0.8) + (Math.random() * 0.4),
+      currentNode: spawnNode,
+      targetNode: targetNode,
+      prevNode: null,
+      progress: 0,
+      waitTimer: Math.random() * 2,
+      bindings: []
+    };
+    dynamicEntities.push(entity);
+    add(p.asset_id, placement(p.position, p.rotation_deg, half), entity);
+  }
+
   return groups;
 }
 
@@ -193,16 +367,23 @@ async function build(s, given = null) {
   let instances = 0, draws = 0;
   const tmp = new THREE.Matrix4();
   for (const [id, parts] of loaded) {
-    const mats = groups.get(id);
+    const items = groups.get(id);
     for (const part of parts) {
-      const im = new THREE.InstancedMesh(part.geometry, part.material, mats.length);
-      mats.forEach((m, i) => im.setMatrixAt(i, tmp.multiplyMatrices(m, part.local)));
+      const im = new THREE.InstancedMesh(part.geometry, part.material, items.length);
+      items.forEach((item, i) => {
+        im.setMatrixAt(i, tmp.multiplyMatrices(item.m, part.local));
+        if (item.entity) {
+          item.entity.bindings.push({ im, index: i, local: part.local });
+          dynamicMeshes.add(im);
+          im.frustumCulled = false;
+        }
+      });
       im.instanceMatrix.needsUpdate = true;
       im.computeBoundingSphere();
       world.add(im);
       draws++;
     }
-    instances += mats.length;
+    instances += items.length;
   }
   const st = layout.stats;
   $('stats').textContent =
@@ -213,6 +394,7 @@ async function build(s, given = null) {
   document.body.dataset.animals = String(st.total_animals);
   document.body.dataset.people = String(st.total_people);
   document.body.dataset.source = given ? 'import' : 'generator';
+  document.body.dataset.simulating = simRunning ? '1' : '0';
 }
 
 function frameAll() {
@@ -346,10 +528,23 @@ if (themeBtn) {
   });
 }
 
+const simBtn = $('sim-toggle');
+function toggleSim() {
+  simRunning = !simRunning;
+  if (simBtn) simBtn.textContent = simRunning ? 'Pause NPCs' : 'Resume NPCs';
+  document.body.dataset.simulating = simRunning ? '1' : '0';
+}
+if (simBtn) simBtn.addEventListener('click', toggleSim);
+
 // ---------- fps ----------
 let frames = 0, last = performance.now(), firstFrame = 0;
 function loop(now) {
   controls.update();
+  const dt = Math.min((now - lastSimTime) / 1000, 0.1);
+  lastSimTime = now;
+  if (simRunning && dynamicEntities.length > 0 && layout) {
+    updateSimulation(dt, layout.boundary.width_m / 2);
+  }
   renderer.render(scene, camera);
   if (!firstFrame && document.body.dataset.ready) {
     firstFrame = now;
@@ -388,4 +583,7 @@ window.__park = {
   get controls() { return controls; },
   get theme() { return currentTheme; },
   setTheme,
+  get npcs() { return dynamicEntities; },
+  get isSimulating() { return simRunning; },
+  toggleSimulation() { toggleSim(); }
 };

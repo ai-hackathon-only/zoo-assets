@@ -248,6 +248,22 @@ console.log(`Day/Night toggle clicked: ${themeBefore} ("${btnTextBefore}") -> ${
 const urlState = await evalJs("return window.location.search");
 console.log(`URL search params preserved: "${urlState}"`);
 
+// 4b. Living Scene NPC Simulation Check (if button exists)
+const simToggleCheck = await evalJs(`
+  const btn = document.getElementById('sim-toggle');
+  if (!btn) return { hasBtn: false };
+  const initialSim = document.body.dataset.simulating;
+  btn.click();
+  const pausedSim = document.body.dataset.simulating;
+  btn.click();
+  const resumedSim = document.body.dataset.simulating;
+  return { hasBtn: true, initialSim, pausedSim, resumedSim };
+`);
+if (simToggleCheck && simToggleCheck.hasBtn) {
+  console.log(`\n--- 3b. Living Scene Simulation Toggle Check ---`);
+  console.log(`Simulation toggle: initial=${simToggleCheck.initialSim} -> paused=${simToggleCheck.pausedSim} -> resumed=${simToggleCheck.resumedSim}`);
+}
+
 // 5. Gallery Search Interaction Check
 console.log('\n--- 4. Gallery Search Interaction Check ---');
 const galleryUrl = 'https://ai-hackathon-only.github.io/zoo-assets/';
