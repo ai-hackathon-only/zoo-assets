@@ -355,6 +355,24 @@ if (consoleErrors.length > 0) {
 }
 
 // 7. Screenshots of 3 different seeds at 1280px and 390px if requested
+if (process.argv.includes('--style-shots')) {
+  console.log('\n--- Screenshots for layout styles ---');
+  for (const st of ['grid', 'loop', 'radial']) {
+    await evalJs(`
+      const sel = document.getElementById('style');
+      if (sel) {
+        sel.value = '${st}';
+        sel.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    `);
+    await new Promise(r => setTimeout(r, 1500));
+    const shot = await sendSession('Page.captureScreenshot', { format: 'png' });
+    const p = `docs/park/park-style-${st}.png`;
+    fs.writeFileSync(p, Buffer.from(shot.result.data, 'base64'));
+    console.log(`Saved screenshot for style ${st}: ${p} (${fs.statSync(p).size} bytes)`);
+  }
+}
+
 if (process.argv.includes('--screenshots')) {
   console.log('\n--- 6. Screenshots (1280px & 390px) ---');
   const shotsDir = '/tmp/park-shots';
