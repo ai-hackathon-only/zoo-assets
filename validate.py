@@ -78,6 +78,22 @@ def check(r):
     want_l = max(sx, sy)
     if abs(ln - want_l) > want_l * L_TOL:
         errs.append(f"longest side {ln:.2f} m, size_m says {want_l} (+-{int(L_TOL * 100)} %)")
+    if r.get("category") == "facilities":
+        GRID_M = 2.0
+        EDGE_M = 0.5
+        TOL_M = 0.001
+        dx, dy = hi[0] - lo[0], hi[1] - lo[1]
+        if abs(cx) > TOL_M or abs(cy) > TOL_M or abs(lo[2]) > TOL_M:
+            errs.append(f"facilities origin not at floor centre within 1 mm (cx={cx:.4f}, cy={cy:.4f}, z0={lo[2]:.4f})")
+        for axis_name, dim in [("dx", dx), ("dy", dy)]:
+            err_2m = abs(dim - round(dim / GRID_M) * GRID_M)
+            err_edge = abs(dim - EDGE_M)
+            if (err_2m > TOL_M or round(dim / GRID_M) < 1) and err_edge > TOL_M:
+                errs.append(f"facilities modular grid check: {axis_name} {dim:.4f} m not multiple of {GRID_M} m or {EDGE_M} m edge within 1 mm")
+        if abs(dx - sx) > TOL_M:
+            errs.append(f"facilities dx {dx:.4f} m does not match size_m[0] {sx:.4f} m within 1 mm")
+        if abs(dy - sy) > TOL_M:
+            errs.append(f"facilities dy {dy:.4f} m does not match size_m[1] {sy:.4f} m within 1 mm")
     return errs, {"tris": tris, "bytes": size, "glb": glb, "thumb": png}
 
 
@@ -125,4 +141,5 @@ def main():
     sys.exit(1 if bad else 0)
 
 
-main()
+if __name__ == "__main__":
+    main()

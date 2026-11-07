@@ -49,6 +49,27 @@ def build(asset, z):
     builder = dispatch.get(family, _build_generic_facility)
     builder(W, L, H, variant, aid, z)
 
+    # Standardize exact metric modular bounds (multiples of 2m or 0.5m edge)
+    import bpy
+    obs = [o for o in bpy.context.scene.objects if o.type == "MESH"]
+    xs = [v.co.x for o in obs for v in o.data.vertices]
+    ys = [v.co.y for o in obs for v in o.data.vertices]
+    zs = [v.co.z for o in obs for v in o.data.vertices]
+    if xs and ys and zs:
+        min_x, max_x = min(xs), max(xs)
+        min_y, max_y = min(ys), max(ys)
+        min_z, max_z = min(zs), max(zs)
+        dx, dy, dz = max_x - min_x, max_y - min_y, max_z - min_z
+        if dx > 0 and dy > 0 and dz > 0:
+            scale_x = W / dx
+            scale_y = L / dy
+            scale_z = H / dz
+            for o in obs:
+                for v in o.data.vertices:
+                    v.co.x = (v.co.x - (min_x + max_x) / 2) * scale_x
+                    v.co.y = (v.co.y - (min_y + max_y) / 2) * scale_y
+                    v.co.z = (v.co.z - min_z) * scale_z
+
 
 # --- FENCES & WALLS ---
 
@@ -490,12 +511,12 @@ def _build_bridge(W, L, H, variant, aid, z):
         z.box((0.2, L * 0.98, H * 0.92), loc=(-W * 0.42, 0, 0.02 + H * 0.46), colour="sand")
         z.box((0.2, L * 0.98, H * 0.92), loc=(W * 0.42, 0, 0.02 + H * 0.46), colour="sand")
     else:  # timber
-        z.box((W * 0.9, L * 0.95, 0.2), loc=(0, 0, H * 0.45), colour="brown")
+        z.box((W * 0.82, L * 0.95, 0.2), loc=(0, 0, H * 0.45), colour="brown")
         for x in (-W * 0.42, W * 0.42):
             z.box((0.08, L * 0.95, 0.08), loc=(x, 0, H * 0.95), colour="tan")
             z.box((0.08, L * 0.95, 0.08), loc=(x, 0, H * 0.65), colour="tan")
             for y in (-L * 0.4, -L * 0.15, L * 0.15, L * 0.4):
-                z.box((0.12, 0.12, H * 0.94), loc=(x, y, H * 0.47), colour="dark_brown")
+                z.box((0.11, 0.11, H * 0.94), loc=(x, y, H * 0.47), colour="dark_brown")
 
 
 # --- WATER FEATURES ---
