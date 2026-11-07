@@ -13,34 +13,56 @@ SCHEMA_DESC = "id, category, name, size_m [width x, length y, height z] metres (
 def assemble(catalog_dir="data", output_path="assets.json"):
     files = sorted(glob.glob(os.path.join(catalog_dir, "catalog_*.json")))
     combined_assets = []
-    seen_ids = set()
+    seen_ids = {}  # id -> source
+    duplicates = []
     category_counts = {}
 
     if os.path.exists(output_path):
         try:
             with open(output_path, "r", encoding="utf-8") as f:
                 base = json.load(f)
-            for item in base.get("assets", []):
-                if item["id"] not in seen_ids:
-                    seen_ids.add(item["id"])
-                    combined_assets.append(item)
-                    cat = item.get("category", "unknown")
-                    category_counts[cat] = category_counts.get(cat, 0) + 1
-        except Exception:
-            pass
+            base_items = base if isinstance(base, list) else base.get("assets", [])
+            for item in base_items:
+                item_id = item.get("id")
+                if not item_id:
+                    print(f"Error: Item missing 'id' in {output_path}: {item}", file=sys.stderr)
+                    sys.exit(1)
+                if item_id in seen_ids:
+                    duplicates.append((item_id, output_path, seen_ids[item_id]))
+                seen_ids[item_id] = output_path
+                combined_assets.append(item)
+                cat = item.get("category", "unknown")
+                category_counts[cat] = category_counts.get(cat, 0) + 1
+        except Exception as e:
+            print(f"Error reading existing {output_path}: {e}", file=sys.stderr)
+            sys.exit(1)
 
     for fpath in files:
-        with open(fpath, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        items = data.get("assets", data.get("facilities", []))
+        try:
+            with open(fpath, "r", encoding="utf-8") as f:
+                data = json.load(f)
+        except Exception as e:
+            print(f"Error reading {fpath}: {e}", file=sys.stderr)
+            sys.exit(1)
+
+        items = data if isinstance(data, list) else data.get("assets", data.get("facilities", []))
         for item in items:
-            item_id = item["id"]
+            item_id = item.get("id")
+            if not item_id:
+                print(f"Error: Item missing 'id' in {fpath}: {item}", file=sys.stderr)
+                sys.exit(1)
             if item_id in seen_ids:
-                continue
-            seen_ids.add(item_id)
+                duplicates.append((item_id, fpath, seen_ids[item_id]))
+            seen_ids[item_id] = fpath
             combined_assets.append(item)
             cat = item.get("category", "unknown")
             category_counts[cat] = category_counts.get(cat, 0) + 1
+
+    if duplicates:
+        print(f"Error: Found {len(duplicates)} duplicate ID(s) across catalog files:", file=sys.stderr)
+        for dup_id, source1, source2 in duplicates:
+            print(f"  - '{dup_id}' in '{source1}' conflicts with '{source2}'", file=sys.stderr)
+        sys.exit(1)
 
     result = {
         "schema": SCHEMA_DESC,
