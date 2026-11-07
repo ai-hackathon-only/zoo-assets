@@ -1,0 +1,6 @@
+{
+ "schema": "id, category, name, size_m [width x, length y, height z] metres (Blender Z up, front faces +Y), generator, budget_tris, params. validate.py --write adds tris, bytes, glb, thumb.",
+ "assets": [
+  {"id": "african_elephant", "category": "animals", "name": "African elephant", "size_m": [1.8, 5.5, 3.2], "generator": "quadruped", "budget_tris": 5000, "params": {"body": "grey", "leg": 0.45}}
+ ]
+}
