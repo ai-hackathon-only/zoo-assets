@@ -47,7 +47,11 @@
     ]
    },
    "variant_of": "african_elephant",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 968,
+   "bytes": 71632,
+   "glb": "assets/animals/african_elephant_baby.glb",
+   "thumb": "assets/animals/african_elephant_baby.png"
   },
   {
    "id": "african_elephant_rare",
@@ -71,7 +75,11 @@
     "recolour": "albino"
    },
    "variant_of": "african_elephant",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 1160,
+   "bytes": 87120,
+   "glb": "assets/animals/african_elephant_rare.glb",
+   "thumb": "assets/animals/african_elephant_rare.png"
   },
   {
    "id": "asian_elephant",
@@ -139,7 +147,11 @@
     ]
    },
    "variant_of": "white_rhino",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 800,
+   "bytes": 60824,
+   "glb": "assets/animals/white_rhino_baby.glb",
+   "thumb": "assets/animals/white_rhino_baby.png"
   },
   {
    "id": "white_rhino_rare",
@@ -161,7 +173,11 @@
     "recolour": "albino"
    },
    "variant_of": "white_rhino",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 992,
+   "bytes": 76312,
+   "glb": "assets/animals/white_rhino_rare.glb",
+   "thumb": "assets/animals/white_rhino_rare.png"
   },
   {
    "id": "indian_rhino",
@@ -229,7 +245,11 @@
     ]
    },
    "variant_of": "hippo",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 756,
+   "bytes": 57796,
+   "glb": "assets/animals/hippo_baby.glb",
+   "thumb": "assets/animals/hippo_baby.png"
   },
   {
    "id": "hippo_rare",
@@ -251,7 +271,11 @@
     "recolour": "albino"
    },
    "variant_of": "hippo",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 948,
+   "bytes": 73280,
+   "glb": "assets/animals/hippo_rare.glb",
+   "thumb": "assets/animals/hippo_rare.png"
   },
   {
    "id": "pygmy_hippo",
@@ -318,7 +342,11 @@
     ]
    },
    "variant_of": "brown_bear",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 812,
+   "bytes": 61788,
+   "glb": "assets/animals/brown_bear_baby.glb",
+   "thumb": "assets/animals/brown_bear_baby.png"
   },
   {
    "id": "brown_bear_rare",
@@ -340,7 +368,11 @@
     "recolour": "albino"
    },
    "variant_of": "brown_bear",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 812,
+   "bytes": 61788,
+   "glb": "assets/animals/brown_bear_rare.glb",
+   "thumb": "assets/animals/brown_bear_rare.png"
   },
   {
    "id": "polar_bear",
@@ -407,7 +439,11 @@
     ]
    },
    "variant_of": "giant_panda",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 1136,
+   "bytes": 86392,
+   "glb": "assets/animals/giant_panda_baby.glb",
+   "thumb": "assets/animals/giant_panda_baby.png"
   },
   {
    "id": "giant_panda_rare",
@@ -431,7 +467,11 @@
     }
    },
    "variant_of": "giant_panda",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 1136,
+   "bytes": 86392,
+   "glb": "assets/animals/giant_panda_rare.glb",
+   "thumb": "assets/animals/giant_panda_rare.png"
   },
   {
    "id": "red_panda",
@@ -477,7 +517,11 @@
     ]
    },
    "variant_of": "red_panda",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 944,
+   "bytes": 69116,
+   "glb": "assets/animals/red_panda_baby.glb",
+   "thumb": "assets/animals/red_panda_baby.png"
   },
   {
    "id": "red_panda_rare",
@@ -500,7 +544,11 @@
     "recolour": "albino"
    },
    "variant_of": "red_panda",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 944,
+   "bytes": 69108,
+   "glb": "assets/animals/red_panda_rare.glb",
+   "thumb": "assets/animals/red_panda_rare.png"
   },
   {
    "id": "sloth_bear",
@@ -595,7 +643,11 @@
     "leg": 0.36
    },
    "variant_of": "grey_wolf",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 764,
+   "bytes": 57916,
+   "glb": "assets/animals/grey_wolf_baby.glb",
+   "thumb": "assets/animals/grey_wolf_baby.png"
   },
   {
    "id": "grey_wolf_rare",
@@ -619,7 +671,11 @@
     "recolour": "melanistic"
    },
    "variant_of": "grey_wolf",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 764,
+   "bytes": 57916,
+   "glb": "assets/animals/grey_wolf_rare.glb",
+   "thumb": "assets/animals/grey_wolf_rare.png"
   },
   {
    "id": "arctic_fox",
@@ -1073,7 +1129,11 @@
     ]
    },
    "variant_of": "lion",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 1192,
+   "bytes": 91324,
+   "glb": "assets/animals/lion_baby.glb",
+   "thumb": "assets/animals/lion_baby.png"
   },
   {
    "id": "lion_rare",
@@ -1095,7 +1155,11 @@
     "recolour": "albino"
    },
    "variant_of": "lion",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 1192,
+   "bytes": 91324,
+   "glb": "assets/animals/lion_rare.glb",
+   "thumb": "assets/animals/lion_rare.png"
   },
   {
    "id": "lioness",
@@ -1162,7 +1226,11 @@
     ]
    },
    "variant_of": "bengal_tiger",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 1812,
+   "bytes": 138712,
+   "glb": "assets/animals/bengal_tiger_baby.glb",
+   "thumb": "assets/animals/bengal_tiger_baby.png"
   },
   {
    "id": "bengal_tiger_rare",
@@ -1184,7 +1252,11 @@
     "recolour": "golden"
    },
    "variant_of": "bengal_tiger",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 1812,
+   "bytes": 138712,
+   "glb": "assets/animals/bengal_tiger_rare.glb",
+   "thumb": "assets/animals/bengal_tiger_rare.png"
   },
   {
    "id": "amur_tiger",
@@ -1251,7 +1323,11 @@
     ]
    },
    "variant_of": "leopard",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 2860,
+   "bytes": 236896,
+   "glb": "assets/animals/leopard_baby.glb",
+   "thumb": "assets/animals/leopard_baby.png"
   },
   {
    "id": "leopard_rare",
@@ -1273,7 +1349,11 @@
     "recolour": "melanistic"
    },
    "variant_of": "leopard",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 2860,
+   "bytes": 236892,
+   "glb": "assets/animals/leopard_rare.glb",
+   "thumb": "assets/animals/leopard_rare.png"
   },
   {
    "id": "snow_leopard",
@@ -1367,7 +1447,11 @@
     ]
    },
    "variant_of": "cheetah",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 2020,
+   "bytes": 164272,
+   "glb": "assets/animals/cheetah_baby.glb",
+   "thumb": "assets/animals/cheetah_baby.png"
   },
   {
    "id": "cheetah_rare",
@@ -1392,7 +1476,11 @@
     }
    },
    "variant_of": "cheetah",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 2020,
+   "bytes": 164272,
+   "glb": "assets/animals/cheetah_rare.glb",
+   "thumb": "assets/animals/cheetah_rare.png"
   },
   {
    "id": "cougar",
@@ -1436,7 +1524,11 @@
     ]
    },
    "variant_of": "cougar",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 988,
+   "bytes": 75896,
+   "glb": "assets/animals/cougar_baby.glb",
+   "thumb": "assets/animals/cougar_baby.png"
   },
   {
    "id": "cougar_rare",
@@ -1458,7 +1550,11 @@
     "recolour": "melanistic"
    },
    "variant_of": "cougar",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 988,
+   "bytes": 75896,
+   "glb": "assets/animals/cougar_rare.glb",
+   "thumb": "assets/animals/cougar_rare.png"
   },
   {
    "id": "eurasian_lynx",
@@ -1578,7 +1674,11 @@
     ]
    },
    "variant_of": "giraffe",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 1740,
+   "bytes": 132956,
+   "glb": "assets/animals/giraffe_baby.glb",
+   "thumb": "assets/animals/giraffe_baby.png"
   },
   {
    "id": "giraffe_rare",
@@ -1602,7 +1702,11 @@
     "recolour": "albino"
    },
    "variant_of": "giraffe",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 1740,
+   "bytes": 132920,
+   "glb": "assets/animals/giraffe_rare.glb",
+   "thumb": "assets/animals/giraffe_rare.png"
   },
   {
    "id": "okapi",
@@ -1669,7 +1773,11 @@
     ]
    },
    "variant_of": "plains_zebra",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 2244,
+   "bytes": 165176,
+   "glb": "assets/animals/plains_zebra_baby.glb",
+   "thumb": "assets/animals/plains_zebra_baby.png"
   },
   {
    "id": "plains_zebra_rare",
@@ -1693,7 +1801,11 @@
     }
    },
    "variant_of": "plains_zebra",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 2244,
+   "bytes": 165172,
+   "glb": "assets/animals/plains_zebra_rare.glb",
+   "thumb": "assets/animals/plains_zebra_rare.png"
   },
   {
    "id": "grevys_zebra",
@@ -1761,7 +1873,11 @@
     ]
    },
    "variant_of": "dromedary",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 936,
+   "bytes": 70084,
+   "glb": "assets/animals/dromedary_baby.glb",
+   "thumb": "assets/animals/dromedary_baby.png"
   },
   {
    "id": "dromedary_rare",
@@ -1783,7 +1899,11 @@
     "recolour": "albino"
    },
    "variant_of": "dromedary",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 936,
+   "bytes": 70052,
+   "glb": "assets/animals/dromedary_rare.glb",
+   "thumb": "assets/animals/dromedary_rare.png"
   },
   {
    "id": "bactrian_camel",
@@ -1897,7 +2017,11 @@
     ]
    },
    "variant_of": "american_bison",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 1060,
+   "bytes": 78392,
+   "glb": "assets/animals/american_bison_baby.glb",
+   "thumb": "assets/animals/american_bison_baby.png"
   },
   {
    "id": "american_bison_rare",
@@ -1919,7 +2043,11 @@
     "recolour": "albino"
    },
    "variant_of": "american_bison",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 1060,
+   "bytes": 78388,
+   "glb": "assets/animals/american_bison_rare.glb",
+   "thumb": "assets/animals/american_bison_rare.png"
   },
   {
    "id": "european_bison",
@@ -2009,7 +2137,11 @@
     ]
    },
    "variant_of": "reindeer",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 1012,
+   "bytes": 73868,
+   "glb": "assets/animals/reindeer_baby.glb",
+   "thumb": "assets/animals/reindeer_baby.png"
   },
   {
    "id": "reindeer_rare",
@@ -2031,7 +2163,11 @@
     "recolour": "albino"
    },
    "variant_of": "reindeer",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 1012,
+   "bytes": 73828,
+   "glb": "assets/animals/reindeer_rare.glb",
+   "thumb": "assets/animals/reindeer_rare.png"
   },
   {
    "id": "red_deer",
@@ -2075,7 +2211,11 @@
     ]
    },
    "variant_of": "red_deer",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 1012,
+   "bytes": 73868,
+   "glb": "assets/animals/red_deer_baby.glb",
+   "thumb": "assets/animals/red_deer_baby.png"
   },
   {
    "id": "red_deer_rare",
@@ -2097,7 +2237,11 @@
     "recolour": "albino"
    },
    "variant_of": "red_deer",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 1012,
+   "bytes": 73868,
+   "glb": "assets/animals/red_deer_rare.glb",
+   "thumb": "assets/animals/red_deer_rare.png"
   },
   {
    "id": "sika_deer",
@@ -2400,7 +2544,11 @@
     ]
    },
    "variant_of": "chimpanzee",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 1356,
+   "bytes": 102112,
+   "glb": "assets/animals/chimpanzee_baby.glb",
+   "thumb": "assets/animals/chimpanzee_baby.png"
   },
   {
    "id": "chimpanzee_rare",
@@ -2422,7 +2570,11 @@
     "recolour": "albino"
    },
    "variant_of": "chimpanzee",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 1356,
+   "bytes": 102112,
+   "glb": "assets/animals/chimpanzee_rare.glb",
+   "thumb": "assets/animals/chimpanzee_rare.png"
   },
   {
    "id": "western_gorilla",
@@ -2466,7 +2618,11 @@
     ]
    },
    "variant_of": "western_gorilla",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 1488,
+   "bytes": 112004,
+   "glb": "assets/animals/western_gorilla_baby.glb",
+   "thumb": "assets/animals/western_gorilla_baby.png"
   },
   {
    "id": "western_gorilla_rare",
@@ -2488,7 +2644,11 @@
     "recolour": "albino"
    },
    "variant_of": "western_gorilla",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 1488,
+   "bytes": 112000,
+   "glb": "assets/animals/western_gorilla_rare.glb",
+   "thumb": "assets/animals/western_gorilla_rare.png"
   },
   {
    "id": "bornean_orangutan",
@@ -2532,7 +2692,11 @@
     ]
    },
    "variant_of": "bornean_orangutan",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 1484,
+   "bytes": 112116,
+   "glb": "assets/animals/bornean_orangutan_baby.glb",
+   "thumb": "assets/animals/bornean_orangutan_baby.png"
   },
   {
    "id": "bornean_orangutan_rare",
@@ -2554,7 +2718,11 @@
     "recolour": "golden"
    },
    "variant_of": "bornean_orangutan",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 1484,
+   "bytes": 112112,
+   "glb": "assets/animals/bornean_orangutan_rare.glb",
+   "thumb": "assets/animals/bornean_orangutan_rare.png"
   },
   {
    "id": "bonobo",
@@ -2621,7 +2789,11 @@
     ]
    },
    "variant_of": "ring_tailed_lemur",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 1652,
+   "bytes": 121316,
+   "glb": "assets/animals/ring_tailed_lemur_baby.glb",
+   "thumb": "assets/animals/ring_tailed_lemur_baby.png"
   },
   {
    "id": "ring_tailed_lemur_rare",
@@ -2643,7 +2815,11 @@
     "recolour": "melanistic"
    },
    "variant_of": "ring_tailed_lemur",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 1652,
+   "bytes": 121312,
+   "glb": "assets/animals/ring_tailed_lemur_rare.glb",
+   "thumb": "assets/animals/ring_tailed_lemur_rare.png"
   },
   {
    "id": "mandrill",
@@ -2710,7 +2886,11 @@
     ]
    },
    "variant_of": "japanese_macaque",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 1124,
+   "bytes": 85888,
+   "glb": "assets/animals/japanese_macaque_baby.glb",
+   "thumb": "assets/animals/japanese_macaque_baby.png"
   },
   {
    "id": "japanese_macaque_rare",
@@ -2732,7 +2912,11 @@
     "recolour": "albino"
    },
    "variant_of": "japanese_macaque",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 1124,
+   "bytes": 85884,
+   "glb": "assets/animals/japanese_macaque_rare.glb",
+   "thumb": "assets/animals/japanese_macaque_rare.png"
   },
   {
    "id": "golden_lion_tamarin",
@@ -2892,7 +3076,11 @@
     ]
    },
    "variant_of": "african_penguin",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 554,
+   "bytes": 43808,
+   "glb": "assets/animals/african_penguin_baby.glb",
+   "thumb": "assets/animals/african_penguin_baby.png"
   },
   {
    "id": "african_penguin_rare",
@@ -2914,7 +3102,11 @@
     "recolour": "albino"
    },
    "variant_of": "african_penguin",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 554,
+   "bytes": 43804,
+   "glb": "assets/animals/african_penguin_rare.glb",
+   "thumb": "assets/animals/african_penguin_rare.png"
   },
   {
    "id": "emperor_penguin",
@@ -2983,7 +3175,11 @@
     ]
    },
    "variant_of": "greater_flamingo",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 724,
+   "bytes": 55388,
+   "glb": "assets/animals/greater_flamingo_baby.glb",
+   "thumb": "assets/animals/greater_flamingo_baby.png"
   },
   {
    "id": "greater_flamingo_rare",
@@ -3006,7 +3202,11 @@
     "recolour": "albino"
    },
    "variant_of": "greater_flamingo",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 724,
+   "bytes": 55388,
+   "glb": "assets/animals/greater_flamingo_rare.glb",
+   "thumb": "assets/animals/greater_flamingo_rare.png"
   },
   {
    "id": "ostrich",
@@ -3054,7 +3254,11 @@
     ]
    },
    "variant_of": "ostrich",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 804,
+   "bytes": 61160,
+   "glb": "assets/animals/ostrich_baby.glb",
+   "thumb": "assets/animals/ostrich_baby.png"
   },
   {
    "id": "ostrich_rare",
@@ -3078,7 +3282,11 @@
     "recolour": "albino"
    },
    "variant_of": "ostrich",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 804,
+   "bytes": 61160,
+   "glb": "assets/animals/ostrich_rare.glb",
+   "thumb": "assets/animals/ostrich_rare.png"
   },
   {
    "id": "emu",
@@ -3124,7 +3332,11 @@
     ]
    },
    "variant_of": "emu",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 740,
+   "bytes": 56164,
+   "glb": "assets/animals/emu_baby.glb",
+   "thumb": "assets/animals/emu_baby.png"
   },
   {
    "id": "emu_rare",
@@ -3147,7 +3359,11 @@
     "recolour": "albino"
    },
    "variant_of": "emu",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 740,
+   "bytes": 56160,
+   "glb": "assets/animals/emu_rare.glb",
+   "thumb": "assets/animals/emu_rare.png"
   },
   {
    "id": "bald_eagle",
@@ -3241,7 +3457,11 @@
     ]
    },
    "variant_of": "scarlet_macaw",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 530,
+   "bytes": 42380,
+   "glb": "assets/animals/scarlet_macaw_baby.glb",
+   "thumb": "assets/animals/scarlet_macaw_baby.png"
   },
   {
    "id": "scarlet_macaw_rare",
@@ -3264,7 +3484,11 @@
     "recolour": "blue"
    },
    "variant_of": "scarlet_macaw",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 530,
+   "bytes": 42376,
+   "glb": "assets/animals/scarlet_macaw_rare.glb",
+   "thumb": "assets/animals/scarlet_macaw_rare.png"
   },
   {
    "id": "toco_toucan",
@@ -3331,7 +3555,11 @@
     ]
    },
    "variant_of": "indian_peafowl",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 550,
+   "bytes": 44356,
+   "glb": "assets/animals/indian_peafowl_baby.glb",
+   "thumb": "assets/animals/indian_peafowl_baby.png"
   },
   {
    "id": "indian_peafowl_rare",
@@ -3353,7 +3581,11 @@
     "recolour": "albino"
    },
    "variant_of": "indian_peafowl",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 550,
+   "bytes": 44352,
+   "glb": "assets/animals/indian_peafowl_rare.glb",
+   "thumb": "assets/animals/indian_peafowl_rare.png"
   },
   {
    "id": "kookaburra",
@@ -3537,7 +3769,11 @@
     ]
    },
    "variant_of": "nile_crocodile",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 912,
+   "bytes": 68928,
+   "glb": "assets/animals/nile_crocodile_baby.glb",
+   "thumb": "assets/animals/nile_crocodile_baby.png"
   },
   {
    "id": "nile_crocodile_rare",
@@ -3559,7 +3795,11 @@
     "recolour": "albino"
    },
    "variant_of": "nile_crocodile",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 912,
+   "bytes": 68920,
+   "glb": "assets/animals/nile_crocodile_rare.glb",
+   "thumb": "assets/animals/nile_crocodile_rare.png"
   },
   {
    "id": "american_alligator",
@@ -3605,7 +3845,11 @@
     ]
    },
    "variant_of": "american_alligator",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 944,
+   "bytes": 71176,
+   "glb": "assets/animals/american_alligator_baby.glb",
+   "thumb": "assets/animals/american_alligator_baby.png"
   },
   {
    "id": "american_alligator_rare",
@@ -3628,7 +3872,11 @@
     "recolour": "albino"
    },
    "variant_of": "american_alligator",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 944,
+   "bytes": 71176,
+   "glb": "assets/animals/american_alligator_rare.glb",
+   "thumb": "assets/animals/american_alligator_rare.png"
   },
   {
    "id": "gharial",
@@ -3764,7 +4012,11 @@
     ]
    },
    "variant_of": "green_iguana",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 442,
+   "bytes": 34872,
+   "glb": "assets/animals/green_iguana_baby.glb",
+   "thumb": "assets/animals/green_iguana_baby.png"
   },
   {
    "id": "green_iguana_rare",
@@ -3786,7 +4038,11 @@
     "recolour": "blue"
    },
    "variant_of": "green_iguana",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 442,
+   "bytes": 34868,
+   "glb": "assets/animals/green_iguana_rare.glb",
+   "thumb": "assets/animals/green_iguana_rare.png"
   },
   {
    "id": "chameleon",
@@ -3856,7 +4112,11 @@
     ]
    },
    "variant_of": "reticulated_python",
-   "variant": "baby"
+   "variant": "baby",
+   "tris": 3104,
+   "bytes": 243692,
+   "glb": "assets/animals/reticulated_python_baby.glb",
+   "thumb": "assets/animals/reticulated_python_baby.png"
   },
   {
    "id": "reticulated_python_rare",
@@ -3879,7 +4139,11 @@
     "recolour": "albino"
    },
    "variant_of": "reticulated_python",
-   "variant": "rare"
+   "variant": "rare",
+   "tris": 3104,
+   "bytes": 243692,
+   "glb": "assets/animals/reticulated_python_rare.glb",
+   "thumb": "assets/animals/reticulated_python_rare.png"
   },
   {
    "id": "king_cobra",
