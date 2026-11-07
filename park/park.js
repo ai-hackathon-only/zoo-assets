@@ -123,10 +123,11 @@ function collectPlacements(L) {
   return groups;
 }
 
-async function build(s) {
+// given: an imported layout object; when set, the generator is skipped.
+async function build(s, given = null) {
   const token = ++buildToken;
   const t = performance.now();
-  layout = generateLayout({ size_m: s.size, density: s.density, population: s.population, seed: s.seed }, { assets: catalog });
+  layout = given || generateLayout({ size_m: s.size, density: s.density, population: s.population, seed: s.seed }, { assets: catalog });
   const genMs = performance.now() - t;
   const size = layout.boundary.width_m;
   ground.scale.set(size + 40, size + 40, 1);
@@ -154,7 +155,9 @@ async function build(s) {
   const st = layout.stats;
   $('stats').textContent =
     `${st.total_enclosures} enclosures · ${st.total_animals} animals · ${st.total_facilities} facilities · ` +
-    `${st.total_people} people · ${glbCache.size} GLBs · ${instances} instances · ${draws} draws · layout ${genMs.toFixed(1)} ms`;
+    `${st.total_people} people · ${glbCache.size} GLBs · ${instances} instances · ${draws} draws · ` +
+    (given ? 'imported layout.json' : `layout ${genMs.toFixed(1)} ms`);
+  document.body.dataset.source = given ? 'import' : 'generator';
   document.body.dataset.ready = '1';
   document.body.dataset.animals = String(st.total_animals);
   document.body.dataset.people = String(st.total_people);
@@ -249,6 +252,36 @@ $('shuffle').addEventListener('click', () => {
   inputs.seed.value = String(Math.floor(Math.random() * 1e6));
   apply(false);
 });
+// ---------- export / import layout.json ----------
+const REQUIRED = ['version', 'settings', 'boundary', 'entrance', 'paths', 'enclosures', 'facilities', 'decorations', 'people', 'stats'];
+$('export').addEventListener('click', () => {
+  if (!layout) return;
+  const blob = new Blob([JSON.stringify(layout, null, 1)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `zoo-${layout.settings.seed}-${layout.settings.size_m}m.json`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+});
+$('import').addEventListener('click', () => $('import-file').click());
+$('import-file').addEventListener('change', async (ev) => {
+  const file = ev.target.files[0];
+  ev.target.value = '';
+  if (!file) return;
+  let L;
+  try { L = JSON.parse(await file.text()); } catch { $('stats').textContent = 'Import failed: not valid JSON.'; return; }
+  const missing = REQUIRED.filter((k) => !(L && k in L));
+  if (missing.length) { $('stats').textContent = `Import failed: missing ${missing.join(', ')}.`; return; }
+  const st = L.settings;
+  inputs.size.value = st.size_m; inputs.density.value = st.density;
+  inputs.population.value = st.population; inputs.seed.value = st.seed;
+  showValues();
+  writeSettings(current());
+  clearTimeout(pending);
+  await build(current(), L);
+  frameAll();
+});
+
 $('overview').addEventListener('click', () => { frameAll(); $('focus-name').textContent = 'Whole park'; });
 
 // ---------- fps ----------
