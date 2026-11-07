@@ -470,7 +470,7 @@ def _build_kiosk(W, L, H, variant, aid, z):
     theme_col = "orange" if variant == "ice_cream" else "rust" if variant == "snack" else "leaf" if variant == "info" else "navy"
     body_h = H * 0.65
     z.box((W * 0.85, L * 0.85, body_h), loc=(0, 0, body_h * 0.5), colour="cream")
-    z.box((W * 0.55, 0.08, body_h * 0.35), loc=(0, -L * 0.435, body_h * 0.55), colour="black")
+    z.box((W * 0.55, 0.08, body_h * 0.35), loc=(0, -L * 0.435, body_h * 0.55), colour="cream", emissive=True)
     z.box((W * 0.6, 0.22, 0.08), loc=(0, -L * 0.45, body_h * 0.38), colour="dark_brown")
     rf_h = H * 0.28
     z.box((W * 0.98, L * 0.98, rf_h), loc=(0, 0, body_h + rf_h * 0.5), colour=theme_col, taper=0.5)
@@ -697,7 +697,7 @@ def _build_lamp(W, L, H, variant, aid, z):
         z.cyl(0.06, post_h, loc=(0, 0, base_h + post_h * 0.5), colour="charcoal", seg=8)
         z.cyl(0.025, W * 0.6, loc=(0, 0, base_h + post_h * 0.9), rot=(0, 90, 0), colour="charcoal", seg=6)
         lantern_z = base_h + post_h + H * 0.09
-        z.box((W * 0.6, L * 0.6, H * 0.16), loc=(0, 0, lantern_z), colour="yellow", taper=0.8)
+        z.box((W * 0.6, L * 0.6, H * 0.16), loc=(0, 0, lantern_z), colour="yellow", taper=0.8, emissive=True)
         z.cone(W * 0.45, H * 0.06, loc=(0, 0, lantern_z + H * 0.11), colour="charcoal", seg=8)
         z.ball(0.03, loc=(0, 0, lantern_z + H * 0.15), colour="gold", seg=6, rings=4)
 
@@ -709,19 +709,19 @@ def _build_lamp(W, L, H, variant, aid, z):
         arm_z = base_h + post_h
         z.box((W * 0.88, 0.06, 0.06), loc=(0, 0, arm_z), colour="charcoal")
         for x in (-W * 0.38, W * 0.38):
-            z.box((0.26, 0.26, H * 0.09), loc=(x, 0, arm_z + H * 0.05), colour="yellow", taper=0.8)
+            z.box((0.26, 0.26, H * 0.09), loc=(x, 0, arm_z + H * 0.05), colour="yellow", taper=0.8, emissive=True)
             z.cone(0.18, H * 0.05, loc=(x, 0, arm_z + H * 0.12), colour="charcoal", seg=8)
             z.ball(0.025, loc=(x, 0, arm_z + H * 0.15), colour="gold", seg=6, rings=4)
 
     elif variant == "modern_led":
         z.box((W * 0.7, L * 0.7, H * 0.92), loc=(0, 0, H * 0.46), colour="charcoal")
         z.box((W * 0.72, L * 0.95, H * 0.08), loc=(0, L * 0.12, H * 0.96), colour="charcoal")
-        z.box((W * 0.58, L * 0.42, 0.02), loc=(0, L * 0.25, H * 0.91), colour="yellow")
+        z.box((W * 0.58, L * 0.42, 0.02), loc=(0, L * 0.25, H * 0.91), colour="yellow", emissive=True)
 
     elif variant == "solar_bollard":
         post_r = min(W, L) * 0.4
         z.cyl(post_r, H * 0.78, loc=(0, 0, H * 0.39), colour="light_grey", seg=12)
-        z.cyl(post_r * 0.95, H * 0.12, loc=(0, 0, H * 0.84), colour="yellow", seg=12)
+        z.cyl(post_r * 0.95, H * 0.12, loc=(0, 0, H * 0.84), colour="yellow", seg=12, emissive=True)
         z.cyl(post_r * 1.05, H * 0.04, loc=(0, 0, H * 0.92), colour="charcoal", seg=12)
         z.cyl(post_r * 0.8, 0.01, loc=(0, 0, H * 0.95), colour="navy", seg=12)
 

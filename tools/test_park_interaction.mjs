@@ -236,7 +236,15 @@ await new Promise(r => setTimeout(r, 400));
 const focusAfterOverview = await evalJs("return document.getElementById('focus-name')?.innerText");
 console.log(`Overview button click restored focus to: "${focusAfterOverview}"`);
 
-// 4. URL State Preservation
+// 4. URL State Preservation & Day/Night Toggle Check
+console.log('\n--- 4. Day/Night Toggle & URL State Check ---');
+const themeBefore = await evalJs("return window.__park?.theme || 'day'");
+const btnTextBefore = await evalJs("return document.getElementById('theme')?.innerText || ''");
+await evalJs("document.getElementById('theme')?.click()");
+await new Promise(r => setTimeout(r, 400));
+const themeAfter = await evalJs("return window.__park?.theme || ''");
+const btnTextAfter = await evalJs("return document.getElementById('theme')?.innerText || ''");
+console.log(`Day/Night toggle clicked: ${themeBefore} ("${btnTextBefore}") -> ${themeAfter} ("${btnTextAfter}")`);
 const urlState = await evalJs("return window.location.search");
 console.log(`URL search params preserved: "${urlState}"`);
 
