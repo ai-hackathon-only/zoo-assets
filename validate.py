@@ -68,7 +68,8 @@ def check(r):
     xs, ys, zs = zip(*[(o.matrix_world @ v.co)[:] for o in obs for v in o.data.vertices])
     lo, hi = (min(xs), min(ys), min(zs)), (max(xs), max(ys), max(zs))
     cx, cy = (lo[0] + hi[0]) / 2, (lo[1] + hi[1]) / 2
-    if abs(cx) > ORIGIN_TOL or abs(cy) > ORIGIN_TOL or abs(lo[2]) > ORIGIN_TOL:
+    tol = min(ORIGIN_TOL, 0.1 * max(hi[0] - lo[0], hi[1] - lo[1], hi[2] - lo[2]))  # relative for tiny assets
+    if abs(cx) > tol or abs(cy) > tol or abs(lo[2]) > tol:
         errs.append(f"origin not at floor centre (centre {cx:.3f},{cy:.3f}, floor {lo[2]:.3f})")
     sx, sy, sz = r["size_m"]
     h, ln = hi[2] - lo[2], max(hi[0] - lo[0], hi[1] - lo[1])
