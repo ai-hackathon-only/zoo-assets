@@ -91,7 +91,7 @@ function setTheme(theme) {
     ground.material.color.setHex(0x9cc77a);
     for (const mat of loadedMaterials) {
       if (mat.emissive && (mat.emissive.r > 0 || mat.emissive.g > 0 || mat.emissive.b > 0)) {
-        mat.emissiveIntensity = 1.0;
+        mat.emissiveIntensity = 0.0;
         mat.needsUpdate = true;
       }
     }
@@ -209,10 +209,10 @@ async function build(s, given = null) {
     `${st.total_enclosures} enclosures · ${st.total_animals} animals · ${st.total_facilities} facilities · ` +
     `${st.total_people} people · ${glbCache.size} GLBs · ${instances} instances · ${draws} draws · ` +
     (given ? 'imported layout.json' : `layout ${genMs.toFixed(1)} ms`);
-  document.body.dataset.source = given ? 'import' : 'generator';
   document.body.dataset.ready = '1';
   document.body.dataset.animals = String(st.total_animals);
   document.body.dataset.people = String(st.total_people);
+  document.body.dataset.source = given ? 'import' : 'generator';
 }
 
 function frameAll() {
