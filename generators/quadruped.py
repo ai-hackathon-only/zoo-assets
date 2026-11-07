@@ -41,6 +41,8 @@ def build(a, z):
     leg_h = H * p.get("leg", min(0.48, max(0.22, 0.12 + 0.55 * ratio)))
     if "wide_mouth" in m:
         leg_h = H * 0.24
+    elif "leg" in p:
+        pass  # per-species leg length wins over the family default
     elif "round_ears" in m or "panda_patches" in m or "chest_v" in m or "face_rings" in m:
         leg_h = H * 0.3  # bears: short, thick legs
     big_head = "trunk" in m or "wide_mouth" in m
@@ -98,8 +100,9 @@ def build(a, z):
         z.box((hr * 1.6, hr * 1.2, hr * 0.12), loc=(0, front - hr * 0.42, hz - hr * 0.55), colour="pink")
         sn_end = (0, front - hr * 0.95, hz + hr * 0.1)
     elif "blunt_snout" in m:
-        z.box((hr * 1.1, hr * 0.8, hr * 0.9), loc=(0, front - hr * 0.1, hz - hr * 0.3), colour=fur, taper=0.9)
-        sn_end = (0, front - hr * 0.5, hz - hr * 0.1)
+        sw, sl = p.get("snout", (1.1, 0.8))  # width, length in head radii (capybara: long box, wombat: wide stub)
+        z.box((hr * sw, hr * sl, hr * 0.9), loc=(0, front - hr * (sl * 0.5 - 0.3), hz - hr * 0.3), colour=fur, taper=0.9)
+        sn_end = (0, front - hr * (sl - 0.3), hz - hr * 0.1)
     elif "trunk" not in m:
         snl = hr * (0.9 if "pointed_ears" in m or "white_tail_tip" in m or "big_ears" in m else 0.55)
         sn_end = (0, front - snl, hz - hr * 0.35)
@@ -132,7 +135,8 @@ def build(a, z):
         if "panda_patches" in m or "eye_rings" in m or "mask" in m:
             z.ball(hr * 0.26, loc=(s * ex, ey + hr * 0.08, ez), colour="black", scale=(1, 0.5, 0.8), seg=8, rings=5)
         if "face_rings" in m:
-            z.ball(hr * 0.24, loc=(s * ex, ey + hr * 0.08, ez), colour="cream", scale=(1, 0.5, 0.9), seg=8, rings=5)
+            z.ball(hr * 0.36, loc=(s * ex, ey - hr * 0.02, ez + hr * 0.05), colour="cream", scale=(1, 0.45, 1.1),
+                   seg=8, rings=5)
         if "face_stripes" in m:
             _limb(z, (s * hr * 0.3, hy - hr * 0.9, hz), (s * hr * 0.45, hy + hr * 0.7, hz + hr * 0.6),
                   hr * 0.17, "black", seg=6)
@@ -173,7 +177,7 @@ def build(a, z):
         col = "cream" if "chest_v" in m else "white"
         for s in (1, -1):
             _limb(z, (s * br[0] * 0.55, by - br[1] * 0.72, bz + br[2] * 0.45), (0, by - br[1] * 0.98, bz - br[2] * 0.1),
-                  br[2] * 0.12, col, seg=6)
+                  br[2] * (0.22 if "chest_v" in m else 0.12), col, seg=6)
     if "stripe_diag" in m:
         for s in (1, -1):
             _limb(z, (s * br[0] * 0.9, by - br[1] * 0.45, bz - br[2] * 0.5), (s * br[0] * 0.5, by + br[1] * 0.35,
