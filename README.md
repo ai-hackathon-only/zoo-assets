@@ -1,13 +1,14 @@
 # Zoo Assets
 
-A library of 500 low-poly 3D models for a toy-style zoo. Every model is built from code using headless Blender Python and mapped to a single shared colour palette texture.
+A library of 566 low-poly 3D models for a toy-style zoo (500 base assets plus 66 procedural animal variants). Every model is built from code using headless Blender Python and mapped to a single shared colour palette texture.
 
-You can browse all models in the web gallery at https://ai-hackathon-only.github.io/zoo-assets/.
+You can browse all models in the web gallery at https://ai-hackathon-only.github.io/zoo-assets/ or explore the procedural 3D zoo map at https://ai-hackathon-only.github.io/zoo-assets/park/.
 
 ## Contents
 
-The library includes 500 models across 13 categories:
-- Animals (130 models across 8 body plans)
+The library includes 566 models across 13 base categories plus variants:
+- Animals (130 base models across 8 body plans)
+- Animal Variants (66 baby and rare morph variants across 33 species)
 - Facilities (70 enclosures, fences, gates, shelters, and paths)
 - Plants and trees (55 species)
 - Landscape and rocks (45 terrain pieces and boulders)
@@ -22,6 +23,55 @@ The library includes 500 models across 13 categories:
 - Benches and signs (20 park furniture pieces)
 
 All models share one palette texture (`assets/palette.png`). They have clean origins at floor center, real-world meter scales, and strict triangle limits (under 5,000 for animals, under 3,000 for keepers, under 10,000 for facilities, and under 2,000 for all other items).
+
+## Procedural Zoo Map (Park)
+
+The interactive 3D zoo map at `park/` (https://ai-hackathon-only.github.io/zoo-assets/park/) assembles GLB assets into complete procedural zoos in the browser using three.js.
+
+Key capabilities:
+- **Controls**: Adjust zoo size (80 m to 600 m), asset density, and visitor population (0 to 300 people).
+- **Shuffle & Seed**: Generate randomized layouts from a seed string. Settings and seed sync to URL parameters for sharing.
+- **Top-Down Minimap**: Click any enclosure on the 2D overview to jump the 3D camera to that animal.
+- **Batch Rendering**: Loads each model file once and draws duplicate assets with instancing.
+
+## Layout Generator Rules
+
+The layout engine (`park/generator.js`) is written in pure JavaScript with no DOM dependencies. It turns a settings object and a seed string into a structured layout matching `park/layout.schema.json`.
+
+Rules enforced by the generator:
+- **Single Entrance**: Exactly one park gate on the outer perimeter.
+- **Path Connectivity**: Continuous paths link the entrance to every enclosure and facility.
+- **Enclosure Sizing**: Footprints scale from each animal species' real-world `size_m`.
+- **Variant Placement**: When present, babies and rare morphs spawn next to adults in their enclosures.
+- **No Overlaps**: Enclosures, facilities, and boundary fences maintain clear non-overlapping boundaries.
+- **Facility Placement**: Kiosks, shelters, and restrooms sit along path edges.
+- **Visitor Spawning**: People stand on paths or gather around enclosures.
+- **Full Coverage**: At maximum settings (600 m size, 1.0 density), all 130 animal species are placed in the park.
+
+To verify layout rules across 200 random seeds, run:
+
+```bash
+node park/check_layout.mjs
+```
+
+## Modular Grid System
+
+Environmental assets (fences, enclosures, kiosks, paths, and gates) follow a standard metric grid agreed in Round 2:
+- **Grid Cell**: 2 m standard cell.
+- **Edge Pieces**: 0.5 m depth along grid lines.
+- **Posts & Corners**: 0.5 m × 0.5 m footprint.
+- **Pivot Origin**: Bottom-center (minimum Z = 0, center X = 0, center Y = 0) with a 1 mm tolerance.
+
+`validate.py` checks that all facility bounding boxes snap to multiples of the 2 m grid and match the bottom-center pivot convention.
+
+## Animal Variants
+
+To add diversity to the zoo population, 33 animal species have three distinct models:
+1. **Standard Adult**: Base species model.
+2. **Baby**: Scaled down to 0.45× body dimensions with enlarged head proportions for a toy aesthetic.
+3. **Rare Color Mutation**: Alternative colorways (such as albino, melanistic, or distinct markings) drawn from the shared palette texture.
+
+All 66 variants are generated programmatically via `tools/make_variants.py` and `lib/variants.py`. They are indexed in `assets.json`, include individual thumbnails, and pass `validate.py` scale and triangle budgets.
 
 ## Rebuilding
 
