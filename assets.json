@@ -20,7 +20,11 @@
      "tusks",
      "big_ears"
     ]
-   }
+   },
+   "tris": 1160,
+   "bytes": 87112,
+   "glb": "assets/animals/african_elephant.glb",
+   "thumb": "assets/animals/african_elephant.png"
   },
   {
    "id": "asian_elephant",
@@ -40,7 +44,11 @@
      "trunk",
      "small_ears"
     ]
-   }
+   },
+   "tris": 1048,
+   "bytes": 79268,
+   "glb": "assets/animals/asian_elephant.glb",
+   "thumb": "assets/animals/asian_elephant.png"
   },
   {
    "id": "white_rhino",
@@ -59,7 +67,11 @@
     "marks": [
      "horn2"
     ]
-   }
+   },
+   "tris": 992,
+   "bytes": 76300,
+   "glb": "assets/animals/white_rhino.glb",
+   "thumb": "assets/animals/white_rhino.png"
   },
   {
    "id": "indian_rhino",
@@ -79,7 +91,11 @@
      "horn1",
      "plates"
     ]
-   }
+   },
+   "tris": 1372,
+   "bytes": 104568,
+   "glb": "assets/animals/indian_rhino.glb",
+   "thumb": "assets/animals/indian_rhino.png"
   },
   {
    "id": "hippo",
@@ -98,7 +114,11 @@
     "marks": [
      "wide_mouth"
     ]
-   }
+   },
+   "tris": 948,
+   "bytes": 73272,
+   "glb": "assets/animals/hippo.glb",
+   "thumb": "assets/animals/hippo.png"
   },
   {
    "id": "pygmy_hippo",
@@ -117,7 +137,11 @@
     "marks": [
      "wide_mouth"
     ]
-   }
+   },
+   "tris": 756,
+   "bytes": 57800,
+   "glb": "assets/animals/pygmy_hippo.glb",
+   "thumb": "assets/animals/pygmy_hippo.png"
   },
   {
    "id": "brown_bear",
@@ -136,7 +160,11 @@
     "marks": [
      "round_ears"
     ]
-   }
+   },
+   "tris": 812,
+   "bytes": 61780,
+   "glb": "assets/animals/brown_bear.glb",
+   "thumb": "assets/animals/brown_bear.png"
   },
   {
    "id": "polar_bear",
@@ -155,7 +183,11 @@
     "marks": [
      "round_ears"
     ]
-   }
+   },
+   "tris": 812,
+   "bytes": 61776,
+   "glb": "assets/animals/polar_bear.glb",
+   "thumb": "assets/animals/polar_bear.png"
   },
   {
    "id": "giant_panda",
@@ -174,7 +206,11 @@
     "marks": [
      "panda_patches"
     ]
-   }
+   },
+   "tris": 1136,
+   "bytes": 86384,
+   "glb": "assets/animals/giant_panda.glb",
+   "thumb": "assets/animals/giant_panda.png"
   },
   {
    "id": "red_panda",
@@ -194,7 +230,11 @@
      "ringed_tail",
      "white_face"
     ]
-   }
+   },
+   "tris": 944,
+   "bytes": 69096,
+   "glb": "assets/animals/red_panda.glb",
+   "thumb": "assets/animals/red_panda.png"
   },
   {
    "id": "sloth_bear",
@@ -214,7 +254,11 @@
      "chest_v",
      "fluffy_ears"
     ]
-   }
+   },
+   "tris": 836,
+   "bytes": 62692,
+   "glb": "assets/animals/sloth_bear.glb",
+   "thumb": "assets/animals/sloth_bear.png"
   },
   {
    "id": "spectacled_bear",
@@ -233,7 +277,11 @@
     "marks": [
      "face_rings"
     ]
-   }
+   },
+   "tris": 924,
+   "bytes": 70144,
+   "glb": "assets/animals/spectacled_bear.glb",
+   "thumb": "assets/animals/spectacled_bear.png"
   },
   {
    "id": "grey_wolf",
@@ -254,7 +302,11 @@
      "bushy_tail"
     ],
     "leg": 0.36
-   }
+   },
+   "tris": 764,
+   "bytes": 57908,
+   "glb": "assets/animals/grey_wolf.glb",
+   "thumb": "assets/animals/grey_wolf.png"
   },
   {
    "id": "arctic_fox",
@@ -273,7 +325,11 @@
     "marks": [
      "bushy_tail"
     ]
-   }
+   },
+   "tris": 876,
+   "bytes": 66516,
+   "glb": "assets/animals/arctic_fox.glb",
+   "thumb": "assets/animals/arctic_fox.png"
   },
   {
    "id": "red_fox",
@@ -292,7 +348,11 @@
     "marks": [
      "white_tail_tip"
     ]
-   }
+   },
+   "tris": 940,
+   "bytes": 71504,
+   "glb": "assets/animals/red_fox.glb",
+   "thumb": "assets/animals/red_fox.png"
   },
   {
    "id": "african_wild_dog",
@@ -312,7 +372,11 @@
      "patches",
      "big_ears"
     ]
-   }
+   },
+   "tris": 852,
+   "bytes": 66000,
+   "glb": "assets/animals/african_wild_dog.glb",
+   "thumb": "assets/animals/african_wild_dog.png"
   },
   {
    "id": "meerkat",
@@ -332,7 +396,11 @@
      "upright",
      "eye_rings"
     ]
-   }
+   },
+   "tris": 992,
+   "bytes": 77324,
+   "glb": "assets/animals/meerkat.glb",
+   "thumb": "assets/animals/meerkat.png"
   },
   {
    "id": "aardvark",
@@ -352,7 +420,11 @@
      "long_snout",
      "big_ears"
     ]
-   }
+   },
+   "tris": 684,
+   "bytes": 51536,
+   "glb": "assets/animals/aardvark.glb",
+   "thumb": "assets/animals/aardvark.png"
   },
   {
    "id": "giant_anteater",
@@ -372,7 +444,11 @@
      "long_snout",
      "stripe_diag"
     ]
-   }
+   },
+   "tris": 956,
+   "bytes": 71612,
+   "glb": "assets/animals/giant_anteater.glb",
+   "thumb": "assets/animals/giant_anteater.png"
   },
   {
    "id": "capybara",
@@ -397,7 +473,11 @@
      1.0,
      1.5
     ]
-   }
+   },
+   "tris": 800,
+   "bytes": 61128,
+   "glb": "assets/animals/capybara.glb",
+   "thumb": "assets/animals/capybara.png"
   },
   {
    "id": "koala",
@@ -417,7 +497,11 @@
      "fluffy_ears",
      "upright"
     ]
-   }
+   },
+   "tris": 996,
+   "bytes": 77916,
+   "glb": "assets/animals/koala.glb",
+   "thumb": "assets/animals/koala.png"
   },
   {
    "id": "wombat",
@@ -441,7 +525,11 @@
      1.4,
      0.6
     ]
-   }
+   },
+   "tris": 800,
+   "bytes": 61124,
+   "glb": "assets/animals/wombat.glb",
+   "thumb": "assets/animals/wombat.png"
   },
   {
    "id": "red_kangaroo",
@@ -461,7 +549,11 @@
      "upright",
      "big_tail"
     ]
-   }
+   },
+   "tris": 720,
+   "bytes": 54896,
+   "glb": "assets/animals/red_kangaroo.glb",
+   "thumb": "assets/animals/red_kangaroo.png"
   },
   {
    "id": "tasmanian_devil",
@@ -480,7 +572,11 @@
     "marks": [
      "chest_stripe"
     ]
-   }
+   },
+   "tris": 836,
+   "bytes": 62704,
+   "glb": "assets/animals/tasmanian_devil.glb",
+   "thumb": "assets/animals/tasmanian_devil.png"
   },
   {
    "id": "platypus",
@@ -500,7 +596,11 @@
      "duck_bill",
      "flat_tail"
     ]
-   }
+   },
+   "tris": 612,
+   "bytes": 46180,
+   "glb": "assets/animals/platypus.glb",
+   "thumb": "assets/animals/platypus.png"
   },
   {
    "id": "porcupine",
@@ -519,7 +619,11 @@
     "marks": [
      "quills"
     ]
-   }
+   },
+   "tris": 1028,
+   "bytes": 81508,
+   "glb": "assets/animals/porcupine.glb",
+   "thumb": "assets/animals/porcupine.png"
   },
   {
    "id": "american_beaver",
@@ -538,7 +642,11 @@
     "marks": [
      "flat_tail"
     ]
-   }
+   },
+   "tris": 660,
+   "bytes": 49744,
+   "glb": "assets/animals/american_beaver.glb",
+   "thumb": "assets/animals/american_beaver.png"
   },
   {
    "id": "raccoon",
@@ -558,7 +666,11 @@
      "mask",
      "ringed_tail"
     ]
-   }
+   },
+   "tris": 1084,
+   "bytes": 79924,
+   "glb": "assets/animals/raccoon.glb",
+   "thumb": "assets/animals/raccoon.png"
   },
   {
    "id": "european_badger",
@@ -577,7 +689,11 @@
     "marks": [
      "face_stripes"
     ]
-   }
+   },
+   "tris": 836,
+   "bytes": 62704,
+   "glb": "assets/animals/european_badger.glb",
+   "thumb": "assets/animals/european_badger.png"
   },
   {
    "id": "river_otter",
@@ -596,7 +712,11 @@
     "marks": [
      "long_tail"
     ]
-   }
+   },
+   "tris": 800,
+   "bytes": 60368,
+   "glb": "assets/animals/river_otter.glb",
+   "thumb": "assets/animals/river_otter.png"
   },
   {
    "id": "lion",
@@ -615,7 +735,11 @@
     "marks": [
      "mane"
     ]
-   }
+   },
+   "tris": 1192,
+   "bytes": 91312,
+   "glb": "assets/animals/lion.glb",
+   "thumb": "assets/animals/lion.png"
   },
   {
    "id": "lioness",
@@ -634,7 +758,11 @@
     "marks": [
      "plain"
     ]
-   }
+   },
+   "tris": 988,
+   "bytes": 75884,
+   "glb": "assets/animals/lioness.glb",
+   "thumb": "assets/animals/lioness.png"
   },
   {
    "id": "bengal_tiger",
@@ -653,7 +781,11 @@
     "marks": [
      "stripes"
     ]
-   }
+   },
+   "tris": 1812,
+   "bytes": 138700,
+   "glb": "assets/animals/bengal_tiger.glb",
+   "thumb": "assets/animals/bengal_tiger.png"
   },
   {
    "id": "amur_tiger",
@@ -672,7 +804,11 @@
     "marks": [
      "stripes"
     ]
-   }
+   },
+   "tris": 1812,
+   "bytes": 138696,
+   "glb": "assets/animals/amur_tiger.glb",
+   "thumb": "assets/animals/amur_tiger.png"
   },
   {
    "id": "leopard",
@@ -691,7 +827,11 @@
     "marks": [
      "rosettes"
     ]
-   }
+   },
+   "tris": 2860,
+   "bytes": 236884,
+   "glb": "assets/animals/leopard.glb",
+   "thumb": "assets/animals/leopard.png"
   },
   {
    "id": "snow_leopard",
@@ -711,7 +851,11 @@
      "rosettes",
      "thick_tail"
     ]
-   }
+   },
+   "tris": 2860,
+   "bytes": 236896,
+   "glb": "assets/animals/snow_leopard.glb",
+   "thumb": "assets/animals/snow_leopard.png"
   },
   {
    "id": "jaguar",
@@ -731,7 +875,11 @@
      "rosettes_big",
      "stocky"
     ]
-   }
+   },
+   "tris": 3220,
+   "bytes": 273604,
+   "glb": "assets/animals/jaguar.glb",
+   "thumb": "assets/animals/jaguar.png"
   },
   {
    "id": "cheetah",
@@ -751,7 +899,11 @@
      "spots",
      "tear_lines"
     ]
-   }
+   },
+   "tris": 2020,
+   "bytes": 164260,
+   "glb": "assets/animals/cheetah.glb",
+   "thumb": "assets/animals/cheetah.png"
   },
   {
    "id": "cougar",
@@ -770,7 +922,11 @@
     "marks": [
      "plain"
     ]
-   }
+   },
+   "tris": 988,
+   "bytes": 75884,
+   "glb": "assets/animals/cougar.glb",
+   "thumb": "assets/animals/cougar.png"
   },
   {
    "id": "eurasian_lynx",
@@ -790,7 +946,11 @@
      "ear_tufts",
      "short_tail"
     ]
-   }
+   },
+   "tris": 1052,
+   "bytes": 81272,
+   "glb": "assets/animals/eurasian_lynx.glb",
+   "thumb": "assets/animals/eurasian_lynx.png"
   },
   {
    "id": "serval",
@@ -811,7 +971,11 @@
      "big_ears",
      "long_legs"
     ]
-   }
+   },
+   "tris": 1996,
+   "bytes": 162580,
+   "glb": "assets/animals/serval.glb",
+   "thumb": "assets/animals/serval.png"
   },
   {
    "id": "black_panther",
@@ -830,7 +994,11 @@
     "marks": [
      "plain"
     ]
-   }
+   },
+   "tris": 988,
+   "bytes": 75896,
+   "glb": "assets/animals/black_panther.glb",
+   "thumb": "assets/animals/black_panther.png"
   },
   {
    "id": "giraffe",
@@ -851,7 +1019,11 @@
      "long_neck",
      "ossicones"
     ]
-   }
+   },
+   "tris": 1740,
+   "bytes": 132912,
+   "glb": "assets/animals/giraffe.glb",
+   "thumb": "assets/animals/giraffe.png"
   },
   {
    "id": "okapi",
@@ -870,7 +1042,11 @@
     "marks": [
      "leg_stripes"
     ]
-   }
+   },
+   "tris": 1060,
+   "bytes": 76056,
+   "glb": "assets/animals/okapi.glb",
+   "thumb": "assets/animals/okapi.png"
   },
   {
    "id": "plains_zebra",
@@ -889,7 +1065,11 @@
     "marks": [
      "stripes"
     ]
-   }
+   },
+   "tris": 2244,
+   "bytes": 165164,
+   "glb": "assets/animals/plains_zebra.glb",
+   "thumb": "assets/animals/plains_zebra.png"
   },
   {
    "id": "grevys_zebra",
@@ -909,7 +1089,11 @@
      "thin_stripes",
      "big_ears"
     ]
-   }
+   },
+   "tris": 2604,
+   "bytes": 192652,
+   "glb": "assets/animals/grevys_zebra.glb",
+   "thumb": "assets/animals/grevys_zebra.png"
   },
   {
    "id": "dromedary",
@@ -928,7 +1112,11 @@
     "marks": [
      "hump1"
     ]
-   }
+   },
+   "tris": 936,
+   "bytes": 70044,
+   "glb": "assets/animals/dromedary.glb",
+   "thumb": "assets/animals/dromedary.png"
   },
   {
    "id": "bactrian_camel",
@@ -947,7 +1135,11 @@
     "marks": [
      "hump2"
     ]
-   }
+   },
+   "tris": 1036,
+   "bytes": 77696,
+   "glb": "assets/animals/bactrian_camel.glb",
+   "thumb": "assets/animals/bactrian_camel.png"
   },
   {
    "id": "llama",
@@ -967,7 +1159,11 @@
      "long_neck",
      "banana_ears"
     ]
-   }
+   },
+   "tris": 832,
+   "bytes": 60740,
+   "glb": "assets/animals/llama.glb",
+   "thumb": "assets/animals/llama.png"
   },
   {
    "id": "alpaca",
@@ -986,7 +1182,11 @@
     "marks": [
      "fluffy"
     ]
-   }
+   },
+   "tris": 900,
+   "bytes": 67380,
+   "glb": "assets/animals/alpaca.glb",
+   "thumb": "assets/animals/alpaca.png"
   },
   {
    "id": "american_bison",
@@ -1005,7 +1205,11 @@
     "marks": [
      "hump_fur"
     ]
-   }
+   },
+   "tris": 1060,
+   "bytes": 78376,
+   "glb": "assets/animals/american_bison.glb",
+   "thumb": "assets/animals/american_bison.png"
   },
   {
    "id": "european_bison",
@@ -1024,7 +1228,11 @@
     "marks": [
      "hump_fur"
     ]
-   }
+   },
+   "tris": 1060,
+   "bytes": 78348,
+   "glb": "assets/animals/european_bison.glb",
+   "thumb": "assets/animals/european_bison.png"
   },
   {
    "id": "moose",
@@ -1043,7 +1251,11 @@
     "marks": [
      "palm_antlers"
     ]
-   }
+   },
+   "tris": 1164,
+   "bytes": 85868,
+   "glb": "assets/animals/moose.glb",
+   "thumb": "assets/animals/moose.png"
   },
   {
    "id": "reindeer",
@@ -1062,7 +1274,11 @@
     "marks": [
      "antlers"
     ]
-   }
+   },
+   "tris": 1012,
+   "bytes": 73820,
+   "glb": "assets/animals/reindeer.glb",
+   "thumb": "assets/animals/reindeer.png"
   },
   {
    "id": "red_deer",
@@ -1081,7 +1297,11 @@
     "marks": [
      "antlers"
     ]
-   }
+   },
+   "tris": 1012,
+   "bytes": 73856,
+   "glb": "assets/animals/red_deer.glb",
+   "thumb": "assets/animals/red_deer.png"
   },
   {
    "id": "sika_deer",
@@ -1101,7 +1321,11 @@
      "spots",
      "antlers_small"
     ]
-   }
+   },
+   "tris": 1500,
+   "bytes": 113628,
+   "glb": "assets/animals/sika_deer.glb",
+   "thumb": "assets/animals/sika_deer.png"
   },
   {
    "id": "gemsbok",
@@ -1121,7 +1345,11 @@
      "straight_horns",
      "face_mask"
     ]
-   }
+   },
+   "tris": 1100,
+   "bytes": 81676,
+   "glb": "assets/animals/gemsbok.glb",
+   "thumb": "assets/animals/gemsbok.png"
   },
   {
    "id": "impala",
@@ -1140,7 +1368,11 @@
     "marks": [
      "lyre_horns"
     ]
-   }
+   },
+   "tris": 1116,
+   "bytes": 81744,
+   "glb": "assets/animals/impala.glb",
+   "thumb": "assets/animals/impala.png"
   },
   {
    "id": "greater_kudu",
@@ -1160,7 +1392,11 @@
      "spiral_horns",
      "thin_stripes"
     ]
-   }
+   },
+   "tris": 2156,
+   "bytes": 160220,
+   "glb": "assets/animals/greater_kudu.glb",
+   "thumb": "assets/animals/greater_kudu.png"
   },
   {
    "id": "blue_wildebeest",
@@ -1180,7 +1416,11 @@
      "beard",
      "curved_horns"
     ]
-   }
+   },
+   "tris": 976,
+   "bytes": 71348,
+   "glb": "assets/animals/blue_wildebeest.glb",
+   "thumb": "assets/animals/blue_wildebeest.png"
   },
   {
    "id": "cape_buffalo",
@@ -1199,7 +1439,11 @@
     "marks": [
      "boss_horns"
     ]
-   }
+   },
+   "tris": 956,
+   "bytes": 70040,
+   "glb": "assets/animals/cape_buffalo.glb",
+   "thumb": "assets/animals/cape_buffalo.png"
   },
   {
    "id": "warthog",
@@ -1219,7 +1463,11 @@
      "tusks",
      "mane_strip"
     ]
-   }
+   },
+   "tris": 1020,
+   "bytes": 75424,
+   "glb": "assets/animals/warthog.glb",
+   "thumb": "assets/animals/warthog.png"
   },
   {
    "id": "tapir",
@@ -1238,7 +1486,11 @@
     "marks": [
      "saddle_white"
     ]
-   }
+   },
+   "tris": 1032,
+   "bytes": 77040,
+   "glb": "assets/animals/tapir.glb",
+   "thumb": "assets/animals/tapir.png"
   },
   {
    "id": "przewalskis_horse",
@@ -1257,7 +1509,11 @@
     "marks": [
      "upright_mane"
     ]
-   }
+   },
+   "tris": 948,
+   "bytes": 69460,
+   "glb": "assets/animals/przewalskis_horse.glb",
+   "thumb": "assets/animals/przewalskis_horse.png"
   },
   {
    "id": "mountain_goat",
@@ -1277,7 +1533,11 @@
      "beard",
      "small_horns"
     ]
-   }
+   },
+   "tris": 936,
+   "bytes": 68760,
+   "glb": "assets/animals/mountain_goat.glb",
+   "thumb": "assets/animals/mountain_goat.png"
   },
   {
    "id": "markhor",
@@ -1296,7 +1556,11 @@
     "marks": [
      "corkscrew_horns"
     ]
-   }
+   },
+   "tris": 1076,
+   "bytes": 77692,
+   "glb": "assets/animals/markhor.glb",
+   "thumb": "assets/animals/markhor.png"
   },
   {
    "id": "chimpanzee",
@@ -1315,7 +1579,11 @@
     "marks": [
      "pale_face"
     ]
-   }
+   },
+   "tris": 1356,
+   "bytes": 102104,
+   "glb": "assets/animals/chimpanzee.glb",
+   "thumb": "assets/animals/chimpanzee.png"
   },
   {
    "id": "western_gorilla",
@@ -1334,7 +1602,11 @@
     "marks": [
      "silver_back"
     ]
-   }
+   },
+   "tris": 1488,
+   "bytes": 111992,
+   "glb": "assets/animals/western_gorilla.glb",
+   "thumb": "assets/animals/western_gorilla.png"
   },
   {
    "id": "bornean_orangutan",
@@ -1353,7 +1625,11 @@
     "marks": [
      "long_arms"
     ]
-   }
+   },
+   "tris": 1484,
+   "bytes": 112104,
+   "glb": "assets/animals/bornean_orangutan.glb",
+   "thumb": "assets/animals/bornean_orangutan.png"
   },
   {
    "id": "bonobo",
@@ -1372,7 +1648,11 @@
     "marks": [
      "parted_hair"
     ]
-   }
+   },
+   "tris": 1448,
+   "bytes": 109432,
+   "glb": "assets/animals/bonobo.glb",
+   "thumb": "assets/animals/bonobo.png"
   },
   {
    "id": "ring_tailed_lemur",
@@ -1391,7 +1671,11 @@
     "marks": [
      "ringed_tail"
     ]
-   }
+   },
+   "tris": 1652,
+   "bytes": 121300,
+   "glb": "assets/animals/ring_tailed_lemur.glb",
+   "thumb": "assets/animals/ring_tailed_lemur.png"
   },
   {
    "id": "mandrill",
@@ -1410,7 +1694,11 @@
     "marks": [
      "red_blue_face"
     ]
-   }
+   },
+   "tris": 1444,
+   "bytes": 110820,
+   "glb": "assets/animals/mandrill.glb",
+   "thumb": "assets/animals/mandrill.png"
   },
   {
    "id": "japanese_macaque",
@@ -1429,7 +1717,11 @@
     "marks": [
      "red_face"
     ]
-   }
+   },
+   "tris": 1124,
+   "bytes": 85872,
+   "glb": "assets/animals/japanese_macaque.glb",
+   "thumb": "assets/animals/japanese_macaque.png"
   },
   {
    "id": "golden_lion_tamarin",
@@ -1448,7 +1740,11 @@
     "marks": [
      "mane"
     ]
-   }
+   },
+   "tris": 1528,
+   "bytes": 110960,
+   "glb": "assets/animals/golden_lion_tamarin.glb",
+   "thumb": "assets/animals/golden_lion_tamarin.png"
   },
   {
    "id": "black_howler",
@@ -1467,7 +1763,11 @@
     "marks": [
      "prehensile_tail"
     ]
-   }
+   },
+   "tris": 1512,
+   "bytes": 111364,
+   "glb": "assets/animals/black_howler.glb",
+   "thumb": "assets/animals/black_howler.png"
   },
   {
    "id": "proboscis_monkey",
@@ -1486,7 +1786,11 @@
     "marks": [
      "big_nose"
     ]
-   }
+   },
+   "tris": 1668,
+   "bytes": 122164,
+   "glb": "assets/animals/proboscis_monkey.glb",
+   "thumb": "assets/animals/proboscis_monkey.png"
   },
   {
    "id": "lar_gibbon",
@@ -1506,7 +1810,11 @@
      "long_arms",
      "face_ring"
     ]
-   }
+   },
+   "tris": 1400,
+   "bytes": 105312,
+   "glb": "assets/animals/lar_gibbon.glb",
+   "thumb": "assets/animals/lar_gibbon.png"
   },
   {
    "id": "common_squirrel_monkey",
@@ -1525,7 +1833,11 @@
     "marks": [
      "white_mask"
     ]
-   }
+   },
+   "tris": 1840,
+   "bytes": 135496,
+   "glb": "assets/animals/common_squirrel_monkey.glb",
+   "thumb": "assets/animals/common_squirrel_monkey.png"
   },
   {
    "id": "african_penguin",
@@ -1544,7 +1856,11 @@
     "marks": [
      "chest_band"
     ]
-   }
+   },
+   "tris": 554,
+   "bytes": 43796,
+   "glb": "assets/animals/african_penguin.glb",
+   "thumb": "assets/animals/african_penguin.png"
   },
   {
    "id": "emperor_penguin",
@@ -1563,7 +1879,11 @@
     "marks": [
      "yellow_ear"
     ]
-   }
+   },
+   "tris": 610,
+   "bytes": 48740,
+   "glb": "assets/animals/emperor_penguin.glb",
+   "thumb": "assets/animals/emperor_penguin.png"
   },
   {
    "id": "greater_flamingo",
@@ -1583,7 +1903,11 @@
      "long_neck",
      "long_legs"
     ]
-   }
+   },
+   "tris": 724,
+   "bytes": 55376,
+   "glb": "assets/animals/greater_flamingo.glb",
+   "thumb": "assets/animals/greater_flamingo.png"
   },
   {
    "id": "ostrich",
@@ -1604,7 +1928,11 @@
      "long_legs",
      "white_wings"
     ]
-   }
+   },
+   "tris": 804,
+   "bytes": 61148,
+   "glb": "assets/animals/ostrich.glb",
+   "thumb": "assets/animals/ostrich.png"
   },
   {
    "id": "emu",
@@ -1624,7 +1952,11 @@
      "long_neck",
      "shaggy"
     ]
-   }
+   },
+   "tris": 740,
+   "bytes": 56148,
+   "glb": "assets/animals/emu.glb",
+   "thumb": "assets/animals/emu.png"
   },
   {
    "id": "bald_eagle",
@@ -1644,7 +1976,11 @@
      "white_head",
      "hooked_beak"
     ]
-   }
+   },
+   "tris": 714,
+   "bytes": 56004,
+   "glb": "assets/animals/bald_eagle.glb",
+   "thumb": "assets/animals/bald_eagle.png"
   },
   {
    "id": "snowy_owl",
@@ -1664,7 +2000,11 @@
      "round_head",
      "black_flecks"
     ]
-   }
+   },
+   "tris": 876,
+   "bytes": 68116,
+   "glb": "assets/animals/snowy_owl.glb",
+   "thumb": "assets/animals/snowy_owl.png"
   },
   {
    "id": "scarlet_macaw",
@@ -1684,7 +2024,11 @@
      "long_tail",
      "blue_yellow_wings"
     ]
-   }
+   },
+   "tris": 530,
+   "bytes": 42364,
+   "glb": "assets/animals/scarlet_macaw.glb",
+   "thumb": "assets/animals/scarlet_macaw.png"
   },
   {
    "id": "toco_toucan",
@@ -1703,7 +2047,11 @@
     "marks": [
      "big_orange_beak"
     ]
-   }
+   },
+   "tris": 806,
+   "bytes": 62836,
+   "glb": "assets/animals/toco_toucan.glb",
+   "thumb": "assets/animals/toco_toucan.png"
   },
   {
    "id": "indian_peafowl",
@@ -1722,7 +2070,11 @@
     "marks": [
      "fan_tail"
     ]
-   }
+   },
+   "tris": 550,
+   "bytes": 44340,
+   "glb": "assets/animals/indian_peafowl.glb",
+   "thumb": "assets/animals/indian_peafowl.png"
   },
   {
    "id": "kookaburra",
@@ -1741,7 +2093,11 @@
     "marks": [
      "eye_stripe"
     ]
-   }
+   },
+   "tris": 964,
+   "bytes": 75428,
+   "glb": "assets/animals/kookaburra.glb",
+   "thumb": "assets/animals/kookaburra.png"
   },
   {
    "id": "kiwi",
@@ -1760,7 +2116,11 @@
     "marks": [
      "long_beak"
     ]
-   }
+   },
+   "tris": 528,
+   "bytes": 40868,
+   "glb": "assets/animals/kiwi.glb",
+   "thumb": "assets/animals/kiwi.png"
   },
   {
    "id": "white_stork",
@@ -1780,7 +2140,11 @@
      "red_beak",
      "black_wings"
     ]
-   }
+   },
+   "tris": 602,
+   "bytes": 46700,
+   "glb": "assets/animals/white_stork.glb",
+   "thumb": "assets/animals/white_stork.png"
   },
   {
    "id": "red_crowned_crane",
@@ -1800,7 +2164,11 @@
      "red_cap",
      "black_neck"
     ]
-   }
+   },
+   "tris": 650,
+   "bytes": 49688,
+   "glb": "assets/animals/red_crowned_crane.glb",
+   "thumb": "assets/animals/red_crowned_crane.png"
   },
   {
    "id": "pelican",
@@ -1819,7 +2187,11 @@
     "marks": [
      "pouch_beak"
     ]
-   }
+   },
+   "tris": 786,
+   "bytes": 60784,
+   "glb": "assets/animals/pelican.glb",
+   "thumb": "assets/animals/pelican.png"
   },
   {
    "id": "shoebill",
@@ -1838,7 +2210,11 @@
     "marks": [
      "shoe_beak"
     ]
-   }
+   },
+   "tris": 792,
+   "bytes": 61208,
+   "glb": "assets/animals/shoebill.glb",
+   "thumb": "assets/animals/shoebill.png"
   },
   {
    "id": "nile_crocodile",
@@ -1857,7 +2233,11 @@
     "marks": [
      "scutes"
     ]
-   }
+   },
+   "tris": 912,
+   "bytes": 68912,
+   "glb": "assets/animals/nile_crocodile.glb",
+   "thumb": "assets/animals/nile_crocodile.png"
   },
   {
    "id": "american_alligator",
@@ -1877,7 +2257,11 @@
      "scutes",
      "blunt_snout"
     ]
-   }
+   },
+   "tris": 944,
+   "bytes": 71164,
+   "glb": "assets/animals/american_alligator.glb",
+   "thumb": "assets/animals/american_alligator.png"
   },
   {
    "id": "gharial",
@@ -1896,7 +2280,11 @@
     "marks": [
      "thin_snout"
     ]
-   }
+   },
+   "tris": 888,
+   "bytes": 66264,
+   "glb": "assets/animals/gharial.glb",
+   "thumb": "assets/animals/gharial.png"
   },
   {
    "id": "galapagos_tortoise",
@@ -1915,7 +2303,11 @@
     "marks": [
      "dome_shell"
     ]
-   }
+   },
+   "tris": 538,
+   "bytes": 41848,
+   "glb": "assets/animals/galapagos_tortoise.glb",
+   "thumb": "assets/animals/galapagos_tortoise.png"
   },
   {
    "id": "green_sea_turtle",
@@ -1934,7 +2326,11 @@
     "marks": [
      "flippers"
     ]
-   }
+   },
+   "tris": 402,
+   "bytes": 33280,
+   "glb": "assets/animals/green_sea_turtle.glb",
+   "thumb": "assets/animals/green_sea_turtle.png"
   },
   {
    "id": "komodo_dragon",
@@ -1953,7 +2349,11 @@
     "marks": [
      "long_tail"
     ]
-   }
+   },
+   "tris": 568,
+   "bytes": 42276,
+   "glb": "assets/animals/komodo_dragon.glb",
+   "thumb": "assets/animals/komodo_dragon.png"
   },
   {
    "id": "green_iguana",
@@ -1972,7 +2372,11 @@
     "marks": [
      "dorsal_spikes"
     ]
-   }
+   },
+   "tris": 442,
+   "bytes": 34856,
+   "glb": "assets/animals/green_iguana.glb",
+   "thumb": "assets/animals/green_iguana.png"
   },
   {
    "id": "chameleon",
@@ -1992,7 +2396,11 @@
      "curled_tail",
      "casque"
     ]
-   }
+   },
+   "tris": 380,
+   "bytes": 29804,
+   "glb": "assets/animals/chameleon.glb",
+   "thumb": "assets/animals/chameleon.png"
   },
   {
    "id": "reticulated_python",
@@ -2012,7 +2420,11 @@
      "coiled",
      "net_pattern"
     ]
-   }
+   },
+   "tris": 3104,
+   "bytes": 243680,
+   "glb": "assets/animals/reticulated_python.glb",
+   "thumb": "assets/animals/reticulated_python.png"
   },
   {
    "id": "king_cobra",
@@ -2031,7 +2443,11 @@
     "marks": [
      "hood_up"
     ]
-   }
+   },
+   "tris": 2288,
+   "bytes": 179380,
+   "glb": "assets/animals/king_cobra.glb",
+   "thumb": "assets/animals/king_cobra.png"
   },
   {
    "id": "poison_dart_frog",
@@ -2050,7 +2466,11 @@
     "marks": [
      "black_spots"
     ]
-   }
+   },
+   "tris": 556,
+   "bytes": 45736,
+   "glb": "assets/animals/poison_dart_frog.glb",
+   "thumb": "assets/animals/poison_dart_frog.png"
   },
   {
    "id": "axolotl",
@@ -2069,7 +2489,11 @@
     "marks": [
      "gills"
     ]
-   }
+   },
+   "tris": 560,
+   "bytes": 44716,
+   "glb": "assets/animals/axolotl.glb",
+   "thumb": "assets/animals/axolotl.png"
   },
   {
    "id": "bottlenose_dolphin",
@@ -2088,7 +2512,11 @@
     "marks": [
      "dorsal_fin"
     ]
-   }
+   },
+   "tris": 1124,
+   "bytes": 86516,
+   "glb": "assets/animals/bottlenose_dolphin.glb",
+   "thumb": "assets/animals/bottlenose_dolphin.png"
   },
   {
    "id": "orca_calf",
@@ -2107,7 +2535,11 @@
     "marks": [
      "white_patches"
     ]
-   }
+   },
+   "tris": 1252,
+   "bytes": 96480,
+   "glb": "assets/animals/orca_calf.glb",
+   "thumb": "assets/animals/orca_calf.png"
   },
   {
    "id": "california_sea_lion",
@@ -2126,7 +2558,11 @@
     "marks": [
      "upright_flippers"
     ]
-   }
+   },
+   "tris": 1208,
+   "bytes": 92652,
+   "glb": "assets/animals/california_sea_lion.glb",
+   "thumb": "assets/animals/california_sea_lion.png"
   },
   {
    "id": "harbour_seal",
@@ -2145,7 +2581,11 @@
     "marks": [
      "spots"
     ]
-   }
+   },
+   "tris": 1256,
+   "bytes": 98428,
+   "glb": "assets/animals/harbour_seal.glb",
+   "thumb": "assets/animals/harbour_seal.png"
   },
   {
    "id": "walrus",
@@ -2165,7 +2605,11 @@
      "tusks",
      "whiskers"
     ]
-   }
+   },
+   "tris": 1368,
+   "bytes": 105748,
+   "glb": "assets/animals/walrus.glb",
+   "thumb": "assets/animals/walrus.png"
   },
   {
    "id": "manatee",
@@ -2184,7 +2628,11 @@
     "marks": [
      "paddle_tail"
     ]
-   }
+   },
+   "tris": 920,
+   "bytes": 69524,
+   "glb": "assets/animals/manatee.glb",
+   "thumb": "assets/animals/manatee.png"
   },
   {
    "id": "great_white_shark",
@@ -2204,7 +2652,11 @@
      "white_belly",
      "dorsal_fin"
     ]
-   }
+   },
+   "tris": 782,
+   "bytes": 59116,
+   "glb": "assets/animals/great_white_shark.glb",
+   "thumb": "assets/animals/great_white_shark.png"
   },
   {
    "id": "manta_ray",
@@ -2223,7 +2675,11 @@
     "marks": [
      "cephalic_fins"
     ]
-   }
+   },
+   "tris": 912,
+   "bytes": 71592,
+   "glb": "assets/animals/manta_ray.glb",
+   "thumb": "assets/animals/manta_ray.png"
   },
   {
    "id": "green_moray",
@@ -2242,7 +2698,11 @@
     "marks": [
      "open_mouth"
     ]
-   }
+   },
+   "tris": 1032,
+   "bytes": 79040,
+   "glb": "assets/animals/green_moray.glb",
+   "thumb": "assets/animals/green_moray.png"
   },
   {
    "id": "clownfish",
@@ -2261,7 +2721,11 @@
     "marks": [
      "white_bands"
     ]
-   }
+   },
+   "tris": 1552,
+   "bytes": 119540,
+   "glb": "assets/animals/clownfish.glb",
+   "thumb": "assets/animals/clownfish.png"
   },
   {
    "id": "blue_tang",
@@ -2280,7 +2744,11 @@
     "marks": [
      "yellow_tail"
     ]
-   }
+   },
+   "tris": 780,
+   "bytes": 61656,
+   "glb": "assets/animals/blue_tang.glb",
+   "thumb": "assets/animals/blue_tang.png"
   },
   {
    "id": "giant_pacific_octopus",
@@ -2299,7 +2767,11 @@
     "marks": [
      "arms8"
     ]
-   }
+   },
+   "tris": 1584,
+   "bytes": 117316,
+   "glb": "assets/animals/giant_pacific_octopus.glb",
+   "thumb": "assets/animals/giant_pacific_octopus.png"
   },
   {
    "id": "moon_jellyfish",
@@ -2319,7 +2791,11 @@
      "bell",
      "tentacles"
     ]
-   }
+   },
+   "tris": 764,
+   "bytes": 57216,
+   "glb": "assets/animals/moon_jellyfish.glb",
+   "thumb": "assets/animals/moon_jellyfish.png"
   },
   {
    "id": "sea_otter",
@@ -2338,7 +2814,11 @@
     "marks": [
      "floating_back"
     ]
-   }
+   },
+   "tris": 968,
+   "bytes": 75708,
+   "glb": "assets/animals/sea_otter.glb",
+   "thumb": "assets/animals/sea_otter.png"
   },
   {
    "id": "monarch_butterfly",
@@ -2357,7 +2837,11 @@
     "marks": [
      "black_veins"
     ]
-   }
+   },
+   "tris": 408,
+   "bytes": 32044,
+   "glb": "assets/animals/monarch_butterfly.glb",
+   "thumb": "assets/animals/monarch_butterfly.png"
   },
   {
    "id": "goliath_beetle",
@@ -2376,7 +2860,11 @@
     "marks": [
      "black_stripes"
     ]
-   }
+   },
+   "tris": 576,
+   "bytes": 41944,
+   "glb": "assets/animals/goliath_beetle.glb",
+   "thumb": "assets/animals/goliath_beetle.png"
   },
   {
    "id": "leafcutter_ant",
@@ -2395,7 +2883,11 @@
     "marks": [
      "carry_leaf"
     ]
-   }
+   },
+   "tris": 500,
+   "bytes": 37844,
+   "glb": "assets/animals/leafcutter_ant.glb",
+   "thumb": "assets/animals/leafcutter_ant.png"
   },
   {
    "id": "honey_bee",
@@ -2414,7 +2906,11 @@
     "marks": [
      "black_bands"
     ]
-   }
+   },
+   "tris": 552,
+   "bytes": 43140,
+   "glb": "assets/animals/honey_bee.glb",
+   "thumb": "assets/animals/honey_bee.png"
   },
   {
    "id": "emperor_scorpion",
@@ -2433,7 +2929,11 @@
     "marks": [
      "curled_tail"
     ]
-   }
+   },
+   "tris": 486,
+   "bytes": 38660,
+   "glb": "assets/animals/emperor_scorpion.glb",
+   "thumb": "assets/animals/emperor_scorpion.png"
   },
   {
    "id": "mexican_redknee_tarantula",
@@ -2452,7 +2952,11 @@
     "marks": [
      "orange_knees"
     ]
-   }
+   },
+   "tris": 952,
+   "bytes": 70656,
+   "glb": "assets/animals/mexican_redknee_tarantula.glb",
+   "thumb": "assets/animals/mexican_redknee_tarantula.png"
   },
   {
    "id": "giant_african_snail",
@@ -2471,7 +2975,11 @@
     "marks": [
      "spiral_shell"
     ]
-   }
+   },
+   "tris": 324,
+   "bytes": 24948,
+   "glb": "assets/animals/giant_african_snail.glb",
+   "thumb": "assets/animals/giant_african_snail.png"
   },
   {
    "id": "stick_insect",
@@ -2490,7 +2998,11 @@
     "marks": [
      "thin"
     ]
-   }
+   },
+   "tris": 368,
+   "bytes": 29488,
+   "glb": "assets/animals/stick_insect.glb",
+   "thumb": "assets/animals/stick_insect.png"
   },
   {
    "id": "praying_mantis",
@@ -2509,7 +3021,11 @@
     "marks": [
      "petal_legs"
     ]
-   }
+   },
+   "tris": 380,
+   "bytes": 30200,
+   "glb": "assets/animals/praying_mantis.glb",
+   "thumb": "assets/animals/praying_mantis.png"
   },
   {
    "id": "atlas_moth",
@@ -2528,7 +3044,11 @@
     "marks": [
      "eye_spots"
     ]
-   }
+   },
+   "tris": 432,
+   "bytes": 33708,
+   "glb": "assets/animals/atlas_moth.glb",
+   "thumb": "assets/animals/atlas_moth.png"
   },
   {
    "id": "fence_wood_rail_straight",
@@ -2544,7 +3064,11 @@
    "params": {
     "family": "fence_wood",
     "variant": "straight"
-   }
+   },
+   "tris": 180,
+   "bytes": 14560,
+   "glb": "assets/facilities/fence_wood_rail_straight.glb",
+   "thumb": "assets/facilities/fence_wood_rail_straight.png"
   },
   {
    "id": "fence_wood_rail_corner",
@@ -2560,7 +3084,11 @@
    "params": {
     "family": "fence_wood",
     "variant": "corner"
-   }
+   },
+   "tris": 96,
+   "bytes": 8668,
+   "glb": "assets/facilities/fence_wood_rail_corner.glb",
+   "thumb": "assets/facilities/fence_wood_rail_corner.png"
   },
   {
    "id": "fence_wood_post",
@@ -2576,7 +3104,11 @@
    "params": {
     "family": "fence_wood",
     "variant": "post"
-   }
+   },
+   "tris": 24,
+   "bytes": 3612,
+   "glb": "assets/facilities/fence_wood_post.glb",
+   "thumb": "assets/facilities/fence_wood_post.png"
   },
   {
    "id": "fence_chainlink_panel",
@@ -2592,7 +3124,11 @@
    "params": {
     "family": "fence_chainlink",
     "variant": "panel"
-   }
+   },
+   "tris": 100,
+   "bytes": 8692,
+   "glb": "assets/facilities/fence_chainlink_panel.glb",
+   "thumb": "assets/facilities/fence_chainlink_panel.png"
   },
   {
    "id": "fence_chainlink_post",
@@ -2608,7 +3144,11 @@
    "params": {
     "family": "fence_chainlink",
     "variant": "post"
-   }
+   },
+   "tris": 120,
+   "bytes": 10604,
+   "glb": "assets/facilities/fence_chainlink_post.glb",
+   "thumb": "assets/facilities/fence_chainlink_post.png"
   },
   {
    "id": "wall_glass_viewing_panel",
@@ -2624,7 +3164,11 @@
    "params": {
     "family": "wall_glass",
     "variant": "panel"
-   }
+   },
+   "tris": 60,
+   "bytes": 6120,
+   "glb": "assets/facilities/wall_glass_viewing_panel.glb",
+   "thumb": "assets/facilities/wall_glass_viewing_panel.png"
   },
   {
    "id": "wall_glass_viewing_curved",
@@ -2640,7 +3184,11 @@
    "params": {
     "family": "wall_glass",
     "variant": "curved"
-   }
+   },
+   "tris": 84,
+   "bytes": 7776,
+   "glb": "assets/facilities/wall_glass_viewing_curved.glb",
+   "thumb": "assets/facilities/wall_glass_viewing_curved.png"
   },
   {
    "id": "wall_stone_perimeter_low",
@@ -2656,7 +3204,11 @@
    "params": {
     "family": "wall_stone",
     "variant": "low"
-   }
+   },
+   "tris": 48,
+   "bytes": 5308,
+   "glb": "assets/facilities/wall_stone_perimeter_low.glb",
+   "thumb": "assets/facilities/wall_stone_perimeter_low.png"
   },
   {
    "id": "wall_stone_perimeter_tall",
@@ -2672,7 +3224,11 @@
    "params": {
     "family": "wall_stone",
     "variant": "tall"
-   }
+   },
+   "tris": 48,
+   "bytes": 5296,
+   "glb": "assets/facilities/wall_stone_perimeter_tall.glb",
+   "thumb": "assets/facilities/wall_stone_perimeter_tall.png"
   },
   {
    "id": "fence_bamboo_panel",
@@ -2688,7 +3244,11 @@
    "params": {
     "family": "fence_bamboo",
     "variant": "panel"
-   }
+   },
+   "tris": 316,
+   "bytes": 22276,
+   "glb": "assets/facilities/fence_bamboo_panel.glb",
+   "thumb": "assets/facilities/fence_bamboo_panel.png"
   },
   {
    "id": "fence_rope_stanchions",
@@ -2704,7 +3264,11 @@
    "params": {
     "family": "fence_rope",
     "variant": "stanchion"
-   }
+   },
+   "tris": 324,
+   "bytes": 25400,
+   "glb": "assets/facilities/fence_rope_stanchions.glb",
+   "thumb": "assets/facilities/fence_rope_stanchions.png"
   },
   {
    "id": "barrier_moat_trench",
@@ -2720,7 +3284,11 @@
    "params": {
     "family": "moat",
     "variant": "trench"
-   }
+   },
+   "tris": 48,
+   "bytes": 5296,
+   "glb": "assets/facilities/barrier_moat_trench.glb",
+   "thumb": "assets/facilities/barrier_moat_trench.png"
   },
   {
    "id": "gate_entrance_arch_grand",
@@ -2736,7 +3304,11 @@
    "params": {
     "family": "gate",
     "variant": "arch"
-   }
+   },
+   "tris": 96,
+   "bytes": 8656,
+   "glb": "assets/facilities/gate_entrance_arch_grand.glb",
+   "thumb": "assets/facilities/gate_entrance_arch_grand.png"
   },
   {
    "id": "gate_paddock_double_wood",
@@ -2752,7 +3324,11 @@
    "params": {
     "family": "gate",
     "variant": "paddock_double"
-   }
+   },
+   "tris": 72,
+   "bytes": 6992,
+   "glb": "assets/facilities/gate_paddock_double_wood.glb",
+   "thumb": "assets/facilities/gate_paddock_double_wood.png"
   },
   {
    "id": "gate_visitor_turnstile",
@@ -2768,7 +3344,11 @@
    "params": {
     "family": "gate",
     "variant": "turnstile"
-   }
+   },
+   "tris": 76,
+   "bytes": 7012,
+   "glb": "assets/facilities/gate_visitor_turnstile.glb",
+   "thumb": "assets/facilities/gate_visitor_turnstile.png"
   },
   {
    "id": "gate_ticket_barrier",
@@ -2784,7 +3364,11 @@
    "params": {
     "family": "gate",
     "variant": "ticket_barrier"
-   }
+   },
+   "tris": 60,
+   "bytes": 6144,
+   "glb": "assets/facilities/gate_ticket_barrier.glb",
+   "thumb": "assets/facilities/gate_ticket_barrier.png"
   },
   {
    "id": "gate_keeper_metal_slide",
@@ -2800,7 +3384,11 @@
    "params": {
     "family": "gate",
     "variant": "keeper_slide"
-   }
+   },
+   "tris": 60,
+   "bytes": 6148,
+   "glb": "assets/facilities/gate_keeper_metal_slide.glb",
+   "thumb": "assets/facilities/gate_keeper_metal_slide.png"
   },
   {
    "id": "gate_pedestrian_wicket",
@@ -2816,7 +3404,11 @@
    "params": {
     "family": "gate",
     "variant": "wicket"
-   }
+   },
+   "tris": 48,
+   "bytes": 5308,
+   "glb": "assets/facilities/gate_pedestrian_wicket.glb",
+   "thumb": "assets/facilities/gate_pedestrian_wicket.png"
   },
   {
    "id": "shelter_animal_night_brick",
@@ -2832,7 +3424,11 @@
    "params": {
     "family": "shelter",
     "variant": "night_brick"
-   }
+   },
+   "tris": 36,
+   "bytes": 4468,
+   "glb": "assets/facilities/shelter_animal_night_brick.glb",
+   "thumb": "assets/facilities/shelter_animal_night_brick.png"
   },
   {
    "id": "shelter_animal_timber_lean",
@@ -2848,7 +3444,11 @@
    "params": {
     "family": "shelter",
     "variant": "timber_lean"
-   }
+   },
+   "tris": 96,
+   "bytes": 8676,
+   "glb": "assets/facilities/shelter_animal_timber_lean.glb",
+   "thumb": "assets/facilities/shelter_animal_timber_lean.png"
   },
   {
    "id": "pavilion_viewing_safari",
@@ -2864,7 +3464,11 @@
    "params": {
     "family": "pavilion",
     "variant": "safari"
-   }
+   },
+   "tris": 96,
+   "bytes": 8616,
+   "glb": "assets/facilities/pavilion_viewing_safari.glb",
+   "thumb": "assets/facilities/pavilion_viewing_safari.png"
   },
   {
    "id": "canopy_walkway_straight",
@@ -2880,7 +3484,11 @@
    "params": {
     "family": "canopy",
     "variant": "straight"
-   }
+   },
+   "tris": 108,
+   "bytes": 9512,
+   "glb": "assets/facilities/canopy_walkway_straight.glb",
+   "thumb": "assets/facilities/canopy_walkway_straight.png"
   },
   {
    "id": "canopy_walkway_ramp",
@@ -2896,7 +3504,11 @@
    "params": {
     "family": "canopy",
     "variant": "ramp"
-   }
+   },
+   "tris": 84,
+   "bytes": 7820,
+   "glb": "assets/facilities/canopy_walkway_ramp.glb",
+   "thumb": "assets/facilities/canopy_walkway_ramp.png"
   },
   {
    "id": "building_reptile_house",
@@ -2912,7 +3524,11 @@
    "params": {
     "family": "building",
     "variant": "reptile_house"
-   }
+   },
+   "tris": 72,
+   "bytes": 6972,
+   "glb": "assets/facilities/building_reptile_house.glb",
+   "thumb": "assets/facilities/building_reptile_house.png"
   },
   {
    "id": "building_aquarium_dome",
@@ -2928,7 +3544,11 @@
    "params": {
     "family": "building",
     "variant": "aquarium_dome"
-   }
+   },
+   "tris": 236,
+   "bytes": 18724,
+   "glb": "assets/facilities/building_aquarium_dome.glb",
+   "thumb": "assets/facilities/building_aquarium_dome.png"
   },
   {
    "id": "building_aviary_walkthrough",
@@ -2944,7 +3564,11 @@
    "params": {
     "family": "building",
     "variant": "aviary"
-   }
+   },
+   "tris": 224,
+   "bytes": 17896,
+   "glb": "assets/facilities/building_aviary_walkthrough.glb",
+   "thumb": "assets/facilities/building_aviary_walkthrough.png"
   },
   {
    "id": "building_keeper_shed",
@@ -2960,7 +3584,11 @@
    "params": {
     "family": "building",
     "variant": "shed"
-   }
+   },
+   "tris": 68,
+   "bytes": 6576,
+   "glb": "assets/facilities/building_keeper_shed.glb",
+   "thumb": "assets/facilities/building_keeper_shed.png"
   },
   {
    "id": "building_vet_clinic",
@@ -2976,7 +3604,11 @@
    "params": {
     "family": "building",
     "variant": "clinic"
-   }
+   },
+   "tris": 84,
+   "bytes": 7820,
+   "glb": "assets/facilities/building_vet_clinic.glb",
+   "thumb": "assets/facilities/building_vet_clinic.png"
   },
   {
    "id": "building_quarantine_bay",
@@ -2992,7 +3624,11 @@
    "params": {
     "family": "building",
     "variant": "quarantine"
-   }
+   },
+   "tris": 72,
+   "bytes": 6988,
+   "glb": "assets/facilities/building_quarantine_bay.glb",
+   "thumb": "assets/facilities/building_quarantine_bay.png"
   },
   {
    "id": "building_hay_barn",
@@ -3008,7 +3644,11 @@
    "params": {
     "family": "building",
     "variant": "hay_barn"
-   }
+   },
+   "tris": 84,
+   "bytes": 7796,
+   "glb": "assets/facilities/building_hay_barn.glb",
+   "thumb": "assets/facilities/building_hay_barn.png"
   },
   {
    "id": "building_public_restroom",
@@ -3024,7 +3664,11 @@
    "params": {
     "family": "building",
     "variant": "restroom"
-   }
+   },
+   "tris": 92,
+   "bytes": 8264,
+   "glb": "assets/facilities/building_public_restroom.glb",
+   "thumb": "assets/facilities/building_public_restroom.png"
   },
   {
    "id": "kiosk_ticketing_booth",
@@ -3040,7 +3684,11 @@
    "params": {
     "family": "kiosk",
     "variant": "ticket"
-   }
+   },
+   "tris": 48,
+   "bytes": 5304,
+   "glb": "assets/facilities/kiosk_ticketing_booth.glb",
+   "thumb": "assets/facilities/kiosk_ticketing_booth.png"
   },
   {
    "id": "kiosk_ice_cream",
@@ -3056,7 +3704,11 @@
    "params": {
     "family": "kiosk",
     "variant": "ice_cream"
-   }
+   },
+   "tris": 142,
+   "bytes": 12512,
+   "glb": "assets/facilities/kiosk_ice_cream.glb",
+   "thumb": "assets/facilities/kiosk_ice_cream.png"
   },
   {
    "id": "kiosk_pretzel_snack",
@@ -3072,7 +3724,11 @@
    "params": {
     "family": "kiosk",
     "variant": "snack"
-   }
+   },
+   "tris": 48,
+   "bytes": 5300,
+   "glb": "assets/facilities/kiosk_pretzel_snack.glb",
+   "thumb": "assets/facilities/kiosk_pretzel_snack.png"
   },
   {
    "id": "kiosk_souvenir_stand",
@@ -3088,7 +3744,11 @@
    "params": {
     "family": "kiosk",
     "variant": "souvenir"
-   }
+   },
+   "tris": 48,
+   "bytes": 5300,
+   "glb": "assets/facilities/kiosk_souvenir_stand.glb",
+   "thumb": "assets/facilities/kiosk_souvenir_stand.png"
   },
   {
    "id": "kiosk_beverage_bar",
@@ -3104,7 +3764,11 @@
    "params": {
     "family": "kiosk",
     "variant": "beverage"
-   }
+   },
+   "tris": 48,
+   "bytes": 5296,
+   "glb": "assets/facilities/kiosk_beverage_bar.glb",
+   "thumb": "assets/facilities/kiosk_beverage_bar.png"
   },
   {
    "id": "booth_visitor_info",
@@ -3120,7 +3784,11 @@
    "params": {
     "family": "kiosk",
     "variant": "info"
-   }
+   },
+   "tris": 72,
+   "bytes": 6980,
+   "glb": "assets/facilities/booth_visitor_info.glb",
+   "thumb": "assets/facilities/booth_visitor_info.png"
   },
   {
    "id": "stand_ice_slush",
@@ -3136,7 +3804,11 @@
    "params": {
     "family": "kiosk",
     "variant": "cart"
-   }
+   },
+   "tris": 126,
+   "bytes": 10240,
+   "glb": "assets/facilities/stand_ice_slush.glb",
+   "thumb": "assets/facilities/stand_ice_slush.png"
   },
   {
    "id": "path_asphalt_straight",
@@ -3152,7 +3824,11 @@
    "params": {
     "family": "path",
     "variant": "asphalt_straight"
-   }
+   },
+   "tris": 36,
+   "bytes": 4460,
+   "glb": "assets/facilities/path_asphalt_straight.glb",
+   "thumb": "assets/facilities/path_asphalt_straight.png"
   },
   {
    "id": "path_asphalt_junction_t",
@@ -3168,7 +3844,11 @@
    "params": {
     "family": "path",
     "variant": "asphalt_t"
-   }
+   },
+   "tris": 36,
+   "bytes": 4464,
+   "glb": "assets/facilities/path_asphalt_junction_t.glb",
+   "thumb": "assets/facilities/path_asphalt_junction_t.png"
   },
   {
    "id": "path_cobblestone_straight",
@@ -3184,7 +3864,11 @@
    "params": {
     "family": "path",
     "variant": "cobblestone"
-   }
+   },
+   "tris": 12,
+   "bytes": 2784,
+   "glb": "assets/facilities/path_cobblestone_straight.glb",
+   "thumb": "assets/facilities/path_cobblestone_straight.png"
   },
   {
    "id": "path_wood_boardwalk",
@@ -3200,7 +3884,11 @@
    "params": {
     "family": "path",
     "variant": "boardwalk"
-   }
+   },
+   "tris": 144,
+   "bytes": 12024,
+   "glb": "assets/facilities/path_wood_boardwalk.glb",
+   "thumb": "assets/facilities/path_wood_boardwalk.png"
   },
   {
    "id": "path_gravel_trail",
@@ -3216,7 +3904,11 @@
    "params": {
     "family": "path",
     "variant": "gravel"
-   }
+   },
+   "tris": 12,
+   "bytes": 2768,
+   "glb": "assets/facilities/path_gravel_trail.glb",
+   "thumb": "assets/facilities/path_gravel_trail.png"
   },
   {
    "id": "bridge_timber_footbridge",
@@ -3232,7 +3924,11 @@
    "params": {
     "family": "bridge",
     "variant": "timber"
-   }
+   },
+   "tris": 156,
+   "bytes": 12848,
+   "glb": "assets/facilities/bridge_timber_footbridge.glb",
+   "thumb": "assets/facilities/bridge_timber_footbridge.png"
   },
   {
    "id": "bridge_stone_arch",
@@ -3248,7 +3944,11 @@
    "params": {
     "family": "bridge",
     "variant": "stone"
-   }
+   },
+   "tris": 36,
+   "bytes": 4448,
+   "glb": "assets/facilities/bridge_stone_arch.glb",
+   "thumb": "assets/facilities/bridge_stone_arch.png"
   },
   {
    "id": "water_penguin_pool",
@@ -3264,7 +3964,11 @@
    "params": {
     "family": "water",
     "variant": "penguin_pool"
-   }
+   },
+   "tris": 24,
+   "bytes": 3612,
+   "glb": "assets/facilities/water_penguin_pool.glb",
+   "thumb": "assets/facilities/water_penguin_pool.png"
   },
   {
    "id": "water_hippo_mud_pond",
@@ -3280,7 +3984,11 @@
    "params": {
     "family": "water",
     "variant": "hippo_pond"
-   }
+   },
+   "tris": 24,
+   "bytes": 3612,
+   "glb": "assets/facilities/water_hippo_mud_pond.glb",
+   "thumb": "assets/facilities/water_hippo_mud_pond.png"
   },
   {
    "id": "water_decorative_fountain",
@@ -3296,7 +4004,11 @@
    "params": {
     "family": "water",
     "variant": "fountain"
-   }
+   },
+   "tris": 232,
+   "bytes": 17048,
+   "glb": "assets/facilities/water_decorative_fountain.glb",
+   "thumb": "assets/facilities/water_decorative_fountain.png"
   },
   {
    "id": "water_duck_pond",
@@ -3312,7 +4024,11 @@
    "params": {
     "family": "water",
     "variant": "duck_pond"
-   }
+   },
+   "tris": 24,
+   "bytes": 3608,
+   "glb": "assets/facilities/water_duck_pond.glb",
+   "thumb": "assets/facilities/water_duck_pond.png"
   },
   {
    "id": "water_alligator_swamp",
@@ -3328,7 +4044,11 @@
    "params": {
     "family": "water",
     "variant": "swamp"
-   }
+   },
+   "tris": 24,
+   "bytes": 3616,
+   "glb": "assets/facilities/water_alligator_swamp.glb",
+   "thumb": "assets/facilities/water_alligator_swamp.png"
   },
   {
    "id": "water_rock_waterfall",
@@ -3344,7 +4064,11 @@
    "params": {
     "family": "water",
     "variant": "waterfall"
-   }
+   },
+   "tris": 36,
+   "bytes": 4456,
+   "glb": "assets/facilities/water_rock_waterfall.glb",
+   "thumb": "assets/facilities/water_rock_waterfall.png"
   },
   {
    "id": "feature_safari_sunshade",
@@ -3360,7 +4084,11 @@
    "params": {
     "family": "viewing",
     "variant": "sunshade"
-   }
+   },
+   "tris": 92,
+   "bytes": 7876,
+   "glb": "assets/facilities/feature_safari_sunshade.glb",
+   "thumb": "assets/facilities/feature_safari_sunshade.png"
   },
   {
    "id": "tower_wooden_observation",
@@ -3376,7 +4104,11 @@
    "params": {
     "family": "viewing",
     "variant": "tower"
-   }
+   },
+   "tris": 120,
+   "bytes": 10332,
+   "glb": "assets/facilities/tower_wooden_observation.glb",
+   "thumb": "assets/facilities/tower_wooden_observation.png"
   },
   {
    "id": "terrace_glass_overlook",
@@ -3392,7 +4124,11 @@
    "params": {
     "family": "viewing",
     "variant": "glass_deck"
-   }
+   },
+   "tris": 60,
+   "bytes": 6144,
+   "glb": "assets/facilities/terrace_glass_overlook.glb",
+   "thumb": "assets/facilities/terrace_glass_overlook.png"
   },
   {
    "id": "pergola_picnic_shaded",
@@ -3408,7 +4144,11 @@
    "params": {
     "family": "viewing",
     "variant": "pergola"
-   }
+   },
+   "tris": 120,
+   "bytes": 10344,
+   "glb": "assets/facilities/pergola_picnic_shaded.glb",
+   "thumb": "assets/facilities/pergola_picnic_shaded.png"
   },
   {
    "id": "pen_petting_zoo_corral",
@@ -3424,7 +4164,11 @@
    "params": {
     "family": "enclosure",
     "variant": "petting_pen"
-   }
+   },
+   "tris": 108,
+   "bytes": 9508,
+   "glb": "assets/facilities/pen_petting_zoo_corral.glb",
+   "thumb": "assets/facilities/pen_petting_zoo_corral.png"
   },
   {
    "id": "platform_giraffe_feeding",
@@ -3440,7 +4184,11 @@
    "params": {
     "family": "platform",
     "variant": "giraffe_feeder"
-   }
+   },
+   "tris": 84,
+   "bytes": 7832,
+   "glb": "assets/facilities/platform_giraffe_feeding.glb",
+   "thumb": "assets/facilities/platform_giraffe_feeding.png"
   },
   {
    "id": "dome_meerkat_viewing_bubble",
@@ -3456,7 +4204,11 @@
    "params": {
     "family": "viewing",
     "variant": "acrylic_dome"
-   }
+   },
+   "tris": 112,
+   "bytes": 10440,
+   "glb": "assets/facilities/dome_meerkat_viewing_bubble.glb",
+   "thumb": "assets/facilities/dome_meerkat_viewing_bubble.png"
   },
   {
    "id": "tunnel_underwater_aquarium",
@@ -3472,7 +4224,11 @@
    "params": {
     "family": "viewing",
     "variant": "underwater_tunnel"
-   }
+   },
+   "tris": 48,
+   "bytes": 5308,
+   "glb": "assets/facilities/tunnel_underwater_aquarium.glb",
+   "thumb": "assets/facilities/tunnel_underwater_aquarium.png"
   },
   {
    "id": "building_butterfly_hothouse",
@@ -3488,7 +4244,11 @@
    "params": {
     "family": "building",
     "variant": "greenhouse"
-   }
+   },
+   "tris": 120,
+   "bytes": 10344,
+   "glb": "assets/facilities/building_butterfly_hothouse.glb",
+   "thumb": "assets/facilities/building_butterfly_hothouse.png"
   },
   {
    "id": "gate_safari_vehicle_airlock",
@@ -3504,7 +4264,11 @@
    "params": {
     "family": "gate",
     "variant": "safari_airlock"
-   }
+   },
+   "tris": 96,
+   "bytes": 8676,
+   "glb": "assets/facilities/gate_safari_vehicle_airlock.glb",
+   "thumb": "assets/facilities/gate_safari_vehicle_airlock.png"
   },
   {
    "id": "water_elephant_splash_pool",
@@ -3520,7 +4284,11 @@
    "params": {
     "family": "water_feature",
     "variant": "splash_pool"
-   }
+   },
+   "tris": 24,
+   "bytes": 3628,
+   "glb": "assets/facilities/water_elephant_splash_pool.glb",
+   "thumb": "assets/facilities/water_elephant_splash_pool.png"
   },
   {
    "id": "water_flamingo_shallow_lagoon",
@@ -3536,7 +4304,11 @@
    "params": {
     "family": "water_feature",
     "variant": "shallow_lagoon"
-   }
+   },
+   "tris": 24,
+   "bytes": 3632,
+   "glb": "assets/facilities/water_flamingo_shallow_lagoon.glb",
+   "thumb": "assets/facilities/water_flamingo_shallow_lagoon.png"
   },
   {
    "id": "cave_bat_nocturnal_portal",
@@ -3552,7 +4324,11 @@
    "params": {
     "family": "building",
     "variant": "rock_cave"
-   }
+   },
+   "tris": 136,
+   "bytes": 12368,
+   "glb": "assets/facilities/cave_bat_nocturnal_portal.glb",
+   "thumb": "assets/facilities/cave_bat_nocturnal_portal.png"
   },
   {
    "id": "turnstile_bank_quad",
@@ -3568,7 +4344,11 @@
    "params": {
     "family": "gate",
     "variant": "turnstile_bank"
-   }
+   },
+   "tris": 356,
+   "bytes": 25588,
+   "glb": "assets/facilities/turnstile_bank_quad.glb",
+   "thumb": "assets/facilities/turnstile_bank_quad.png"
   },
   {
    "id": "building_staff_breakroom",
@@ -3584,7 +4364,11 @@
    "params": {
     "family": "building",
     "variant": "staff_quarters"
-   }
+   },
+   "tris": 112,
+   "bytes": 9532,
+   "glb": "assets/facilities/building_staff_breakroom.glb",
+   "thumb": "assets/facilities/building_staff_breakroom.png"
   },
   {
    "id": "building_lost_and_found",
@@ -3600,7 +4384,11 @@
    "params": {
     "family": "kiosk",
     "variant": "security_booth"
-   }
+   },
+   "tris": 48,
+   "bytes": 5304,
+   "glb": "assets/facilities/building_lost_and_found.glb",
+   "thumb": "assets/facilities/building_lost_and_found.png"
   },
   {
    "id": "building_first_aid_station",
@@ -3616,7 +4404,11 @@
    "params": {
     "family": "building",
     "variant": "first_aid"
-   }
+   },
+   "tris": 84,
+   "bytes": 7816,
+   "glb": "assets/facilities/building_first_aid_station.glb",
+   "thumb": "assets/facilities/building_first_aid_station.png"
   },
   {
    "id": "station_waste_compost_bay",
@@ -3632,7 +4424,11 @@
    "params": {
     "family": "utility",
     "variant": "compost_bay"
-   }
+   },
+   "tris": 96,
+   "bytes": 8672,
+   "glb": "assets/facilities/station_waste_compost_bay.glb",
+   "thumb": "assets/facilities/station_waste_compost_bay.png"
   },
   {
    "id": "shelter_otter_holts_rock",
@@ -3648,7 +4444,11 @@
    "params": {
     "family": "enclosure",
     "variant": "otter_holt"
-   }
+   },
+   "tris": 24,
+   "bytes": 3624,
+   "glb": "assets/facilities/shelter_otter_holts_rock.glb",
+   "thumb": "assets/facilities/shelter_otter_holts_rock.png"
   },
   {
    "id": "keeper_safari_lead_01",
@@ -3667,7 +4467,11 @@
     "skin_tone": "tan",
     "uniform": "khaki",
     "tool": "clipboard"
-   }
+   },
+   "tris": 236,
+   "bytes": 18340,
+   "glb": "assets/keepers/keeper_safari_lead_01.glb",
+   "thumb": "assets/keepers/keeper_safari_lead_01.png"
   },
   {
    "id": "keeper_carnivore_specialist_02",
@@ -3686,7 +4490,11 @@
     "skin_tone": "dark",
     "uniform": "olive",
     "tool": "meat_tongs"
-   }
+   },
+   "tris": 224,
+   "bytes": 17520,
+   "glb": "assets/keepers/keeper_carnivore_specialist_02.glb",
+   "thumb": "assets/keepers/keeper_carnivore_specialist_02.png"
   },
   {
    "id": "keeper_aquatic_feeder_03",
@@ -3705,7 +4513,11 @@
     "skin_tone": "fair",
     "uniform": "navy",
     "tool": "fish_bucket"
-   }
+   },
+   "tris": 252,
+   "bytes": 19208,
+   "glb": "assets/keepers/keeper_aquatic_feeder_03.glb",
+   "thumb": "assets/keepers/keeper_aquatic_feeder_03.png"
   },
   {
    "id": "keeper_primate_caregiver_04",
@@ -3724,7 +4536,11 @@
     "skin_tone": "medium",
     "uniform": "khaki",
     "tool": "puzzle_box"
-   }
+   },
+   "tris": 212,
+   "bytes": 16672,
+   "glb": "assets/keepers/keeper_primate_caregiver_04.glb",
+   "thumb": "assets/keepers/keeper_primate_caregiver_04.png"
   },
   {
    "id": "keeper_vet_surgeon_05",
@@ -3743,7 +4559,11 @@
     "skin_tone": "fair",
     "uniform": "teal_scrubs",
     "tool": "med_kit"
-   }
+   },
+   "tris": 224,
+   "bytes": 17500,
+   "glb": "assets/keepers/keeper_vet_surgeon_05.glb",
+   "thumb": "assets/keepers/keeper_vet_surgeon_05.png"
   },
   {
    "id": "keeper_vet_assistant_06",
@@ -3762,7 +4582,11 @@
     "skin_tone": "dark",
     "uniform": "teal_scrubs",
     "tool": "scanner"
-   }
+   },
+   "tris": 212,
+   "bytes": 16664,
+   "glb": "assets/keepers/keeper_vet_assistant_06.glb",
+   "thumb": "assets/keepers/keeper_vet_assistant_06.png"
   },
   {
    "id": "keeper_aviary_curator_07",
@@ -3781,7 +4605,11 @@
     "skin_tone": "medium",
     "uniform": "green",
     "tool": "seed_scoop"
-   }
+   },
+   "tris": 212,
+   "bytes": 16664,
+   "glb": "assets/keepers/keeper_aviary_curator_07.glb",
+   "thumb": "assets/keepers/keeper_aviary_curator_07.png"
   },
   {
    "id": "keeper_herpetologist_08",
@@ -3800,7 +4628,11 @@
     "skin_tone": "tan",
     "uniform": "camo_khaki",
     "tool": "snake_hook"
-   }
+   },
+   "tris": 212,
+   "bytes": 16664,
+   "glb": "assets/keepers/keeper_herpetologist_08.glb",
+   "thumb": "assets/keepers/keeper_herpetologist_08.png"
   },
   {
    "id": "keeper_elephant_keeper_09",
@@ -3819,7 +4651,11 @@
     "skin_tone": "dark",
     "uniform": "heavy_work",
     "tool": "shovel"
-   }
+   },
+   "tris": 244,
+   "bytes": 18780,
+   "glb": "assets/keepers/keeper_elephant_keeper_09.glb",
+   "thumb": "assets/keepers/keeper_elephant_keeper_09.png"
   },
   {
    "id": "keeper_ungulate_feeder_10",
@@ -3838,7 +4674,11 @@
     "skin_tone": "fair",
     "uniform": "khaki",
     "tool": "pitchfork"
-   }
+   },
+   "tris": 244,
+   "bytes": 18780,
+   "glb": "assets/keepers/keeper_ungulate_feeder_10.glb",
+   "thumb": "assets/keepers/keeper_ungulate_feeder_10.png"
   },
   {
    "id": "keeper_arctic_curator_11",
@@ -3857,7 +4697,11 @@
     "skin_tone": "fair",
     "uniform": "parka_blue",
     "tool": "ice_pick"
-   }
+   },
+   "tris": 244,
+   "bytes": 18780,
+   "glb": "assets/keepers/keeper_arctic_curator_11.glb",
+   "thumb": "assets/keepers/keeper_arctic_curator_11.png"
   },
   {
    "id": "keeper_nocturnal_keeper_12",
@@ -3876,7 +4720,11 @@
     "skin_tone": "dark",
     "uniform": "charcoal",
     "tool": "red_flashlight"
-   }
+   },
+   "tris": 212,
+   "bytes": 16672,
+   "glb": "assets/keepers/keeper_nocturnal_keeper_12.glb",
+   "thumb": "assets/keepers/keeper_nocturnal_keeper_12.png"
   },
   {
    "id": "keeper_nursery_nurse_13",
@@ -3895,7 +4743,11 @@
     "skin_tone": "medium",
     "uniform": "white_apron",
     "tool": "nursing_bottle"
-   }
+   },
+   "tris": 224,
+   "bytes": 17504,
+   "glb": "assets/keepers/keeper_nursery_nurse_13.glb",
+   "thumb": "assets/keepers/keeper_nursery_nurse_13.png"
   },
   {
    "id": "keeper_grounds_landscaper_14",
@@ -3914,7 +4766,11 @@
     "skin_tone": "tan",
     "uniform": "orange_vest",
     "tool": "rake"
-   }
+   },
+   "tris": 256,
+   "bytes": 19624,
+   "glb": "assets/keepers/keeper_grounds_landscaper_14.glb",
+   "thumb": "assets/keepers/keeper_grounds_landscaper_14.png"
   },
   {
    "id": "keeper_maintenance_tech_15",
@@ -3933,7 +4789,11 @@
     "skin_tone": "medium",
     "uniform": "blue_overalls",
     "tool": "toolbox"
-   }
+   },
+   "tris": 224,
+   "bytes": 17508,
+   "glb": "assets/keepers/keeper_maintenance_tech_15.glb",
+   "thumb": "assets/keepers/keeper_maintenance_tech_15.png"
   },
   {
    "id": "keeper_security_ranger_16",
@@ -3952,7 +4812,11 @@
     "skin_tone": "dark",
     "uniform": "ranger_tan",
     "tool": "radio_holster"
-   }
+   },
+   "tris": 224,
+   "bytes": 17508,
+   "glb": "assets/keepers/keeper_security_ranger_16.glb",
+   "thumb": "assets/keepers/keeper_security_ranger_16.png"
   },
   {
    "id": "keeper_education_guide_17",
@@ -3971,7 +4835,11 @@
     "skin_tone": "fair",
     "uniform": "yellow_polo",
     "tool": "megaphone"
-   }
+   },
+   "tris": 224,
+   "bytes": 17508,
+   "glb": "assets/keepers/keeper_education_guide_17.glb",
+   "thumb": "assets/keepers/keeper_education_guide_17.png"
   },
   {
    "id": "keeper_penguin_keeper_18",
@@ -3990,7 +4858,11 @@
     "skin_tone": "tan",
     "uniform": "waders_blue",
     "tool": "feed_pail"
-   }
+   },
+   "tris": 252,
+   "bytes": 19208,
+   "glb": "assets/keepers/keeper_penguin_keeper_18.glb",
+   "thumb": "assets/keepers/keeper_penguin_keeper_18.png"
   },
   {
    "id": "keeper_botanist_curator_19",
@@ -4009,7 +4881,11 @@
     "skin_tone": "fair",
     "uniform": "green_smock",
     "tool": "pruning_shears"
-   }
+   },
+   "tris": 232,
+   "bytes": 17940,
+   "glb": "assets/keepers/keeper_botanist_curator_19.glb",
+   "thumb": "assets/keepers/keeper_botanist_curator_19.png"
   },
   {
    "id": "keeper_apprentice_keeper_20",
@@ -4028,7 +4904,11 @@
     "skin_tone": "medium",
     "uniform": "khaki_vest",
     "tool": "broom"
-   }
+   },
+   "tris": 244,
+   "bytes": 18784,
+   "glb": "assets/keepers/keeper_apprentice_keeper_20.glb",
+   "thumb": "assets/keepers/keeper_apprentice_keeper_20.png"
   },
   {
    "id": "visitor_tourist_camera_01",
@@ -4047,7 +4927,11 @@
     "skin_tone": "fair",
     "outfit": "casual_polo",
     "accessory": "camera"
-   }
+   },
+   "tris": 232,
+   "bytes": 17940,
+   "glb": "assets/visitors/visitor_tourist_camera_01.glb",
+   "thumb": "assets/visitors/visitor_tourist_camera_01.png"
   },
   {
    "id": "visitor_tourist_sunhat_02",
@@ -4066,7 +4950,11 @@
     "skin_tone": "tan",
     "outfit": "summer_dress",
     "accessory": "tote_bag"
-   }
+   },
+   "tris": 224,
+   "bytes": 17512,
+   "glb": "assets/visitors/visitor_tourist_sunhat_02.glb",
+   "thumb": "assets/visitors/visitor_tourist_sunhat_02.png"
   },
   {
    "id": "visitor_child_balloon_03",
@@ -4085,7 +4973,11 @@
     "skin_tone": "dark",
     "outfit": "tshirt_shorts",
     "accessory": "balloon"
-   }
+   },
+   "tris": 292,
+   "bytes": 22776,
+   "glb": "assets/visitors/visitor_child_balloon_03.glb",
+   "thumb": "assets/visitors/visitor_child_balloon_03.png"
   },
   {
    "id": "visitor_child_icecream_04",
@@ -4104,7 +4996,11 @@
     "skin_tone": "fair",
     "outfit": "overalls",
     "accessory": "ice_cream"
-   }
+   },
+   "tris": 274,
+   "bytes": 21652,
+   "glb": "assets/visitors/visitor_child_icecream_04.glb",
+   "thumb": "assets/visitors/visitor_child_icecream_04.png"
   },
   {
    "id": "visitor_child_cap_05",
@@ -4123,7 +5019,11 @@
     "skin_tone": "medium",
     "outfit": "safari_kids",
     "accessory": "binoculars_toy"
-   }
+   },
+   "tris": 252,
+   "bytes": 19204,
+   "glb": "assets/visitors/visitor_child_cap_05.glb",
+   "thumb": "assets/visitors/visitor_child_cap_05.png"
   },
   {
    "id": "visitor_toddler_waddling_06",
@@ -4142,7 +5042,11 @@
     "skin_tone": "fair",
     "outfit": "onesie_yellow",
     "accessory": "none"
-   }
+   },
+   "tris": 200,
+   "bytes": 15836,
+   "glb": "assets/visitors/visitor_toddler_waddling_06.glb",
+   "thumb": "assets/visitors/visitor_toddler_waddling_06.png"
   },
   {
    "id": "visitor_teen_phone_07",
@@ -4161,7 +5065,11 @@
     "skin_tone": "medium",
     "outfit": "hoodie_jeans",
     "accessory": "smartphone"
-   }
+   },
+   "tris": 212,
+   "bytes": 16660,
+   "glb": "assets/visitors/visitor_teen_phone_07.glb",
+   "thumb": "assets/visitors/visitor_teen_phone_07.png"
   },
   {
    "id": "visitor_teen_skateboard_08",
@@ -4180,7 +5088,11 @@
     "skin_tone": "dark",
     "outfit": "graphic_tee",
     "accessory": "backpack"
-   }
+   },
+   "tris": 212,
+   "bytes": 16672,
+   "glb": "assets/visitors/visitor_teen_skateboard_08.glb",
+   "thumb": "assets/visitors/visitor_teen_skateboard_08.png"
   },
   {
    "id": "visitor_senior_cane_09",
@@ -4199,7 +5111,11 @@
     "skin_tone": "fair",
     "outfit": "cardigan",
     "accessory": "cane"
-   }
+   },
+   "tris": 220,
+   "bytes": 17096,
+   "glb": "assets/visitors/visitor_senior_cane_09.glb",
+   "thumb": "assets/visitors/visitor_senior_cane_09.png"
   },
   {
    "id": "visitor_senior_sunvisor_10",
@@ -4218,7 +5134,11 @@
     "skin_tone": "tan",
     "outfit": "blouse_skirt",
     "accessory": "umbrella"
-   }
+   },
+   "tris": 232,
+   "bytes": 17944,
+   "glb": "assets/visitors/visitor_senior_sunvisor_10.glb",
+   "thumb": "assets/visitors/visitor_senior_sunvisor_10.png"
   },
   {
    "id": "visitor_family_dad_backpack_11",
@@ -4237,7 +5157,11 @@
     "skin_tone": "fair",
     "outfit": "cargo_hiking",
     "accessory": "heavy_pack"
-   }
+   },
+   "tris": 212,
+   "bytes": 16680,
+   "glb": "assets/visitors/visitor_family_dad_backpack_11.glb",
+   "thumb": "assets/visitors/visitor_family_dad_backpack_11.png"
   },
   {
    "id": "visitor_family_mom_stroller_12",
@@ -4256,7 +5180,11 @@
     "skin_tone": "dark",
     "outfit": "activewear",
     "accessory": "stroller_handle"
-   }
+   },
+   "tris": 212,
+   "bytes": 16680,
+   "glb": "assets/visitors/visitor_family_mom_stroller_12.glb",
+   "thumb": "assets/visitors/visitor_family_mom_stroller_12.png"
   },
   {
    "id": "visitor_wildlife_photographer_13",
@@ -4275,7 +5203,11 @@
     "skin_tone": "medium",
     "outfit": "camo_vest",
     "accessory": "tripod_rig"
-   }
+   },
+   "tris": 232,
+   "bytes": 17956,
+   "glb": "assets/visitors/visitor_wildlife_photographer_13.glb",
+   "thumb": "assets/visitors/visitor_wildlife_photographer_13.png"
   },
   {
    "id": "visitor_art_student_14",
@@ -4294,7 +5226,11 @@
     "skin_tone": "fair",
     "outfit": "boho_jacket",
     "accessory": "sketchbook"
-   }
+   },
+   "tris": 224,
+   "bytes": 17504,
+   "glb": "assets/visitors/visitor_art_student_14.glb",
+   "thumb": "assets/visitors/visitor_art_student_14.png"
   },
   {
    "id": "visitor_school_trip_scout_15",
@@ -4313,7 +5249,11 @@
     "skin_tone": "tan",
     "outfit": "scout_uniform",
     "accessory": "field_notebook"
-   }
+   },
+   "tris": 236,
+   "bytes": 18356,
+   "glb": "assets/visitors/visitor_school_trip_scout_15.glb",
+   "thumb": "assets/visitors/visitor_school_trip_scout_15.png"
   },
   {
    "id": "visitor_school_chaperone_16",
@@ -4332,7 +5272,11 @@
     "skin_tone": "dark",
     "outfit": "hi_vis_yellow",
     "accessory": "clipboard_whistle"
-   }
+   },
+   "tris": 224,
+   "bytes": 17516,
+   "glb": "assets/visitors/visitor_school_chaperone_16.glb",
+   "thumb": "assets/visitors/visitor_school_chaperone_16.png"
   },
   {
    "id": "visitor_zoology_student_17",
@@ -4351,7 +5295,11 @@
     "skin_tone": "medium",
     "outfit": "vest_khaki",
     "accessory": "digital_recorder"
-   }
+   },
+   "tris": 224,
+   "bytes": 17512,
+   "glb": "assets/visitors/visitor_zoology_student_17.glb",
+   "thumb": "assets/visitors/visitor_zoology_student_17.png"
   },
   {
    "id": "visitor_souvenir_shopper_18",
@@ -4370,7 +5318,11 @@
     "skin_tone": "fair",
     "outfit": "shopping_chic",
     "accessory": "gift_bags"
-   }
+   },
+   "tris": 212,
+   "bytes": 16672,
+   "glb": "assets/visitors/visitor_souvenir_shopper_18.glb",
+   "thumb": "assets/visitors/visitor_souvenir_shopper_18.png"
   },
   {
    "id": "visitor_jogger_sport_19",
@@ -4389,7 +5341,11 @@
     "skin_tone": "dark",
     "outfit": "running_shorts",
     "accessory": "water_flask"
-   }
+   },
+   "tris": 220,
+   "bytes": 17096,
+   "glb": "assets/visitors/visitor_jogger_sport_19.glb",
+   "thumb": "assets/visitors/visitor_jogger_sport_19.png"
   },
   {
    "id": "visitor_snack_muncher_20",
@@ -4408,7 +5364,11 @@
     "skin_tone": "tan",
     "outfit": "denim_jacket",
     "accessory": "pretzel"
-   }
+   },
+   "tris": 212,
+   "bytes": 16668,
+   "glb": "assets/visitors/visitor_snack_muncher_20.glb",
+   "thumb": "assets/visitors/visitor_snack_muncher_20.png"
   },
   {
    "id": "visitor_bird_watcher_21",
@@ -4427,7 +5387,11 @@
     "skin_tone": "fair",
     "outfit": "outdoor_vest",
     "accessory": "binoculars_neck"
-   }
+   },
+   "tris": 252,
+   "bytes": 19208,
+   "glb": "assets/visitors/visitor_bird_watcher_21.glb",
+   "thumb": "assets/visitors/visitor_bird_watcher_21.png"
   },
   {
    "id": "visitor_wheelchair_user_22",
@@ -4446,7 +5410,11 @@
     "skin_tone": "medium",
     "outfit": "casual_jacket",
     "accessory": "wheelchair"
-   }
+   },
+   "tris": 276,
+   "bytes": 21280,
+   "glb": "assets/visitors/visitor_wheelchair_user_22.glb",
+   "thumb": "assets/visitors/visitor_wheelchair_user_22.png"
   },
   {
    "id": "visitor_parent_shoulder_kid_23",
@@ -4465,7 +5433,11 @@
     "skin_tone": "dark",
     "outfit": "casual_shirt",
     "accessory": "kid_rider"
-   }
+   },
+   "tris": 216,
+   "bytes": 17088,
+   "glb": "assets/visitors/visitor_parent_shoulder_kid_23.glb",
+   "thumb": "assets/visitors/visitor_parent_shoulder_kid_23.png"
   },
   {
    "id": "visitor_twin_kid_boy_24",
@@ -4484,7 +5456,11 @@
     "skin_tone": "fair",
     "outfit": "explorer_hat",
     "accessory": "map_sheet"
-   }
+   },
+   "tris": 212,
+   "bytes": 16668,
+   "glb": "assets/visitors/visitor_twin_kid_boy_24.glb",
+   "thumb": "assets/visitors/visitor_twin_kid_boy_24.png"
   },
   {
    "id": "visitor_twin_kid_girl_25",
@@ -4503,7 +5479,11 @@
     "skin_tone": "fair",
     "outfit": "explorer_hat",
     "accessory": "compass"
-   }
+   },
+   "tris": 212,
+   "bytes": 16668,
+   "glb": "assets/visitors/visitor_twin_kid_girl_25.glb",
+   "thumb": "assets/visitors/visitor_twin_kid_girl_25.png"
   },
   {
    "id": "acacia_tree",
@@ -4520,7 +5500,11 @@
     "kind": "tree_flat",
     "trunk": "brown",
     "leaf": "olive"
-   }
+   },
+   "tris": 188,
+   "bytes": 13416,
+   "glb": "assets/plants/acacia_tree.glb",
+   "thumb": "assets/plants/acacia_tree.png"
   },
   {
    "id": "baobab_tree",
@@ -4537,7 +5521,11 @@
     "kind": "tree_bottle",
     "trunk": "tan",
     "leaf": "leaf"
-   }
+   },
+   "tris": 556,
+   "bytes": 41424,
+   "glb": "assets/plants/baobab_tree.glb",
+   "thumb": "assets/plants/baobab_tree.png"
   },
   {
    "id": "oak_tree",
@@ -4554,7 +5542,11 @@
     "kind": "tree_round",
     "trunk": "brown",
     "leaf": "leaf"
-   }
+   },
+   "tris": 568,
+   "bytes": 44628,
+   "glb": "assets/plants/oak_tree.glb",
+   "thumb": "assets/plants/oak_tree.png"
   },
   {
    "id": "birch_tree",
@@ -4571,7 +5563,11 @@
     "kind": "tree_oval",
     "trunk": "white",
     "leaf": "lime"
-   }
+   },
+   "tris": 204,
+   "bytes": 16568,
+   "glb": "assets/plants/birch_tree.glb",
+   "thumb": "assets/plants/birch_tree.png"
   },
   {
    "id": "pine_tree",
@@ -4588,7 +5584,11 @@
     "kind": "tree_cone",
     "trunk": "dark_brown",
     "leaf": "forest"
-   }
+   },
+   "tris": 84,
+   "bytes": 8052,
+   "glb": "assets/plants/pine_tree.glb",
+   "thumb": "assets/plants/pine_tree.png"
   },
   {
    "id": "spruce_tree",
@@ -4606,7 +5606,11 @@
     "trunk": "dark_brown",
     "leaf": "forest",
     "tiers": 5
-   }
+   },
+   "tris": 98,
+   "bytes": 9164,
+   "glb": "assets/plants/spruce_tree.glb",
+   "thumb": "assets/plants/spruce_tree.png"
   },
   {
    "id": "palm_tree",
@@ -4623,7 +5627,11 @@
     "kind": "palm",
     "trunk": "tan",
     "leaf": "leaf"
-   }
+   },
+   "tris": 368,
+   "bytes": 27552,
+   "glb": "assets/plants/palm_tree.glb",
+   "thumb": "assets/plants/palm_tree.png"
   },
   {
    "id": "date_palm",
@@ -4640,7 +5648,11 @@
     "kind": "palm",
     "trunk": "brown",
     "leaf": "olive"
-   }
+   },
+   "tris": 244,
+   "bytes": 17592,
+   "glb": "assets/plants/date_palm.glb",
+   "thumb": "assets/plants/date_palm.png"
   },
   {
    "id": "eucalyptus_tree",
@@ -4657,7 +5669,11 @@
     "kind": "tree_oval",
     "trunk": "light_grey",
     "leaf": "olive"
-   }
+   },
+   "tris": 168,
+   "bytes": 14056,
+   "glb": "assets/plants/eucalyptus_tree.glb",
+   "thumb": "assets/plants/eucalyptus_tree.png"
   },
   {
    "id": "bamboo_clump",
@@ -4674,7 +5690,11 @@
     "kind": "bamboo",
     "stem": "lime",
     "leaf": "leaf"
-   }
+   },
+   "tris": 980,
+   "bytes": 66052,
+   "glb": "assets/plants/bamboo_clump.glb",
+   "thumb": "assets/plants/bamboo_clump.png"
   },
   {
    "id": "willow_tree",
@@ -4691,7 +5711,11 @@
     "kind": "tree_weeping",
     "trunk": "brown",
     "leaf": "lime"
-   }
+   },
+   "tris": 328,
+   "bytes": 24244,
+   "glb": "assets/plants/willow_tree.glb",
+   "thumb": "assets/plants/willow_tree.png"
   },
   {
    "id": "maple_tree_autumn",
@@ -4708,7 +5732,11 @@
     "kind": "tree_round",
     "trunk": "brown",
     "leaf": "orange"
-   }
+   },
+   "tris": 568,
+   "bytes": 44644,
+   "glb": "assets/plants/maple_tree_autumn.glb",
+   "thumb": "assets/plants/maple_tree_autumn.png"
   },
   {
    "id": "cherry_tree_blossom",
@@ -4725,7 +5753,11 @@
     "kind": "tree_round",
     "trunk": "dark_brown",
     "leaf": "pink"
-   }
+   },
+   "tris": 568,
+   "bytes": 44644,
+   "glb": "assets/plants/cherry_tree_blossom.glb",
+   "thumb": "assets/plants/cherry_tree_blossom.png"
   },
   {
    "id": "dead_tree",
@@ -4741,7 +5773,11 @@
    "params": {
     "kind": "tree_bare",
     "trunk": "grey"
-   }
+   },
+   "tris": 192,
+   "bytes": 14184,
+   "glb": "assets/plants/dead_tree.glb",
+   "thumb": "assets/plants/dead_tree.png"
   },
   {
    "id": "mangrove_tree",
@@ -4758,7 +5794,11 @@
     "kind": "tree_roots",
     "trunk": "brown",
     "leaf": "forest"
-   }
+   },
+   "tris": 288,
+   "bytes": 21704,
+   "glb": "assets/plants/mangrove_tree.glb",
+   "thumb": "assets/plants/mangrove_tree.png"
   },
   {
    "id": "kapok_tree",
@@ -4775,7 +5815,11 @@
     "kind": "tree_flat",
     "trunk": "light_grey",
     "leaf": "forest"
-   }
+   },
+   "tris": 188,
+   "bytes": 13416,
+   "glb": "assets/plants/kapok_tree.glb",
+   "thumb": "assets/plants/kapok_tree.png"
   },
   {
    "id": "cypress_tree",
@@ -4792,7 +5836,11 @@
     "kind": "tree_column",
     "trunk": "brown",
     "leaf": "forest"
-   }
+   },
+   "tris": 86,
+   "bytes": 7540,
+   "glb": "assets/plants/cypress_tree.glb",
+   "thumb": "assets/plants/cypress_tree.png"
   },
   {
    "id": "joshua_tree",
@@ -4809,7 +5857,11 @@
     "kind": "tree_branchy",
     "trunk": "tan",
     "leaf": "olive"
-   }
+   },
+   "tris": 328,
+   "bytes": 25780,
+   "glb": "assets/plants/joshua_tree.glb",
+   "thumb": "assets/plants/joshua_tree.png"
   },
   {
    "id": "saguaro_cactus",
@@ -4825,7 +5877,11 @@
    "params": {
     "kind": "cactus_arms",
     "body": "leaf"
-   }
+   },
+   "tris": 148,
+   "bytes": 10860,
+   "glb": "assets/plants/saguaro_cactus.glb",
+   "thumb": "assets/plants/saguaro_cactus.png"
   },
   {
    "id": "barrel_cactus",
@@ -4842,7 +5898,11 @@
     "kind": "cactus_ball",
     "body": "leaf",
     "flower": "yellow"
-   }
+   },
+   "tris": 182,
+   "bytes": 15564,
+   "glb": "assets/plants/barrel_cactus.glb",
+   "thumb": "assets/plants/barrel_cactus.png"
   },
   {
    "id": "prickly_pear",
@@ -4859,7 +5919,11 @@
     "kind": "cactus_pads",
     "body": "lime",
     "flower": "red"
-   }
+   },
+   "tris": 428,
+   "bytes": 35092,
+   "glb": "assets/plants/prickly_pear.glb",
+   "thumb": "assets/plants/prickly_pear.png"
   },
   {
    "id": "agave_plant",
@@ -4875,7 +5939,11 @@
    "params": {
     "kind": "rosette",
     "leaf": "teal"
-   }
+   },
+   "tris": 192,
+   "bytes": 15364,
+   "glb": "assets/plants/agave_plant.glb",
+   "thumb": "assets/plants/agave_plant.png"
   },
   {
    "id": "aloe_plant",
@@ -4891,7 +5959,11 @@
    "params": {
     "kind": "rosette",
     "leaf": "olive"
-   }
+   },
+   "tris": 192,
+   "bytes": 15364,
+   "glb": "assets/plants/aloe_plant.glb",
+   "thumb": "assets/plants/aloe_plant.png"
   },
   {
    "id": "tree_fern",
@@ -4908,7 +5980,11 @@
     "kind": "palm",
     "trunk": "dark_brown",
     "leaf": "forest"
-   }
+   },
+   "tris": 224,
+   "bytes": 16316,
+   "glb": "assets/plants/tree_fern.glb",
+   "thumb": "assets/plants/tree_fern.png"
   },
   {
    "id": "fern_bush",
@@ -4924,7 +6000,11 @@
    "params": {
     "kind": "fern",
     "leaf": "leaf"
-   }
+   },
+   "tris": 144,
+   "bytes": 11996,
+   "glb": "assets/plants/fern_bush.glb",
+   "thumb": "assets/plants/fern_bush.png"
   },
   {
    "id": "round_shrub",
@@ -4940,7 +6020,11 @@
    "params": {
     "kind": "shrub_round",
     "leaf": "leaf"
-   }
+   },
+   "tris": 460,
+   "bytes": 36820,
+   "glb": "assets/plants/round_shrub.glb",
+   "thumb": "assets/plants/round_shrub.png"
   },
   {
    "id": "box_hedge",
@@ -4956,7 +6040,11 @@
    "params": {
     "kind": "hedge",
     "leaf": "forest"
-   }
+   },
+   "tris": 12,
+   "bytes": 2692,
+   "glb": "assets/plants/box_hedge.glb",
+   "thumb": "assets/plants/box_hedge.png"
   },
   {
    "id": "hedge_corner",
@@ -4972,7 +6060,11 @@
    "params": {
     "kind": "hedge_corner",
     "leaf": "forest"
-   }
+   },
+   "tris": 24,
+   "bytes": 3516,
+   "glb": "assets/plants/hedge_corner.glb",
+   "thumb": "assets/plants/hedge_corner.png"
   },
   {
    "id": "topiary_ball",
@@ -4989,7 +6081,11 @@
     "kind": "topiary",
     "leaf": "forest",
     "pot": "rust"
-   }
+   },
+   "tris": 244,
+   "bytes": 19132,
+   "glb": "assets/plants/topiary_ball.glb",
+   "thumb": "assets/plants/topiary_ball.png"
   },
   {
    "id": "flowering_shrub",
@@ -5006,7 +6102,11 @@
     "kind": "shrub_round",
     "leaf": "leaf",
     "flower": "lavender"
-   }
+   },
+   "tris": 712,
+   "bytes": 57156,
+   "glb": "assets/plants/flowering_shrub.glb",
+   "thumb": "assets/plants/flowering_shrub.png"
   },
   {
    "id": "rhododendron_bush",
@@ -5023,7 +6123,11 @@
     "kind": "shrub_round",
     "leaf": "forest",
     "flower": "purple"
-   }
+   },
+   "tris": 712,
+   "bytes": 57160,
+   "glb": "assets/plants/rhododendron_bush.glb",
+   "thumb": "assets/plants/rhododendron_bush.png"
   },
   {
    "id": "berry_bush",
@@ -5040,7 +6144,11 @@
     "kind": "shrub_round",
     "leaf": "leaf",
     "flower": "red"
-   }
+   },
+   "tris": 712,
+   "bytes": 57144,
+   "glb": "assets/plants/berry_bush.glb",
+   "thumb": "assets/plants/berry_bush.png"
   },
   {
    "id": "tall_grass_clump",
@@ -5056,7 +6164,11 @@
    "params": {
     "kind": "grass",
     "leaf": "lime"
-   }
+   },
+   "tris": 72,
+   "bytes": 8504,
+   "glb": "assets/plants/tall_grass_clump.glb",
+   "thumb": "assets/plants/tall_grass_clump.png"
   },
   {
    "id": "savanna_grass",
@@ -5072,7 +6184,11 @@
    "params": {
     "kind": "grass",
     "leaf": "sand"
-   }
+   },
+   "tris": 72,
+   "bytes": 8500,
+   "glb": "assets/plants/savanna_grass.glb",
+   "thumb": "assets/plants/savanna_grass.png"
   },
   {
    "id": "pampas_grass",
@@ -5089,7 +6205,11 @@
     "kind": "grass_plume",
     "leaf": "olive",
     "plume": "cream"
-   }
+   },
+   "tris": 126,
+   "bytes": 11124,
+   "glb": "assets/plants/pampas_grass.glb",
+   "thumb": "assets/plants/pampas_grass.png"
   },
   {
    "id": "reeds_clump",
@@ -5106,7 +6226,11 @@
     "kind": "reeds",
     "leaf": "olive",
     "head": "brown"
-   }
+   },
+   "tris": 230,
+   "bytes": 17384,
+   "glb": "assets/plants/reeds_clump.glb",
+   "thumb": "assets/plants/reeds_clump.png"
   },
   {
    "id": "papyrus_clump",
@@ -5123,7 +6247,11 @@
     "kind": "grass_plume",
     "leaf": "leaf",
     "plume": "lime"
-   }
+   },
+   "tris": 190,
+   "bytes": 14068,
+   "glb": "assets/plants/papyrus_clump.glb",
+   "thumb": "assets/plants/papyrus_clump.png"
   },
   {
    "id": "water_lily",
@@ -5140,7 +6268,11 @@
     "kind": "lily",
     "leaf": "leaf",
     "flower": "pink"
-   }
+   },
+   "tris": 94,
+   "bytes": 8496,
+   "glb": "assets/plants/water_lily.glb",
+   "thumb": "assets/plants/water_lily.png"
   },
   {
    "id": "lotus_flower",
@@ -5158,7 +6290,11 @@
     "leaf": "forest",
     "flower": "pink",
     "stem": true
-   }
+   },
+   "tris": 114,
+   "bytes": 9772,
+   "glb": "assets/plants/lotus_flower.glb",
+   "thumb": "assets/plants/lotus_flower.png"
   },
   {
    "id": "sunflower_patch",
@@ -5175,7 +6311,11 @@
     "kind": "flower_patch",
     "flower": "yellow",
     "stem": "leaf"
-   }
+   },
+   "tris": 400,
+   "bytes": 26416,
+   "glb": "assets/plants/sunflower_patch.glb",
+   "thumb": "assets/plants/sunflower_patch.png"
   },
   {
    "id": "tulip_bed",
@@ -5192,7 +6332,11 @@
     "kind": "flower_bed",
     "flower": "red",
     "stem": "leaf"
-   }
+   },
+   "tris": 188,
+   "bytes": 16076,
+   "glb": "assets/plants/tulip_bed.glb",
+   "thumb": "assets/plants/tulip_bed.png"
   },
   {
    "id": "daisy_patch",
@@ -5209,7 +6353,11 @@
     "kind": "flower_patch",
     "flower": "white",
     "stem": "leaf"
-   }
+   },
+   "tris": 400,
+   "bytes": 30248,
+   "glb": "assets/plants/daisy_patch.glb",
+   "thumb": "assets/plants/daisy_patch.png"
   },
   {
    "id": "lavender_bush",
@@ -5226,7 +6374,11 @@
     "kind": "shrub_round",
     "leaf": "olive",
     "flower": "lavender"
-   }
+   },
+   "tris": 712,
+   "bytes": 57152,
+   "glb": "assets/plants/lavender_bush.glb",
+   "thumb": "assets/plants/lavender_bush.png"
   },
   {
    "id": "flower_planter_box",
@@ -5243,7 +6395,11 @@
     "kind": "planter",
     "box": "brown",
     "flower": "orange"
-   }
+   },
+   "tris": 372,
+   "bytes": 30636,
+   "glb": "assets/plants/flower_planter_box.glb",
+   "thumb": "assets/plants/flower_planter_box.png"
   },
   {
    "id": "round_flower_pot",
@@ -5260,7 +6416,11 @@
     "kind": "planter_round",
     "box": "rust",
     "flower": "yellow"
-   }
+   },
+   "tris": 244,
+   "bytes": 20168,
+   "glb": "assets/plants/round_flower_pot.glb",
+   "thumb": "assets/plants/round_flower_pot.png"
   },
   {
    "id": "hanging_vine",
@@ -5276,7 +6436,11 @@
    "params": {
     "kind": "vine",
     "leaf": "forest"
-   }
+   },
+   "tris": 156,
+   "bytes": 12656,
+   "glb": "assets/plants/hanging_vine.glb",
+   "thumb": "assets/plants/hanging_vine.png"
   },
   {
    "id": "ivy_wall_patch",
@@ -5292,7 +6456,11 @@
    "params": {
     "kind": "ivy",
     "leaf": "leaf"
-   }
+   },
+   "tris": 792,
+   "bytes": 61984,
+   "glb": "assets/plants/ivy_wall_patch.glb",
+   "thumb": "assets/plants/ivy_wall_patch.png"
   },
   {
    "id": "mushroom_cluster",
@@ -5309,7 +6477,11 @@
     "kind": "mushroom",
     "cap": "red",
     "stem": "cream"
-   }
+   },
+   "tris": 192,
+   "bytes": 16336,
+   "glb": "assets/plants/mushroom_cluster.glb",
+   "thumb": "assets/plants/mushroom_cluster.png"
   },
   {
    "id": "tree_stump",
@@ -5326,7 +6498,11 @@
     "kind": "stump",
     "bark": "brown",
     "top": "tan"
-   }
+   },
+   "tris": 104,
+   "bytes": 8944,
+   "glb": "assets/plants/tree_stump.glb",
+   "thumb": "assets/plants/tree_stump.png"
   },
   {
    "id": "banana_plant",
@@ -5343,7 +6519,11 @@
     "kind": "banana",
     "stem": "lime",
     "leaf": "leaf"
-   }
+   },
+   "tris": 100,
+   "bytes": 8664,
+   "glb": "assets/plants/banana_plant.glb",
+   "thumb": "assets/plants/banana_plant.png"
   },
   {
    "id": "monstera_plant",
@@ -5359,7 +6539,11 @@
    "params": {
     "kind": "big_leaf",
     "leaf": "forest"
-   }
+   },
+   "tris": 168,
+   "bytes": 13304,
+   "glb": "assets/plants/monstera_plant.glb",
+   "thumb": "assets/plants/monstera_plant.png"
   },
   {
    "id": "bromeliad",
@@ -5376,7 +6560,11 @@
     "kind": "rosette",
     "leaf": "leaf",
     "flower": "red"
-   }
+   },
+   "tris": 222,
+   "bytes": 17460,
+   "glb": "assets/plants/bromeliad.glb",
+   "thumb": "assets/plants/bromeliad.png"
   },
   {
    "id": "bonsai_pine",
@@ -5394,7 +6582,11 @@
     "trunk": "dark_brown",
     "leaf": "forest",
     "pot": "navy"
-   }
+   },
+   "tris": 172,
+   "bytes": 14856,
+   "glb": "assets/plants/bonsai_pine.glb",
+   "thumb": "assets/plants/bonsai_pine.png"
   },
   {
    "id": "kelp_strand",
@@ -5410,7 +6602,11 @@
    "params": {
     "kind": "kelp",
     "leaf": "olive"
-   }
+   },
+   "tris": 314,
+   "bytes": 26020,
+   "glb": "assets/plants/kelp_strand.glb",
+   "thumb": "assets/plants/kelp_strand.png"
   },
   {
    "id": "coral_cluster",
@@ -5426,7 +6622,11 @@
    "params": {
     "kind": "coral",
     "colour": "pink"
-   }
+   },
+   "tris": 278,
+   "bytes": 22096,
+   "glb": "assets/plants/coral_cluster.glb",
+   "thumb": "assets/plants/coral_cluster.png"
   },
   {
    "id": "boulder_small",
@@ -5442,7 +6642,11 @@
    "params": {
     "kind": "boulder",
     "rock": "grey"
-   }
+   },
+   "tris": 184,
+   "bytes": 16160,
+   "glb": "assets/landscape/boulder_small.glb",
+   "thumb": "assets/landscape/boulder_small.png"
   },
   {
    "id": "boulder_medium",
@@ -5458,7 +6662,11 @@
    "params": {
     "kind": "boulder",
     "rock": "grey"
-   }
+   },
+   "tris": 184,
+   "bytes": 16156,
+   "glb": "assets/landscape/boulder_medium.glb",
+   "thumb": "assets/landscape/boulder_medium.png"
   },
   {
    "id": "boulder_large",
@@ -5474,7 +6682,11 @@
    "params": {
     "kind": "boulder",
     "rock": "charcoal"
-   }
+   },
+   "tris": 184,
+   "bytes": 16156,
+   "glb": "assets/landscape/boulder_large.glb",
+   "thumb": "assets/landscape/boulder_large.png"
   },
   {
    "id": "sandstone_boulder",
@@ -5490,7 +6702,11 @@
    "params": {
     "kind": "boulder",
     "rock": "sand"
-   }
+   },
+   "tris": 184,
+   "bytes": 16164,
+   "glb": "assets/landscape/sandstone_boulder.glb",
+   "thumb": "assets/landscape/sandstone_boulder.png"
   },
   {
    "id": "red_rock",
@@ -5506,7 +6722,11 @@
    "params": {
     "kind": "boulder",
     "rock": "rust"
-   }
+   },
+   "tris": 184,
+   "bytes": 16148,
+   "glb": "assets/landscape/red_rock.glb",
+   "thumb": "assets/landscape/red_rock.png"
   },
   {
    "id": "flat_rock",
@@ -5522,7 +6742,11 @@
    "params": {
     "kind": "slab",
     "rock": "light_grey"
-   }
+   },
+   "tris": 52,
+   "bytes": 5108,
+   "glb": "assets/landscape/flat_rock.glb",
+   "thumb": "assets/landscape/flat_rock.png"
   },
   {
    "id": "stepping_stones",
@@ -5539,7 +6763,11 @@
     "kind": "stones_row",
     "rock": "grey",
     "count": 5
-   }
+   },
+   "tris": 120,
+   "bytes": 9372,
+   "glb": "assets/landscape/stepping_stones.glb",
+   "thumb": "assets/landscape/stepping_stones.png"
   },
   {
    "id": "rock_pile",
@@ -5555,7 +6783,11 @@
    "params": {
     "kind": "pile",
     "rock": "grey"
-   }
+   },
+   "tris": 366,
+   "bytes": 30748,
+   "glb": "assets/landscape/rock_pile.glb",
+   "thumb": "assets/landscape/rock_pile.png"
   },
   {
    "id": "pebble_patch",
@@ -5571,7 +6803,11 @@
    "params": {
     "kind": "pebbles",
     "rock": "light_grey"
-   }
+   },
+   "tris": 276,
+   "bytes": 23432,
+   "glb": "assets/landscape/pebble_patch.glb",
+   "thumb": "assets/landscape/pebble_patch.png"
   },
   {
    "id": "rock_arch",
@@ -5587,7 +6823,11 @@
    "params": {
     "kind": "arch",
     "rock": "tan"
-   }
+   },
+   "tris": 72,
+   "bytes": 7308,
+   "glb": "assets/landscape/rock_arch.glb",
+   "thumb": "assets/landscape/rock_arch.png"
   },
   {
    "id": "cliff_wall",
@@ -5603,7 +6843,11 @@
    "params": {
     "kind": "cliff",
     "rock": "grey"
-   }
+   },
+   "tris": 72,
+   "bytes": 7344,
+   "glb": "assets/landscape/cliff_wall.glb",
+   "thumb": "assets/landscape/cliff_wall.png"
   },
   {
    "id": "cliff_corner",
@@ -5619,7 +6863,11 @@
    "params": {
     "kind": "cliff_corner",
     "rock": "grey"
-   }
+   },
+   "tris": 60,
+   "bytes": 5932,
+   "glb": "assets/landscape/cliff_corner.glb",
+   "thumb": "assets/landscape/cliff_corner.png"
   },
   {
    "id": "rock_cave",
@@ -5635,7 +6883,11 @@
    "params": {
     "kind": "cave",
     "rock": "charcoal"
-   }
+   },
+   "tris": 60,
+   "bytes": 6120,
+   "glb": "assets/landscape/rock_cave.glb",
+   "thumb": "assets/landscape/rock_cave.png"
   },
   {
    "id": "kopje_outcrop",
@@ -5651,7 +6903,11 @@
    "params": {
     "kind": "outcrop",
     "rock": "tan"
-   }
+   },
+   "tris": 248,
+   "bytes": 21148,
+   "glb": "assets/landscape/kopje_outcrop.glb",
+   "thumb": "assets/landscape/kopje_outcrop.png"
   },
   {
    "id": "termite_mound",
@@ -5667,7 +6923,11 @@
    "params": {
     "kind": "mound_spire",
     "soil": "rust"
-   }
+   },
+   "tris": 52,
+   "bytes": 6208,
+   "glb": "assets/landscape/termite_mound.glb",
+   "thumb": "assets/landscape/termite_mound.png"
   },
   {
    "id": "ice_floe",
@@ -5683,7 +6943,11 @@
    "params": {
     "kind": "slab",
     "rock": "white"
-   }
+   },
+   "tris": 52,
+   "bytes": 5108,
+   "glb": "assets/landscape/ice_floe.glb",
+   "thumb": "assets/landscape/ice_floe.png"
   },
   {
    "id": "iceberg_rock",
@@ -5700,7 +6964,11 @@
     "kind": "boulder",
     "rock": "white",
     "accent": "sky"
-   }
+   },
+   "tris": 248,
+   "bytes": 21144,
+   "glb": "assets/landscape/iceberg_rock.glb",
+   "thumb": "assets/landscape/iceberg_rock.png"
   },
   {
    "id": "snow_mound",
@@ -5716,7 +6984,11 @@
    "params": {
     "kind": "mound",
     "soil": "white"
-   }
+   },
+   "tris": 100,
+   "bytes": 9564,
+   "glb": "assets/landscape/snow_mound.glb",
+   "thumb": "assets/landscape/snow_mound.png"
   },
   {
    "id": "grass_hill",
@@ -5732,7 +7004,11 @@
    "params": {
     "kind": "mound",
     "soil": "leaf"
-   }
+   },
+   "tris": 100,
+   "bytes": 9544,
+   "glb": "assets/landscape/grass_hill.glb",
+   "thumb": "assets/landscape/grass_hill.png"
   },
   {
    "id": "sand_dune",
@@ -5748,7 +7024,11 @@
    "params": {
     "kind": "dune",
     "soil": "sand"
-   }
+   },
+   "tris": 128,
+   "bytes": 11264,
+   "glb": "assets/landscape/sand_dune.glb",
+   "thumb": "assets/landscape/sand_dune.png"
   },
   {
    "id": "dirt_mound",
@@ -5764,7 +7044,11 @@
    "params": {
     "kind": "mound",
     "soil": "brown"
-   }
+   },
+   "tris": 100,
+   "bytes": 9564,
+   "glb": "assets/landscape/dirt_mound.glb",
+   "thumb": "assets/landscape/dirt_mound.png"
   },
   {
    "id": "pond_small",
@@ -5781,7 +7065,11 @@
     "kind": "pond",
     "water": "water",
     "rim": "grey"
-   }
+   },
+   "tris": 376,
+   "bytes": 30296,
+   "glb": "assets/landscape/pond_small.glb",
+   "thumb": "assets/landscape/pond_small.png"
   },
   {
    "id": "stream_section",
@@ -5798,7 +7086,11 @@
     "kind": "stream",
     "water": "water",
     "rim": "grey"
-   }
+   },
+   "tris": 96,
+   "bytes": 9292,
+   "glb": "assets/landscape/stream_section.glb",
+   "thumb": "assets/landscape/stream_section.png"
   },
   {
    "id": "fallen_log",
@@ -5815,7 +7107,11 @@
     "kind": "log",
     "bark": "brown",
     "end": "tan"
-   }
+   },
+   "tris": 104,
+   "bytes": 8308,
+   "glb": "assets/landscape/fallen_log.glb",
+   "thumb": "assets/landscape/fallen_log.png"
   },
   {
    "id": "hollow_log",
@@ -5832,7 +7128,11 @@
     "kind": "log_hollow",
     "bark": "dark_brown",
     "end": "tan"
-   }
+   },
+   "tris": 140,
+   "bytes": 10444,
+   "glb": "assets/landscape/hollow_log.glb",
+   "thumb": "assets/landscape/hollow_log.png"
   },
   {
    "id": "driftwood",
@@ -5849,7 +7149,11 @@
     "kind": "log",
     "bark": "light_grey",
     "end": "cream"
-   }
+   },
+   "tris": 104,
+   "bytes": 8304,
+   "glb": "assets/landscape/driftwood.glb",
+   "thumb": "assets/landscape/driftwood.png"
   },
   {
    "id": "climbing_tree_trunk",
@@ -5865,7 +7169,11 @@
    "params": {
     "kind": "tree_bare",
     "trunk": "brown"
-   }
+   },
+   "tris": 88,
+   "bytes": 7456,
+   "glb": "assets/landscape/climbing_tree_trunk.glb",
+   "thumb": "assets/landscape/climbing_tree_trunk.png"
   },
   {
    "id": "root_tangle",
@@ -5881,7 +7189,11 @@
    "params": {
     "kind": "roots",
     "bark": "dark_brown"
-   }
+   },
+   "tris": 124,
+   "bytes": 9768,
+   "glb": "assets/landscape/root_tangle.glb",
+   "thumb": "assets/landscape/root_tangle.png"
   },
   {
    "id": "grass_tile",
@@ -5897,7 +7209,11 @@
    "params": {
     "kind": "tile",
     "top": "leaf"
-   }
+   },
+   "tris": 24,
+   "bytes": 3596,
+   "glb": "assets/landscape/grass_tile.glb",
+   "thumb": "assets/landscape/grass_tile.png"
   },
   {
    "id": "sand_tile",
@@ -5913,7 +7229,11 @@
    "params": {
     "kind": "tile",
     "top": "sand"
-   }
+   },
+   "tris": 24,
+   "bytes": 3592,
+   "glb": "assets/landscape/sand_tile.glb",
+   "thumb": "assets/landscape/sand_tile.png"
   },
   {
    "id": "dirt_tile",
@@ -5929,7 +7249,11 @@
    "params": {
     "kind": "tile",
     "top": "brown"
-   }
+   },
+   "tris": 24,
+   "bytes": 3592,
+   "glb": "assets/landscape/dirt_tile.glb",
+   "thumb": "assets/landscape/dirt_tile.png"
   },
   {
    "id": "snow_tile",
@@ -5945,7 +7269,11 @@
    "params": {
     "kind": "tile",
     "top": "white"
-   }
+   },
+   "tris": 24,
+   "bytes": 3592,
+   "glb": "assets/landscape/snow_tile.glb",
+   "thumb": "assets/landscape/snow_tile.png"
   },
   {
    "id": "gravel_tile",
@@ -5961,7 +7289,11 @@
    "params": {
     "kind": "tile",
     "top": "light_grey"
-   }
+   },
+   "tris": 24,
+   "bytes": 3596,
+   "glb": "assets/landscape/gravel_tile.glb",
+   "thumb": "assets/landscape/gravel_tile.png"
   },
   {
    "id": "mulch_tile",
@@ -5977,7 +7309,11 @@
    "params": {
     "kind": "tile",
     "top": "rust"
-   }
+   },
+   "tris": 24,
+   "bytes": 3596,
+   "glb": "assets/landscape/mulch_tile.glb",
+   "thumb": "assets/landscape/mulch_tile.png"
   },
   {
    "id": "rock_ledge",
@@ -5993,7 +7329,11 @@
    "params": {
     "kind": "ledge",
     "rock": "grey"
-   }
+   },
+   "tris": 24,
+   "bytes": 3596,
+   "glb": "assets/landscape/rock_ledge.glb",
+   "thumb": "assets/landscape/rock_ledge.png"
   },
   {
    "id": "sandbank",
@@ -6009,7 +7349,11 @@
    "params": {
     "kind": "mound",
     "soil": "sand"
-   }
+   },
+   "tris": 100,
+   "bytes": 9560,
+   "glb": "assets/landscape/sandbank.glb",
+   "thumb": "assets/landscape/sandbank.png"
   },
   {
    "id": "lava_rock",
@@ -6025,7 +7369,11 @@
    "params": {
     "kind": "boulder",
     "rock": "black"
-   }
+   },
+   "tris": 184,
+   "bytes": 16148,
+   "glb": "assets/landscape/lava_rock.glb",
+   "thumb": "assets/landscape/lava_rock.png"
   },
   {
    "id": "mossy_rock",
@@ -6042,7 +7390,11 @@
     "kind": "boulder",
     "rock": "grey",
     "accent": "leaf"
-   }
+   },
+   "tris": 268,
+   "bytes": 22928,
+   "glb": "assets/landscape/mossy_rock.glb",
+   "thumb": "assets/landscape/mossy_rock.png"
   },
   {
    "id": "rock_column",
@@ -6058,7 +7410,11 @@
    "params": {
     "kind": "column",
     "rock": "charcoal"
-   }
+   },
+   "tris": 40,
+   "bytes": 4464,
+   "glb": "assets/landscape/rock_column.glb",
+   "thumb": "assets/landscape/rock_column.png"
   },
   {
    "id": "crystal_rock",
@@ -6075,7 +7431,11 @@
     "kind": "boulder",
     "rock": "charcoal",
     "accent": "lavender"
-   }
+   },
+   "tris": 210,
+   "bytes": 18360,
+   "glb": "assets/landscape/crystal_rock.glb",
+   "thumb": "assets/landscape/crystal_rock.png"
   },
   {
    "id": "pond_island",
@@ -6092,7 +7452,11 @@
     "kind": "mound",
     "soil": "leaf",
     "rim": "sand"
-   }
+   },
+   "tris": 144,
+   "bytes": 12136,
+   "glb": "assets/landscape/pond_island.glb",
+   "thumb": "assets/landscape/pond_island.png"
   },
   {
    "id": "hay_mound",
@@ -6108,7 +7472,11 @@
    "params": {
     "kind": "mound",
     "soil": "yellow"
-   }
+   },
+   "tris": 112,
+   "bytes": 10528,
+   "glb": "assets/landscape/hay_mound.glb",
+   "thumb": "assets/landscape/hay_mound.png"
   },
   {
    "id": "stalagmite_group",
@@ -6124,7 +7492,11 @@
    "params": {
     "kind": "spires",
     "rock": "tan"
-   }
+   },
+   "tris": 52,
+   "bytes": 6212,
+   "glb": "assets/landscape/stalagmite_group.glb",
+   "thumb": "assets/landscape/stalagmite_group.png"
   },
   {
    "id": "tide_pool_rocks",
@@ -6141,7 +7513,11 @@
     "kind": "pond",
     "water": "water",
     "rim": "charcoal"
-   }
+   },
+   "tris": 376,
+   "bytes": 30308,
+   "glb": "assets/landscape/tide_pool_rocks.glb",
+   "thumb": "assets/landscape/tide_pool_rocks.png"
   },
   {
    "id": "canyon_wall",
@@ -6158,7 +7534,11 @@
     "kind": "cliff",
     "rock": "rust",
     "accent": "sand"
-   }
+   },
+   "tris": 72,
+   "bytes": 7348,
+   "glb": "assets/landscape/canyon_wall.glb",
+   "thumb": "assets/landscape/canyon_wall.png"
   },
   {
    "id": "flag_pole",
@@ -6175,7 +7555,11 @@
     "kind": "flag",
     "pole": "light_grey",
     "cloth": "leaf"
-   }
+   },
+   "tris": 168,
+   "bytes": 13548,
+   "glb": "assets/decor/flag_pole.glb",
+   "thumb": "assets/decor/flag_pole.png"
   },
   {
    "id": "banner_pole",
@@ -6192,7 +7576,11 @@
     "kind": "banner",
     "pole": "charcoal",
     "cloth": "orange"
-   }
+   },
+   "tris": 128,
+   "bytes": 9980,
+   "glb": "assets/decor/banner_pole.glb",
+   "thumb": "assets/decor/banner_pole.png"
   },
   {
    "id": "bunting_string",
@@ -6208,7 +7596,11 @@
    "params": {
     "kind": "bunting",
     "cloth": "red"
-   }
+   },
+   "tris": 168,
+   "bytes": 13308,
+   "glb": "assets/decor/bunting_string.glb",
+   "thumb": "assets/decor/bunting_string.png"
   },
   {
    "id": "patio_umbrella",
@@ -6225,7 +7617,11 @@
     "kind": "umbrella",
     "pole": "white",
     "cloth": "red"
-   }
+   },
+   "tris": 200,
+   "bytes": 15672,
+   "glb": "assets/decor/patio_umbrella.glb",
+   "thumb": "assets/decor/patio_umbrella.png"
   },
   {
    "id": "striped_parasol",
@@ -6243,7 +7639,11 @@
     "pole": "white",
     "cloth": "yellow",
     "stripe": "white"
-   }
+   },
+   "tris": 248,
+   "bytes": 19032,
+   "glb": "assets/decor/striped_parasol.glb",
+   "thumb": "assets/decor/striped_parasol.png"
   },
   {
    "id": "cafe_table_set",
@@ -6260,7 +7660,11 @@
     "kind": "table_set",
     "wood": "tan",
     "metal": "charcoal"
-   }
+   },
+   "tris": 440,
+   "bytes": 29916,
+   "glb": "assets/decor/cafe_table_set.glb",
+   "thumb": "assets/decor/cafe_table_set.png"
   },
   {
    "id": "picnic_blanket",
@@ -6277,7 +7681,11 @@
     "kind": "blanket",
     "cloth": "red",
     "stripe": "white"
-   }
+   },
+   "tris": 92,
+   "bytes": 7852,
+   "glb": "assets/decor/picnic_blanket.glb",
+   "thumb": "assets/decor/picnic_blanket.png"
   },
   {
    "id": "stone_planter",
@@ -6294,7 +7702,11 @@
     "kind": "planter_square",
     "stone": "light_grey",
     "plant": "leaf"
-   }
+   },
+   "tris": 280,
+   "bytes": 23700,
+   "glb": "assets/decor/stone_planter.glb",
+   "thumb": "assets/decor/stone_planter.png"
   },
   {
    "id": "hanging_basket",
@@ -6311,7 +7723,11 @@
     "kind": "basket",
     "weave": "tan",
     "flower": "pink"
-   }
+   },
+   "tris": 400,
+   "bytes": 32624,
+   "glb": "assets/decor/hanging_basket.glb",
+   "thumb": "assets/decor/hanging_basket.png"
   },
   {
    "id": "garden_arch",
@@ -6328,7 +7744,11 @@
     "kind": "arch_frame",
     "frame": "white",
     "flower": "red"
-   }
+   },
+   "tris": 516,
+   "bytes": 41124,
+   "glb": "assets/decor/garden_arch.glb",
+   "thumb": "assets/decor/garden_arch.png"
   },
   {
    "id": "gazebo_small",
@@ -6345,7 +7765,11 @@
     "kind": "gazebo",
     "frame": "white",
     "roof": "teal"
-   }
+   },
+   "tris": 246,
+   "bytes": 18248,
+   "glb": "assets/decor/gazebo_small.glb",
+   "thumb": "assets/decor/gazebo_small.png"
   },
   {
    "id": "sundial",
@@ -6362,7 +7786,11 @@
     "kind": "sundial",
     "stone": "light_grey",
     "metal": "gold"
-   }
+   },
+   "tris": 160,
+   "bytes": 11704,
+   "glb": "assets/decor/sundial.glb",
+   "thumb": "assets/decor/sundial.png"
   },
   {
    "id": "bird_bath",
@@ -6379,7 +7807,11 @@
     "kind": "bird_bath",
     "stone": "light_grey",
     "water": "water"
-   }
+   },
+   "tris": 186,
+   "bytes": 13912,
+   "glb": "assets/decor/bird_bath.glb",
+   "thumb": "assets/decor/bird_bath.png"
   },
   {
    "id": "animal_statue_lion",
@@ -6396,7 +7828,11 @@
     "kind": "statue",
     "stone": "light_grey",
     "shape": "cat"
-   }
+   },
+   "tris": 244,
+   "bytes": 20424,
+   "glb": "assets/decor/animal_statue_lion.glb",
+   "thumb": "assets/decor/animal_statue_lion.png"
   },
   {
    "id": "animal_statue_elephant",
@@ -6413,7 +7849,11 @@
     "kind": "statue",
     "stone": "light_grey",
     "shape": "elephant"
-   }
+   },
+   "tris": 240,
+   "bytes": 19000,
+   "glb": "assets/decor/animal_statue_elephant.glb",
+   "thumb": "assets/decor/animal_statue_elephant.png"
   },
   {
    "id": "giant_egg_sculpture",
@@ -6430,7 +7870,11 @@
     "kind": "egg",
     "body": "cream",
     "spot": "brown"
-   }
+   },
+   "tris": 672,
+   "bytes": 54360,
+   "glb": "assets/decor/giant_egg_sculpture.glb",
+   "thumb": "assets/decor/giant_egg_sculpture.png"
   },
   {
    "id": "footprint_paver",
@@ -6447,7 +7891,11 @@
     "kind": "paver",
     "stone": "grey",
     "print": "dark_brown"
-   }
+   },
+   "tris": 204,
+   "bytes": 18260,
+   "glb": "assets/decor/footprint_paver.glb",
+   "thumb": "assets/decor/footprint_paver.png"
   },
   {
    "id": "height_chart",
@@ -6464,7 +7912,11 @@
     "kind": "height_chart",
     "board": "yellow",
     "mark": "brown"
-   }
+   },
+   "tris": 172,
+   "bytes": 13708,
+   "glb": "assets/decor/height_chart.glb",
+   "thumb": "assets/decor/height_chart.png"
   },
   {
    "id": "photo_cutout_board",
@@ -6481,7 +7933,11 @@
     "kind": "cutout",
     "board": "leaf",
     "frame": "brown"
-   }
+   },
+   "tris": 220,
+   "bytes": 16308,
+   "glb": "assets/decor/photo_cutout_board.glb",
+   "thumb": "assets/decor/photo_cutout_board.png"
   },
   {
    "id": "wooden_barrel",
@@ -6498,7 +7954,11 @@
     "kind": "barrel",
     "wood": "brown",
     "band": "charcoal"
-   }
+   },
+   "tris": 256,
+   "bytes": 16896,
+   "glb": "assets/decor/wooden_barrel.glb",
+   "thumb": "assets/decor/wooden_barrel.png"
   },
   {
    "id": "wooden_crate",
@@ -6514,7 +7974,11 @@
    "params": {
     "kind": "crate",
     "wood": "tan"
-   }
+   },
+   "tris": 180,
+   "bytes": 14520,
+   "glb": "assets/decor/wooden_crate.glb",
+   "thumb": "assets/decor/wooden_crate.png"
   },
   {
    "id": "crate_stack",
@@ -6530,7 +7994,11 @@
    "params": {
     "kind": "crate_stack",
     "wood": "tan"
-   }
+   },
+   "tris": 36,
+   "bytes": 4432,
+   "glb": "assets/decor/crate_stack.glb",
+   "thumb": "assets/decor/crate_stack.png"
   },
   {
    "id": "lantern_string",
@@ -6547,7 +8015,11 @@
     "kind": "lanterns",
     "wire": "charcoal",
     "light": "yellow"
-   }
+   },
+   "tris": 844,
+   "bytes": 63320,
+   "glb": "assets/decor/lantern_string.glb",
+   "thumb": "assets/decor/lantern_string.png"
   },
   {
    "id": "tiki_torch",
@@ -6564,7 +8036,11 @@
     "kind": "torch",
     "pole": "tan",
     "flame": "orange"
-   }
+   },
+   "tris": 160,
+   "bytes": 12608,
+   "glb": "assets/decor/tiki_torch.glb",
+   "thumb": "assets/decor/tiki_torch.png"
   },
   {
    "id": "wind_chime",
@@ -6581,7 +8057,11 @@
     "kind": "chime",
     "wood": "tan",
     "metal": "light_grey"
-   }
+   },
+   "tris": 172,
+   "bytes": 12936,
+   "glb": "assets/decor/wind_chime.glb",
+   "thumb": "assets/decor/wind_chime.png"
   },
   {
    "id": "weather_vane",
@@ -6598,7 +8078,11 @@
     "kind": "vane",
     "metal": "charcoal",
     "accent": "gold"
-   }
+   },
+   "tris": 242,
+   "bytes": 19120,
+   "glb": "assets/decor/weather_vane.glb",
+   "thumb": "assets/decor/weather_vane.png"
   },
   {
    "id": "painted_rock",
@@ -6615,7 +8099,11 @@
     "kind": "painted_rock",
     "rock": "grey",
     "paint": "orange"
-   }
+   },
+   "tris": 220,
+   "bytes": 18988,
+   "glb": "assets/decor/painted_rock.glb",
+   "thumb": "assets/decor/painted_rock.png"
   },
   {
    "id": "garden_trellis",
@@ -6632,7 +8120,11 @@
     "kind": "trellis",
     "frame": "white",
     "plant": "leaf"
-   }
+   },
+   "tris": 492,
+   "bytes": 39020,
+   "glb": "assets/decor/garden_trellis.glb",
+   "thumb": "assets/decor/garden_trellis.png"
   },
   {
    "id": "bird_feeder_post",
@@ -6649,7 +8141,11 @@
     "kind": "feeder",
     "pole": "brown",
     "roof": "red"
-   }
+   },
+   "tris": 148,
+   "bytes": 12036,
+   "glb": "assets/decor/bird_feeder_post.glb",
+   "thumb": "assets/decor/bird_feeder_post.png"
   },
   {
    "id": "garden_wishing_well",
@@ -6666,7 +8162,11 @@
     "kind": "well",
     "stone": "grey",
     "roof": "rust"
-   }
+   },
+   "tris": 252,
+   "bytes": 17656,
+   "glb": "assets/decor/garden_wishing_well.glb",
+   "thumb": "assets/decor/garden_wishing_well.png"
   },
   {
    "id": "keeper_golf_cart",
@@ -7207,7 +8707,11 @@
    "params": {
     "prop_family": "food",
     "variant": "hay_bale_square"
-   }
+   },
+   "tris": 36,
+   "bytes": 4456,
+   "glb": "assets/food/food_hay_bale_square_01.glb",
+   "thumb": "assets/food/food_hay_bale_square_01.png"
   },
   {
    "id": "food_hay_bale_round_02",
@@ -7223,7 +8727,11 @@
    "params": {
     "prop_family": "food",
     "variant": "hay_bale_round"
-   }
+   },
+   "tris": 132,
+   "bytes": 9640,
+   "glb": "assets/food/food_hay_bale_round_02.glb",
+   "thumb": "assets/food/food_hay_bale_round_02.png"
   },
   {
    "id": "food_meat_rib_slab_03",
@@ -7239,7 +8747,11 @@
    "params": {
     "prop_family": "food",
     "variant": "meat_rib_slab"
-   }
+   },
+   "tris": 124,
+   "bytes": 9596,
+   "glb": "assets/food/food_meat_rib_slab_03.glb",
+   "thumb": "assets/food/food_meat_rib_slab_03.png"
   },
   {
    "id": "food_fish_bucket_herring_04",
@@ -7255,7 +8767,11 @@
    "params": {
     "prop_family": "food",
     "variant": "fish_bucket_herring"
-   }
+   },
+   "tris": 198,
+   "bytes": 16584,
+   "glb": "assets/food/food_fish_bucket_herring_04.glb",
+   "thumb": "assets/food/food_fish_bucket_herring_04.png"
   },
   {
    "id": "food_eucalyptus_bundle_05",
@@ -7271,7 +8787,11 @@
    "params": {
     "prop_family": "food",
     "variant": "eucalyptus_bundle"
-   }
+   },
+   "tris": 120,
+   "bytes": 10600,
+   "glb": "assets/food/food_eucalyptus_bundle_05.glb",
+   "thumb": "assets/food/food_eucalyptus_bundle_05.png"
   },
   {
    "id": "food_bamboo_stalk_sheaf_06",
@@ -7287,7 +8807,11 @@
    "params": {
     "prop_family": "food",
     "variant": "bamboo_stalk_sheaf"
-   }
+   },
+   "tris": 412,
+   "bytes": 28236,
+   "glb": "assets/food/food_bamboo_stalk_sheaf_06.glb",
+   "thumb": "assets/food/food_bamboo_stalk_sheaf_06.png"
   },
   {
    "id": "food_fruit_crate_mixed_07",
@@ -7303,7 +8827,11 @@
    "params": {
     "prop_family": "food",
     "variant": "fruit_crate_mixed"
-   }
+   },
+   "tris": 276,
+   "bytes": 23576,
+   "glb": "assets/food/food_fruit_crate_mixed_07.glb",
+   "thumb": "assets/food/food_fruit_crate_mixed_07.png"
   },
   {
    "id": "food_veggie_bushel_roots_08",
@@ -7319,7 +8847,11 @@
    "params": {
     "prop_family": "food",
     "variant": "veggie_bushel_roots"
-   }
+   },
+   "tris": 96,
+   "bytes": 9056,
+   "glb": "assets/food/food_veggie_bushel_roots_08.glb",
+   "thumb": "assets/food/food_veggie_bushel_roots_08.png"
   },
   {
    "id": "food_seed_pellet_trough_09",
@@ -7335,7 +8867,11 @@
    "params": {
     "prop_family": "food",
     "variant": "seed_pellet_trough"
-   }
+   },
+   "tris": 48,
+   "bytes": 5304,
+   "glb": "assets/food/food_seed_pellet_trough_09.glb",
+   "thumb": "assets/food/food_seed_pellet_trough_09.png"
   },
   {
    "id": "food_insect_larva_dish_10",
@@ -7351,7 +8887,11 @@
    "params": {
     "prop_family": "food",
     "variant": "insect_larva_dish"
-   }
+   },
+   "tris": 100,
+   "bytes": 8304,
+   "glb": "assets/food/food_insect_larva_dish_10.glb",
+   "thumb": "assets/food/food_insect_larva_dish_10.png"
   },
   {
    "id": "food_salt_lick_mineral_11",
@@ -7367,7 +8907,11 @@
    "params": {
     "prop_family": "food",
     "variant": "salt_lick_mineral"
-   }
+   },
+   "tris": 24,
+   "bytes": 3616,
+   "glb": "assets/food/food_salt_lick_mineral_11.glb",
+   "thumb": "assets/food/food_salt_lick_mineral_11.png"
   },
   {
    "id": "food_raw_marrow_bone_12",
@@ -7383,7 +8927,11 @@
    "params": {
     "prop_family": "food",
     "variant": "raw_marrow_bone"
-   }
+   },
+   "tris": 192,
+   "bytes": 16536,
+   "glb": "assets/food/food_raw_marrow_bone_12.glb",
+   "thumb": "assets/food/food_raw_marrow_bone_12.png"
   },
   {
    "id": "food_browse_wall_rack_13",
@@ -7399,7 +8947,11 @@
    "params": {
     "prop_family": "food",
     "variant": "browse_wall_rack"
-   }
+   },
+   "tris": 88,
+   "bytes": 8596,
+   "glb": "assets/food/food_browse_wall_rack_13.glb",
+   "thumb": "assets/food/food_browse_wall_rack_13.png"
   },
   {
    "id": "food_slow_feeder_haynet_14",
@@ -7415,7 +8967,11 @@
    "params": {
     "prop_family": "food",
     "variant": "slow_feeder_haynet"
-   }
+   },
+   "tris": 120,
+   "bytes": 10600,
+   "glb": "assets/food/food_slow_feeder_haynet_14.glb",
+   "thumb": "assets/food/food_slow_feeder_haynet_14.png"
   },
   {
    "id": "food_nectar_tube_feeder_15",
@@ -7431,7 +8987,11 @@
    "params": {
     "prop_family": "food",
     "variant": "nectar_tube_feeder"
-   }
+   },
+   "tris": 84,
+   "bytes": 7524,
+   "glb": "assets/food/food_nectar_tube_feeder_15.glb",
+   "thumb": "assets/food/food_nectar_tube_feeder_15.png"
   },
   {
    "id": "food_carnivore_nutrient_loaf_16",
@@ -7447,7 +9007,11 @@
    "params": {
     "prop_family": "food",
     "variant": "carnivore_nutrient_loaf"
-   }
+   },
+   "tris": 24,
+   "bytes": 3604,
+   "glb": "assets/food/food_carnivore_nutrient_loaf_16.glb",
+   "thumb": "assets/food/food_carnivore_nutrient_loaf_16.png"
   },
   {
    "id": "food_watermelon_enrich_treat_17",
@@ -7463,7 +9027,11 @@
    "params": {
     "prop_family": "food",
     "variant": "watermelon_enrich_treat"
-   }
+   },
+   "tris": 612,
+   "bytes": 47112,
+   "glb": "assets/food/food_watermelon_enrich_treat_17.glb",
+   "thumb": "assets/food/food_watermelon_enrich_treat_17.png"
   },
   {
    "id": "food_krill_shrimp_pail_18",
@@ -7479,7 +9047,11 @@
    "params": {
     "prop_family": "food",
     "variant": "krill_shrimp_pail"
-   }
+   },
+   "tris": 64,
+   "bytes": 5784,
+   "glb": "assets/food/food_krill_shrimp_pail_18.glb",
+   "thumb": "assets/food/food_krill_shrimp_pail_18.png"
   },
   {
    "id": "food_pellet_feed_sack_19",
@@ -7495,7 +9067,11 @@
    "params": {
     "prop_family": "food",
     "variant": "pellet_feed_sack"
-   }
+   },
+   "tris": 24,
+   "bytes": 3612,
+   "glb": "assets/food/food_pellet_feed_sack_19.glb",
+   "thumb": "assets/food/food_pellet_feed_sack_19.png"
   },
   {
    "id": "food_water_drink_trough_20",
@@ -7511,7 +9087,11 @@
    "params": {
     "prop_family": "food",
     "variant": "water_drink_trough"
-   }
+   },
+   "tris": 36,
+   "bytes": 4460,
+   "glb": "assets/food/food_water_drink_trough_20.glb",
+   "thumb": "assets/food/food_water_drink_trough_20.png"
   },
   {
    "id": "enrich_boomer_ball_lg_01",
@@ -7527,7 +9107,11 @@
    "params": {
     "prop_family": "enrichment",
     "variant": "boomer_ball_lg"
-   }
+   },
+   "tris": 196,
+   "bytes": 16112,
+   "glb": "assets/enrichment/enrich_boomer_ball_lg_01.glb",
+   "thumb": "assets/enrichment/enrich_boomer_ball_lg_01.png"
   },
   {
    "id": "enrich_boomer_ball_sm_02",
@@ -7543,7 +9127,11 @@
    "params": {
     "prop_family": "enrichment",
     "variant": "boomer_ball_sm"
-   }
+   },
+   "tris": 100,
+   "bytes": 9596,
+   "glb": "assets/enrichment/enrich_boomer_ball_sm_02.glb",
+   "thumb": "assets/enrichment/enrich_boomer_ball_sm_02.png"
   },
   {
    "id": "enrich_tire_swing_single_03",
@@ -7559,7 +9147,11 @@
    "params": {
     "prop_family": "enrichment",
     "variant": "tire_swing_single"
-   }
+   },
+   "tris": 84,
+   "bytes": 7076,
+   "glb": "assets/enrichment/enrich_tire_swing_single_03.glb",
+   "thumb": "assets/enrichment/enrich_tire_swing_single_03.png"
   },
   {
    "id": "enrich_tire_pyramid_04",
@@ -7575,7 +9167,11 @@
    "params": {
     "prop_family": "enrichment",
     "variant": "tire_pyramid"
-   }
+   },
+   "tris": 256,
+   "bytes": 17312,
+   "glb": "assets/enrichment/enrich_tire_pyramid_04.glb",
+   "thumb": "assets/enrichment/enrich_tire_pyramid_04.png"
   },
   {
    "id": "enrich_puzzle_barrel_05",
@@ -7591,7 +9187,11 @@
    "params": {
     "prop_family": "enrichment",
     "variant": "puzzle_barrel"
-   }
+   },
+   "tris": 168,
+   "bytes": 12180,
+   "glb": "assets/enrichment/enrich_puzzle_barrel_05.glb",
+   "thumb": "assets/enrichment/enrich_puzzle_barrel_05.png"
   },
   {
    "id": "enrich_firehose_cube_06",
@@ -7607,7 +9207,11 @@
    "params": {
     "prop_family": "enrichment",
     "variant": "firehose_cube"
-   }
+   },
+   "tris": 36,
+   "bytes": 4464,
+   "glb": "assets/enrichment/enrich_firehose_cube_06.glb",
+   "thumb": "assets/enrichment/enrich_firehose_cube_06.png"
   },
   {
    "id": "enrich_ice_block_treat_07",
@@ -7623,7 +9227,11 @@
    "params": {
     "prop_family": "enrichment",
     "variant": "ice_block_treat"
-   }
+   },
+   "tris": 60,
+   "bytes": 6484,
+   "glb": "assets/enrichment/enrich_ice_block_treat_07.glb",
+   "thumb": "assets/enrichment/enrich_ice_block_treat_07.png"
   },
   {
    "id": "enrich_scratch_post_timber_08",
@@ -7639,7 +9247,11 @@
    "params": {
     "prop_family": "enrichment",
     "variant": "scratch_post_timber"
-   }
+   },
+   "tris": 68,
+   "bytes": 6212,
+   "glb": "assets/enrichment/enrich_scratch_post_timber_08.glb",
+   "thumb": "assets/enrichment/enrich_scratch_post_timber_08.png"
   },
   {
    "id": "enrich_floating_log_buoy_09",
@@ -7655,7 +9267,11 @@
    "params": {
     "prop_family": "enrichment",
     "variant": "floating_log_buoy"
-   }
+   },
+   "tris": 84,
+   "bytes": 7072,
+   "glb": "assets/enrichment/enrich_floating_log_buoy_09.glb",
+   "thumb": "assets/enrichment/enrich_floating_log_buoy_09.png"
   },
   {
    "id": "enrich_scent_marking_log_10",
@@ -7671,7 +9287,11 @@
    "params": {
     "prop_family": "enrichment",
     "variant": "scent_marking_log"
-   }
+   },
+   "tris": 60,
+   "bytes": 5776,
+   "glb": "assets/enrichment/enrich_scent_marking_log_10.glb",
+   "thumb": "assets/enrichment/enrich_scent_marking_log_10.png"
   },
   {
    "id": "enrich_rope_spiral_tug_11",
@@ -7687,7 +9307,11 @@
    "params": {
     "prop_family": "enrichment",
     "variant": "rope_spiral_tug"
-   }
+   },
+   "tris": 212,
+   "bytes": 16544,
+   "glb": "assets/enrichment/enrich_rope_spiral_tug_11.glb",
+   "thumb": "assets/enrichment/enrich_rope_spiral_tug_11.png"
   },
   {
    "id": "enrich_forage_bungee_net_12",
@@ -7703,7 +9327,11 @@
    "params": {
     "prop_family": "enrichment",
     "variant": "forage_bungee_net"
-   }
+   },
+   "tris": 156,
+   "bytes": 12100,
+   "glb": "assets/enrichment/enrich_forage_bungee_net_12.glb",
+   "thumb": "assets/enrichment/enrich_forage_bungee_net_12.png"
   },
   {
    "id": "enrich_bamboo_windchime_toy_13",
@@ -7719,7 +9347,11 @@
    "params": {
     "prop_family": "enrichment",
     "variant": "bamboo_windchime_toy"
-   }
+   },
+   "tris": 112,
+   "bytes": 9168,
+   "glb": "assets/enrichment/enrich_bamboo_windchime_toy_13.glb",
+   "thumb": "assets/enrichment/enrich_bamboo_windchime_toy_13.png"
   },
   {
    "id": "enrich_primate_puzzle_box_14",
@@ -7735,7 +9367,11 @@
    "params": {
     "prop_family": "enrichment",
     "variant": "primate_puzzle_box"
-   }
+   },
+   "tris": 36,
+   "bytes": 4472,
+   "glb": "assets/enrichment/enrich_primate_puzzle_box_14.glb",
+   "thumb": "assets/enrichment/enrich_primate_puzzle_box_14.png"
   },
   {
    "id": "enrich_rubber_wobble_cone_15",
@@ -7751,7 +9387,11 @@
    "params": {
     "prop_family": "enrichment",
     "variant": "rubber_wobble_cone"
-   }
+   },
+   "tris": 98,
+   "bytes": 9464,
+   "glb": "assets/enrichment/enrich_rubber_wobble_cone_15.glb",
+   "thumb": "assets/enrichment/enrich_rubber_wobble_cone_15.png"
   },
   {
    "id": "enrich_climbing_cargo_net_16",
@@ -7767,7 +9407,11 @@
    "params": {
     "prop_family": "enrichment",
     "variant": "climbing_cargo_net"
-   }
+   },
+   "tris": 144,
+   "bytes": 12000,
+   "glb": "assets/enrichment/enrich_climbing_cargo_net_16.glb",
+   "thumb": "assets/enrichment/enrich_climbing_cargo_net_16.png"
   },
   {
    "id": "enrich_misting_rub_station_17",
@@ -7783,7 +9427,11 @@
    "params": {
     "prop_family": "enrichment",
     "variant": "misting_rub_station"
-   }
+   },
+   "tris": 116,
+   "bytes": 9188,
+   "glb": "assets/enrichment/enrich_misting_rub_station_17.glb",
+   "thumb": "assets/enrichment/enrich_misting_rub_station_17.png"
   },
   {
    "id": "enrich_splash_wading_tub_18",
@@ -7799,7 +9447,11 @@
    "params": {
     "prop_family": "enrichment",
     "variant": "splash_wading_tub"
-   }
+   },
+   "tris": 132,
+   "bytes": 9664,
+   "glb": "assets/enrichment/enrich_splash_wading_tub_18.glb",
+   "thumb": "assets/enrichment/enrich_splash_wading_tub_18.png"
   },
   {
    "id": "enrich_treat_labyrinth_plate_19",
@@ -7815,7 +9467,11 @@
    "params": {
     "prop_family": "enrichment",
     "variant": "treat_labyrinth_plate"
-   }
+   },
+   "tris": 108,
+   "bytes": 8376,
+   "glb": "assets/enrichment/enrich_treat_labyrinth_plate_19.glb",
+   "thumb": "assets/enrichment/enrich_treat_labyrinth_plate_19.png"
   },
   {
    "id": "enrich_floating_plastic_ring_20",
@@ -7831,7 +9487,11 @@
    "params": {
     "prop_family": "enrichment",
     "variant": "floating_plastic_ring"
-   }
+   },
+   "tris": 72,
+   "bytes": 6240,
+   "glb": "assets/enrichment/enrich_floating_plastic_ring_20.glb",
+   "thumb": "assets/enrichment/enrich_floating_plastic_ring_20.png"
   },
   {
    "id": "shop_plush_lion_toy_01",
@@ -7847,7 +9507,11 @@
    "params": {
     "prop_family": "shop",
     "variant": "plush_lion_toy"
-   }
+   },
+   "tris": 304,
+   "bytes": 25016,
+   "glb": "assets/shop/shop_plush_lion_toy_01.glb",
+   "thumb": "assets/shop/shop_plush_lion_toy_01.png"
   },
   {
    "id": "shop_plush_elephant_toy_02",
@@ -7863,7 +9527,11 @@
    "params": {
     "prop_family": "shop",
     "variant": "plush_elephant_toy"
-   }
+   },
+   "tris": 252,
+   "bytes": 21256,
+   "glb": "assets/shop/shop_plush_elephant_toy_02.glb",
+   "thumb": "assets/shop/shop_plush_elephant_toy_02.png"
   },
   {
    "id": "shop_plush_penguin_toy_03",
@@ -7879,7 +9547,11 @@
    "params": {
     "prop_family": "shop",
     "variant": "plush_penguin_toy"
-   }
+   },
+   "tris": 122,
+   "bytes": 11512,
+   "glb": "assets/shop/shop_plush_penguin_toy_03.glb",
+   "thumb": "assets/shop/shop_plush_penguin_toy_03.png"
   },
   {
    "id": "shop_plush_giraffe_toy_04",
@@ -7895,7 +9567,11 @@
    "params": {
     "prop_family": "shop",
     "variant": "plush_giraffe_toy"
-   }
+   },
+   "tris": 256,
+   "bytes": 20640,
+   "glb": "assets/shop/shop_plush_giraffe_toy_04.glb",
+   "thumb": "assets/shop/shop_plush_giraffe_toy_04.png"
   },
   {
    "id": "shop_zoo_guide_brochure_05",
@@ -7911,7 +9587,11 @@
    "params": {
     "prop_family": "shop",
     "variant": "zoo_guide_brochure"
-   }
+   },
+   "tris": 24,
+   "bytes": 3596,
+   "glb": "assets/shop/shop_zoo_guide_brochure_05.glb",
+   "thumb": "assets/shop/shop_zoo_guide_brochure_05.png"
   },
   {
    "id": "shop_postcard_carousel_rack_06",
@@ -7927,7 +9607,11 @@
    "params": {
     "prop_family": "shop",
     "variant": "postcard_carousel_rack"
-   }
+   },
+   "tris": 60,
+   "bytes": 5772,
+   "glb": "assets/shop/shop_postcard_carousel_rack_06.glb",
+   "thumb": "assets/shop/shop_postcard_carousel_rack_06.png"
   },
   {
    "id": "shop_animal_ear_headband_07",
@@ -7943,7 +9627,11 @@
    "params": {
     "prop_family": "shop",
     "variant": "animal_ear_headband"
-   }
+   },
+   "tris": 100,
+   "bytes": 9464,
+   "glb": "assets/shop/shop_animal_ear_headband_07.glb",
+   "thumb": "assets/shop/shop_animal_ear_headband_07.png"
   },
   {
    "id": "shop_safari_pith_helmet_08",
@@ -7959,7 +9647,11 @@
    "params": {
     "prop_family": "shop",
     "variant": "safari_pith_helmet"
-   }
+   },
+   "tris": 144,
+   "bytes": 11900,
+   "glb": "assets/shop/shop_safari_pith_helmet_08.glb",
+   "thumb": "assets/shop/shop_safari_pith_helmet_08.png"
   },
   {
    "id": "shop_zoo_logo_hoodie_09",
@@ -7975,7 +9667,11 @@
    "params": {
     "prop_family": "shop",
     "variant": "zoo_logo_hoodie"
-   }
+   },
+   "tris": 76,
+   "bytes": 7004,
+   "glb": "assets/shop/shop_zoo_logo_hoodie_09.glb",
+   "thumb": "assets/shop/shop_zoo_logo_hoodie_09.png"
   },
   {
    "id": "shop_ceramic_souvenir_mug_10",
@@ -7991,7 +9687,11 @@
    "params": {
     "prop_family": "shop",
     "variant": "ceramic_souvenir_mug"
-   }
+   },
+   "tris": 40,
+   "bytes": 4488,
+   "glb": "assets/shop/shop_ceramic_souvenir_mug_10.glb",
+   "thumb": "assets/shop/shop_ceramic_souvenir_mug_10.png"
   },
   {
    "id": "shop_steel_water_bottle_11",
@@ -8007,7 +9707,11 @@
    "params": {
     "prop_family": "shop",
     "variant": "steel_water_bottle"
-   }
+   },
+   "tris": 56,
+   "bytes": 5352,
+   "glb": "assets/shop/shop_steel_water_bottle_11.glb",
+   "thumb": "assets/shop/shop_steel_water_bottle_11.png"
   },
   {
    "id": "shop_spiral_rainbow_lollipop_12",
@@ -8023,7 +9727,11 @@
    "params": {
     "prop_family": "shop",
     "variant": "spiral_rainbow_lollipop"
-   }
+   },
+   "tris": 76,
+   "bytes": 6640,
+   "glb": "assets/shop/shop_spiral_rainbow_lollipop_12.glb",
+   "thumb": "assets/shop/shop_spiral_rainbow_lollipop_12.png"
   },
   {
    "id": "shop_soft_pretzel_mustard_13",
@@ -8039,7 +9747,11 @@
    "params": {
     "prop_family": "shop",
     "variant": "soft_pretzel_mustard"
-   }
+   },
+   "tris": 192,
+   "bytes": 15396,
+   "glb": "assets/shop/shop_soft_pretzel_mustard_13.glb",
+   "thumb": "assets/shop/shop_soft_pretzel_mustard_13.png"
   },
   {
    "id": "shop_softserve_icecream_cone_14",
@@ -8055,7 +9767,11 @@
    "params": {
     "prop_family": "shop",
     "variant": "softserve_icecream_cone"
-   }
+   },
+   "tris": 76,
+   "bytes": 7024,
+   "glb": "assets/shop/shop_softserve_icecream_cone_14.glb",
+   "thumb": "assets/shop/shop_softserve_icecream_cone_14.png"
   },
   {
    "id": "shop_fountain_soda_cup_15",
@@ -8071,7 +9787,11 @@
    "params": {
     "prop_family": "shop",
     "variant": "fountain_soda_cup"
-   }
+   },
+   "tris": 68,
+   "bytes": 6196,
+   "glb": "assets/shop/shop_fountain_soda_cup_15.glb",
+   "thumb": "assets/shop/shop_fountain_soda_cup_15.png"
   },
   {
    "id": "shop_animal_sticker_sheet_16",
@@ -8087,7 +9807,11 @@
    "params": {
     "prop_family": "shop",
     "variant": "animal_sticker_sheet"
-   }
+   },
+   "tris": 84,
+   "bytes": 7804,
+   "glb": "assets/shop/shop_animal_sticker_sheet_16.glb",
+   "thumb": "assets/shop/shop_animal_sticker_sheet_16.png"
   },
   {
    "id": "shop_keychain_spin_tree_17",
@@ -8103,7 +9827,11 @@
    "params": {
     "prop_family": "shop",
     "variant": "keychain_spin_tree"
-   }
+   },
+   "tris": 96,
+   "bytes": 8280,
+   "glb": "assets/shop/shop_keychain_spin_tree_17.glb",
+   "thumb": "assets/shop/shop_keychain_spin_tree_17.png"
   },
   {
    "id": "shop_figurine_blind_box_18",
@@ -8119,7 +9847,11 @@
    "params": {
     "prop_family": "shop",
     "variant": "figurine_blind_box"
-   }
+   },
+   "tris": 24,
+   "bytes": 3620,
+   "glb": "assets/shop/shop_figurine_blind_box_18.glb",
+   "thumb": "assets/shop/shop_figurine_blind_box_18.png"
   },
   {
    "id": "shop_toy_plastic_binoculars_19",
@@ -8135,7 +9867,11 @@
    "params": {
     "prop_family": "shop",
     "variant": "toy_plastic_binoculars"
-   }
+   },
+   "tris": 52,
+   "bytes": 5336,
+   "glb": "assets/shop/shop_toy_plastic_binoculars_19.glb",
+   "thumb": "assets/shop/shop_toy_plastic_binoculars_19.png"
   },
   {
    "id": "shop_helium_tiger_balloon_20",
@@ -8151,7 +9887,11 @@
    "params": {
     "prop_family": "shop",
     "variant": "helium_tiger_balloon"
-   }
+   },
+   "tris": 212,
+   "bytes": 17948,
+   "glb": "assets/shop/shop_helium_tiger_balloon_20.glb",
+   "thumb": "assets/shop/shop_helium_tiger_balloon_20.png"
   },
   {
    "id": "vet_exam_table",
@@ -8169,7 +9909,11 @@
     "material": "stainless",
     "primary_color": "light_grey",
     "mat_color": "teal"
-   }
+   },
+   "tris": 64,
+   "bytes": 6160,
+   "glb": "assets/vet_equipment/vet_exam_table.glb",
+   "thumb": "assets/vet_equipment/vet_exam_table.png"
   },
   {
    "id": "vet_mobile_ultrasound",
@@ -8187,7 +9931,11 @@
     "has_screen": true,
     "primary_color": "light_grey",
     "screen_color": "teal"
-   }
+   },
+   "tris": 116,
+   "bytes": 9560,
+   "glb": "assets/vet_equipment/vet_mobile_ultrasound.glb",
+   "thumb": "assets/vet_equipment/vet_mobile_ultrasound.png"
   },
   {
    "id": "vet_digital_scale_large",
@@ -8204,7 +9952,11 @@
     "type": "scale",
     "primary_color": "charcoal",
     "display_color": "red"
-   }
+   },
+   "tris": 36,
+   "bytes": 4436,
+   "glb": "assets/vet_equipment/vet_digital_scale_large.glb",
+   "thumb": "assets/vet_equipment/vet_digital_scale_large.png"
   },
   {
    "id": "vet_digital_scale_small",
@@ -8221,7 +9973,11 @@
     "type": "scale",
     "primary_color": "white",
     "display_color": "water"
-   }
+   },
+   "tris": 36,
+   "bytes": 4444,
+   "glb": "assets/vet_equipment/vet_digital_scale_small.glb",
+   "thumb": "assets/vet_equipment/vet_digital_scale_small.png"
   },
   {
    "id": "vet_surgical_light",
@@ -8238,7 +9994,11 @@
     "type": "lamp",
     "arm_color": "light_grey",
     "lamp_color": "yellow"
-   }
+   },
+   "tris": 150,
+   "bytes": 12580,
+   "glb": "assets/vet_equipment/vet_surgical_light.glb",
+   "thumb": "assets/vet_equipment/vet_surgical_light.png"
   },
   {
    "id": "vet_anesthesia_machine",
@@ -8255,7 +10015,11 @@
     "type": "machine",
     "tank_color": "sky",
     "frame_color": "white"
-   }
+   },
+   "tris": 52,
+   "bytes": 5336,
+   "glb": "assets/vet_equipment/vet_anesthesia_machine.glb",
+   "thumb": "assets/vet_equipment/vet_anesthesia_machine.png"
   },
   {
    "id": "vet_xray_portable",
@@ -8272,7 +10036,11 @@
     "type": "scanner",
     "case_color": "orange",
     "metal_color": "grey"
-   }
+   },
+   "tris": 52,
+   "bytes": 5296,
+   "glb": "assets/vet_equipment/vet_xray_portable.glb",
+   "thumb": "assets/vet_equipment/vet_xray_portable.png"
   },
   {
    "id": "vet_instrument_tray",
@@ -8289,7 +10057,11 @@
     "type": "tray",
     "stand_color": "light_grey",
     "tray_color": "teal"
-   }
+   },
+   "tris": 56,
+   "bytes": 5712,
+   "glb": "assets/vet_equipment/vet_instrument_tray.glb",
+   "thumb": "assets/vet_equipment/vet_instrument_tray.png"
   },
   {
    "id": "vet_iv_drip_stand",
@@ -8306,7 +10078,11 @@
     "type": "pole",
     "stand_color": "light_grey",
     "bag_color": "water"
-   }
+   },
+   "tris": 64,
+   "bytes": 6168,
+   "glb": "assets/vet_equipment/vet_iv_drip_stand.glb",
+   "thumb": "assets/vet_equipment/vet_iv_drip_stand.png"
   },
   {
    "id": "vet_recovery_stretcher",
@@ -8323,7 +10099,11 @@
     "type": "stretcher",
     "fabric_color": "navy",
     "pole_color": "tan"
-   }
+   },
+   "tris": 100,
+   "bytes": 8700,
+   "glb": "assets/vet_equipment/vet_recovery_stretcher.glb",
+   "thumb": "assets/vet_equipment/vet_recovery_stretcher.png"
   },
   {
    "id": "vet_heavy_transport_gurney",
@@ -8340,7 +10120,11 @@
     "type": "gurney",
     "frame_color": "charcoal",
     "pad_color": "forest"
-   }
+   },
+   "tris": 24,
+   "bytes": 3604,
+   "glb": "assets/vet_equipment/vet_heavy_transport_gurney.glb",
+   "thumb": "assets/vet_equipment/vet_heavy_transport_gurney.png"
   },
   {
    "id": "vet_incubator_brooder",
@@ -8357,7 +10141,11 @@
     "type": "box",
     "case_color": "cream",
     "window_color": "sky"
-   }
+   },
+   "tris": 24,
+   "bytes": 3628,
+   "glb": "assets/vet_equipment/vet_incubator_brooder.glb",
+   "thumb": "assets/vet_equipment/vet_incubator_brooder.png"
   },
   {
    "id": "vet_microscope_station",
@@ -8374,7 +10162,11 @@
     "type": "optical",
     "body_color": "charcoal",
     "lens_color": "yellow"
-   }
+   },
+   "tris": 76,
+   "bytes": 7024,
+   "glb": "assets/vet_equipment/vet_microscope_station.glb",
+   "thumb": "assets/vet_equipment/vet_microscope_station.png"
   },
   {
    "id": "vet_centrifuge_unit",
@@ -8391,7 +10183,11 @@
     "type": "device",
     "body_color": "white",
     "lid_color": "teal"
-   }
+   },
+   "tris": 72,
+   "bytes": 6224,
+   "glb": "assets/vet_equipment/vet_centrifuge_unit.glb",
+   "thumb": "assets/vet_equipment/vet_centrifuge_unit.png"
   },
   {
    "id": "vet_dart_rifle_case",
@@ -8408,7 +10204,11 @@
     "type": "case",
     "case_color": "olive",
     "trim_color": "black"
-   }
+   },
+   "tris": 24,
+   "bytes": 3624,
+   "glb": "assets/vet_equipment/vet_dart_rifle_case.glb",
+   "thumb": "assets/vet_equipment/vet_dart_rifle_case.png"
   },
   {
    "id": "vet_first_aid_trunk",
@@ -8425,7 +10225,11 @@
     "type": "trunk",
     "box_color": "red",
     "cross_color": "white"
-   }
+   },
+   "tris": 64,
+   "bytes": 6432,
+   "glb": "assets/vet_equipment/vet_first_aid_trunk.glb",
+   "thumb": "assets/vet_equipment/vet_first_aid_trunk.png"
   },
   {
    "id": "vet_medicine_cabinet",
@@ -8442,7 +10246,11 @@
     "type": "cabinet",
     "body_color": "white",
     "glass_color": "sky"
-   }
+   },
+   "tris": 24,
+   "bytes": 3624,
+   "glb": "assets/vet_equipment/vet_medicine_cabinet.glb",
+   "thumb": "assets/vet_equipment/vet_medicine_cabinet.png"
   },
   {
    "id": "vet_capture_net_pole",
@@ -8459,7 +10267,11 @@
     "type": "pole",
     "net_color": "sand",
     "handle_color": "rust"
-   }
+   },
+   "tris": 62,
+   "bytes": 6036,
+   "glb": "assets/vet_equipment/vet_capture_net_pole.glb",
+   "thumb": "assets/vet_equipment/vet_capture_net_pole.png"
   },
   {
    "id": "vet_oxygen_cylinder_trolley",
@@ -8476,7 +10288,11 @@
     "type": "trolley",
     "tank_color": "leaf",
     "frame_color": "black"
-   }
+   },
+   "tris": 52,
+   "bytes": 5348,
+   "glb": "assets/vet_equipment/vet_oxygen_cylinder_trolley.glb",
+   "thumb": "assets/vet_equipment/vet_oxygen_cylinder_trolley.png"
   },
   {
    "id": "vet_hydrotherapy_tank",
@@ -8493,7 +10309,11 @@
     "type": "tub",
     "tub_color": "teal",
     "water_color": "water"
-   }
+   },
+   "tris": 36,
+   "bytes": 4464,
+   "glb": "assets/vet_equipment/vet_hydrotherapy_tank.glb",
+   "thumb": "assets/vet_equipment/vet_hydrotherapy_tank.png"
   },
   {
    "id": "bench_park_wood_classic",
@@ -8509,7 +10329,11 @@
    "params": {
     "family": "bench",
     "variant": "wood_classic"
-   }
+   },
+   "tris": 132,
+   "bytes": 11220,
+   "glb": "assets/benches_lamps_bins_signs/bench_park_wood_classic.glb",
+   "thumb": "assets/benches_lamps_bins_signs/bench_park_wood_classic.png"
   },
   {
    "id": "bench_cast_iron_ornate",
@@ -8525,7 +10349,11 @@
    "params": {
     "family": "bench",
     "variant": "cast_iron"
-   }
+   },
+   "tris": 168,
+   "bytes": 13740,
+   "glb": "assets/benches_lamps_bins_signs/bench_cast_iron_ornate.glb",
+   "thumb": "assets/benches_lamps_bins_signs/bench_cast_iron_ornate.png"
   },
   {
    "id": "bench_concrete_modern",
@@ -8541,7 +10369,11 @@
    "params": {
     "family": "bench",
     "variant": "concrete_modern"
-   }
+   },
+   "tris": 24,
+   "bytes": 3648,
+   "glb": "assets/benches_lamps_bins_signs/bench_concrete_modern.glb",
+   "thumb": "assets/benches_lamps_bins_signs/bench_concrete_modern.png"
   },
   {
    "id": "bench_rustic_log",
@@ -8557,7 +10389,11 @@
    "params": {
     "family": "bench",
     "variant": "rustic_log"
-   }
+   },
+   "tris": 68,
+   "bytes": 6212,
+   "glb": "assets/benches_lamps_bins_signs/bench_rustic_log.glb",
+   "thumb": "assets/benches_lamps_bins_signs/bench_rustic_log.png"
   },
   {
    "id": "bench_picnic_table_combo",
@@ -8573,7 +10409,11 @@
    "params": {
     "family": "bench",
     "variant": "picnic_combo"
-   }
+   },
+   "tris": 84,
+   "bytes": 7860,
+   "glb": "assets/benches_lamps_bins_signs/bench_picnic_table_combo.glb",
+   "thumb": "assets/benches_lamps_bins_signs/bench_picnic_table_combo.png"
   },
   {
    "id": "lamp_post_victorian_single",
@@ -8589,7 +10429,11 @@
    "params": {
     "family": "lamp",
     "variant": "victorian_single"
-   }
+   },
+   "tris": 122,
+   "bytes": 10656,
+   "glb": "assets/benches_lamps_bins_signs/lamp_post_victorian_single.glb",
+   "thumb": "assets/benches_lamps_bins_signs/lamp_post_victorian_single.png"
   },
   {
    "id": "lamp_post_victorian_double",
@@ -8605,7 +10449,11 @@
    "params": {
     "family": "lamp",
     "variant": "victorian_double"
-   }
+   },
+   "tris": 176,
+   "bytes": 15080,
+   "glb": "assets/benches_lamps_bins_signs/lamp_post_victorian_double.glb",
+   "thumb": "assets/benches_lamps_bins_signs/lamp_post_victorian_double.png"
   },
   {
    "id": "lamp_post_modern_led",
@@ -8621,7 +10469,11 @@
    "params": {
     "family": "lamp",
     "variant": "modern_led"
-   }
+   },
+   "tris": 36,
+   "bytes": 4488,
+   "glb": "assets/benches_lamps_bins_signs/lamp_post_modern_led.glb",
+   "thumb": "assets/benches_lamps_bins_signs/lamp_post_modern_led.png"
   },
   {
    "id": "lamp_bollard_solar",
@@ -8637,7 +10489,11 @@
    "params": {
     "family": "lamp",
     "variant": "solar_bollard"
-   }
+   },
+   "tris": 176,
+   "bytes": 12248,
+   "glb": "assets/benches_lamps_bins_signs/lamp_bollard_solar.glb",
+   "thumb": "assets/benches_lamps_bins_signs/lamp_bollard_solar.png"
   },
   {
    "id": "bin_waste_general_timber",
@@ -8653,7 +10509,11 @@
    "params": {
     "family": "bin",
     "variant": "timber_slat"
-   }
+   },
+   "tris": 300,
+   "bytes": 22732,
+   "glb": "assets/benches_lamps_bins_signs/bin_waste_general_timber.glb",
+   "thumb": "assets/benches_lamps_bins_signs/bin_waste_general_timber.png"
   },
   {
    "id": "bin_recycle_dual_metal",
@@ -8669,7 +10529,11 @@
    "params": {
     "family": "bin",
     "variant": "recycle_dual"
-   }
+   },
+   "tris": 60,
+   "bytes": 6180,
+   "glb": "assets/benches_lamps_bins_signs/bin_recycle_dual_metal.glb",
+   "thumb": "assets/benches_lamps_bins_signs/bin_recycle_dual_metal.png"
   },
   {
    "id": "bin_solar_compactor",
@@ -8685,7 +10549,11 @@
    "params": {
     "family": "bin",
     "variant": "solar_compactor"
-   }
+   },
+   "tris": 72,
+   "bytes": 7012,
+   "glb": "assets/benches_lamps_bins_signs/bin_solar_compactor.glb",
+   "thumb": "assets/benches_lamps_bins_signs/bin_solar_compactor.png"
   },
   {
    "id": "bin_animal_proof_bear",
@@ -8701,7 +10569,11 @@
    "params": {
     "family": "bin",
     "variant": "animal_proof"
-   }
+   },
+   "tris": 48,
+   "bytes": 5332,
+   "glb": "assets/benches_lamps_bins_signs/bin_animal_proof_bear.glb",
+   "thumb": "assets/benches_lamps_bins_signs/bin_animal_proof_bear.png"
   },
   {
    "id": "sign_direction_fingerpost",
@@ -8717,7 +10589,11 @@
    "params": {
     "family": "sign",
     "variant": "fingerpost"
-   }
+   },
+   "tris": 90,
+   "bytes": 8156,
+   "glb": "assets/benches_lamps_bins_signs/sign_direction_fingerpost.glb",
+   "thumb": "assets/benches_lamps_bins_signs/sign_direction_fingerpost.png"
   },
   {
    "id": "sign_zoo_map_board",
@@ -8733,7 +10609,11 @@
    "params": {
     "family": "sign",
     "variant": "map_board"
-   }
+   },
+   "tris": 72,
+   "bytes": 7008,
+   "glb": "assets/benches_lamps_bins_signs/sign_zoo_map_board.glb",
+   "thumb": "assets/benches_lamps_bins_signs/sign_zoo_map_board.png"
   },
   {
    "id": "sign_exhibit_info_plaque",
@@ -8749,7 +10629,11 @@
    "params": {
     "family": "sign",
     "variant": "info_lectern"
-   }
+   },
+   "tris": 48,
+   "bytes": 5340,
+   "glb": "assets/benches_lamps_bins_signs/sign_exhibit_info_plaque.glb",
+   "thumb": "assets/benches_lamps_bins_signs/sign_exhibit_info_plaque.png"
   },
   {
    "id": "sign_warning_caution_barrier",
@@ -8765,7 +10649,11 @@
    "params": {
     "family": "sign",
     "variant": "caution_a_frame"
-   }
+   },
+   "tris": 48,
+   "bytes": 5348,
+   "glb": "assets/benches_lamps_bins_signs/sign_warning_caution_barrier.glb",
+   "thumb": "assets/benches_lamps_bins_signs/sign_warning_caution_barrier.png"
   },
   {
    "id": "sign_entrance_totem_monolith",
@@ -8781,7 +10669,11 @@
    "params": {
     "family": "sign",
     "variant": "totem_monolith"
-   }
+   },
+   "tris": 48,
+   "bytes": 5348,
+   "glb": "assets/benches_lamps_bins_signs/sign_entrance_totem_monolith.glb",
+   "thumb": "assets/benches_lamps_bins_signs/sign_entrance_totem_monolith.png"
   },
   {
    "id": "drinking_fountain_pedestal",
@@ -8797,7 +10689,11 @@
    "params": {
     "family": "amenity",
     "variant": "drinking_fountain"
-   }
+   },
+   "tris": 88,
+   "bytes": 7888,
+   "glb": "assets/benches_lamps_bins_signs/drinking_fountain_pedestal.glb",
+   "thumb": "assets/benches_lamps_bins_signs/drinking_fountain_pedestal.png"
   },
   {
    "id": "misting_cooling_station",
@@ -8813,7 +10709,11 @@
    "params": {
     "family": "amenity",
     "variant": "mist_arch"
-   }
+   },
+   "tris": 120,
+   "bytes": 9980,
+   "glb": "assets/benches_lamps_bins_signs/misting_cooling_station.glb",
+   "thumb": "assets/benches_lamps_bins_signs/misting_cooling_station.png"
   }
  ]
 }
