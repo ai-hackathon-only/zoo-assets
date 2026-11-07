@@ -286,4 +286,8 @@ frameAll();
 requestAnimationFrame(loop);
 
 // read-only hook for scripted interaction checks
-window.__park = { get layout() { return layout; } };
+window.__park = {
+  get layout() { return layout; },
+  get camera() { return camera; },
+  get controls() { return controls; }
+};

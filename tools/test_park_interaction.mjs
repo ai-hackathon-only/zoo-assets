@@ -1,10 +1,25 @@
 import fs from 'fs';
-import { spawn } from 'child_process';
+import { spawn, execSync } from 'child_process';
 
 const args = process.argv.slice(2).filter(a => !a.startsWith('--'));
 const targetUrl = args[0] || 'https://ai-hackathon-only.github.io/zoo-assets/park/?size=600&density=1&population=300&seed=42';
 
-console.log(`Testing URL: ${targetUrl}`);
+// 0. Machine info
+let cpuInfo = 'Unknown CPU';
+let gpuInfo = 'Unknown GPU';
+try {
+  cpuInfo = execSync('sysctl -n machdep.cpu.brand_string', { encoding: 'utf8' }).trim();
+} catch (e) {}
+try {
+  const sp = execSync('system_profiler SPDisplaysDataType', { encoding: 'utf8' });
+  const m = sp.match(/Chipset Model:\s*(.+)/);
+  if (m) gpuInfo = m[1].trim();
+} catch (e) {}
+
+console.log(`=== Testbed Environment ===`);
+console.log(`Machine: ${cpuInfo} · GPU: ${gpuInfo}`);
+console.log(`Browser: Google Chrome headless (angle / webgl)`);
+console.log(`Target URL: ${targetUrl}\n`);
 
 // Launch Chrome with remote debugging
 const chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
@@ -89,8 +104,8 @@ async function evalJs(expr) {
   return res.result?.result?.value;
 }
 
-// Wait for load and first frame
-console.log('Waiting for initial park load and first frame...');
+// 1. Wait for load and first frame
+console.log('--- 1. Speed & Batch Loading (600m safari, 300 pop) ---');
 const startTime = Date.now();
 let firstFrameText = '';
 let fpsText = '';
@@ -109,16 +124,17 @@ fpsText = await evalJs("return document.getElementById('fps')?.innerText || ''")
 
 console.log(`Elapsed to ready: ${elapsedSec}s`);
 console.log(`First frame hud: "${firstFrameText}"`);
-console.log(`Initial fps: "${fpsText}"`);
 console.log(`Initial stats: "${statsText}"`);
 
-// Let it orbit/render for 3 seconds to measure FPS
-console.log('Sampling FPS over 3 seconds...');
+// Measure FPS while actively orbiting
+console.log('Sampling active rendering FPS over 3 seconds...');
 await new Promise(r => setTimeout(r, 3000));
 fpsText = await evalJs("return document.getElementById('fps')?.innerText || ''");
 console.log(`Sustained FPS: "${fpsText}"`);
 
-// Test 1: Seed & Shuffle
+// 2. Interactive Controls Check
+console.log('\n--- 2. Interactive Controls Check ---');
+// Seed & Shuffle
 const seedBefore = await evalJs("return document.getElementById('seed')?.value");
 console.log(`Seed before shuffle: "${seedBefore}"`);
 await evalJs("document.getElementById('shuffle')?.click()");
@@ -126,8 +142,7 @@ await new Promise(r => setTimeout(r, 500));
 const seedAfter = await evalJs("return document.getElementById('seed')?.value");
 console.log(`Seed after shuffle: "${seedAfter}" (changed: ${seedBefore !== seedAfter})`);
 
-// Test 2: Control sliders
-// Park size slider
+// Sliders
 await evalJs(`
   const s = document.getElementById('size');
   s.value = '300';
@@ -137,7 +152,6 @@ await new Promise(r => setTimeout(r, 300));
 const sizeOut = await evalJs("return document.getElementById('size-out')?.innerText");
 console.log(`Size slider set to 300m -> output: "${sizeOut}"`);
 
-// Density slider
 await evalJs(`
   const d = document.getElementById('density');
   d.value = '0.5';
@@ -147,7 +161,6 @@ await new Promise(r => setTimeout(r, 300));
 const densityOut = await evalJs("return document.getElementById('density-out')?.innerText");
 console.log(`Density slider set to 0.50 -> output: "${densityOut}"`);
 
-// Population slider
 await evalJs(`
   const p = document.getElementById('population');
   p.value = '150';
@@ -157,9 +170,14 @@ await new Promise(r => setTimeout(r, 300));
 const popOut = await evalJs("return document.getElementById('population-out')?.innerText");
 console.log(`Population slider set to 150 -> output: "${popOut}"`);
 
-// Test 3: Minimap click & Overview
-console.log('Testing minimap click and overview button...');
+// 3. Minimap & Camera Move Check
+console.log('\n--- 3. Minimap Camera Flight Check ---');
+const camBefore = await evalJs(`
+  const c = window.__park?.camera?.position;
+  return c ? { x: Math.round(c.x), y: Math.round(c.y), z: Math.round(c.z) } : null;
+`);
 const focusBefore = await evalJs("return document.getElementById('focus-name')?.innerText");
+
 const enclosureName = await evalJs(`
   const L = window.__park?.layout;
   const enc = L?.enclosures?.[0];
@@ -176,28 +194,89 @@ const enclosureName = await evalJs(`
   canvas.dispatchEvent(evt);
   return enc?.name;
 `);
-await new Promise(r => setTimeout(r, 600));
+await new Promise(r => setTimeout(r, 800));
+
+const camAfter = await evalJs(`
+  const c = window.__park?.camera?.position;
+  return c ? { x: Math.round(c.x), y: Math.round(c.y), z: Math.round(c.z) } : null;
+`);
 const focusAfterClick = await evalJs("return document.getElementById('focus-name')?.innerText");
-console.log(`Minimap click on "${enclosureName}" changed focus from "${focusBefore}" to: "${focusAfterClick}"`);
+
+if (camBefore && camAfter) {
+  console.log(`Camera before minimap click: [${camBefore.x}, ${camBefore.y}, ${camBefore.z}]`);
+  console.log(`Clicked minimap enclosure: "${enclosureName}"`);
+  console.log(`Camera after minimap click: [${camAfter.x}, ${camAfter.y}, ${camAfter.z}]`);
+} else {
+  console.log(`Clicked minimap enclosure: "${enclosureName}"`);
+}
+console.log(`Focus name changed from "${focusBefore}" to: "${focusAfterClick}"`);
 
 await evalJs("document.getElementById('overview')?.click()");
-await new Promise(r => setTimeout(r, 300));
+await new Promise(r => setTimeout(r, 400));
 const focusAfterOverview = await evalJs("return document.getElementById('focus-name')?.innerText");
 console.log(`Overview button click restored focus to: "${focusAfterOverview}"`);
 
-// URL state check
+// 4. URL State Preservation
 const urlState = await evalJs("return window.location.search");
 console.log(`URL search params preserved: "${urlState}"`);
 
-// Console errors check
+// 5. Gallery Search Interaction Check
+console.log('\n--- 4. Gallery Search Interaction Check ---');
+const galleryUrl = 'https://ai-hackathon-only.github.io/zoo-assets/';
+const galleryRes = await send('Target.createTarget', { url: galleryUrl });
+const gTargetId = galleryRes.result.targetId;
+const gAttach = await send('Target.attachToTarget', { targetId: gTargetId, flatten: true });
+const gSessionId = gAttach.result.sessionId;
+
+function sendGallery(method, params = {}) {
+  const reqId = id++;
+  return new Promise(resolve => {
+    callbacks.set(reqId, resolve);
+    ws.send(JSON.stringify({ id: reqId, sessionId: gSessionId, method, params }));
+  });
+}
+
+await sendGallery('Runtime.enable');
+await sendGallery('Page.enable');
+
+// Wait for gallery assets to render
+await new Promise(r => setTimeout(r, 1500));
+
+async function evalGallery(expr) {
+  const res = await sendGallery('Runtime.evaluate', {
+    expression: `(() => { ${expr} })()`,
+    returnByValue: true,
+    awaitPromise: true
+  });
+  return res.result?.result?.value;
+}
+
+const initialCards = await evalGallery("return document.querySelectorAll('.card').length");
+// Type "lion" into search input
+await evalGallery(`
+  const input = document.querySelector('input[type="search"]') || document.querySelector('#search') || document.querySelector('input');
+  if (input) {
+    input.value = 'lion';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+`);
+await new Promise(r => setTimeout(r, 400));
+const lionCards = await evalGallery("return document.querySelectorAll('.card:not([hidden]):not([style*=\"display: none\"])').length");
+console.log(`Gallery search: initial total cards = ${initialCards}, typed "lion" → visible cards = ${lionCards}`);
+
+// 6. Console Errors Summary
+console.log(`\n--- 5. Console Diagnostics ---`);
 console.log(`Total console errors: ${consoleErrors.length}`);
 if (consoleErrors.length > 0) {
   console.log('Errors:', consoleErrors);
 }
 
-// Screenshots of 3 different seeds at 1280px and 390px if requested
+// 7. Screenshots of 3 different seeds at 1280px and 390px if requested
 if (process.argv.includes('--screenshots')) {
-  console.log('Taking screenshots of 3 shuffled seeds at 1280px and 390px...');
+  console.log('\n--- 6. Screenshots (1280px & 390px) ---');
+  const shotsDir = '/tmp/park-shots';
+  if (!fs.existsSync(shotsDir)) fs.mkdirSync(shotsDir, { recursive: true });
+
   const seeds = ['42', '101', '777'];
   for (const s of seeds) {
     await evalJs(`
@@ -205,7 +284,7 @@ if (process.argv.includes('--screenshots')) {
       input.value = '${s}';
       input.dispatchEvent(new Event('change', { bubbles: true }));
     `);
-    await new Promise(r => setTimeout(r, 1200));
+    await new Promise(r => setTimeout(r, 1500));
 
     // 1280px desktop
     await sendSession('Emulation.setDeviceMetricsOverride', {
@@ -213,7 +292,7 @@ if (process.argv.includes('--screenshots')) {
     });
     await new Promise(r => setTimeout(r, 400));
     const shotDesktop = await sendSession('Page.captureScreenshot', { format: 'png' });
-    const pDesktop = `/tmp/park-seed-${s}-1280px.png`;
+    const pDesktop = `${shotsDir}/park-seed-${s}-1280px.png`;
     fs.writeFileSync(pDesktop, Buffer.from(shotDesktop.result.data, 'base64'));
     console.log(`Saved 1280px screenshot for seed ${s}: ${pDesktop}`);
 
@@ -223,7 +302,7 @@ if (process.argv.includes('--screenshots')) {
     });
     await new Promise(r => setTimeout(r, 400));
     const shotMobile = await sendSession('Page.captureScreenshot', { format: 'png' });
-    const pMobile = `/tmp/park-seed-${s}-390px.png`;
+    const pMobile = `${shotsDir}/park-seed-${s}-390px.png`;
     fs.writeFileSync(pMobile, Buffer.from(shotMobile.result.data, 'base64'));
     console.log(`Saved 390px screenshot for seed ${s}: ${pMobile}`);
   }
@@ -236,4 +315,4 @@ try {
   fs.rmSync(userDataDir, { recursive: true, force: true });
 } catch (e) {}
 
-console.log('Test completed successfully.');
+console.log('\nTest completed successfully.');
