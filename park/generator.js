@@ -143,6 +143,7 @@ export function generateLayout(settings, options = {}) {
   const density = Math.max(0, Math.min(1, typeof settings.density === 'number' ? settings.density : 0.5));
   const population = Math.max(0, Math.min(300, Math.round(settings.population !== undefined ? settings.population : 50)));
   const seed = settings.seed !== undefined ? settings.seed : 42;
+  const style = (settings.style && ['grid', 'loop', 'radial'].includes(settings.style)) ? settings.style : 'grid';
 
   const rand = createPRNG(seed);
 
@@ -260,27 +261,108 @@ export function generateLayout(settings, options = {}) {
     if (entranceGW > 1) addPathCell(spineGX - 1, entranceGY + dy);
   }
 
-  // Central spine road moving North
-  const northBoundGY = gridCells - 4;
-  for (let gy = entranceGY + entranceGH; gy <= northBoundGY; gy++) {
-    addPathCell(spineGX, gy);
-  }
-
-  // Cross avenues spaced regularly so enclosures fit cleanly between them
-  const avenueSpacingCells = Math.max(16, Math.floor(gridCells / (2 + Math.floor(density * 3))));
   const avenueYList = [];
-  for (let gy = 6; gy <= northBoundGY - 6; gy += avenueSpacingCells) {
-    avenueYList.push(gy);
-    const minX = 4;
-    const maxX = gridCells - 5;
-    for (let gx = minX; gx <= maxX; gx++) {
-      addPathCell(gx, gy);
+
+  if (style === 'grid') {
+    // Central spine road moving North
+    const northBoundGY = gridCells - 4;
+    for (let gy = entranceGY + entranceGH; gy <= northBoundGY; gy++) {
+      addPathCell(spineGX, gy);
     }
-  }
-  if (avenueYList.length === 0) {
-    const midY = Math.floor(gridCells / 2);
-    avenueYList.push(midY);
-    for (let gx = 4; gx <= gridCells - 5; gx++) addPathCell(gx, midY);
+
+    // Cross avenues spaced regularly so enclosures fit cleanly between them
+    const avenueSpacingCells = Math.max(16, Math.floor(gridCells / (2 + Math.floor(density * 3))));
+    for (let gy = 6; gy <= northBoundGY - 6; gy += avenueSpacingCells) {
+      avenueYList.push(gy);
+      const minX = 4;
+      const maxX = gridCells - 5;
+      for (let gx = minX; gx <= maxX; gx++) {
+        addPathCell(gx, gy);
+      }
+    }
+    if (avenueYList.length === 0) {
+      const midY = Math.floor(gridCells / 2);
+      avenueYList.push(midY);
+      for (let gx = 4; gx <= gridCells - 5; gx++) addPathCell(gx, midY);
+    }
+  } else if (style === 'loop') {
+    const cx = Math.floor(gridCells / 2);
+    const cy = Math.floor(gridCells / 2);
+    const northBoundGY = gridCells - 5;
+
+    // Radius of inner/main loop
+    const r1 = Math.max(8, Math.floor(gridCells * 0.22));
+    const minX1 = Math.max(4, cx - r1), maxX1 = Math.min(gridCells - 5, cx + r1);
+    const minY1 = Math.max(entranceGY + entranceGH + 2, cy - r1), maxY1 = Math.min(northBoundGY, cy + r1);
+
+    // Spine connects entrance to loop south edge
+    for (let gy = entranceGY + entranceGH; gy <= minY1; gy++) {
+      addPathCell(spineGX, gy);
+    }
+    for (let gx = Math.min(spineGX, cx); gx <= Math.max(spineGX, cx); gx++) {
+      addPathCell(gx, minY1);
+    }
+
+    // Inner loop paths
+    for (let x = minX1; x <= maxX1; x++) { addPathCell(x, minY1); addPathCell(x, maxY1); }
+    for (let y = minY1; y <= maxY1; y++) { addPathCell(minX1, y); addPathCell(maxX1, y); }
+
+    // Outer loop and spokes
+    const r2 = Math.min(Math.floor(gridCells * 0.40), gridCells - 6);
+    const minX2 = Math.max(4, cx - r2), maxX2 = Math.min(gridCells - 5, cx + r2);
+    const minY2 = Math.max(entranceGY + entranceGH + 2, cy - r2), maxY2 = Math.min(northBoundGY, cy + r2);
+
+    for (let x = minX2; x <= maxX2; x++) { addPathCell(x, minY2); addPathCell(x, maxY2); }
+    for (let y = minY2; y <= maxY2; y++) { addPathCell(minX2, y); addPathCell(maxX2, y); }
+
+    for (let y = maxY1; y <= maxY2; y++) addPathCell(cx, y);
+    for (let y = minY2; y <= minY1; y++) addPathCell(cx, y);
+    for (let x = maxX1; x <= maxX2; x++) addPathCell(x, cy);
+    for (let x = minX2; x <= minX1; x++) addPathCell(x, cy);
+  } else if (style === 'radial') {
+    const cx = Math.floor(gridCells / 2);
+    const cy = Math.floor(gridCells / 2);
+    const northBoundGY = gridCells - 5;
+
+    // Grand Central Plaza (at least 5x5 cells)
+    const plazaR = Math.max(2, Math.floor(gridCells * 0.05));
+    for (let dy = -plazaR; dy <= plazaR; dy++) {
+      for (let dx = -plazaR; dx <= plazaR; dx++) {
+        addPathCell(cx + dx, cy + dy);
+      }
+    }
+
+    // Direct south concourse connecting entrance to central plaza
+    for (let gy = entranceGY + entranceGH; gy <= cy; gy++) {
+      addPathCell(spineGX, gy);
+      if (spineGX > 0) addPathCell(spineGX - 1, gy);
+    }
+    if (spineGX !== cx) {
+      for (let gx = Math.min(spineGX, cx); gx <= Math.max(spineGX, cx); gx++) {
+        addPathCell(gx, cy - plazaR);
+      }
+    }
+
+    // 4 Cardinal Boulevards
+    for (let gy = cy + plazaR; gy <= northBoundGY; gy++) addPathCell(cx, gy);
+    for (let gx = cx + plazaR; gx <= gridCells - 5; gx++) addPathCell(gx, cy);
+    for (let gx = 4; gx <= cx - plazaR; gx++) addPathCell(gx, cy);
+
+    // Outer concentric ring boulevard connecting radial spokes
+    const ringR = Math.max(8, Math.floor(gridCells * 0.36));
+    const minRX = Math.max(4, cx - ringR), maxRX = Math.min(gridCells - 5, cx + ringR);
+    const minRY = Math.max(entranceGY + entranceGH + 2, cy - ringR), maxRY = Math.min(northBoundGY, cy + ringR);
+    for (let x = minRX; x <= maxRX; x++) { addPathCell(x, minRY); addPathCell(x, maxRY); }
+    for (let y = minRY; y <= maxRY; y++) { addPathCell(minRX, y); addPathCell(maxRX, y); }
+
+    // Intermediate ring for large maps
+    if (gridCells >= 100) {
+      const midR = Math.floor(ringR * 0.6);
+      const minMX = Math.max(4, cx - midR), maxMX = Math.min(gridCells - 5, cx + midR);
+      const minMY = Math.max(entranceGY + entranceGH + 2, cy - midR), maxMY = Math.min(northBoundGY, cy + midR);
+      for (let x = minMX; x <= maxMX; x++) { addPathCell(x, minMY); addPathCell(x, maxMY); }
+      for (let y = minMY; y <= maxMY; y++) { addPathCell(minMX, y); addPathCell(maxMX, y); }
+    }
   }
 
   // 3. Enclosure Placement
@@ -299,8 +381,9 @@ export function generateLayout(settings, options = {}) {
   }
 
   const enclosures = [];
+  const activePathTileArray = Array.from(pathSet).map(s => s.split(',').map(Number));
 
-  // Try placing enclosures adjacent to path avenues and spine
+  // Try placing enclosures adjacent to paths
   for (let i = 0; i < animalsShuffled.length && enclosures.length < targetEncCount; i++) {
     const animal = animalsShuffled[i];
     const encSize = getEnclosureSizeMeters(animal.size_m);
@@ -310,24 +393,25 @@ export function generateLayout(settings, options = {}) {
     let placed = false;
     let attempts = 0;
 
-    while (!placed && attempts < 300) {
+    while (!placed && attempts < 400) {
       attempts++;
-      const avY = avenueYList[Math.floor(rand() * avenueYList.length)];
-      const onNorth = rand() > 0.5;
+      let encGX, encGY, gatePos;
 
-      const encGY = onNorth ? avY + 1 : avY - encGH;
-      const minGX = 4;
-      const maxGX = gridCells - 4 - encGW;
-      if (maxGX <= minGX) continue;
+      if (style === 'grid') {
+        const avY = avenueYList[Math.floor(rand() * avenueYList.length)];
+        const onNorth = rand() > 0.5;
 
-      const encGX = minGX + Math.floor(rand() * (maxGX - minGX));
+        encGY = onNorth ? avY + 1 : avY - encGH;
+        const minGX = 4;
+        const maxGX = gridCells - 4 - encGW;
+        if (maxGX <= minGX) continue;
 
-      if (isRegionFree(encGX, encGY, encGW, encGH)) {
-        // Enclosure footprint must be adjacent to at least one path tile
+        encGX = minGX + Math.floor(rand() * (maxGX - minGX));
+
+        if (!isRegionFree(encGX, encGY, encGW, encGH)) continue;
+
         const adjPathY = onNorth ? encGY - 1 : encGY + encGH;
         let gateGX = encGX + Math.floor(encGW / 2);
-
-        // Find path tile on adjacent row
         let hasAdjPath = false;
         for (let gx = encGX; gx < encGX + encGW; gx++) {
           if (getCell(gx, adjPathY) === OCC_PATH) {
@@ -336,20 +420,41 @@ export function generateLayout(settings, options = {}) {
             break;
           }
         }
+        if (!hasAdjPath) continue;
+        gatePos = [gateGX * GRID_M + GRID_M / 2, adjPathY * GRID_M + GRID_M / 2, 0];
+      } else {
+        const pt = activePathTileArray[Math.floor(rand() * activePathTileArray.length)];
+        const ptGX = pt[0], ptGY = pt[1];
+        const side = Math.floor(rand() * 4);
 
-        if (hasAdjPath) {
-          markRegion(encGX, encGY, encGW, encGH, OCC_ENCLOSURE);
+        if (side === 0) { // North of path
+          encGY = ptGY + 1;
+          encGX = ptGX - Math.floor(rand() * encGW);
+        } else if (side === 1) { // South of path
+          encGY = ptGY - encGH;
+          encGX = ptGX - Math.floor(rand() * encGW);
+        } else if (side === 2) { // East of path
+          encGX = ptGX + 1;
+          encGY = ptGY - Math.floor(rand() * encGH);
+        } else { // West of path
+          encGX = ptGX - encGW;
+          encGY = ptGY - Math.floor(rand() * encGH);
+        }
 
-          const minXM = encGX * GRID_M;
-          const minYM = encGY * GRID_M;
-          const widthM = encGW * GRID_M;
-          const depthM = encGH * GRID_M;
-          const maxXM = minXM + widthM;
-          const maxYM = minYM + depthM;
-          const centerXM = minXM + widthM / 2;
-          const centerYM = minYM + depthM / 2;
+        if (!isRegionFree(encGX, encGY, encGW, encGH)) continue;
+        gatePos = [ptGX * GRID_M + GRID_M / 2, ptGY * GRID_M + GRID_M / 2, 0];
+      }
 
-          const gatePos = [gateGX * GRID_M + GRID_M / 2, adjPathY * GRID_M + GRID_M / 2, 0];
+      markRegion(encGX, encGY, encGW, encGH, OCC_ENCLOSURE);
+
+      const minXM = encGX * GRID_M;
+      const minYM = encGY * GRID_M;
+      const widthM = encGW * GRID_M;
+      const depthM = encGH * GRID_M;
+      const maxXM = minXM + widthM;
+      const maxYM = minYM + depthM;
+      const centerXM = minXM + widthM / 2;
+      const centerYM = minYM + depthM / 2;
 
           // Spawn animal instances inside enclosure bounds
           const animalInstances = [];
@@ -425,8 +530,6 @@ export function generateLayout(settings, options = {}) {
           });
 
           placed = true;
-        }
-      }
     }
   }
 
@@ -562,7 +665,8 @@ export function generateLayout(settings, options = {}) {
       size_m,
       density,
       population,
-      seed
+      seed,
+      style
     },
     boundary: {
       width_m: size_m,

@@ -89,10 +89,12 @@ for (let i = 0; i < TOTAL_SEEDS; i++) {
     population = Math.round(((i * 17 + 29) % 301));
   }
 
-  const seed = `seed_${i}_${size_m}_${density}_${population}`;
+  const styles = ['grid', 'loop', 'radial'];
+  const style = styles[i % styles.length];
+  const seed = `seed_${i}_${size_m}_${density}_${population}_${style}`;
 
   const t0 = performance.now();
-  const layout = generateLayout({ size_m, density, population, seed }, { assets });
+  const layout = generateLayout({ size_m, density, population, seed, style }, { assets });
   const t1 = performance.now();
   timings.push(t1 - t0);
 

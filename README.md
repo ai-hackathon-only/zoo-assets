@@ -29,7 +29,8 @@ All models share one palette texture (`assets/palette.png`). They have clean ori
 The interactive 3D zoo map at `park/` (https://ai-hackathon-only.github.io/zoo-assets/park/) assembles GLB assets into complete procedural zoos in the browser using three.js.
 
 Key capabilities:
-- **Controls**: Adjust zoo size (80 m to 600 m), asset density, and visitor population (0 to 300 people).
+- **Controls**: Adjust zoo size (80 m to 600 m), asset density, visitor population (0 to 300 people), and layout style.
+- **Layout Styles**: Choose between **Grid** (orthogonal avenue blocks), **Loop** (perimeter ring thoroughfare with central plaza), and **Radial** (central grand plaza concourse with radiating boulevards).
 - **Shuffle & Seed**: Generate randomized layouts from a seed string. Settings and seed sync to URL parameters for sharing.
 - **Top-Down Minimap**: Click any enclosure on the 2D overview to jump the 3D camera to that animal.
 - **Batch Rendering**: Loads each model file once and draws duplicate assets with instancing.

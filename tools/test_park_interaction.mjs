@@ -264,6 +264,22 @@ if (simToggleCheck && simToggleCheck.hasBtn) {
   console.log(`Simulation toggle: initial=${simToggleCheck.initialSim} -> paused=${simToggleCheck.pausedSim} -> resumed=${simToggleCheck.resumedSim}`);
 }
 
+// 4c. Layout Style Setting Check
+const styleCheck = await evalJs(`
+  const sel = document.getElementById('style');
+  if (!sel) return { hasSel: false };
+  const initialStyle = sel.value;
+  sel.value = 'loop';
+  sel.dispatchEvent(new Event('change', { bubbles: true }));
+  return { hasSel: true, initialStyle, newStyle: sel.value };
+`);
+if (styleCheck && styleCheck.hasSel) {
+  await new Promise(r => setTimeout(r, 600));
+  const urlWithStyle = await evalJs("return window.location.search");
+  console.log(`\n--- 3c. Layout Style Setting Check ---`);
+  console.log(`Layout style selector switched: ${styleCheck.initialStyle} -> ${styleCheck.newStyle} (URL: "${urlWithStyle}")`);
+}
+
 // 5. Gallery Search Interaction Check
 console.log('\n--- 4. Gallery Search Interaction Check ---');
 const galleryUrl = 'https://ai-hackathon-only.github.io/zoo-assets/';

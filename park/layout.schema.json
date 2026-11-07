@@ -40,6 +40,10 @@
         },
         "seed": {
           "type": ["string", "number"]
+        },
+        "style": {
+          "type": "string",
+          "enum": ["grid", "loop", "radial"]
         }
       }
     },

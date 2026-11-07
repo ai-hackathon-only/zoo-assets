@@ -37,7 +37,7 @@
       flex: 1; min-width: 0; font: inherit; font-size: 14px; padding: 8px 10px;
       border: 1px solid var(--border); border-radius: var(--radius-sm);
     }
-    input:focus-visible, button:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+    input:focus-visible, button:focus-visible, select:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
     button {
       font: inherit; font-size: 14px; font-weight: 600; padding: 8px 14px; border-radius: var(--radius-sm);
       border: 1px solid var(--primary); background: var(--primary); color: #fff; cursor: pointer;
@@ -72,6 +72,12 @@
       <button id="shuffle" type="button">Shuffle</button>
       <button id="theme" type="button" class="ghost" style="padding:6px 10px;font-size:13px" title="Toggle day / night lighting">🌙 Night</button>
     </div>
+    <label for="style">Layout style</label>
+    <select id="style" style="width:100%;font:inherit;font-size:14px;padding:6px 8px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);margin-bottom:4px">
+      <option value="grid">Grid (orthogonal avenues)</option>
+      <option value="loop">Loop (ring thoroughfare)</option>
+      <option value="radial">Radial (central plaza & spokes)</option>
+    </select>
     <label for="size">Park size <output id="size-out"></output></label>
     <input id="size" type="range" min="80" max="600" step="10">
     <label for="density">Density <output id="density-out"></output></label>
