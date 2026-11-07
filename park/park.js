@@ -356,7 +356,7 @@ function collectPlacements(L) {
 async function build(s, given = null) {
   const token = ++buildToken;
   const t = performance.now();
-  layout = given || generateLayout({ size_m: s.size, density: s.density, population: s.population, seed: s.seed }, { assets: catalog });
+  layout = given || generateLayout({ size_m: s.size, density: s.density, population: s.population, seed: s.seed, style: s.style }, { assets: catalog });
   const genMs = performance.now() - t;
   const size = layout.boundary.width_m;
   ground.scale.set(size + 40, size + 40, 1);

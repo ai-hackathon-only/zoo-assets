@@ -269,15 +269,38 @@ const styleCheck = await evalJs(`
   const sel = document.getElementById('style');
   if (!sel) return { hasSel: false };
   const initialStyle = sel.value;
+  const initialPaths = window.__park?.layout?.paths?.length || 0;
   sel.value = 'loop';
   sel.dispatchEvent(new Event('change', { bubbles: true }));
-  return { hasSel: true, initialStyle, newStyle: sel.value };
+  return { hasSel: true, initialStyle, initialPaths, newStyle: sel.value };
 `);
 if (styleCheck && styleCheck.hasSel) {
   await new Promise(r => setTimeout(r, 600));
-  const urlWithStyle = await evalJs("return window.location.search");
+  const loopInfo = await evalJs(`
+    return {
+      style: window.__park?.layout?.settings?.style,
+      paths: window.__park?.layout?.paths?.length || 0,
+      url: window.location.search
+    };
+  `);
+  // Switch to radial
+  await evalJs(`
+    const sel = document.getElementById('style');
+    sel.value = 'radial';
+    sel.dispatchEvent(new Event('change', { bubbles: true }));
+  `);
+  await new Promise(r => setTimeout(r, 600));
+  const radialInfo = await evalJs(`
+    return {
+      style: window.__park?.layout?.settings?.style,
+      paths: window.__park?.layout?.paths?.length || 0,
+      url: window.location.search
+    };
+  `);
   console.log(`\n--- 3c. Layout Style Setting Check ---`);
-  console.log(`Layout style selector switched: ${styleCheck.initialStyle} -> ${styleCheck.newStyle} (URL: "${urlWithStyle}")`);
+  console.log(`Layout style grid: ${styleCheck.initialPaths} paths`);
+  console.log(`Layout style loop: style=${loopInfo?.style}, ${loopInfo?.paths} paths (URL: "${loopInfo?.url}")`);
+  console.log(`Layout style radial: style=${radialInfo?.style}, ${radialInfo?.paths} paths (URL: "${radialInfo?.url}")`);
 }
 
 // 5. Gallery Search Interaction Check
