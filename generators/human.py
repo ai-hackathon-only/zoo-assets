@@ -1,5 +1,6 @@
 """Human character generator: procedural low-poly models for zoo keepers and visitors.
 Produces stylized toy-like characters with modular uniforms, outfits, hair, hats, skin tones, and tools.
+Facing: All models face -Y (Blender front, glTF +Z) to match the thumbnail camera.
 """
 import math
 from mathutils import Vector
@@ -66,6 +67,18 @@ OUTFIT_MAP = {
     "explorer_hat": ("sand", "tan"),
 }
 
+KEEPER_HAIR_OVERRIDE = {
+    "keeper_vet_surgeon_05": "sand",
+    "keeper_vet_assistant_06": "black",
+    "keeper_primate_caregiver_04": "brown",
+    "keeper_aviary_curator_07": "rust",
+    "keeper_herpetologist_08": "dark_brown",
+    "keeper_nocturnal_keeper_12": "black",
+    "keeper_nursery_nurse_13": "sand",
+    "keeper_botanist_curator_19": "brown",
+    "keeper_apprentice_keeper_20": "tan",
+}
+
 
 def build(asset, z):
     sx, sy, sz = asset["size_m"]
@@ -110,14 +123,14 @@ def build(asset, z):
         W *= 0.95
         L *= 0.95
 
-    # 1. Shoes / Feet
+    # 1. Shoes / Feet (facing -Y)
     shoe_h = H * 0.06
     shoe_w = W * 0.30
     shoe_l = L * 0.60
     shoe_col = "dark_brown" if role == "keeper" else "charcoal"
     leg_x = W * 0.23
     for x in (leg_x, -leg_x):
-        z.box((shoe_w, shoe_l, shoe_h), loc=(x, shoe_l * 0.15, shoe_h / 2), colour=shoe_col)
+        z.box((shoe_w, shoe_l, shoe_h), loc=(x, -shoe_l * 0.15, shoe_h / 2), colour=shoe_col)
 
     # 2. Legs / Pants
     leg_top = H * 0.44
@@ -155,11 +168,11 @@ def build(asset, z):
         forearm_h = arm_h * 0.48
         forearm_col = top_col if "long" in uniform_key or "parka" in uniform_key or "jacket" in uniform_key else skin_col
         z.box((arm_w * 0.88, arm_l * 0.88, forearm_h),
-              loc=(x, arm_l * 0.08, arm_top - sleeve_h * 0.95 - forearm_h / 2), colour=forearm_col)
+              loc=(x, -arm_l * 0.08, arm_top - sleeve_h * 0.95 - forearm_h / 2), colour=forearm_col)
         
         hand_h = H * 0.06
         z.box((arm_w * 0.82, arm_l * 0.82, hand_h),
-              loc=(x, arm_l * 0.12, arm_top - arm_h - hand_h * 0.4), colour=skin_col)
+              loc=(x, -arm_l * 0.12, arm_top - arm_h - hand_h * 0.4), colour=skin_col)
 
     # 5. Neck & Head
     neck_h = H * 0.06
@@ -174,18 +187,33 @@ def build(asset, z):
     head_center_z = head_bottom + head_h / 2
     z.box((head_w, head_l, head_h), loc=(0, 0, head_center_z), colour=skin_col)
 
-    # Facial features (Eyes embedded, no coplanar faces)
+    # Facial features: Eyes embedded facing -Y
     eye_z = head_center_z + head_h * 0.08
-    eye_y = head_l * 0.48
+    eye_y = -head_l * 0.48
     eye_x = head_w * 0.22
     for x in (eye_x, -eye_x):
         z.box((head_w * 0.14, head_l * 0.10, head_h * 0.10), loc=(x, eye_y, eye_z), colour="black")
 
-    # 6. Hair / Hat
+    # 6. Hair / Hat (varied hats and visible hair styles)
     hat_z = head_bottom + head_h * 0.75
-    hair_col = "light_grey" if is_senior else ("dark_brown" if skin_raw in ("tan", "dark") else "sand")
+    hair_col = KEEPER_HAIR_OVERRIDE.get(
+        asset["id"],
+        "light_grey" if is_senior else ("dark_brown" if skin_raw in ("tan", "dark") else "sand")
+    )
 
-    if role == "keeper" or "ranger" in uniform_key or "safari" in uniform_key:
+    aid = asset["id"]
+    is_safari_hat = aid in (
+        "keeper_safari_lead_01", "keeper_security_ranger_16", "keeper_elephant_keeper_09",
+        "keeper_education_guide_17", "keeper_grounds_landscaper_14"
+    ) or "ranger_tan" in uniform_key
+    is_cap = aid in (
+        "keeper_carnivore_specialist_02", "keeper_aquatic_feeder_03", "keeper_ungulate_feeder_10",
+        "keeper_maintenance_tech_15", "keeper_penguin_keeper_18", "keeper_arctic_curator_11",
+        "visitor_child_cap_05"
+    ) or "scout" in uniform_key or "cap" in aid
+    is_sunhat = "sunhat" in aid or "sunvisor" in aid or "summer_dress" in uniform_key
+
+    if is_safari_hat:
         brim_w = head_w * 1.55
         brim_l = head_l * 1.55
         brim_h = H * 0.025
@@ -194,21 +222,21 @@ def build(asset, z):
         crown_l = head_l * 0.90
         crown_h = H * 0.08
         z.box((crown_w, crown_l, crown_h), loc=(0, 0, hat_z + crown_h / 2), colour=top_col)
-    elif "cap" in asset["id"] or "scout" in uniform_key:
+    elif is_cap:
         cap_h = H * 0.08
         z.box((head_w * 1.05, head_l * 1.05, cap_h), loc=(0, 0, hat_z + cap_h / 2), colour=top_col)
         visor_l = head_l * 0.50
-        z.box((head_w * 0.95, visor_l, H * 0.025), loc=(0, head_l * 0.60, hat_z + H * 0.01), colour=top_col)
-    elif "sunhat" in asset["id"] or "blouse" in uniform_key or "summer_dress" in uniform_key:
+        z.box((head_w * 0.95, visor_l, H * 0.025), loc=(0, -head_l * 0.60, hat_z + H * 0.01), colour=top_col)
+    elif is_sunhat:
         brim_w = head_w * 1.6
         brim_l = head_l * 1.6
         z.box((brim_w, brim_l, H * 0.025), loc=(0, 0, hat_z), colour="cream")
         z.box((head_w * 0.92, head_l * 0.92, H * 0.07), loc=(0, 0, hat_z + H * 0.035), colour="cream")
     else:
-        # Hair cap resting on top/back of head
+        # Natural visible hair cap resting on top and back (+Y) of head
         hair_h = head_h * 0.40
         hair_l = head_l * 0.85
-        z.box((head_w * 1.05, hair_l, hair_h), loc=(0, -head_l * 0.10, hat_z + hair_h / 2), colour=hair_col)
+        z.box((head_w * 1.05, hair_l, hair_h), loc=(0, head_l * 0.10, hat_z + hair_h / 2), colour=hair_col)
 
     # 7. Tools and Accessories
     _add_tool(z, tool, H, W, L, torso_w, torso_top, arm_top, arm_h, shoulder_x, skin_col, top_col)
@@ -216,62 +244,73 @@ def build(asset, z):
 
 def _add_tool(z, tool, H, W, L, torso_w, torso_top, arm_top, arm_h, shoulder_x, skin_col, top_col):
     hx = shoulder_x
-    hy = L * 0.22
+    hy = -L * 0.22
     hz = arm_top - arm_h
 
-    if tool in ("clipboard", "field_notebook", "sketchbook"):
-        z.box((0.18, 0.04, 0.22), loc=(hx * 0.88, hy + 0.08, hz + 0.05), colour="brown")
-        z.box((0.15, 0.05, 0.18), loc=(hx * 0.88, hy + 0.08, hz + 0.05), colour="white")
+    if tool in ("clipboard", "field_notebook", "sketchbook", "clipboard_whistle"):
+        z.box((0.18, 0.04, 0.22), loc=(hx * 0.88, hy - 0.08, hz + 0.05), colour="brown")
+        z.box((0.15, 0.05, 0.18), loc=(hx * 0.88, hy - 0.08, hz + 0.05), colour="white")
     elif tool in ("meat_tongs", "snake_hook"):
-        z.box((0.04, 0.32, 0.04), loc=(hx * 0.88, hy + 0.12, hz), colour="light_grey")
+        z.box((0.04, 0.32, 0.04), loc=(hx * 0.88, hy - 0.12, hz), colour="light_grey")
     elif tool in ("fish_bucket", "feed_pail"):
-        z.cyl(0.12, 0.22, loc=(hx, hy + 0.05, hz - 0.16), colour="grey", seg=8)
-        z.box((0.03, 0.03, 0.20), loc=(hx, hy + 0.05, hz - 0.03), colour="light_grey")
-    elif tool in ("puzzle_box", "toolbox", "med_kit", "scanner"):
-        col = "teal" if tool == "med_kit" else ("charcoal" if tool == "scanner" else "rust")
-        z.box((0.20, 0.16, 0.16), loc=(hx, hy + 0.05, hz), colour=col)
+        z.cyl(0.12, 0.22, loc=(hx, hy - 0.05, hz - 0.16), colour="grey", seg=8)
+        z.box((0.03, 0.03, 0.20), loc=(hx, hy - 0.05, hz - 0.03), colour="light_grey")
+    elif tool in ("puzzle_box", "toolbox", "scanner"):
+        col = "charcoal" if tool == "scanner" else ("rust" if tool == "toolbox" else "sand")
+        z.box((0.20, 0.16, 0.16), loc=(hx, hy - 0.05, hz), colour=col)
+    elif tool == "med_kit":
+        # Bright red emergency medical kit with white handle - high contrast against teal scrubs
+        z.box((0.22, 0.16, 0.16), loc=(hx, hy - 0.05, hz), colour="red")
+        z.box((0.08, 0.04, 0.03), loc=(hx, hy - 0.05, hz + 0.09), colour="white")
     elif tool in ("shovel", "pitchfork", "rake", "broom", "pruning_shears", "ice_pick"):
         pole_h = H * 0.55
-        z.cyl(0.025, pole_h, loc=(hx, hy + 0.05, pole_h / 2), colour="sand", seg=6)
+        z.cyl(0.025, pole_h, loc=(hx, hy - 0.05, pole_h / 2), colour="sand", seg=6)
         tool_head_col = "light_grey" if tool != "broom" else "tan"
-        z.box((0.18, 0.08, 0.12), loc=(hx, hy + 0.05, pole_h * 0.95), colour=tool_head_col)
+        z.box((0.18, 0.08, 0.12), loc=(hx, hy - 0.05, pole_h * 0.95), colour=tool_head_col)
+    elif tool in ("seed_scoop", "nursing_bottle", "radio_holster", "megaphone", "red_flashlight"):
+        z.box((0.08, 0.10, 0.14), loc=(hx * 0.88, hy - 0.05, hz + 0.02), colour="orange" if "red" in tool else "sand")
     elif tool == "camera":
-        z.box((0.14, 0.10, 0.10), loc=(0, L * 0.42, torso_top - H * 0.10), colour="black")
-        z.cyl(0.04, 0.06, loc=(0, L * 0.49, torso_top - H * 0.10), colour="charcoal", rot=(90, 0, 0), seg=6)
+        z.box((0.14, 0.10, 0.10), loc=(0, -L * 0.42, torso_top - H * 0.10), colour="black")
+        z.cyl(0.04, 0.06, loc=(0, -L * 0.49, torso_top - H * 0.10), colour="charcoal", rot=(90, 0, 0), seg=6)
     elif tool == "balloon":
         string_h = H * 0.38
         z.cyl(0.015, string_h, loc=(hx, hy, hz + string_h / 2), colour="white", seg=4)
         z.ball(0.14, loc=(hx, hy, hz + string_h + 0.11), colour="red", scale=(1, 1, 1.2), seg=8, rings=6)
     elif tool == "ice_cream":
-        z.cone(0.04, 0.12, loc=(hx, hy + 0.05, hz + 0.08), colour="tan", seg=6)
-        z.ball(0.05, loc=(hx, hy + 0.05, hz + 0.16), colour="pink", seg=8, rings=5)
+        z.cone(0.04, 0.12, loc=(hx, hy - 0.05, hz + 0.08), colour="tan", seg=6)
+        z.ball(0.05, loc=(hx, hy - 0.05, hz + 0.16), colour="pink", seg=8, rings=5)
     elif tool in ("binoculars_toy", "binoculars_neck"):
         for bx in (-0.04, 0.04):
-            z.cyl(0.03, 0.10, loc=(bx, L * 0.42, torso_top - H * 0.08), colour="forest", rot=(90, 0, 0), seg=6)
+            z.cyl(0.03, 0.10, loc=(bx, -L * 0.42, torso_top - H * 0.08), colour="forest", rot=(90, 0, 0), seg=6)
     elif tool in ("cane", "umbrella"):
         cane_h = H * 0.48
         z.cyl(0.025, cane_h, loc=(hx, hy, cane_h / 2), colour="dark_brown" if tool == "cane" else "navy", seg=6)
     elif tool in ("heavy_pack", "backpack"):
-        z.box((W * 0.65, L * 0.42, H * 0.28), loc=(0, -L * 0.50, torso_top - H * 0.14), colour="forest")
-    elif tool == "smartphone":
-        z.box((0.07, 0.025, 0.13), loc=(hx * 0.85, hy + 0.08, hz + 0.06), colour="charcoal")
+        # Backpack worn on back (+Y)
+        z.box((W * 0.65, L * 0.42, H * 0.28), loc=(0, L * 0.50, torso_top - H * 0.14), colour="forest")
+    elif tool in ("smartphone", "digital_recorder"):
+        z.box((0.07, 0.025, 0.13), loc=(hx * 0.85, hy - 0.08, hz + 0.06), colour="charcoal")
     elif tool in ("gift_bags", "tote_bag"):
-        z.box((0.20, 0.14, 0.22), loc=(hx, hy + 0.06, hz - 0.16), colour="pink" if tool == "gift_bags" else "cream")
+        z.box((0.20, 0.14, 0.22), loc=(hx, hy - 0.06, hz - 0.16), colour="pink" if tool == "gift_bags" else "cream")
     elif tool == "water_flask":
         z.cyl(0.04, 0.16, loc=(hx, hy, hz), colour="sky", seg=6)
-    elif tool == "pretzel":
-        z.box((0.12, 0.04, 0.12), loc=(hx * 0.85, hy + 0.08, hz + 0.04), colour="tan")
+    elif tool in ("pretzel", "map_sheet", "compass"):
+        z.box((0.12, 0.04, 0.12), loc=(hx * 0.85, hy - 0.08, hz + 0.04), colour="tan" if tool == "pretzel" else "cream")
+    elif tool == "stroller_handle":
+        z.box((W * 0.80, 0.04, 0.04), loc=(0, -L * 0.48, hz + 0.08), colour="charcoal")
+    elif tool == "tripod_rig":
+        z.cyl(0.03, H * 0.50, loc=(hx, hy - 0.06, H * 0.25), colour="charcoal", seg=6)
 
 
 def _build_wheelchair_user(z, W, L, H, skin_col, top_col, bot_col):
-    # Wheelchair base & wheels
+    # Wheelchair base & wheels (facing -Y)
     wheel_r = H * 0.28
     wheel_w = 0.06
     for side in (-1, 1):
         wx = side * (W * 0.42)
-        z.cyl(wheel_r, wheel_w, loc=(wx, -L * 0.05, wheel_r), colour="charcoal", rot=(0, 90, 0), seg=10)
+        z.cyl(wheel_r, wheel_w, loc=(wx, L * 0.05, wheel_r), colour="charcoal", rot=(0, 90, 0), seg=10)
         # Hub sphere
-        z.ball(0.06, loc=(wx + side * 0.02, -L * 0.05, wheel_r), colour="light_grey", seg=6, rings=4)
+        z.ball(0.06, loc=(wx + side * 0.02, L * 0.05, wheel_r), colour="light_grey", seg=6, rings=4)
 
     # Seat frame
     seat_z = wheel_r * 1.05
@@ -279,43 +318,43 @@ def _build_wheelchair_user(z, W, L, H, skin_col, top_col, bot_col):
     seat_l = L * 0.52
     seat_h = 0.07
     z.box((seat_w, seat_l, seat_h), loc=(0, 0, seat_z), colour="navy")
-    # Backrest narrower than seat to avoid coplanar sides
+    # Backrest at +Y (back)
     back_h = H * 0.38
-    z.box((seat_w * 0.92, 0.06, back_h), loc=(0, -seat_l * 0.42, seat_z + seat_h * 0.3 + back_h / 2), colour="navy")
+    z.box((seat_w * 0.92, 0.06, back_h), loc=(0, seat_l * 0.42, seat_z + seat_h * 0.3 + back_h / 2), colour="navy")
 
-    # Seated legs
+    # Seated legs pointing forward (-Y)
     leg_l = seat_l * 0.85
     leg_w = seat_w * 0.28
     leg_h = 0.13
     seat_top_z = seat_z + seat_h / 2
     for side in (-1, 1):
         lx = side * (seat_w * 0.22)
-        z.box((leg_w, leg_l, leg_h), loc=(lx, seat_l * 0.30, seat_top_z + leg_h / 2), colour=bot_col)
-        # Feet hanging down, clearly below seat frame
-        z.box((leg_w * 0.95, 0.14, 0.18), loc=(lx, seat_l * 0.72, seat_z - 0.10), colour="dark_brown")
+        z.box((leg_w, leg_l, leg_h), loc=(lx, -seat_l * 0.30, seat_top_z + leg_h / 2), colour=bot_col)
+        # Feet hanging down
+        z.box((leg_w * 0.95, 0.14, 0.18), loc=(lx, -seat_l * 0.72, seat_z - 0.10), colour="dark_brown")
 
     # Seated torso (embedded into seat)
     torso_h = H * 0.34
     torso_w = seat_w * 0.78
     torso_l = seat_l * 0.46
-    z.box((torso_w, torso_l, torso_h), loc=(0, -seat_l * 0.12, seat_top_z - 0.04 + torso_h / 2), colour=top_col)
+    z.box((torso_w, torso_l, torso_h), loc=(0, seat_l * 0.12, seat_top_z - 0.04 + torso_h / 2), colour=top_col)
 
     # Head
     head_size = H * 0.18
     head_z = seat_top_z + torso_h + head_size * 0.45
     head_w = torso_w * 0.60
     head_l = torso_l * 0.68
-    z.box((head_w, head_l, head_size), loc=(0, -seat_l * 0.10, head_z), colour=skin_col)
+    z.box((head_w, head_l, head_size), loc=(0, seat_l * 0.10, head_z), colour=skin_col)
     
-    # Eyes
-    eye_y = -seat_l * 0.10 + head_l * 0.48
+    # Eyes facing -Y
+    eye_y = seat_l * 0.10 - head_l * 0.48
     for side in (-1, 1):
         z.box((head_w * 0.14, head_l * 0.10, head_size * 0.10), loc=(side * (head_w * 0.22), eye_y, head_z + 0.02), colour="black")
     
-    # Hair cap extends distinctly past back of head
+    # Hair cap extends distinctly past back of head (+Y)
     hair_h = head_size * 0.38
     hair_l = head_l * 0.85
-    z.box((head_w * 1.05, hair_l, hair_h), loc=(0, -seat_l * 0.10 - head_l * 0.15, head_z + hair_h / 2), colour="dark_brown")
+    z.box((head_w * 1.05, hair_l, hair_h), loc=(0, seat_l * 0.10 + head_l * 0.15, head_z + hair_h / 2), colour="dark_brown")
 
 
 def _build_shoulder_kid(z, W, L, H, skin_col, top_col, bot_col):
@@ -325,7 +364,7 @@ def _build_shoulder_kid(z, W, L, H, skin_col, top_col, bot_col):
 
     shoe_h = adult_h * 0.06
     for x in (adult_w * 0.24, -adult_w * 0.24):
-        z.box((adult_w * 0.28, adult_l * 0.55, shoe_h), loc=(x, adult_l * 0.12, shoe_h / 2), colour="dark_brown")
+        z.box((adult_w * 0.28, adult_l * 0.55, shoe_h), loc=(x, -adult_l * 0.12, shoe_h / 2), colour="dark_brown")
 
     leg_h = adult_h * 0.42
     for x in (adult_w * 0.24, -adult_w * 0.24):
@@ -352,33 +391,38 @@ def _build_shoulder_kid(z, W, L, H, skin_col, top_col, bot_col):
     head_l = adult_l * 0.52
     z.box((head_w, head_l, head_size), loc=(0, 0, head_z), colour=skin_col)
 
-    # Eyes
-    eye_y = head_l * 0.48
+    # Eyes facing -Y
+    eye_y = -head_l * 0.48
     for x in (head_w * 0.22, -head_w * 0.22):
         z.box((head_w * 0.14, head_l * 0.10, head_size * 0.10), loc=(x, eye_y, head_z + 0.02), colour="black")
 
-    # Adult Hair cap extends distinctly past back of head
+    # Adult Hair cap at back (+Y)
     hair_h = head_size * 0.38
     hair_l = head_l * 0.85
-    z.box((head_w * 1.05, hair_l, hair_h), loc=(0, -head_l * 0.15, head_z + hair_h / 2), colour="dark_brown")
+    z.box((head_w * 1.05, hair_l, hair_h), loc=(0, head_l * 0.15, head_z + hair_h / 2), colour="dark_brown")
 
-    # Toddler on shoulders!
+    # Toddler on shoulders! (facing -Y)
     kid_bottom = torso_bottom + torso_h + adult_h * 0.06
     kid_torso_h = H * 0.13
     kid_w = adult_w * 0.42
     kid_l = adult_l * 0.44
     for x in (adult_w * 0.28, -adult_w * 0.28):
-        z.box((kid_w * 0.35, kid_l * 0.85, kid_torso_h * 0.55), loc=(x, kid_l * 0.20, kid_bottom), colour="navy")
+        z.box((kid_w * 0.35, kid_l * 0.85, kid_torso_h * 0.55), loc=(x, -kid_l * 0.20, kid_bottom), colour="navy")
 
-    z.box((kid_w, kid_l, kid_torso_h), loc=(0, -kid_l * 0.08, kid_bottom + kid_torso_h / 2), colour="yellow")
+    z.box((kid_w, kid_l, kid_torso_h), loc=(0, kid_l * 0.08, kid_bottom + kid_torso_h / 2), colour="yellow")
     
     kid_head_h = H * 0.11
     kid_head_z = kid_bottom + kid_torso_h + kid_head_h / 2
     kid_head_w = kid_w * 0.72
     kid_head_l = kid_l * 0.72
-    z.box((kid_head_w, kid_head_l, kid_head_h), loc=(0, -kid_l * 0.04, kid_head_z), colour=skin_col)
+    z.box((kid_head_w, kid_head_l, kid_head_h), loc=(0, kid_l * 0.04, kid_head_z), colour=skin_col)
     
-    # Kid hair cap extends distinctly past back of kid head
+    # Kid eyes facing -Y
+    kid_eye_y = kid_l * 0.04 - kid_head_l * 0.48
+    for x in (kid_head_w * 0.22, -kid_head_w * 0.22):
+        z.box((kid_head_w * 0.14, kid_head_l * 0.10, kid_head_h * 0.10), loc=(x, kid_eye_y, kid_head_z + 0.02), colour="black")
+
+    # Kid hair cap extends distinctly past back of kid head (+Y)
     kid_hair_h = kid_head_h * 0.40
     kid_hair_l = kid_head_l * 0.85
-    z.box((kid_head_w * 1.05, kid_hair_l, kid_hair_h), loc=(0, -kid_l * 0.04 - kid_head_l * 0.15, kid_head_z + kid_hair_h / 2), colour="sand")
+    z.box((kid_head_w * 1.05, kid_hair_l, kid_hair_h), loc=(0, kid_l * 0.04 + kid_head_l * 0.15, kid_head_z + kid_hair_h / 2), colour="sand")
