@@ -155,14 +155,18 @@ The table above has Gemini checking the 92 Claude-built animals. The 38 Gemini-b
 
 Method: seat 1 (`aho-builder-1`, Claude Code · claude-opus-5-5, did not build any of these) copied the 38 thumbnails to a temp folder under shuffled numbers (Python `random.seed(44)`), tiled them into one unlabeled 8x5 sheet with ffmpeg, wrote every guess, then opened the key.
 
-Result: **37 / 38**. Miss: `praying_mantis`, which goes back to `generators/insect.py` (the pink orchid-mantis colours hide the mantis shape; folded forelegs and a triangular head would help). `snowy_owl` was right but a weak guess.
+Unlabeled sheet: [`docs/recognition/claude-blind-sheet.png`](docs/recognition/claude-blind-sheet.png) (8x5, read left to right, top to bottom; tile n is row n below).
+
+Result: **36 / 38**. Misses: `praying_mantis`, which goes back to `generators/insect.py` (the pink orchid-mantis colours hide the mantis shape; folded forelegs and a triangular head would help), and `snowy_owl`, a plain grey blob with no visible eyes or face, so it is counted as a miss (back to `generators/bird.py`: white body, yellow eyes, facial disc).
+
+Limit of this check: the checker wrote `assets.json`, so it knew the 130 names and picked from that closed list. Without the list, the group-level guesses (scorpion, butterfly, crane, iguana, cobra, crocodile, toucan, bee, flamingo, penguin, tortoise, moth, stork, turtle, ant, eagle, axolotl, beetle, ostrich, stick insect, peacock, pelican, snake, kiwi, parrot, snail, spider, frog) would very likely still hold. Species-level picks (red-crowned crane, emperor vs African penguin, Nile crocodile vs gharial vs alligator, red-knee tarantula, komodo dragon, shoebill, kookaburra, emu) leaned on the list. Not re-tested open-set.
 
 | # | ID | Blind guess | Result |
 |---|---|---|:---:|
 | 0 | `emperor_scorpion` | scorpion | MATCH |
 | 1 | `monarch_butterfly` | monarch butterfly | MATCH |
 | 2 | `red_crowned_crane` | red-crowned crane | MATCH |
-| 3 | `snowy_owl` | snowy owl (weak guess: grey blob) | MATCH |
+| 3 | `snowy_owl` | snowy owl (weak guess: grey blob, no face) | MISS |
 | 4 | `green_iguana` | iguana | MATCH |
 | 5 | `king_cobra` | king cobra | MATCH |
 | 6 | `american_alligator` | alligator | MATCH |
@@ -198,13 +202,13 @@ Result: **37 / 38**. Miss: `praying_mantis`, which goes back to `generators/inse
 | 36 | `mexican_redknee_tarantula` | red-knee tarantula | MATCH |
 | 37 | `poison_dart_frog` | poison dart frog | MATCH |
 
-**All animals:** 92 / 92 (Gemini on Claude-built) + 37 / 38 (Claude on Gemini-built) = **129 / 130**, above the 90 / 100 bar.
+**All animals:** 92 / 92 (Gemini on Claude-built) + 36 / 38 (Claude on Gemini-built) = **128 / 130**, above the 90 / 100 bar.
 
 ---
 
 ## Conclusion & Compliance
 
 • **GOALS.md Requirement:** At least 90 of 100 animals guessed right.
-• **Actual Score:** **129 of 130** after both directions were checked (see the Claude check above).
+• **Actual Score:** **128 of 130** after both directions were checked (see the Claude check above).
 • Every animal in the library presents an unmistakable visual profile adhering strictly to the shared palette and stylized low-poly toy design language.
 • All generated assets meet or exceed species recognition criteria without relying on high-poly detail or external textures.
