@@ -510,14 +510,65 @@
       color: var(--text-muted);
       z-index: 5;
     }
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .park-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--primary);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: var(--radius-pill);
+      box-shadow: var(--shadow-sm);
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+
+    .park-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .tag-variant {
+      font-weight: 700;
+    }
+    .tag-baby {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+    .tag-rare {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
   </style>
 </head>
 <body>
   <header class="header">
     <div class="header-inner">
       <div class="title-row">
-        <h1>Zoo Assets</h1>
-        <span class="header-tag">500 Low-Poly 3D Assets</span>
+        <div class="brand">
+          <h1>Zoo Assets</h1>
+          <span class="header-tag" id="header-asset-count">500 Low-Poly 3D Assets</span>
+        </div>
+        <div class="header-nav">
+          <a href="park/" class="park-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+              <line x1="8" y1="2" x2="8" y2="18"></line>
+              <line x1="16" y1="6" x2="16" y2="22"></line>
+            </svg>
+            <span>Explore 3D Zoo Map &rarr;</span>
+          </a>
+        </div>
       </div>
       <p class="header-desc">
         A unified toy-style 3D asset library crafted procedurally for headless Blender. All models share one master UV palette and export as clean, lightweight web GLBs.
@@ -592,6 +643,10 @@
               <th>Tri Budget</th>
               <td id="detail-tri-budget">—</td>
             </tr>
+            <tr id="row-variant" style="display: none;">
+              <th>Variant</th>
+              <td id="detail-variant">—</td>
+            </tr>
           </tbody>
         </table>
         <a id="detail-download" class="download-btn" href="#" download>
@@ -613,10 +668,28 @@
     // State
     let assets = [];
     try {
-      assets = JSON.parse(document.getElementById('embedded-assets').textContent);
+      const embedded = JSON.parse(document.getElementById('embedded-assets').textContent);
+      assets = Array.isArray(embedded) ? embedded : (embedded.assets || []);
     } catch (e) {
       console.error("Failed to parse embedded assets:", e);
     }
+
+    // Try dynamic fetch of assets.json to include live variants
+    (async () => {
+      try {
+        const res = await fetch('assets.json');
+        if (res.ok) {
+          const json = await res.json();
+          assets = Array.isArray(json) ? json : (json.assets || []);
+          const headerTag = document.getElementById('header-asset-count');
+          if (headerTag) headerTag.textContent = `${assets.length} Low-Poly 3D Assets`;
+          buildCategories();
+          renderGrid();
+        }
+      } catch (err) {
+        console.warn("Using embedded asset catalog:", err);
+      }
+    })();
 
     let currentCategory = 'all';
     let searchQuery = '';
@@ -644,21 +717,30 @@
     const btnReset = document.getElementById('btn-reset');
 
     // Build Category Tabs
-    const catCounts = {};
-    assets.forEach(a => {
-      catCounts[a.category] = (catCounts[a.category] || 0) + 1;
-    });
+    function buildCategories() {
+      const catCounts = {};
+      let variantCount = 0;
+      assets.forEach(a => {
+        catCounts[a.category] = (catCounts[a.category] || 0) + 1;
+        if (a.variant) variantCount++;
+      });
 
-    const categories = ['all', ...Object.keys(catCounts).sort()];
+      const categories = ['all'];
+      if (variantCount > 0) {
+        categories.push('variants');
+      }
+      categories.push(...Object.keys(catCounts).sort());
 
-    catTabsEl.innerHTML = categories.map(cat => {
-      const count = cat === 'all' ? assets.length : catCounts[cat];
-      const label = cat === 'all' ? 'All' : cat.replace(/_/g, ' ');
-      return `<button class="cat-btn ${cat === 'all' ? 'active' : ''}" data-cat="${cat}">
-        <span style="text-transform: capitalize;">${label}</span>
-        <span class="cat-badge">${count}</span>
-      </button>`;
-    }).join('');
+      catTabsEl.innerHTML = categories.map(cat => {
+        let count = cat === 'all' ? assets.length : (cat === 'variants' ? variantCount : catCounts[cat]);
+        let label = cat === 'all' ? 'All' : (cat === 'variants' ? 'Animal Variants' : cat.replace(/_/g, ' '));
+        return `<button class="cat-btn ${cat === currentCategory ? 'active' : ''}" data-cat="${cat}">
+          <span style="text-transform: capitalize;">${label}</span>
+          <span class="cat-badge">${count}</span>
+        </button>`;
+      }).join('');
+    }
+    buildCategories();
 
     // Tab Click Handlers
     catTabsEl.addEventListener('click', (e) => {
@@ -679,11 +761,17 @@
     // Render Grid
     function renderGrid() {
       const filtered = assets.filter(a => {
-        const matchesCat = currentCategory === 'all' || a.category === currentCategory;
+        let matchesCat = false;
+        if (currentCategory === 'all') matchesCat = true;
+        else if (currentCategory === 'variants') matchesCat = !!a.variant;
+        else matchesCat = a.category === currentCategory;
+
         const matchesSearch = !searchQuery || 
           a.name.toLowerCase().includes(searchQuery) || 
           a.id.toLowerCase().includes(searchQuery) ||
-          a.category.toLowerCase().includes(searchQuery);
+          a.category.toLowerCase().includes(searchQuery) ||
+          (a.variant && a.variant.toLowerCase().includes(searchQuery)) ||
+          (a.variant_of && a.variant_of.toLowerCase().includes(searchQuery));
         return matchesCat && matchesSearch;
       });
 
@@ -700,6 +788,8 @@
       assetGridEl.innerHTML = filtered.map(a => {
         const sizeStr = a.size_m ? `${a.size_m[0]} × ${a.size_m[1]} × ${a.size_m[2]} m` : '';
         const thumbUrl = `assets/${a.category}/${a.id}.png`;
+        const variantBadge = a.variant ? 
+          `<span class="tag tag-variant tag-${a.variant}">${a.variant === 'baby' ? '👶 Baby' : '✨ Rare'}</span>` : '';
         return `<div class="card" data-id="${a.id}">
           <div class="thumb-wrap">
             <img class="thumb-img" src="${thumbUrl}" alt="${a.name}" loading="lazy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' fill=\'%23ccc\'><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\'>3D</text></svg>'">
@@ -707,6 +797,7 @@
           <div class="card-body">
             <h3 class="card-title">${a.name}</h3>
             <div class="card-meta">
+              ${variantBadge}
               <span class="tag">${a.category.replace(/_/g, ' ')}</span>
               <span style="font-size: 0.75rem;">${sizeStr}</span>
             </div>
@@ -808,6 +899,17 @@
       detailSize.textContent = asset.size_m ? `${asset.size_m[0]} × ${asset.size_m[1]} × ${asset.size_m[2]} m` : 'N/A';
       detailGenerator.textContent = asset.generator || 'procedural';
       detailTriBudget.textContent = asset.budget_tris ? `${asset.budget_tris.toLocaleString()} tris` : 'N/A';
+
+      const rowVariant = document.getElementById('row-variant');
+      const detailVariant = document.getElementById('detail-variant');
+      if (rowVariant && detailVariant) {
+        if (asset.variant) {
+          rowVariant.style.display = '';
+          detailVariant.textContent = asset.variant === 'baby' ? `Baby (${asset.variant_of})` : `Rare Morph (${asset.variant_of})`;
+        } else {
+          rowVariant.style.display = 'none';
+        }
+      }
       
       const glbUrl = `assets/${asset.category}/${asset.id}.glb`;
       detailDownload.href = glbUrl;
