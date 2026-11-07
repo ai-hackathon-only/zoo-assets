@@ -1,0 +1,277 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZooParkLayout",
+  "description": "Procedural layout format for zoo testbed scene",
+  "type": "object",
+  "required": [
+    "version",
+    "settings",
+    "boundary",
+    "entrance",
+    "paths",
+    "enclosures",
+    "facilities",
+    "decorations",
+    "people",
+    "stats"
+  ],
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "settings": {
+      "type": "object",
+      "required": ["size_m", "density", "population", "seed"],
+      "properties": {
+        "size_m": {
+          "type": "number",
+          "minimum": 80,
+          "maximum": 600
+        },
+        "density": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "population": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 300
+        },
+        "seed": {
+          "type": ["string", "number"]
+        }
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "required": ["width_m", "depth_m", "min_x", "min_y", "max_x", "max_y"],
+      "properties": {
+        "width_m": { "type": "number" },
+        "depth_m": { "type": "number" },
+        "min_x": { "type": "number" },
+        "min_y": { "type": "number" },
+        "max_x": { "type": "number" },
+        "max_y": { "type": "number" }
+      }
+    },
+    "entrance": {
+      "type": "object",
+      "required": ["id", "asset_id", "position", "rotation_deg", "footprint"],
+      "properties": {
+        "id": { "type": "string" },
+        "asset_id": { "type": "string" },
+        "position": {
+          "type": "array",
+          "items": { "type": "number" },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "rotation_deg": { "type": "number" },
+        "footprint": {
+          "type": "array",
+          "items": { "type": "number" },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      }
+    },
+    "paths": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "position", "size"],
+        "properties": {
+          "id": { "type": "string" },
+          "position": {
+            "type": "array",
+            "items": { "type": "number" },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "size": {
+            "type": "array",
+            "items": { "type": "number" },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "connections": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "enclosures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "species_id",
+          "bounds",
+          "center",
+          "gate_position",
+          "fence_asset_id",
+          "animals"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "species_id": { "type": "string" },
+          "name": { "type": "string" },
+          "bounds": {
+            "type": "object",
+            "required": ["min_x", "min_y", "max_x", "max_y", "width", "depth"],
+            "properties": {
+              "min_x": { "type": "number" },
+              "min_y": { "type": "number" },
+              "max_x": { "type": "number" },
+              "max_y": { "type": "number" },
+              "width": { "type": "number" },
+              "depth": { "type": "number" }
+            }
+          },
+          "center": {
+            "type": "array",
+            "items": { "type": "number" },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "fence_asset_id": { "type": "string" },
+          "gate_position": {
+            "type": "array",
+            "items": { "type": "number" },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "animals": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "asset_id", "variant", "position", "rotation_deg"],
+              "properties": {
+                "id": { "type": "string" },
+                "asset_id": { "type": "string" },
+                "variant": {
+                  "type": "string",
+                  "enum": ["adult", "baby", "mutation"]
+                },
+                "position": {
+                  "type": "array",
+                  "items": { "type": "number" },
+                  "minItems": 3,
+                  "maxItems": 3
+                },
+                "rotation_deg": { "type": "number" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "facilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "asset_id",
+          "category",
+          "position",
+          "rotation_deg",
+          "footprint",
+          "path_tile"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "asset_id": { "type": "string" },
+          "category": { "type": "string" },
+          "position": {
+            "type": "array",
+            "items": { "type": "number" },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "rotation_deg": { "type": "number" },
+          "footprint": {
+            "type": "array",
+            "items": { "type": "number" },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "path_tile": {
+            "type": "array",
+            "items": { "type": "number" },
+            "minItems": 2,
+            "maxItems": 2
+          }
+        }
+      }
+    },
+    "decorations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "asset_id", "position", "rotation_deg"],
+        "properties": {
+          "id": { "type": "string" },
+          "asset_id": { "type": "string" },
+          "position": {
+            "type": "array",
+            "items": { "type": "number" },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "rotation_deg": { "type": "number" },
+          "scale": { "type": "number" }
+        }
+      }
+    },
+    "people": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "asset_id", "role", "position", "rotation_deg"],
+        "properties": {
+          "id": { "type": "string" },
+          "asset_id": { "type": "string" },
+          "role": {
+            "type": "string",
+            "enum": ["visitor", "keeper"]
+          },
+          "position": {
+            "type": "array",
+            "items": { "type": "number" },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "rotation_deg": { "type": "number" },
+          "near_enclosure_id": {
+            "type": ["string", "null"]
+          }
+        }
+      }
+    },
+    "stats": {
+      "type": "object",
+      "required": [
+        "enclosure_count",
+        "facility_count",
+        "animal_count",
+        "visitor_count",
+        "keeper_count",
+        "path_tile_count",
+        "generation_time_ms"
+      ],
+      "properties": {
+        "enclosure_count": { "type": "integer" },
+        "facility_count": { "type": "integer" },
+        "animal_count": { "type": "integer" },
+        "visitor_count": { "type": "integer" },
+        "keeper_count": { "type": "integer" },
+        "path_tile_count": { "type": "integer" },
+        "generation_time_ms": { "type": "number" }
+      }
+    }
+  }
+}
