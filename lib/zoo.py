@@ -180,6 +180,7 @@ def render_thumb(ob, path, res=256):
     direction = Vector((1.0, -1.4, 0.8)).normalized()
     cam.location = centre + direction * radius * 4
     cam.rotation_euler = (centre - cam.location).to_track_quat("-Z", "Y").to_euler()
+    cam_d.clip_start = radius * 0.1  # default 0.1 m would clip assets under ~5 cm
     cam_d.clip_end = radius * 10
     sc.camera = cam
     sun_d = bpy.data.lights.new("thumb_sun", "SUN")
