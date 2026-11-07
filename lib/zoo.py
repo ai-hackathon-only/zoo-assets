@@ -19,6 +19,7 @@ _VARIANT = None
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PALETTE_PNG = os.path.join(ROOT, "palette", "palette.png")
 MAT_NAME = "MAT_palette"
+EMISSIVE_MAT_NAME = "MAT_emissive"
 
 # GOALS.md budgets: (max tris, max bytes)
 BUDGETS = {"animals": (5000, 300_000), "keepers": (3000, 300_000), "facilities": (10000, 300_000)}
@@ -59,6 +60,28 @@ def material():
     return mat
 
 
+def emissive_material(colour=(1.0, 0.95, 0.5, 1.0), strength=5.0):
+    mat = bpy.data.materials.get(EMISSIVE_MAT_NAME)
+    if mat:
+        return mat
+    mat = bpy.data.materials.new(EMISSIVE_MAT_NAME)
+    mat.use_nodes = True
+    nt = mat.node_tree
+    bsdf = next(n for n in nt.nodes if n.type == "BSDF_PRINCIPLED")
+    bsdf.inputs["Roughness"].default_value = 0.2
+    tex = nt.nodes.new("ShaderNodeTexImage")
+    tex.image = bpy.data.images.load(PALETTE_PNG, check_existing=True)
+    tex.interpolation = "Closest"
+    nt.links.new(tex.outputs["Color"], bsdf.inputs["Base Color"])
+    if "Emission Color" in bsdf.inputs:
+        bsdf.inputs["Emission Color"].default_value = colour
+    elif "Emission" in bsdf.inputs:
+        bsdf.inputs["Emission"].default_value = colour
+    if "Emission Strength" in bsdf.inputs:
+        bsdf.inputs["Emission Strength"].default_value = strength
+    return mat
+
+
 def paint(bm, colour, faces=None):
     """Map each face to a small copy of itself inside the colour's swatch (no zero-area UVs)."""
     uv = bm.loops.layers.uv.verify()
@@ -76,11 +99,13 @@ def paint(bm, colour, faces=None):
             l[uv].uv = (cu + x / s * half * .8, cv + y / s * half * .8)
 
 
-def _obj(bm, name="part"):
+def _obj(bm, name="part", emissive=False):
     me = bpy.data.meshes.new(name)
     bm.to_mesh(me)
     bm.free()
     ob = bpy.data.objects.new(name, me)
+    if emissive:
+        ob["is_emissive"] = True
     bpy.context.scene.collection.objects.link(ob)
     return ob
 
@@ -96,7 +121,7 @@ def _rot(rot):
     return (Matrix.Rotation(rz, 4, "Z") @ Matrix.Rotation(ry, 4, "Y") @ Matrix.Rotation(rx, 4, "X"))
 
 
-def box(size, loc=(0, 0, 0), colour="grey", rot=(0, 0, 0), taper=1.0):
+def box(size, loc=(0, 0, 0), colour="grey", rot=(0, 0, 0), taper=1.0, emissive=False):
     """Box of size (x, y, z) centred at loc. taper<1 shrinks the top face (toy wedge shapes)."""
     bm = bmesh.new()
     bmesh.ops.create_cube(bm, size=1.0)
@@ -107,29 +132,29 @@ def box(size, loc=(0, 0, 0), colour="grey", rot=(0, 0, 0), taper=1.0):
                 v.co.y *= taper
     _place(bm, Vector(loc), rot, size)
     paint(bm, colour)
-    return _obj(bm)
+    return _obj(bm, emissive=emissive)
 
 
-def cyl(r, h, loc=(0, 0, 0), colour="grey", rot=(0, 0, 0), seg=8, r2=None):
+def cyl(r, h, loc=(0, 0, 0), colour="grey", rot=(0, 0, 0), seg=8, r2=None, emissive=False):
     """Cylinder (or truncated cone with r2) along local Z, centred at loc."""
     bm = bmesh.new()
     bmesh.ops.create_cone(bm, cap_ends=True, segments=seg, radius1=r, radius2=r if r2 is None else r2, depth=h)
     _place(bm, Vector(loc), rot, (1, 1, 1))
     paint(bm, colour)
-    return _obj(bm)
+    return _obj(bm, emissive=emissive)
 
 
-def cone(r, h, loc=(0, 0, 0), colour="grey", rot=(0, 0, 0), seg=8):
-    return cyl(r, h, loc, colour, rot, seg, r2=0.0)
+def cone(r, h, loc=(0, 0, 0), colour="grey", rot=(0, 0, 0), seg=8, emissive=False):
+    return cyl(r, h, loc, colour, rot, seg, r2=0.0, emissive=emissive)
 
 
-def ball(r, loc=(0, 0, 0), colour="grey", scale=(1, 1, 1), rot=(0, 0, 0), seg=10, rings=6):
+def ball(r, loc=(0, 0, 0), colour="grey", scale=(1, 1, 1), rot=(0, 0, 0), seg=10, rings=6, emissive=False):
     """Low-poly UV sphere of radius r, stretched by scale."""
     bm = bmesh.new()
     bmesh.ops.create_uvsphere(bm, u_segments=seg, v_segments=rings, radius=r)
     _place(bm, Vector(loc), rot, scale)
     paint(bm, colour)
-    return _obj(bm)
+    return _obj(bm, emissive=emissive)
 
 
 def mirror_x(fn, *a, loc=(0, 0, 0), **kw):
@@ -146,9 +171,19 @@ def finish(asset):
     if _VARIANT == "baby":
         _babyfy(obs, asset)
     bm = bmesh.new()
+    has_emissive = any(o.get("is_emissive", False) for o in obs)
     for o in obs:
+        is_em = o.get("is_emissive", False)
         tmp = o.data.copy()
         tmp.transform(o.matrix_world)
+        if has_emissive:
+            bm_part = bmesh.new()
+            bm_part.from_mesh(tmp)
+            mat_idx = 1 if is_em else 0
+            for f in bm_part.faces:
+                f.material_index = mat_idx
+            bm_part.to_mesh(tmp)
+            bm_part.free()
         bm.from_mesh(tmp)
         bpy.data.meshes.remove(tmp)
     for o in obs:
@@ -164,6 +199,8 @@ def finish(asset):
     ob = _obj(bm, name)
     ob.data.name = name
     ob.data.materials.append(material())
+    if has_emissive:
+        ob.data.materials.append(emissive_material())
     for p in ob.data.polygons:
         p.use_smooth = False
     return ob

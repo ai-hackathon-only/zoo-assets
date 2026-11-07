@@ -22,10 +22,13 @@ function readSettings() {
     density: num('density', 0, 1),
     population: Math.round(num('population', 0, 300)),
     seed: q.get('seed') || String(DEFAULTS.seed),
+    theme: q.get('theme') === 'night' ? 'night' : 'day',
   };
 }
 function writeSettings(s) {
-  const q = new URLSearchParams({ size: s.size, density: s.density, population: s.population, seed: s.seed });
+  const params = { size: s.size, density: s.density, population: s.population, seed: s.seed };
+  if (s.theme === 'night') params.theme = 'night';
+  const q = new URLSearchParams(params);
   history.replaceState(null, '', `${location.pathname}?${q}`);
 }
 
@@ -40,7 +43,8 @@ const camera = new THREE.PerspectiveCamera(50, 1, 0.5, 4000);
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
 controls.maxPolarAngle = Math.PI * 0.47;
-scene.add(new THREE.HemisphereLight(0xffffff, 0x8a9a6a, 1.6));
+const hemiLight = new THREE.HemisphereLight(0xffffff, 0x8a9a6a, 1.6);
+scene.add(hemiLight);
 const sun = new THREE.DirectionalLight(0xffffff, 1.8);
 sun.position.set(-1, 2, 1.2);
 scene.add(sun);
@@ -50,6 +54,49 @@ ground.rotation.x = -Math.PI / 2;
 scene.add(ground);
 const world = new THREE.Group();
 scene.add(world);
+
+let currentTheme = 'day';
+const loadedMaterials = new Set();
+
+function setTheme(theme) {
+  currentTheme = theme === 'night' ? 'night' : 'day';
+  const isNight = currentTheme === 'night';
+  const themeBtn = $('theme');
+  if (themeBtn) {
+    themeBtn.textContent = isNight ? '☀️ Day' : '🌙 Night';
+    themeBtn.setAttribute('aria-pressed', isNight ? 'true' : 'false');
+  }
+  document.body.dataset.theme = currentTheme;
+  if (isNight) {
+    scene.background.setHex(0x0a1122);
+    hemiLight.color.setHex(0x3a4866);
+    hemiLight.groundColor.setHex(0x18202c);
+    hemiLight.intensity = 0.5;
+    sun.color.setHex(0x5c7ca8);
+    sun.intensity = 0.6;
+    ground.material.color.setHex(0x233120);
+    for (const mat of loadedMaterials) {
+      if (mat.emissive && (mat.emissive.r > 0 || mat.emissive.g > 0 || mat.emissive.b > 0)) {
+        mat.emissiveIntensity = 8.0;
+        mat.needsUpdate = true;
+      }
+    }
+  } else {
+    scene.background.setHex(0xcfe8f3);
+    hemiLight.color.setHex(0xffffff);
+    hemiLight.groundColor.setHex(0x8a9a6a);
+    hemiLight.intensity = 1.6;
+    sun.color.setHex(0xffffff);
+    sun.intensity = 1.8;
+    ground.material.color.setHex(0x9cc77a);
+    for (const mat of loadedMaterials) {
+      if (mat.emissive && (mat.emissive.r > 0 || mat.emissive.g > 0 || mat.emissive.b > 0)) {
+        mat.emissiveIntensity = 0.0;
+        mat.needsUpdate = true;
+      }
+    }
+  }
+}
 
 function resize() {
   const w = canvas.clientWidth, h = canvas.clientHeight;
@@ -72,8 +119,13 @@ function loadParts(id) {
     const parts = [];
     gltf.scene.updateMatrixWorld(true);
     gltf.scene.traverse((o) => {
-      if (o.isMesh) parts.push({ geometry: o.geometry, material: o.material, local: o.matrixWorld.clone() });
+      if (o.isMesh) {
+        parts.push({ geometry: o.geometry, material: o.material, local: o.matrixWorld.clone() });
+        if (Array.isArray(o.material)) o.material.forEach((m) => loadedMaterials.add(m));
+        else if (o.material) loadedMaterials.add(o.material);
+      }
     });
+    setTheme(currentTheme);
     return parts;
   }).catch((e) => { console.warn('GLB failed', id, e.message); return []; });
   glbCache.set(id, p);
@@ -157,10 +209,10 @@ async function build(s, given = null) {
     `${st.total_enclosures} enclosures · ${st.total_animals} animals · ${st.total_facilities} facilities · ` +
     `${st.total_people} people · ${glbCache.size} GLBs · ${instances} instances · ${draws} draws · ` +
     (given ? 'imported layout.json' : `layout ${genMs.toFixed(1)} ms`);
-  document.body.dataset.source = given ? 'import' : 'generator';
   document.body.dataset.ready = '1';
   document.body.dataset.animals = String(st.total_animals);
   document.body.dataset.people = String(st.total_people);
+  document.body.dataset.source = given ? 'import' : 'generator';
 }
 
 function frameAll() {
@@ -231,6 +283,7 @@ function current() {
   return {
     size: Number(inputs.size.value), density: Number(inputs.density.value),
     population: Number(inputs.population.value), seed: inputs.seed.value.trim() || '0',
+    theme: currentTheme,
   };
 }
 function showValues() {
@@ -283,6 +336,15 @@ $('import-file').addEventListener('change', async (ev) => {
 });
 
 $('overview').addEventListener('click', () => { frameAll(); $('focus-name').textContent = 'Whole park'; });
+const themeBtn = $('theme');
+if (themeBtn) {
+  themeBtn.addEventListener('click', () => {
+    const next = currentTheme === 'night' ? 'day' : 'night';
+    setTheme(next);
+    const s = current();
+    writeSettings(s);
+  });
+}
 
 // ---------- fps ----------
 let frames = 0, last = performance.now(), firstFrame = 0;
@@ -309,6 +371,7 @@ const s0 = readSettings();
 inputs.size.value = s0.size; inputs.density.value = s0.density;
 inputs.population.value = s0.population; inputs.seed.value = s0.seed;
 showValues();
+setTheme(s0.theme);
 const res = await fetch('../assets.json');
 const json = await res.json();
 catalog = Array.isArray(json) ? json : json.assets;
@@ -322,5 +385,7 @@ requestAnimationFrame(loop);
 window.__park = {
   get layout() { return layout; },
   get camera() { return camera; },
-  get controls() { return controls; }
+  get controls() { return controls; },
+  get theme() { return currentTheme; },
+  setTheme,
 };
