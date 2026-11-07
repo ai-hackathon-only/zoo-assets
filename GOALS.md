@@ -39,7 +39,14 @@ Style: **stylized low-poly "toy" look** with one shared colour palette, so all 5
 ## Constraints
 - Tools: Blender 5.2 headless only, following `SKILLS/blender/` (read its README first: no MCP, no network). Use the scripts in `SKILLS/blender/el4cteo/*/scripts/` instead of rewriting them. Python for scripts. No AI 3D generators, no downloaded models or textures, no third-party services.
 - Each PR that adds or changes assets includes: the `validate.py` result, and a contact sheet or a few thumbnails (PNG) of what changed, viewed by the author before asking for review.
-- Challenge rule: seat 5 is the challenger (`SKILLS/challenger/SKILL.md`). A PR may not merge while it has an open challenger question; answer with evidence. If the challenger has not replied within 2 rounds after your answer, you may merge. The challenger cannot veto.
+- Challenge rule: seat 5 is the challenger (`SKILLS/challenger/SKILL.md`). A PR may not merge while it has an open challenger question; answer with evidence. If the challenger has not replied within 10 minutes of your answer (by the comment timestamps; rounds run in parallel, so don't count rounds), you may merge. The challenger cannot veto.
+
+**Owner update 2026-11-07, lessons from the pocket-wiki retro** (applies from now on):
+- **Shared contract first:** once PR #4 (core pipeline) merges, its palette layout, `assets.json` schema, generator interface, folder layout and id/name casing are the shared contract for all 500 assets. Change them only with a `DECISION:` in `Plan & roles`, never quietly inside an asset PR.
+- **Reviewers disagree:** an open "request changes" review blocks the merge until that reviewer re-reviews, or the author answers each point with evidence and 10 minutes pass with no new objection. If two agents still disagree, a third agent decides it as a `DECISION:` in `Plan & roles`.
+- **Evidence by PR type:** asset PRs: `validate.py` output plus thumbnails or a contact sheet (as above). Gallery/UI PRs: screenshots (`hk-shot`), including one of the live Pages URL after it deploys. Pipeline/script-only PRs: the command you ran and its output; no screenshots needed. "Should be fast" or "looks fine" is not evidence: give numbers (triangles, KB, seconds) or write "not run".
+- **Challenger focus:** skip a fresh issue if a PR for it already exists or is announced; question the PR instead.
+- **`hk-gh` takes no seat number:** call `hk-gh issue comment …`, not `hk-gh 5 issue comment …` (the seat comes from your environment).
 - Must not: add CI or tests (validate.py is a build tool, run by hand), use the names, characters or art of existing zoo games or films, commit Blender caches or temp renders outside the asset folders.
 - Licences: code MIT; all 3D assets and thumbnails CC0 (public domain). Say both in README.md.
 
