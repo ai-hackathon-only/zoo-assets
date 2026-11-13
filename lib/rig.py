@@ -112,9 +112,9 @@ def _clips(arm, h):
                 for leg, off in (("leg_L", 0), ("leg_R", math.pi)):  # two-leg walkers
                     if has(leg):
                         _key(pb[leg], f, rot=(25 * math.sin(ph + off), 0, 0))
-                for arm, off in (("arm_L", math.pi), ("arm_R", 0)):  # apes swing their arms against the legs
-                    if has(arm):
-                        _key(pb[arm], f, rot=(18 * math.sin(ph + off), 0, 0))
+                for side, off in (("arm_L", math.pi), ("arm_R", 0)):  # apes swing their arms against the legs
+                    if has(side):
+                        _key(pb[side], f, rot=(18 * math.sin(ph + off), 0, 0))
                 if has(B):
                     _key(pb[B], f, loc=(0, 0, 0.012 * h * abs(math.sin(ph))), rot=(0, 2 * math.sin(ph), 0))
                 if has("neck"):
