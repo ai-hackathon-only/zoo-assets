@@ -14,8 +14,9 @@ CLIPS = {"walk": 24, "idle": 48, "wave": 48, "carry": 24}
 SKELETON = {"root", "body", "head", "arm_L", "arm_R", "leg_L", "leg_R"}
 
 
-def is_human(bone_names):
-    return {"leg_L", "leg_R", "arm_L", "arm_R"} <= set(bone_names)
+def is_human(bone_names, name=""):
+    """Full skeleton, or a one-piece person (wheelchair user, kid on shoulders) named SM_/RIG_ keepers or visitors."""
+    return {"leg_L", "leg_R", "arm_L", "arm_R"} <= set(bone_names) or ("_keepers_" in name or "_visitors_" in name)
 
 
 def clips(arm, h, key):

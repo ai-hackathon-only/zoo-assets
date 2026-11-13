@@ -46,7 +46,7 @@ def build(ob, joints):
     for pb in arm.pose.bones:
         pb.rotation_mode = "XYZ"
     from lib import rig_human
-    if rig_human.is_human(joints):  # shared human skeleton: its own clips
+    if rig_human.is_human(joints, ob.name):  # shared human skeleton: its own clips
         rig_human.clips(arm, max(ob.dimensions.z, 0.05), _key)
     else:
         _clips(arm, max(ob.dimensions.z, 0.05))
@@ -200,7 +200,7 @@ def _plant_clips(arm, h):
         b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
 
 
-def expected_clips(bone_names):
+def expected_clips(bone_names, name=""):
     """Clip names the Decision lists for a skeleton, judged by its bone names (used by validate.py)."""
     from lib import rig_human
-    return rig_human.CLIPS if rig_human.is_human(bone_names) else CLIPS
+    return rig_human.CLIPS if rig_human.is_human(bone_names, name) else CLIPS
