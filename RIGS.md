@@ -34,7 +34,7 @@ One id per skeleton. A species with its own bones or clips gets `<family>.<speci
 | plant | idle, sway | trunk, crown |
 | static | idle | root |
 
-`gate` is for the facilities whose id starts with `gate_` (8 today, e.g. `gate_paddock_double_wood`) plus `turnstile_bank_quad`; the `rig` field in assets.json says which. The other facilities use `facility`.
+`gate` is for these 7 ids only: `gate_paddock_double_wood`, `gate_visitor_turnstile`, `gate_ticket_barrier`, `gate_keeper_metal_slide`, `gate_pedestrian_wicket`, `gate_safari_vehicle_airlock`, `turnstile_bank_quad`. `gate_entrance_arch_grand` is a fixed arch with no moving part, so it uses `facility`. The `rig` field in assets.json says which; the prefix is not the rule.
 
 Scorpion and tarantula use `arachnid` and are built by `insect.py`. Species extras and the non-animal groups follow the tables in `docs/RIG-PROPOSAL.md` until the team edits them here.
 
