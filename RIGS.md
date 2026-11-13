@@ -27,7 +27,8 @@ One id per skeleton. A species with its own bones or clips gets `<family>.<speci
 | insect | idle, crawl | thorax, abdomen, head, antenna_L/R, legs |
 | arachnid | idle, crawl | body, 8 legs |
 | mollusc (giant African snail) | idle, crawl | foot, shell, eyestalk_L/R |
-| human | idle, walk, wave (keepers also carry) | hips, spine, chest, neck, head, upperarm/forearm L/R, thigh/shin L/R, prop |
+| human | idle, walk, wave, carry (all 45, as built in #96) | hips, spine, chest, neck, head, upperarm/forearm L/R, thigh/shin L/R, prop |
+| human_onepiece (`visitor_wheelchair_user_22`, `visitor_parent_shoulder_kid_23`) | same four clips, body moves as one | root, body |
 | vehicle | idle, drive | body, one bone per wheel |
 | gate | idle, open, close | door or gate bone |
 | facility (no door or gate) | idle | root |
