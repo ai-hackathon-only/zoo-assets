@@ -80,6 +80,11 @@ KEEPER_HAIR_OVERRIDE = {
 }
 
 
+# worn on the torso, or poles that stand on the ground: they stay on the body bone
+_BODY_TOOLS = {"camera", "binoculars_toy", "binoculars_neck", "heavy_pack", "backpack", "stroller_handle", "tripod_rig",
+               "shovel", "pitchfork", "rake", "broom", "pruning_shears", "ice_pick", "cane", "umbrella"}
+
+
 def build(asset, z):
     sx, sy, sz = asset["size_m"]
     p = asset.get("params", {})
@@ -101,6 +106,8 @@ def build(asset, z):
     target_l = sy
     target_h = sz
 
+    if is_wheelchair or is_shoulder_kid:  # one-piece builders: root + body bone only
+        z.joint("body", (0, 0, target_h * 0.4), (0, 0, target_h * 0.8))
     if is_wheelchair:
         _build_wheelchair_user(z, target_w, target_l, target_h, skin_col, top_col, bot_col)
         return
@@ -129,8 +136,15 @@ def build(asset, z):
     shoe_l = L * 0.60
     shoe_col = "dark_brown" if role == "keeper" else "charcoal"
     leg_x = W * 0.23
+    leg_top = H * 0.44
+    torso_top = H * 0.72
+    shoulder_top = torso_top - H * 0.02
+    z.joint("body", (0, 0, leg_top), (0, 0, torso_top))
     for x in (leg_x, -leg_x):
-        z.box((shoe_w, shoe_l, shoe_h), loc=(x, -shoe_l * 0.15, shoe_h / 2), colour=shoe_col)
+        z.joint("leg_R" if x > 0 else "leg_L", (x, 0, leg_top), (x, 0, 0), "body")
+    for x in (leg_x, -leg_x):
+        with z.bone("leg_R" if x > 0 else "leg_L"):
+            z.box((shoe_w, shoe_l, shoe_h), loc=(x, -shoe_l * 0.15, shoe_h / 2), colour=shoe_col)
 
     # 2. Legs / Pants
     leg_top = H * 0.44
@@ -139,7 +153,8 @@ def build(asset, z):
     leg_l = L * 0.40
     leg_z_center = shoe_h * 0.7 + leg_h / 2
     for x in (leg_x, -leg_x):
-        z.box((leg_w, leg_l, leg_h), loc=(x, 0, leg_z_center), colour=bot_col)
+        with z.bone("leg_R" if x > 0 else "leg_L"):
+            z.box((leg_w, leg_l, leg_h), loc=(x, 0, leg_z_center), colour=bot_col)
 
     # 3. Torso / Shirt
     torso_bottom = leg_top - H * 0.015
@@ -162,6 +177,8 @@ def build(asset, z):
     shoulder_x = torso_w * 0.50 + arm_w * 0.38
 
     for side, x in ((-1, -shoulder_x), (1, shoulder_x)):
+        z.joint("arm_R" if x > 0 else "arm_L", (x, 0, arm_top), (x, 0, arm_top - arm_h), "body")
+        z.set_bone("arm_R" if x > 0 else "arm_L")
         sleeve_h = arm_h * 0.55
         z.box((arm_w, arm_l, sleeve_h), loc=(x, 0, arm_top - sleeve_h / 2), colour=top_col)
         
@@ -174,6 +191,7 @@ def build(asset, z):
         z.box((arm_w * 0.82, arm_l * 0.82, hand_h),
               loc=(x, -arm_l * 0.12, arm_top - arm_h - hand_h * 0.4), colour=skin_col)
 
+    z.set_bone("body")
     # 5. Neck & Head
     neck_h = H * 0.06
     neck_r = min(W, L) * 0.16
@@ -185,6 +203,8 @@ def build(asset, z):
     head_l = L * 0.55
     head_h = head_size
     head_center_z = head_bottom + head_h / 2
+    z.joint("head", (0, 0, torso_top), (0, 0, head_bottom + head_h), "body")
+    z.set_bone("head")
     z.box((head_w, head_l, head_h), loc=(0, 0, head_center_z), colour=skin_col)
 
     # Facial features: Eyes embedded facing -Y
@@ -238,7 +258,8 @@ def build(asset, z):
         hair_l = head_l * 0.85
         z.box((head_w * 1.05, hair_l, hair_h), loc=(0, head_l * 0.10, hat_z + hair_h / 2), colour=hair_col)
 
-    # 7. Tools and Accessories
+    # 7. Tools and Accessories: hand-held ones follow the right arm, worn ones and poles stay on the body
+    z.set_bone("body" if tool in _BODY_TOOLS else "arm_R")
     _add_tool(z, tool, H, W, L, torso_w, torso_top, arm_top, arm_h, shoulder_x, skin_col, top_col)
 
 
@@ -271,7 +292,7 @@ def _add_tool(z, tool, H, W, L, torso_w, torso_top, arm_top, arm_h, shoulder_x, 
         z.box((0.08, 0.10, 0.14), loc=(hx * 0.88, hy - 0.05, hz + 0.02), colour="orange" if "red" in tool else "sand")
     elif tool == "camera":
         z.box((0.14, 0.10, 0.10), loc=(0, -L * 0.42, torso_top - H * 0.10), colour="black")
-        z.cyl(0.04, 0.06, loc=(0, -L * 0.49, torso_top - H * 0.10), colour="charcoal", rot=(90, 0, 0), seg=6)
+        z.cyl(0.04, 0.06, loc=(0, -L * 0.50, torso_top - H * 0.10), colour="charcoal", rot=(90, 0, 0), seg=6)
     elif tool == "balloon":
         string_h = H * 0.38
         z.cyl(0.015, string_h, loc=(hx, hy, hz + string_h / 2), colour="white", seg=4)
