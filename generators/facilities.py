@@ -237,9 +237,11 @@ def _build_gate(W, L, H, variant, aid, z):
         for u in range(units):
             ux = -W * 0.5 + uw * (u + 0.5)
             z.box((uw * 0.7, L * 0.7, H * 0.8), loc=(ux, 0, H * 0.4), colour="light_grey")
-            z.cyl(0.06, 0.15, loc=(ux, L * 0.2, H * 0.75), rot=(45, 0, 0), colour="charcoal")
+            hub = z.cyl(0.06, 0.15, loc=(ux, L * 0.2, H * 0.75), rot=(45, 0, 0), colour="charcoal")
+            hub["leaf"] = 1 if u % 2 == 0 else -1
             for rot_deg in (0, 120, 240):
-                z.box((0.03, 0.03, max(uw, L) * 0.65), loc=(ux, L * 0.28, H * 0.75), rot=(rot_deg, 45, 0), colour="light_grey")
+                arm = z.box((0.03, 0.03, max(uw, L) * 0.65), loc=(ux, L * 0.28, H * 0.75), rot=(rot_deg, 45, 0), colour="light_grey")
+                arm["leaf"] = hub["leaf"]
         if variant == "turnstile_bank":
             z.box((W * 0.98, L * 0.92, 0.15), loc=(0, 0, H * 0.95), colour="navy")
             z.cyl(0.06, H * 0.92, loc=(-W * 0.46, -L * 0.4, H * 0.46), colour="charcoal", seg=6)
@@ -249,7 +251,8 @@ def _build_gate(W, L, H, variant, aid, z):
         for x in (-W * 0.35, W * 0.35):
             z.box((cab_w, L * 0.85, H * 0.85), loc=(x, 0, H * 0.425), colour="light_grey")
             z.box((cab_w * 0.7, L * 0.4, 0.05), loc=(x, 0, H * 0.86), colour="teal")
-        z.box((W * 0.35, 0.04, H * 0.35), loc=(0, 0, H * 0.55), colour="teal")
+        flap = z.box((W * 0.35, 0.04, H * 0.35), loc=(0, 0, H * 0.55), colour="teal")
+        flap["leaf"] = 1
     elif variant == "keeper_slide":
         z.box((0.15, L * 0.8, H * 0.92), loc=(-W * 0.45, 0, H * 0.46), colour="charcoal")
         z.box((0.15, L * 0.8, H * 0.92), loc=(W * 0.45, 0, H * 0.46), colour="charcoal")
