@@ -15,6 +15,7 @@ from mathutils import Vector
 
 FPS = 24
 CLIPS = {"walk": 24, "idle": 48, "eat": 48}
+FLY = 24  # birds (bones wing_L / wing_R) also get a fly clip of this many frames
 
 
 def build(ob, joints):
@@ -92,7 +93,10 @@ def _clips(arm, h):
     has = lambda n: n in pb
     ad = arm.animation_data_create()
     eat = _eat_angle(arm, h)
-    for clip, n in CLIPS.items():
+    clips = dict(CLIPS)
+    if has("wing_L"):
+        clips["fly"] = FLY
+    for clip, n in clips.items():
         for b in pb:  # each clip starts from the rest pose
             b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
         ad.action = None
@@ -102,6 +106,9 @@ def _clips(arm, h):
                 for leg, off in (("leg_FL", 0), ("leg_BR", 0), ("leg_FR", math.pi), ("leg_BL", math.pi)):
                     if has(leg):
                         _key(pb[leg], f, rot=(22 * math.sin(ph + off), 0, 0))
+                for leg, off in (("leg_L", 0), ("leg_R", math.pi)):  # two-leg walkers
+                    if has(leg):
+                        _key(pb[leg], f, rot=(25 * math.sin(ph + off), 0, 0))
                 if has("body"):
                     _key(pb["body"], f, loc=(0, 0, 0.012 * h * abs(math.sin(ph))), rot=(0, 2 * math.sin(ph), 0))
                 if has("neck"):
@@ -110,6 +117,21 @@ def _clips(arm, h):
                     _key(pb["head"], f, rot=(-4 * math.sin(2 * ph), 0, 3 * math.sin(ph)))
                 if has("tail"):
                     _key(pb["tail"], f, rot=(0, 0, 18 * math.sin(ph)))
+            elif clip == "fly":
+                for wing, sgn in (("wing_L", -1), ("wing_R", 1)):
+                    if has(wing):  # bone points down, local Z = world Y: flap up and out, then down
+                        _key(pb[wing], f, rot=(0, 0, sgn * (10 + 45 * math.sin(ph))))
+                if has("body"):
+                    _key(pb["body"], f, loc=(0, 0, 0.03 * h * math.sin(ph + 1.2)))
+                if has("neck"):
+                    _key(pb["neck"], f, rot=(-8, 0, 0))
+                if has("head"):
+                    _key(pb["head"], f, rot=(4, 0, 0))
+                for leg in ("leg_L", "leg_R"):
+                    if has(leg):
+                        _key(pb[leg], f, rot=(-35, 0, 0))
+                if has("tail"):
+                    _key(pb["tail"], f, rot=(10 * math.sin(ph), 0, 0))
             elif clip == "idle":
                 if has("body"):
                     s = 1 + 0.015 * math.sin(2 * ph)
