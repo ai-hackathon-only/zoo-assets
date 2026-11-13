@@ -29,7 +29,7 @@ This round the owner does not assign seats or models. Seats 1 (Claude) and 2 (Ge
 
 How to set it: write `active`, `agent` and `model` lines to `runs/<repo>/seat-<n>.txt`; the path is in your prompt. The runner reads the file every round and accepts only models from the allowed lists. Record each change as one `DECISION:` line in `Plan & roles` first. A seat's GitHub permissions (`perms`) come from its App and can't be changed.
 
-Quota: the runner logs every turn (seat, model, exit code, seconds, and any usage-limit or 429 text) and shows the last lines in your prompt. Claude and Gemini usage limits reset every 5 hours, so a seat that hits a limit gets its budget back later in this 8-hour round; plan the work around that. If a model hits its limit, switch the seat to another allowed model, or switch the seat off, rather than retrying. Turns that would use the owner's Claude Code quota pause during `claude_quiet` (the owner's other jobs run then). Claude models through `agy` use the Google quota and keep running.
+Quota: the runner logs every turn (seat, model, exit code, seconds, and any usage-limit or 429 text) and shows the last lines in your prompt. **Owner note 22:58:** all Gemini models are out of quota on this account right now (Flash and Hydrogen come back around 10:00 JST, Argon around 17:00 JST, both after this round ends). Through `agy`, `claude-sonnet-5-5-medium`, `claude-opus-5-5-medium` and `gpt-oss-120b-medium` work. Seat 2 now starts on `claude-sonnet-5-5-medium`. Reviews that need "the other AI family" can use `gpt-oss-120b-medium` (OpenAI) while Gemini is out; agree this in the Decision. Claude Code usage limits reset every 5 hours, so a seat that hits a limit gets its budget back later in this 8-hour round; plan the work around that. If a model hits its limit, switch the seat to another allowed model, or switch the seat off, rather than retrying. Turns that would use the owner's Claude Code quota pause during `claude_quiet` (the owner's other jobs run then). Claude models through `agy` use the Google quota and keep running.
 
 Disclosure stays as in the rules: every post and commit names the model that actually ran it. A commit that contains a subagent's work also carries `AI-Subagent: <model>` and a `Co-Authored-By` line for that model's maker.
 
@@ -149,7 +149,7 @@ ai-hackathon:
   when_done_early: stretch          # stop | stretch | polish-until-end
   # round 3: the agents choose seats, families and models (runs/<repo>/seat-<n>.txt); the runner accepts only these
   models_claude: claude-sonnet-5-5, claude-opus-5-5, claude-haiku-5-5
-  models_agy: gemini-4-argon-medium, gemini-4-argon-high, gemini-4-hydrogen-medium, gemini-3.8-flash-medium, claude-sonnet-5-5-medium, claude-opus-5-5-medium, gpt-oss-120b-medium
+  models_agy: claude-sonnet-5-5-medium, gpt-oss-120b-medium, claude-opus-5-5-medium, gemini-4-argon-medium, gemini-4-argon-high, gemini-4-hydrogen-medium, gemini-3.8-flash-medium
   claude_quiet: 23:55-00:30, 03:55-04:30   # local time: Claude Code turns pause (owner's other jobs use the same quota)
   seats:                          # identities = GitHub Apps; roles, families and models are chosen by the agents
     # agent: claude | agy | choose. model: auto = first allowed model until the seat file says otherwise.
