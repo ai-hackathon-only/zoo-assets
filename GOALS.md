@@ -15,7 +15,8 @@ Build the 3D assets for a toy-style zoo: **500 assets** covering everything you 
 
 Style: **stylized low-poly "toy" look** with one shared colour palette, so all 500 assets look like one world. Recognisable by proportions, colours and markings (stripes, spots, manes, trunks, horns), not by realistic detail.
 
-## Round 3 (2026-11-14 00:40–06:40 JST): a rig and animations for every asset
+## Round 3 (2026-11-13 22:55 – 2026-11-14 06:55 JST, 8 hours): a rig and animations for every asset
+**Focus: rigs only.** Rig the existing 566 assets. No new assets, no new park or gallery features beyond playing the clips.
 Owner update for round 3. Before the start, the owner added a working example, made with Claude Code on a branch merged in this update: the four-legged animals (generators `quadruped`, `hoofed`, `bigcat`: 66 species plus their baby and rare variants, 102 models) have rigs and clips, and the gallery plays them. Read `lib/rig.py`, the `z.bone` / `z.set_bone` / `z.joint` helpers in `lib/zoo.py`, and how the three generators use them. Open `Kickoff — round 3` and, at the end, `Retro — round 3`.
 
 How the example works, in short: each generator tags every part with the bone it moves with and declares where each bone pivots. `finish()` keeps the tags as rigid weights (one bone per vertex), and `lib/rig.py` adds the armature and the clips. Guessing bones after the parts are joined does not work: on the first try the spots and body panels flew off with the legs.
@@ -28,13 +29,13 @@ This round the owner does not assign seats or models. Seats 1 (Claude) and 2 (Ge
 
 How to set it: write `active`, `agent` and `model` lines to `runs/<repo>/seat-<n>.txt`; the path is in your prompt. The runner reads the file every round and accepts only models from the allowed lists. Record each change as one `DECISION:` line in `Plan & roles` first. A seat's GitHub permissions (`perms`) come from its App and can't be changed.
 
-Quota: the runner logs every turn (seat, model, exit code, seconds, and any usage-limit or 429 text) and shows the last lines in your prompt. Plan with it: if a model hits its limit, switch the seat to another allowed model, or switch the seat off, rather than retrying. Turns that would use the owner's Claude Code quota pause during `claude_quiet` (the owner's other jobs run then). Claude models through `agy` use the Google quota and keep running.
+Quota: the runner logs every turn (seat, model, exit code, seconds, and any usage-limit or 429 text) and shows the last lines in your prompt. Claude and Gemini usage limits reset every 5 hours, so a seat that hits a limit gets its budget back later in this 8-hour round; plan the work around that. If a model hits its limit, switch the seat to another allowed model, or switch the seat off, rather than retrying. Turns that would use the owner's Claude Code quota pause during `claude_quiet` (the owner's other jobs run then). Claude models through `agy` use the Google quota and keep running.
 
 Disclosure stays as in the rules: every post and commit names the model that actually ran it. A commit that contains a subagent's work also carries `AI-Subagent: <model>` and a `Co-Authored-By` line for that model's maker.
 
 ### Round 3 rules
 - The round-1 and round-2 rules still apply. The challenger rule applies while some seat holds the challenger role. If no seat takes it, every PR needs one review from the other AI family before it merges.
-- Order: `Decision: skeletons and clips` → generator rigs per family, in parallel → validate.py rig checks → motion review → gallery and park.
+- Order: `Decision: skeletons and clips` → generator rigs per family, in parallel → validate.py rig checks → motion review → gallery clip check.
 - Evidence for rig PRs: `validate.py` output plus a frame strip of each clip.
 
 ### Round 3 — done when
@@ -51,14 +52,12 @@ Disclosure stays as in the rules: every post and commit names the model that act
 - [ ] **File budget for rigged assets:** ≤ 500 KB for animals, keepers, visitors, vehicles and facilities, ≤ 150 KB for everything else; all GLBs together ≤ 150 MB. Skin weights add about 16 bytes per vertex; storing them as normalized bytes is allowed (rigid weights are exactly 1.0).
 - [ ] **Motion review by the other AI family**, like the recognition test: for every skeleton, render frame strips of each clip with headless Blender (for example 6 walk frames, 3 eat frames) and have an agent of the other family check them. Look for parts that fly off, limbs that bend the wrong way, heads that go into the body, and clips that do nothing. Results go in `MOTION.md`; failures go back to their generator. A passing `validate.py` is not enough: in the owner's example, the validator passed while the eat clip moved heads up instead of down.
 - [ ] **Gallery:** clip buttons for every rigged asset (the example adds Walk / Idle / Eat), plus an "Animated" filter. Scripted headless browser check on the live URL that opens one asset per skeleton, plays each clip and reads the console (no errors).
-- [ ] **Park:** animals and people in `park/` play `idle`, and people walk along the paths with `walk`. The round-2 speed rules (first frame, fps) still hold, measured on the live URL.
 - [ ] `README.md` gets a section on rigs, skeletons and clips, in plain language per `SKILLS/de-ai/`.
 - [ ] Every agent posted its round-3 retro in `Retro — round 3`, including which models it used, why, and what the quota log showed.
 
 ### Round 3 stretch (only when every round-3 line is done)
 1. Sumi-e ink renders: a sprite sheet per animated animal in the brush-ink look (Blender Freestyle, tapered black lines, grey washes on paper).
 2. Smooth weights at the knees and neck for the four-leg skeleton, if the file budget allows.
-3. Random idle offsets in the park so animals don't move in sync.
 
 ## Round 2 (2026-11-07 18:30–22:30): a procedural zoo you can open in the browser
 Owner update for round 2. Round 1 (below) is finished: 500 assets, gallery, recognition test, Retro #53. Round 2 turns the library into a **testbed scene for future game scenarios**: a whole zoo assembled in the browser from these GLBs, plus modular facilities and animal variants so the zoo can be generated cleanly. Use the round-1 retro (#53) and the Discussions rules in `SKILLS/ai-hackathon/SKILL.md` §2. Open `Kickoff — round 2` and, at the end, `Retro — round 2` (Retro #53 is round 1 and does not count).
@@ -144,14 +143,14 @@ Owner update for round 2. Round 1 (below) is finished: 500 assets, gallery, reco
 ai-hackathon:
   repo: ai-hackathon-only/zoo-assets
   owner: hueitan            # the human who is responsible
-  start: 2026-11-14T00:40+09:00
-  end:   2026-11-14T06:40+09:00
+  start: 2026-11-13T22:55+09:00
+  end:   2026-11-14T06:55+09:00
   round_minutes: 5                # how often each agent wakes up
   when_done_early: stretch          # stop | stretch | polish-until-end
   # round 3: the agents choose seats, families and models (runs/<repo>/seat-<n>.txt); the runner accepts only these
   models_claude: claude-sonnet-5-5, claude-opus-5-5, claude-haiku-5-5
   models_agy: gemini-4-argon-medium, gemini-4-argon-high, gemini-4-hydrogen-medium, gemini-3.8-flash-medium, claude-sonnet-5-5-medium, claude-opus-5-5-medium, gpt-oss-120b-medium
-  claude_quiet: 23:50-00:40, 03:50-04:40   # local time: Claude Code turns pause (owner's other jobs use the same quota)
+  claude_quiet: 23:55-00:30, 03:55-04:30   # local time: Claude Code turns pause (owner's other jobs use the same quota)
   seats:                          # identities = GitHub Apps; roles, families and models are chosen by the agents
     # agent: claude | agy | choose. model: auto = first allowed model until the seat file says otherwise.
     - { seat: 1, app: aho-builder-1,  agent: claude, model: auto, perms: builder,  browser: yes, backup: 2 }
