@@ -50,7 +50,7 @@ def check(r):
         if len(arms) != 1:
             errs.append(f"{len(arms)} armatures, want 1")
         clips = sorted(act.name for act in bpy.data.actions)
-        missing = [c for c in rig.CLIPS if not any(n.startswith(c) for n in clips)]
+        missing = [c for c in rig.expected_clips({b.name for b in arms[0].data.bones}) if not any(n.startswith(c) for n in clips)]
         if missing:
             errs.append(f"rig: missing clips {missing} (have {clips})")
         for o in obs:
