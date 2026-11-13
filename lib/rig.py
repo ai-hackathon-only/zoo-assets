@@ -92,6 +92,8 @@ def _clips(arm, h):
     pb = arm.pose.bones
     has = lambda n: n in pb
     ad = arm.animation_data_create()
+    if "trunk" in pb:
+        return _plant_clips(arm, h)
     eat = _eat_angle(arm, h)
     clips = dict(CLIPS)
     if has("wing_L"):
@@ -164,6 +166,31 @@ def _clips(arm, h):
         track.name = clip
         track.strips.new(clip, 0, act)
         track.mute = True  # tracks are for export; the scene shows the rest pose
+        ad.action = None
+    for b in pb:
+        b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
+
+
+def _plant_clips(arm, h):
+    """Plants: idle (48, tiny crown breathing) and sway (48, trunk and crown lean with a phase lag)."""
+    pb = arm.pose.bones
+    ad = arm.animation_data_create()
+    for clip, n in (("idle", 48), ("sway", 48)):
+        for b in pb:
+            b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
+        ad.action = None
+        amp = 1.0 if clip == "idle" else 5.0
+        for f in range(n + 1):
+            ph = 2 * math.pi * f / n
+            _key(pb["trunk"], f, rot=(0.3 * amp * math.sin(ph + 0.6), 0, 0.5 * amp * math.sin(ph)))
+            _key(pb["crown"], f, rot=(0.6 * amp * math.sin(ph), 0, 1.0 * amp * math.sin(ph - 0.8)))
+        act = ad.action
+        act.name = clip
+        act.use_fake_user = True
+        track = ad.nla_tracks.new()
+        track.name = clip
+        track.strips.new(clip, 0, act)
+        track.mute = True
         ad.action = None
     for b in pb:
         b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
