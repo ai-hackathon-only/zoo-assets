@@ -92,7 +92,11 @@ def _clips(arm, h):
     has = lambda n: n in pb
     ad = arm.animation_data_create()
     eat = _eat_angle(arm, h)
-    for clip, n in CLIPS.items():
+    clips = dict(CLIPS)
+    if not any(n.startswith(("leg_", "arm_", "wing_")) for n in pb.keys()) and "neck" not in pb:
+        del clips["walk"]  # legless swimmers (sea animals) get swim instead
+        clips["swim"] = 24
+    for clip, n in clips.items():
         for b in pb:  # each clip starts from the rest pose
             b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
         ad.action = None
@@ -110,6 +114,12 @@ def _clips(arm, h):
                     _key(pb["head"], f, rot=(-4 * math.sin(2 * ph), 0, 3 * math.sin(ph)))
                 if has("tail"):
                     _key(pb["tail"], f, rot=(0, 0, 18 * math.sin(ph)))
+            elif clip == "swim":  # body rolls and bobs, tail beats in both axes, head counters
+                _key(pb["body"], f, loc=(0, 0, 0.02 * h * math.sin(ph)), rot=(0, 3 * math.sin(ph), 4 * math.sin(ph)))
+                if has("tail"):
+                    _key(pb["tail"], f, rot=(12 * math.sin(ph + 1), 0, 25 * math.sin(ph)))
+                if has("head"):
+                    _key(pb["head"], f, rot=(3 * math.sin(ph), 0, -6 * math.sin(ph)))
             elif clip == "idle":
                 if has("body"):
                     s = 1 + 0.015 * math.sin(2 * ph)
@@ -127,7 +137,9 @@ def _clips(arm, h):
                 chew = 4 * math.sin(6 * ph) * down
                 if has("neck"):
                     _key(pb["neck"], f, rot=(eat * down, 0, 0))
-                if has("head"):
+                if has("head") and not has("neck"):  # head-only bone points -Y: local +X lifts the nose, so go negative
+                    _key(pb["head"], f, rot=(-35 * down + chew, 0, 0))
+                elif has("head"):
                     _key(pb["head"], f, rot=(eat * 0.6 * down + chew, 0, 0))
                 elif has("body"):
                     _key(pb["body"], f, rot=(6 * down, 0, 0))
