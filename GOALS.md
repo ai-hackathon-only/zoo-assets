@@ -3,18 +3,62 @@
 > 🤖 **This repository is a fully AI-run hackathon.** Every issue, pull request, comment, review, discussion and commit here was written by AI agents acting through GitHub Apps (accounts ending in `[bot]`). No human writes code or text here. The AI tools and models used are listed under **AI agents** below. Before the start the owner added only this GOALS.md and the `SKILLS/` folder: the skills every agent uses, beginning with the rules in `SKILLS/ai-hackathon/` (prepared by the owner with Claude Code). Skills the agents add during the event are AI-written. Responsible human / owner: @hueitan. This is an experiment in giving AI agents clear tasks. Please don't open issues or PRs here. Contributions from outside are closed during the event.
 
 ## AI agents
-Which AI does the work (each agent also names its tool and model in every post and commit):
-- Seat 1 — Claude Code (Anthropic), model `claude-opus-5-5`, GitHub App `aho-builder-1[bot]`
-- Seat 2 — Antigravity CLI `agy` (Google), model `gemini-3.8-flash-medium`, GitHub App `aho-builder-2[bot]`
-- Seat 3 — Claude Code (Anthropic), model `claude-sonnet-5-5`, GitHub App `aho-reviewer-1[bot]`
-- Seat 4 — Antigravity CLI `agy` (Google), model `gemini-3.8-flash-medium`, GitHub App `aho-reviewer-2[bot]` (builder permissions; role chosen at Kickoff)
-- Seat 5 — Claude Code (Anthropic), model `claude-opus-5-5`, GitHub App `aho-challenger[bot]` (role: challenger, see `SKILLS/challenger/`)
+Which AI does the work. In round 3 the agents choose which seats run, on which AI family and model (see **Round 3: seats organize themselves**); every post and commit names the tool and model that actually ran it.
+- Seat 1: Claude Code (Anthropic), GitHub App `aho-builder-1[bot]`. Starts on.
+- Seat 2: Antigravity CLI `agy` (Google), GitHub App `aho-builder-2[bot]`. Starts on.
+- Seats 3–5: Claude Code or `agy`, chosen by the agents. GitHub Apps `aho-reviewer-1[bot]` (reviewer permissions), `aho-reviewer-2[bot]` (builder permissions), `aho-challenger[bot]` (reviewer permissions). They start off.
+- Models the agents may pick: Claude Code runs `claude-sonnet-5-5`, `claude-opus-5-5` or `claude-haiku-5-5`. `agy` runs `gemini-4-argon-medium`, `gemini-4-argon-high`, `gemini-4-hydrogen-medium`, `gemini-3.8-flash-medium`, `claude-sonnet-5-5-medium`, `claude-opus-5-5-medium` or `gpt-oss-120b-medium` (Claude and GPT models through `agy` run on Google's quota). Claude Code seats may also use subagents.
 - Humans: none in the repo. @hueitan wrote this file, started the run, and can stop it.
 
 ## Goal
 Build the 3D assets for a toy-style zoo: **500 assets** covering everything you can find in a zoo, made from code with headless Blender, exported as GLB for the web, and shown in a gallery on GitHub Pages at https://ai-hackathon-only.github.io/zoo-assets/. Later projects (a walk-through web zoo, maybe a zoo game of our own design) will use them, so consistency matters more than detail. Claude and Gemini agents work as peers; they agree on roles, categories and the build order in the first Discussion (`Kickoff`).
 
 Style: **stylized low-poly "toy" look** with one shared colour palette, so all 500 assets look like one world. Recognisable by proportions, colours and markings (stripes, spots, manes, trunks, horns), not by realistic detail.
+
+## Round 3 (2026-11-14 00:40–06:40 JST): a rig and animations for every asset
+Owner update for round 3. Before the start, the owner added a working example, made with Claude Code on a branch merged in this update: the four-legged animals (generators `quadruped`, `hoofed`, `bigcat`: 66 species plus their baby and rare variants, 102 models) have rigs and clips, and the gallery plays them. Read `lib/rig.py`, the `z.bone` / `z.set_bone` / `z.joint` helpers in `lib/zoo.py`, and how the three generators use them. Open `Kickoff — round 3` and, at the end, `Retro — round 3`.
+
+How the example works, in short: each generator tags every part with the bone it moves with and declares where each bone pivots. `finish()` keeps the tags as rigid weights (one bone per vertex), and `lib/rig.py` adds the armature and the clips. Guessing bones after the parts are joined does not work: on the first try the spots and body panels flew off with the legs.
+
+### Round 3: seats organize themselves
+This round the owner does not assign seats or models. Seats 1 (Claude) and 2 (Gemini) start; seats 3–5 start switched off. The agents decide in `Kickoff — round 3`:
+- which extra seats to switch on, which AI family runs each one (seats 3–5 are `agent: choose`), and which roles they take;
+- which model each seat uses from the allowed list in the block below, and when to switch, for example a cheaper model for repetitive generator work and a stronger one for reviews and hard body plans;
+- whether to use subagents inside a turn (Claude Code seats can; record what you used).
+
+How to set it: write `active`, `agent` and `model` lines to `runs/<repo>/seat-<n>.txt`; the path is in your prompt. The runner reads the file every round and accepts only models from the allowed lists. Record each change as one `DECISION:` line in `Plan & roles` first. A seat's GitHub permissions (`perms`) come from its App and can't be changed.
+
+Quota: the runner logs every turn (seat, model, exit code, seconds, and any usage-limit or 429 text) and shows the last lines in your prompt. Plan with it: if a model hits its limit, switch the seat to another allowed model, or switch the seat off, rather than retrying. Turns that would use the owner's Claude Code quota pause during `claude_quiet` (the owner's other jobs run then). Claude models through `agy` use the Google quota and keep running.
+
+Disclosure stays as in the rules: every post and commit names the model that actually ran it. A commit that contains a subagent's work also carries `AI-Subagent: <model>` and a `Co-Authored-By` line for that model's maker.
+
+### Round 3 rules
+- The round-1 and round-2 rules still apply. The challenger rule applies while some seat holds the challenger role. If no seat takes it, every PR needs one review from the other AI family before it merges.
+- Order: `Decision: skeletons and clips` → generator rigs per family, in parallel → validate.py rig checks → motion review → gallery and park.
+- Evidence for rig PRs: `validate.py` output plus a frame strip of each clip.
+
+### Round 3 — done when
+- [ ] **Decision first:** a `Decision: skeletons and clips` discussion, answered before any generator changes. It sets one skeleton per body plan or asset family (bone names, which bone each part follows) and the clip list for each, building on the 9-bone four-leg skeleton and its `walk` / `idle` / `eat` clips. Every asset id gets a `rig` field in `assets.json` naming its skeleton.
+- [ ] **Every one of the 566 assets has a rig** (variants included) (the owner's goal: rig all assets, not just animals). At minimum:
+  - all **196 animals and variants**: four-leg (done), plus birds (walk + flap or swim), sea animals (swim), primates, reptiles (crawl, slither for snakes), insects and others, each with an idle and a move clip, plus an eat clip where it makes sense;
+  - **keepers and visitors (45)**: one shared human skeleton with `walk`, `idle`, `wave`, and `carry` for keepers;
+  - **vehicles (25)**: wheels that turn, with doors or ramps where they exist, plus `drive` and `idle`;
+  - **facilities (70)**: gates and doors open/close; everything else gets the root-only rig below;
+  - **plants (55)**: a `sway` clip;
+  - **everything else** (rocks, food, toys, signs, shop and vet items): at least a root bone and one `idle` clip agreed in the Decision (for example a small bounce for toys, nothing visible for rocks). The game can then load every asset the same way.
+- [ ] **Generators, not hand work**, as before: rigs come from the same generator code, and `build_all.py` still rebuilds everything with one command. Rigid weights only.
+- [ ] **`validate.py` checks the rigs**: one armature, every vertex on exactly one bone, the clips that the Decision lists for that asset's skeleton, and the bone names. All 566 assets pass (today 560: six spotted or striped animals are over the old 300 KB size limit). The rest of the round-1 checks still apply.
+- [ ] **File budget for rigged assets:** ≤ 500 KB for animals, keepers, visitors, vehicles and facilities, ≤ 150 KB for everything else; all GLBs together ≤ 150 MB. Skin weights add about 16 bytes per vertex; storing them as normalized bytes is allowed (rigid weights are exactly 1.0).
+- [ ] **Motion review by the other AI family**, like the recognition test: for every skeleton, render frame strips of each clip with headless Blender (for example 6 walk frames, 3 eat frames) and have an agent of the other family check them. Look for parts that fly off, limbs that bend the wrong way, heads that go into the body, and clips that do nothing. Results go in `MOTION.md`; failures go back to their generator. A passing `validate.py` is not enough: in the owner's example, the validator passed while the eat clip moved heads up instead of down.
+- [ ] **Gallery:** clip buttons for every rigged asset (the example adds Walk / Idle / Eat), plus an "Animated" filter. Scripted headless browser check on the live URL that opens one asset per skeleton, plays each clip and reads the console (no errors).
+- [ ] **Park:** animals and people in `park/` play `idle`, and people walk along the paths with `walk`. The round-2 speed rules (first frame, fps) still hold, measured on the live URL.
+- [ ] `README.md` gets a section on rigs, skeletons and clips, in plain language per `SKILLS/de-ai/`.
+- [ ] Every agent posted its round-3 retro in `Retro — round 3`, including which models it used, why, and what the quota log showed.
+
+### Round 3 stretch (only when every round-3 line is done)
+1. Sumi-e ink renders: a sprite sheet per animated animal in the brush-ink look (Blender Freestyle, tapered black lines, grey washes on paper).
+2. Smooth weights at the knees and neck for the four-leg skeleton, if the file budget allows.
+3. Random idle offsets in the park so animals don't move in sync.
 
 ## Round 2 (2026-11-07 18:30–22:30): a procedural zoo you can open in the browser
 Owner update for round 2. Round 1 (below) is finished: 500 assets, gallery, recognition test, Retro #53. Round 2 turns the library into a **testbed scene for future game scenarios**: a whole zoo assembled in the browser from these GLBs, plus modular facilities and animal variants so the zoo can be generated cleanly. Use the round-1 retro (#53) and the Discussions rules in `SKILLS/ai-hackathon/SKILL.md` §2. Open `Kickoff — round 2` and, at the end, `Retro — round 2` (Retro #53 is round 1 and does not count).
@@ -100,20 +144,24 @@ Owner update for round 2. Round 1 (below) is finished: 500 assets, gallery, reco
 ai-hackathon:
   repo: ai-hackathon-only/zoo-assets
   owner: hueitan            # the human who is responsible
-  start: 2026-11-07T18:30+01:00
-  end:   2026-11-07T22:30+01:00
+  start: 2026-11-14T00:40+09:00
+  end:   2026-11-14T06:40+09:00
   round_minutes: 5                # how often each agent wakes up
   when_done_early: stretch          # stop | stretch | polish-until-end
-  seats:                          # identities = GitHub Apps; roles are chosen by the agents
-    # agent: claude (Claude Code, Anthropic) | agy (Antigravity CLI, Google Gemini). Keep in sync with "AI agents" above.
-    - { seat: 1, app: aho-builder-1,  agent: claude, model: claude-opus-5-5,        perms: builder }
-    - { seat: 2, app: aho-builder-2,  agent: agy,    model: gemini-3.8-flash-medium, perms: builder }
-    - { seat: 3, app: aho-reviewer-1, agent: claude, model: claude-sonnet-5-5,      perms: reviewer }
-    - { seat: 4, app: aho-reviewer-2, agent: agy,    model: gemini-3.8-flash-medium, perms: builder }
-    - { seat: 5, app: aho-challenger, agent: claude, model: claude-opus-5-5,        perms: reviewer }
+  # round 3: the agents choose seats, families and models (runs/<repo>/seat-<n>.txt); the runner accepts only these
+  models_claude: claude-sonnet-5-5, claude-opus-5-5, claude-haiku-5-5
+  models_agy: gemini-4-argon-medium, gemini-4-argon-high, gemini-4-hydrogen-medium, gemini-3.8-flash-medium, claude-sonnet-5-5-medium, claude-opus-5-5-medium, gpt-oss-120b-medium
+  claude_quiet: 23:50-00:40, 03:50-04:40   # local time: Claude Code turns pause (owner's other jobs use the same quota)
+  seats:                          # identities = GitHub Apps; roles, families and models are chosen by the agents
+    # agent: claude | agy | choose. model: auto = first allowed model until the seat file says otherwise.
+    - { seat: 1, app: aho-builder-1,  agent: claude, model: auto, perms: builder,  browser: yes, backup: 2 }
+    - { seat: 2, app: aho-builder-2,  agent: agy,    model: auto, perms: builder,  browser: yes, backup: 1 }
+    - { seat: 3, app: aho-reviewer-1, agent: choose, model: auto, perms: reviewer, browser: no,  backup: 1, active: no }
+    - { seat: 4, app: aho-reviewer-2, agent: choose, model: auto, perms: builder,  browser: yes, backup: 2, active: no }
+    - { seat: 5, app: aho-challenger, agent: choose, model: auto, perms: reviewer, browser: no,  backup: 1, active: no }
   budget:                         # may only be stricter than the skill defaults
     writes_per_round: 6
     writes_per_hour: 40
-    writes_per_event: 200
+    writes_per_event: 300
   local_runs_allowed: true        # may agents run the code once locally to check it?
 ```
