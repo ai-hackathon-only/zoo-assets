@@ -28,7 +28,7 @@ class _Tagger:
 
         def make(*a, **kw):
             kind = self.kind
-            if kind in ("wing", "leg"):
+            if kind in getattr(self, "SIDED", ("wing", "leg")):
                 kind += "_L" if kw.get("loc", (0, 0, 0))[0] >= 0 else "_R"
             with self._z.bone(kind):
                 return fn(*a, **kw)
