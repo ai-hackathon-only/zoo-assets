@@ -254,16 +254,18 @@ def _build_gate(W, L, H, variant, aid, z):
         z.box((0.15, L * 0.8, H * 0.92), loc=(-W * 0.45, 0, H * 0.46), colour="charcoal")
         z.box((0.15, L * 0.8, H * 0.92), loc=(W * 0.45, 0, H * 0.46), colour="charcoal")
         z.box((W * 0.98, L * 0.6, 0.15), loc=(0, 0, H * 0.95), colour="charcoal")
-        z.box((W * 0.85, 0.08, H * 0.85), loc=(W * 0.05, 0, H * 0.45), colour="light_grey")
-        z.box((W * 0.82, 0.12, 0.08), loc=(W * 0.05, 0, H * 0.45), colour="charcoal")
+        d1 = z.box((W * 0.85, 0.08, H * 0.85), loc=(W * 0.05, 0, H * 0.45), colour="light_grey")
+        d2 = z.box((W * 0.82, 0.12, 0.08), loc=(W * 0.05, 0, H * 0.45), colour="charcoal")
+        d1["leaf"] = d2["leaf"] = 1
     elif variant == "safari_airlock":
         z.box((W * 0.95, L * 0.95, 0.2), loc=(0, 0, 0.1), colour="grey")
         for x in (-W * 0.45, W * 0.45):
             for y in (-L * 0.45, L * 0.45):
                 z.box((0.3, 0.3, H * 0.74), loc=(x, y, 0.2 + H * 0.37), colour="charcoal")
         z.box((W * 0.98, L * 0.98, 0.18), loc=(0, 0, H * 0.94), colour="charcoal")
-        z.box((W * 0.78, 0.15, H * 0.7), loc=(0, -L * 0.45, 0.2 + H * 0.36), colour="rust")
-        z.box((W * 0.78, 0.15, H * 0.7), loc=(0, L * 0.45, 0.2 + H * 0.36), colour="rust")
+        d1 = z.box((W * 0.78, 0.15, H * 0.7), loc=(0, -L * 0.45, 0.2 + H * 0.36), colour="rust")
+        d2 = z.box((W * 0.78, 0.15, H * 0.7), loc=(0, L * 0.45, 0.2 + H * 0.36), colour="rust")
+        d1["leaf"], d2["leaf"] = 1, -1
     else:
         post_w = 0.22
         z.box((post_w, L * 0.8, H * 0.95), loc=(-W * 0.45, 0, H * 0.475), colour="dark_brown")
