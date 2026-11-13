@@ -155,7 +155,9 @@ def _clips(arm, h):
                 chew = 4 * math.sin(6 * ph) * down
                 if has("neck"):
                     _key(pb["neck"], f, rot=(eat * down, 0, 0))
-                if has("head"):
+                if has("head") and not has("neck"):  # head-only bone points -Y: its local +X lifts the nose, so go negative
+                    _key(pb["head"], f, rot=(-35 * down + chew, 0, 0))
+                elif has("head"):
                     _key(pb["head"], f, rot=(eat * 0.6 * down + chew, 0, 0))
                 elif has(B):
                     _key(pb[B], f, rot=(6 * down, 0, 0))
