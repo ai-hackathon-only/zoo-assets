@@ -61,7 +61,7 @@ def clips(arm, h, key):
             elif clip == "wave":
                 if has("arm_R"):
                     up = min(1.0, f / 8, (n - f) / 8)  # lift in 8 frames, wave, lower
-                    key(pb["arm_R"], f, rot=(0, -(150 + 12 * math.sin(ph * 4)) * up, 0))
+                    key(pb["arm_R"], f, rot=(0, 0, (135 + 12 * math.sin(ph * 4)) * up))
                 if has("head"):
                     key(pb["head"], f, rot=(0, 0, 6 * math.sin(ph)))
                 if has("body"):
