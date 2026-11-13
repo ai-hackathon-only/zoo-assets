@@ -101,6 +101,7 @@ def _clips(arm, h):
     if not any(n.startswith(("leg_", "arm_", "wing_")) for n in pb.keys()) and "neck" not in pb:
         del clips["walk"]  # legless swimmers (sea animals) get swim instead
         clips["swim"] = 24
+        clips["crawl"] = 24  # RIGS.md insect row requires crawl; same body wave as swim
     for clip, n in clips.items():
         for b in pb:  # each clip starts from the rest pose
             b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
@@ -138,6 +139,7 @@ def _clips(arm, h):
                 if has("tail"):
                     _key(pb["tail"], f, rot=(10 * math.sin(ph), 0, 0))
             elif clip == "swim":  # body rolls and bobs, tail beats in both axes, head counters
+            elif clip in ("swim", "crawl"):  # body rolls and bobs, tail beats in both axes, head counters
                 _key(pb["body"], f, loc=(0, 0, 0.02 * h * math.sin(ph)), rot=(0, 3 * math.sin(ph), 4 * math.sin(ph)))
                 if has("tail"):
                     _key(pb["tail"], f, rot=(12 * math.sin(ph + 1), 0, 25 * math.sin(ph)))
