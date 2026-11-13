@@ -69,6 +69,32 @@ def build(asset, z):
                     v.co.x = (v.co.x - (min_x + max_x) / 2) * scale_x
                     v.co.y = (v.co.y - (min_y + max_y) / 2) * scale_y
                     v.co.z = (v.co.z - min_z) * scale_z
+    _rig(z)
+
+
+def _rig(z):
+    """Swing gates (leaf parts marked in _build_gate) get one door bone per leaf, hinged at the outer edge; clips open
+    and close. Facilities without leaves declare no joints and get the root-only rig."""
+    import bpy
+    from mathutils import Vector
+    meshes = [o for o in bpy.context.scene.objects if o.type == "MESH"]
+    leaves = {}
+    for o in meshes:
+        if "leaf" in o:
+            leaves.setdefault(int(o["leaf"]), []).append(o)
+    if not leaves:
+        return
+    for o in meshes:
+        o["bone"] = "frame"
+    z.joint("frame", (0, 0, 0), (0, 0, 0.1))
+    for side, objs in leaves.items():
+        cs = [o.matrix_world @ Vector(c) for o in objs for c in o.bound_box]
+        x = min(c.x for c in cs) if side == 1 else max(c.x for c in cs)
+        name = "door_L" if side == 1 else "door_R"
+        for o in objs:
+            o["bone"] = name
+        y = sum(c.y for c in cs) / len(cs)
+        z.joint(name, (x, y, min(c.z for c in cs)), (x, y, max(c.z for c in cs)), parent="frame")
 
 
 # --- FENCES & WALLS ---
@@ -245,8 +271,9 @@ def _build_gate(W, L, H, variant, aid, z):
         gw = W * 0.42 if variant == "paddock_double" else W * 0.8
         gh = H * 0.8
         for gx in ((-W * 0.22, W * 0.22) if variant == "paddock_double" else (0,)):
-            z.box((gw * 0.95, 0.08, gh), loc=(gx, 0, gh * 0.5 + 0.1), colour="brown")
-            z.box((gw * 0.9, 0.1, 0.08), loc=(gx, 0, gh * 0.5 + 0.1), rot=(0, 25, 0), colour="tan")
+            a = z.box((gw * 0.95, 0.08, gh), loc=(gx, 0, gh * 0.5 + 0.1), colour="brown")
+            b = z.box((gw * 0.9, 0.1, 0.08), loc=(gx, 0, gh * 0.5 + 0.1), rot=(0, 25, 0), colour="tan")
+            a["leaf"] = b["leaf"] = 1 if gx <= 0 else -1  # 1: hinge at the -X edge (door_L), -1: at the +X edge (door_R)
 
 
 # --- BUILDINGS & SHELTERS ---

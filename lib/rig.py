@@ -91,6 +91,8 @@ def _clips(arm, h):
     pb = arm.pose.bones
     has = lambda n: n in pb
     ad = arm.animation_data_create()
+    if "frame" in pb:
+        return _gate_clips(arm)
     if "chassis" in pb:
         return _vehicle_clips(arm, h)
     eat = _eat_angle(arm, h)
@@ -167,6 +169,33 @@ def _vehicle_clips(arm, h):
                 _key(pb["chassis"], f, loc=(0, 0, 0.006 * abs(math.sin(2 * ph))))
             else:
                 _key(pb["chassis"], f, loc=(0, 0, 0.002 * math.sin(ph)))
+        act = ad.action
+        act.name = clip
+        act.use_fake_user = True
+        track = ad.nla_tracks.new()
+        track.name = clip
+        track.strips.new(clip, 0, act)
+        track.mute = True
+        ad.action = None
+    for b in pb:
+        b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
+
+
+def _gate_clips(arm):
+    """Swing gates: open (24 frames, each leaf swings 100 degrees about its hinge, eased), close (the reverse) and
+    idle (24 frames, nothing moves). door_R turns the other way so a double gate opens outward from the middle."""
+    pb = arm.pose.bones
+    ad = arm.animation_data_create()
+    doors = [b for b in pb if b.name.startswith("door_")]
+    for clip in ("open", "close", "idle"):
+        for b in pb:
+            b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
+        ad.action = None
+        for f in range(25):
+            t = 0.5 - 0.5 * math.cos(math.pi * f / 24)
+            a = 100.0 * (t if clip == "open" else 1 - t if clip == "close" else 0)
+            for d in doors:
+                _key(d, f, rot=(0, a if d.name == "door_L" else -a, 0))
         act = ad.action
         act.name = clip
         act.use_fake_user = True
