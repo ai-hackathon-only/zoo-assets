@@ -161,9 +161,9 @@ def _clips(arm, h):
                     _key(pb[B], f, rot=(6 * down, 0, 0))
                 if has("tail"):
                     _key(pb["tail"], f, rot=(0, 0, 8 * math.sin(ph)))
-                for arm in ("arm_L", "arm_R"):  # hands come up to the mouth
-                    if has(arm):
-                        _key(pb[arm], f, rot=(-70 * down, 0, 0))
+                for side_arm in ("arm_L", "arm_R"):  # hands come up to the mouth
+                    if has(side_arm):
+                        _key(pb[side_arm], f, rot=(-70 * down, 0, 0))
             elif clip == "sit":  # settle back, head turns, arms rest, slow breathing
                 s = 1 + 0.02 * math.sin(ph)
                 _key(pb[B], f, scale=(s, 1, s))
@@ -171,9 +171,9 @@ def _clips(arm, h):
                     _key(pb["head"], f, rot=(6 * math.sin(ph), 0, 20 * math.sin(ph)))
                 if has("neck"):
                     _key(pb["neck"], f, rot=(4, 0, 0))
-                for arm in ("arm_L", "arm_R"):
-                    if has(arm):
-                        _key(pb[arm], f, rot=(4 * math.sin(ph), 0, 0))
+                for side_arm in ("arm_L", "arm_R"):
+                    if has(side_arm):
+                        _key(pb[side_arm], f, rot=(4 * math.sin(ph), 0, 0))
         act = ad.action
         if act is None:
             continue
