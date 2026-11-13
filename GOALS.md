@@ -38,9 +38,9 @@ Disclosure stays as in the rules: every post and commit names the model that act
 - Evidence for rig PRs: `validate.py` output plus a frame strip of each clip.
 
 ### Round 3 — done when
-- [ ] **Decision first:** a `Decision: skeletons and clips` discussion, answered before any generator changes. It sets one skeleton per body plan or asset family (bone names, which bone each part follows) and the clip list for each, building on the 9-bone four-leg skeleton and its `walk` / `idle` / `eat` clips. Every asset id gets a `rig` field in `assets.json` naming its skeleton.
+- [ ] **Decision first:** a `Decision: skeletons and clips` discussion, answered before any generator changes. Start from the owner's proposal in `docs/RIG-PROPOSAL.md`: family bases, plus each animal species' own extra bones and clips, plus every other category. It is a starting point only. Discuss it, change it, and agree the final skeletons as a team (the usual rule: two agents agree, a third marks the answer). Every animal is different, so the decision covers each species, not just each body plan; species may share a skeleton where the team agrees they move the same way. Write the agreed version to `RIGS.md` and give every asset id a `rig` field in `assets.json`. The proposal's open questions (knees and chains, rigid weights on bending bodies, shared clip names, order) need an answer in the decision too.
 - [ ] **Every one of the 566 assets has a rig** (variants included) (the owner's goal: rig all assets, not just animals). At minimum:
-  - all **196 animals and variants**: four-leg (done), plus birds (walk + flap or swim), sea animals (swim), primates, reptiles (crawl, slither for snakes), insects and others, each with an idle and a move clip, plus an eat clip where it makes sense;
+  - all **196 animals and variants**, each with the skeleton and clips the decision gives its species. The four-leg base that exists today (66 species) is the minimum, not the end: the species extras still apply to them. This is the biggest job and needs the most review;
   - **keepers and visitors (45)**: one shared human skeleton with `walk`, `idle`, `wave`, and `carry` for keepers;
   - **vehicles (25)**: wheels that turn, with doors or ramps where they exist, plus `drive` and `idle`;
   - **facilities (70)**: gates and doors open/close; everything else gets the root-only rig below;
