@@ -1,0 +1,147 @@
+"""Armature and animation clips for rigged assets (round 3).
+
+zoo.finish() calls build(ob, joints) when a generator declared joints. Weights are rigid: every part follows exactly
+one bone (the toy look hides the small gaps at joints). Clips are made from the bone names that exist, so one set of
+clips serves every 4-leg body plan:
+  walk (24 frames, loop): diagonal leg pairs swing, body bobs, neck nods, tail sways
+  idle (48 frames, loop): breathing, slow head turn, tail flick
+  eat  (48 frames, loop): neck and head go down, chew, come back up
+Bone names: root, body, neck, head, tail, leg_FL, leg_FR, leg_BL, leg_BR (F = front, at -Y).
+"""
+import math
+
+import bpy
+from mathutils import Vector
+
+FPS = 24
+CLIPS = {"walk": 24, "idle": 48, "eat": 48}
+
+
+def build(ob, joints):
+    name = ob.name.replace("SM_", "RIG_", 1)
+    arm_d = bpy.data.armatures.new(name)
+    arm = bpy.data.objects.new(name, arm_d)
+    bpy.context.scene.collection.objects.link(arm)
+    bpy.ops.object.select_all(action="DESELECT")
+    bpy.context.view_layer.objects.active = arm
+    arm.select_set(True)
+    bpy.ops.object.mode_set(mode="EDIT")
+    size = max(ob.dimensions) or 1.0
+    root = arm_d.edit_bones.new("root")
+    root.head, root.tail = (0, 0, 0), (0, -0.15 * size, 0)
+    eb = {"root": root}
+    for n, (h, t, _) in joints.items():
+        b = arm_d.edit_bones.new(n)
+        b.head, b.tail = h, t
+        if (b.tail - b.head).length < 1e-4:
+            b.tail = b.head + Vector((0, 0, 0.05 * size))
+        eb[n] = b
+    for n, (_, _, par) in joints.items():
+        eb[n].parent = eb.get(par, root)
+    bpy.ops.object.mode_set(mode="OBJECT")
+    ob.parent = arm
+    md = ob.modifiers.new("Armature", "ARMATURE")
+    md.object = arm
+    for pb in arm.pose.bones:
+        pb.rotation_mode = "XYZ"
+    _clips(arm, max(ob.dimensions.z, 0.05))
+    return arm
+
+
+def _key(pb, frame, rot=None, loc=None, scale=None):
+    if rot is not None:
+        pb.rotation_euler = tuple(math.radians(a) for a in rot)
+        pb.keyframe_insert("rotation_euler", frame=frame)
+    if loc is not None:
+        pb.location = loc
+        pb.keyframe_insert("location", frame=frame)
+    if scale is not None:
+        pb.scale = scale
+        pb.keyframe_insert("scale", frame=frame)
+
+
+def _eat_angle(arm, h):
+    """Neck bend (degrees; the head adds 0.6x) that brings the nose to just above the ground, capped at 60."""
+    pb = arm.pose.bones
+    if "head" not in pb:
+        return 0.0
+    neck = pb.get("neck")
+    pivot = arm.matrix_world @ (neck or pb["head"]).head
+    reach0 = pivot.y - (arm.matrix_world @ pb["head"].tail).y  # how far the nose is in front of the pivot (-Y)
+    best = 0.0
+    for ang in range(0, 61, 2):
+        if neck:
+            neck.rotation_euler = (math.radians(ang), 0, 0)
+        pb["head"].rotation_euler = (math.radians(ang * 0.6), 0, 0)
+        bpy.context.view_layer.update()
+        tip = arm.matrix_world @ pb["head"].tail
+        if pivot.y - tip.y < 0.55 * reach0:  # nose swinging back under the chest: stop before this step
+            break
+        best = ang
+        if tip.z <= 0.2 * h:
+            break
+    for b in pb:
+        b.rotation_euler = (0, 0, 0)
+    bpy.context.view_layer.update()
+    return float(best)
+
+
+def _clips(arm, h):
+    """h = model height in metres (scales the walk bob and the eat target)."""
+    pb = arm.pose.bones
+    has = lambda n: n in pb
+    ad = arm.animation_data_create()
+    eat = _eat_angle(arm, h)
+    for clip, n in CLIPS.items():
+        for b in pb:  # each clip starts from the rest pose
+            b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
+        ad.action = None
+        for f in range(n + 1):
+            ph = 2 * math.pi * f / n
+            if clip == "walk":
+                for leg, off in (("leg_FL", 0), ("leg_BR", 0), ("leg_FR", math.pi), ("leg_BL", math.pi)):
+                    if has(leg):
+                        _key(pb[leg], f, rot=(22 * math.sin(ph + off), 0, 0))
+                if has("body"):
+                    _key(pb["body"], f, loc=(0, 0, 0.012 * h * abs(math.sin(ph))), rot=(0, 2 * math.sin(ph), 0))
+                if has("neck"):
+                    _key(pb["neck"], f, rot=(5 * math.sin(2 * ph), 0, 0))
+                if has("head"):
+                    _key(pb["head"], f, rot=(-4 * math.sin(2 * ph), 0, 3 * math.sin(ph)))
+                if has("tail"):
+                    _key(pb["tail"], f, rot=(0, 0, 18 * math.sin(ph)))
+            elif clip == "idle":
+                if has("body"):
+                    s = 1 + 0.015 * math.sin(2 * ph)
+                    _key(pb["body"], f, scale=(s, 1, s))
+                if has("head"):
+                    _key(pb["head"], f, rot=(3 * math.sin(2 * ph), 0, 16 * math.sin(ph)))
+                if has("neck"):
+                    _key(pb["neck"], f, rot=(3 * math.sin(ph), 0, 4 * math.sin(ph)))
+                if has("tail"):
+                    flick = 25 * math.sin(4 * ph) * max(0.0, math.sin(ph))
+                    _key(pb["tail"], f, rot=(0, 0, flick))
+            elif clip == "eat":
+                t = f / n
+                down = math.sin(math.pi * min(1.0, t / 0.8)) ** 0.5 if t < 0.8 else 0.0  # ease down, hold, up
+                chew = 4 * math.sin(6 * ph) * down
+                if has("neck"):
+                    _key(pb["neck"], f, rot=(eat * down, 0, 0))
+                if has("head"):
+                    _key(pb["head"], f, rot=(eat * 0.6 * down + chew, 0, 0))
+                elif has("body"):
+                    _key(pb["body"], f, rot=(6 * down, 0, 0))
+                if has("tail"):
+                    _key(pb["tail"], f, rot=(0, 0, 8 * math.sin(ph)))
+        act = ad.action
+        if act is None:
+            continue
+        act.name = clip
+        act.use_fake_user = True
+        track = ad.nla_tracks.new()
+        track.name = clip
+        track.strips.new(clip, 0, act)
+        track.mute = True  # tracks are for export; the scene shows the rest pose
+        ad.action = None
+    for b in pb:
+        b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)

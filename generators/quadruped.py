@@ -52,6 +52,7 @@ def build(a, z):
     br = (W * 0.5, body_l / 2, torso_h / 2)
     by = -L * 0.02
     z.ball(1, loc=(0, by, bz), colour=fur, scale=br, seg=14, rings=9)
+    z.joint("body", (0, by + br[1] * 0.8, bz), (0, by - br[1] * 0.8, bz))
     if belly != fur:
         z.ball(1, loc=(0, by, bz - br[2] * 0.3), colour=belly, scale=(br[0] * 0.85, br[1] * 0.85, br[2] * 0.72),
                seg=12, rings=7)
@@ -62,10 +63,15 @@ def build(a, z):
     for x in (W * 0.27, -W * 0.27):
         for y in (by - br[1] * 0.55, by + br[1] * 0.55):
             top = bz - br[2] * 0.2
+            leg = f"leg_{'F' if y < by else 'B'}{'L' if x > 0 else 'R'}"
+            z.joint(leg, (x, y, top), (x, y, 0), "body")
+            z.set_bone(leg)
             _limb(z, (x, y, 0), (x, y, top), lr * 0.9, leg_col, r2=lr)
             if W > 1:  # big toes on heavy animals
                 z.ball(lr * 0.95, loc=(x, y - lr * 0.15, lr * 0.25), colour="light_grey" if fur != "light_grey"
                        else "grey", scale=(1, 1, 0.3), seg=8, rings=4)
+
+    z.set_bone("body")
 
     # head
     hr = min(H - leg_h, body_l) * (0.3 if big_head else 0.33)
@@ -76,7 +82,12 @@ def build(a, z):
     if "wide_mouth" in m:
         hz = bz + br[2] * 0.25
     neck_top = (0, hy + hr * 0.3, hz - hr * 0.2)
-    _limb(z, (0, by - br[1] * 0.6, bz + br[2] * 0.2), neck_top, hr * 0.7, fur, seg=8)
+    neck_base = (0, by - br[1] * 0.6, bz + br[2] * 0.2)
+    z.joint("neck", neck_base, neck_top, "body")
+    z.joint("head", neck_top, (0, hy - hr * 1.2, hz), "neck")
+    z.set_bone("neck")
+    _limb(z, neck_base, neck_top, hr * 0.7, fur, seg=8)
+    z.set_bone("head")
     face = "white" if ("panda_patches" in m or "face_stripes" in m) else fur
     if "white_face" in m:
         face = "cream"
@@ -169,6 +180,8 @@ def build(a, z):
             ec = "black" if "panda_patches" in m else ("white" if "white_face" in m else fur)
             z.ball(hr * 0.28, loc=(ex2, hy + hr * 0.2, ez2), colour=ec, scale=(1, 0.55, 1), seg=8, rings=5)
 
+    z.set_bone("body")
+
     # body marks
     if "panda_patches" in m:
         z.ball(1, loc=(0, by - br[1] * 0.3, bz + br[2] * 0.05), colour="black",
@@ -209,6 +222,8 @@ def build(a, z):
     # tail (behind, +Y)
     ty, tz = by + br[1] * 0.9, bz + br[2] * 0.2
     tail_room = L / 2 - ty
+    z.joint("tail", (0, ty, tz), (0, ty + max(tail_room, br[1] * 0.3), tz - br[2] * 0.3), "body")
+    z.set_bone("tail")
     if "big_tail" in m or "long_tail" in m:
         _limb(z, (0, ty, tz), (0, L / 2, br[2] * 0.4), br[2] * 0.45, fur, r2=br[2] * 0.08)
     elif "flat_tail" in m:
@@ -248,6 +263,7 @@ def _upright(z, W, L, H, fur, belly, ink, m):
     tz0 = H * (0.15 if roo else 0.08)
     tr = (W * 0.45 if not roo else W * 0.4, W * (0.45 if not roo else 0.5), torso_h / 2)
     tc = (0, 0, tz0 + tr[2])
+    z.joint("body", (0, 0, tz0), (0, 0, tz0 + torso_h), "root")
     z.ball(1, loc=tc, colour=fur, scale=tr, rot=(-15 if roo else 0, 0, 0), seg=12, rings=8)
     z.ball(1, loc=(0, tc[1] - tr[1] * 0.3, tc[2] - tr[2] * 0.05), colour="cream" if fur != "grey" else "white",
            scale=(tr[0] * 0.7, tr[1] * 0.75, tr[2] * 0.8), seg=10, rings=6)
@@ -267,6 +283,8 @@ def _upright(z, W, L, H, fur, belly, ink, m):
     # head
     hz = tz0 + torso_h + hr * 0.75
     hy = -tr[1] * (0.25 if not roo else 0.45)
+    z.joint("head", (0, hy, hz - hr * 0.8), (0, hy - hr * 1.2, hz - hr * 0.8), "body")
+    z.set_bone("head")
     z.ball(hr, loc=(0, hy, hz), colour=fur, scale=(1, 1.05, 1), seg=12, rings=8)
     if koala:
         z.ball(hr * 0.3, loc=(0, hy - hr * 0.95, hz - hr * 0.1), colour="black", scale=(0.7, 0.5, 1.0), seg=8, rings=5)
@@ -291,6 +309,8 @@ def _upright(z, W, L, H, fur, belly, ink, m):
         else:
             z.ball(hr * 0.2, loc=(s * hr * 0.85, hy + hr * 0.1, hz + hr * 0.2), colour=ink, scale=(0.5, 0.6, 1), seg=6, rings=4)
     # tail behind (+Y)
+    z.set_bone("tail")
+    z.joint("tail", (0, tr[1] * 0.6, tz0 + tr[2] * 0.3), (0, L * 0.5, H * 0.03), "body")
     if roo:
         _limb(z, (0, tr[1] * 0.6, tz0 + tr[2] * 0.4), (0, L / 2, H * 0.03), tr[0] * 0.5, fur, r2=tr[0] * 0.12)
     elif not koala:

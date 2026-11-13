@@ -3,7 +3,12 @@
 A generator module has `build(asset, z)` that adds parts with z.box/z.cyl/z.ball/z.cone.
 build_all.py then calls z.finish() -> one mesh `SM_<category>_<name>`, one material `MAT_palette`.
 Units: metres, Z up in Blender (the glTF exporter writes Y up).
+
+Rigs (round 3): a generator tags parts with `with z.bone("neck"): ...` (untagged parts belong to "body") and declares
+each bone's pivot with z.joint(name, head, tail, parent). If a generator declared joints, finish() keeps the tags as
+rigid vertex weights and lib/rig.py adds an armature plus the walk/idle/eat clips. No joints = static asset as before.
 """
+import contextlib
 import math
 import os
 
@@ -30,10 +35,16 @@ def budget(category):
     return BUDGETS.get(category, DEFAULT_BUDGET)
 
 
+_BONES = ["body"]
+JOINTS = {}  # name -> (head, tail, parent) in build coordinates
+
+
 def reset():
     global _RECOLOUR, _VARIANT
     bpy.ops.wm.read_factory_settings(use_empty=True)
     _RECOLOUR = _VARIANT = None
+    _BONES[:] = ["body"]
+    JOINTS.clear()
 
 
 def begin(asset):
@@ -42,6 +53,32 @@ def begin(asset):
     _VARIANT = asset.get("variant")
     rc = asset.get("params", {}).get("recolour")
     _RECOLOUR = variants.recolour_fn(rc, asset.get("params", {}).get("body")) if _VARIANT == "rare" and rc else None
+
+
+@contextlib.contextmanager
+def bone(name):
+    """Parts made inside this block move with bone `name`."""
+    _BONES.append(name)
+    try:
+        yield
+    finally:
+        _BONES.pop()
+
+
+def set_bone(name):
+    """Tag every part made from here on with `name` (for long sections; `with bone()` for short ones)."""
+    _BONES[-1] = name
+
+
+def joint(name, head, tail, parent="root"):
+    """Declare a bone: it pivots at `head` and points to `tail`."""
+    JOINTS[name] = (Vector(head), Vector(tail), parent)
+
+
+def transform_joints(m):
+    """Apply the same matrix the generator applied to its parts (turns, _fit scaling)."""
+    for k, (h, t, par) in JOINTS.items():
+        JOINTS[k] = (m @ h, m @ t, par)
 
 
 def material():
@@ -106,6 +143,7 @@ def _obj(bm, name="part", emissive=False):
     ob = bpy.data.objects.new(name, me)
     if emissive:
         ob["is_emissive"] = True
+    ob["bone"] = _BONES[-1]
     bpy.context.scene.collection.objects.link(ob)
     return ob
 
@@ -172,10 +210,12 @@ def finish(asset):
         _babyfy(obs, asset)
     bm = bmesh.new()
     has_emissive = any(o.get("is_emissive", False) for o in obs)
+    ranges = []  # (first vert, end vert, bone) per part
     for o in obs:
         is_em = o.get("is_emissive", False)
         tmp = o.data.copy()
         tmp.transform(o.matrix_world)
+        start = len(bm.verts)
         if has_emissive:
             bm_part = bmesh.new()
             bm_part.from_mesh(tmp)
@@ -185,7 +225,20 @@ def finish(asset):
             bm_part.to_mesh(tmp)
             bm_part.free()
         bm.from_mesh(tmp)
+        ranges.append((start, len(bm.verts), o.get("bone", "body")))
         bpy.data.meshes.remove(tmp)
+    groups = []
+    if JOINTS:
+        missing = sorted({b for _, _, b in ranges} - set(JOINTS))
+        if missing:
+            raise ValueError(f"{asset['id']}: parts tagged with bones that have no joint: {missing}")
+        groups = sorted({b for _, _, b in ranges})
+        dl = bm.verts.layers.deform.verify()
+        bm.verts.ensure_lookup_table()
+        for a0, a1, b in ranges:
+            gi = groups.index(b)
+            for i in range(a0, a1):
+                bm.verts[i][dl][gi] = 1.0
     for o in obs:
         me = o.data
         bpy.data.objects.remove(o)
@@ -203,6 +256,12 @@ def finish(asset):
         ob.data.materials.append(emissive_material())
     for p in ob.data.polygons:
         p.use_smooth = False
+    if JOINTS:
+        from lib import rig
+        for g in groups:  # same order as the deform layer indices
+            ob.vertex_groups.new(name=g)
+        transform_joints(Matrix.Translation(shift))
+        rig.build(ob, JOINTS)
     return ob
 
 
@@ -233,6 +292,9 @@ def _babyfy(obs, asset):
             o.data.transform(o.matrix_world)
             o.matrix_world = Matrix()
             o.data.transform(m)
+        if "head" in JOINTS:  # the head bone grows with the head parts
+            h, t, par = JOINTS["head"]
+            JOINTS["head"] = (m @ h, m @ t, par)
     # legs: squash everything under the torso line towards the floor, lift the rest by the same amount
     cut = lo.z + size.z * (0.3 if not upright else 0.2)
     drop = (cut - lo.z) * (1 - variants.BABY_LEG)
@@ -244,11 +306,18 @@ def _babyfy(obs, asset):
                 v.co.z = lo.z + (v.co.z - lo.z) * variants.BABY_LEG
             else:
                 v.co.z -= drop
+    def squash(pt):
+        pt = Vector(pt)
+        pt.z = lo.z + (pt.z - lo.z) * variants.BABY_LEG if pt.z < cut else pt.z - drop
+        return pt
+    for name, (h, t, par) in list(JOINTS.items()):
+        JOINTS[name] = (squash(h), squash(t), par)
     # fit back to the baby's size_m height
     zs = [v.co.z for o in obs for v in o.data.vertices]
     k = asset["size_m"][2] / max(max(zs) - min(zs), 1e-6)
     for o in obs:
         o.data.transform(Matrix.Scale(k, 4))
+    transform_joints(Matrix.Scale(k, 4))
 
 
 def object_name(asset):
@@ -260,6 +329,14 @@ def export_glb(ob, path):
     bpy.ops.object.select_all(action="DESELECT")
     ob.select_set(True)
     bpy.context.view_layer.objects.active = ob
+    arm = ob.parent if ob.parent and ob.parent.type == "ARMATURE" else None
+    if arm:
+        arm.select_set(True)
+        bpy.ops.export_scene.gltf(filepath=path, export_format="GLB", use_selection=True, export_apply=False,
+                                  export_yup=True, export_texcoords=True, export_normals=True,
+                                  export_materials="EXPORT", export_animations=True, export_skins=True,
+                                  export_animation_mode="NLA_TRACKS", export_def_bones=False)
+        return
     bpy.ops.export_scene.gltf(filepath=path, export_format="GLB", use_selection=True, export_apply=True,
                               export_yup=True, export_texcoords=True, export_normals=True,
                               export_materials="EXPORT", export_animations=False)

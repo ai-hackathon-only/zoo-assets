@@ -18,7 +18,7 @@ sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, "SKILLS/blender/el4cteo/blender-asset-qa/scripts"))
 import qa_check  # noqa: E402
 
-from lib import zoo  # noqa: E402
+from lib import rig, zoo  # noqa: E402
 
 TOTAL_MAX = 120 * 1024 * 1024
 H_TOL, L_TOL, ORIGIN_TOL = 0.20, 0.30, 0.02  # height +-20 %, longest side +-30 %, origin 2 cm
@@ -40,8 +40,23 @@ def check(r):
         errs.append("missing thumbnail " + png)
     zoo.reset()
     bpy.ops.import_scene.gltf(filepath=path)
-    obs = [o for o in bpy.context.scene.objects if o.type == "MESH"]
+    arms = [o for o in bpy.context.scene.objects if o.type == "ARMATURE"]
+    shapes = {pb.custom_shape for a in arms for pb in a.pose.bones if pb.custom_shape}  # importer's bone display
+    obs = [o for o in bpy.context.scene.objects if o.type == "MESH" and o not in shapes]
+    for o in shapes:
+        bpy.data.objects.remove(o)
     want = zoo.object_name(r)
+    if arms:  # rigged asset (round 3): one armature, the standard clips, rigid weights
+        if len(arms) != 1:
+            errs.append(f"{len(arms)} armatures, want 1")
+        clips = sorted(act.name for act in bpy.data.actions)
+        missing = [c for c in rig.CLIPS if not any(n.startswith(c) for n in clips)]
+        if missing:
+            errs.append(f"rig: missing clips {missing} (have {clips})")
+        for o in obs:
+            loose = sum(1 for v in o.data.vertices if len([g for g in v.groups if g.weight > 0.5]) != 1)
+            if loose:
+                errs.append(f"rig: {loose} vertices not on exactly one bone")
     names = [o.name for o in obs]
     if names != [want]:
         errs.append(f"objects {names}, want exactly [{want}]")

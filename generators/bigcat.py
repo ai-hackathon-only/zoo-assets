@@ -37,20 +37,33 @@ def build(a, z):
     br = (W * (0.56 if "stocky" in marks else 0.46), body_len / 2, torso_h / 2 * (1.12 if "stocky" in marks else 1))
     by = L / 2 - L * 0.13 - br[1]  # torso centre (y = 0 is the middle of the full length)
     z.ball(1, loc=(0, by, bz), colour=fur, scale=br, seg=12, rings=8)
+    z.joint("body", (0, by - br[1] * 0.8, bz), (0, by + br[1] * 0.8, bz))  # built facing +Y, turned at the end
     z.ball(1, loc=(0, by, bz - br[2] * 0.35), colour=belly, scale=(br[0] * 0.8, br[1] * 0.85, br[2] * 0.7), seg=10, rings=6)
 
     # legs: thick cylinders with paws
     lr = W * 0.13
     for y in (by + br[1] * 0.6, by - br[1] * 0.62):
         for x in (W * 0.22, -W * 0.22):
+            top = leg_h + torso_h * 0.2
+            leg = f"leg_{'F' if y > by else 'B'}{'L' if x < 0 else 'R'}"  # names after the turn
+            z.joint(leg, (x, y, top), (x, y, 0), "body")
+            z.set_bone(leg)
             z.cyl(lr, leg_h + torso_h * 0.2, loc=(x, y, (leg_h + torso_h * 0.2) / 2), colour=fur, r2=lr * 1.15, seg=7)
             z.ball(lr * 1.35, loc=(x, y + lr * 0.4, lr * 0.6), colour=belly if fur != "black" else fur,
                    scale=(1, 1.3, 0.6), seg=8, rings=4)
 
+    z.set_bone("body")
+
     # neck and head
     hr = min(W * 0.4, H * 0.21) * (1.2 if "stocky" in marks else 0.8 if "long_legs" in marks else 1)
     hy, hz = by + br[1] + hr * 0.35, H - hr * 1.05
+    neck_base = (0, by + br[1] * 0.6, bz + br[2] * 0.2)
+    neck_top = (0, hy - hr * 0.5, hz - hr * 0.5)
+    z.joint("neck", neck_base, neck_top, "body")
+    z.joint("head", neck_top, (0, hy + hr * 1.2, hz), "neck")
+    z.set_bone("neck")
     z.cyl(hr * 0.75, hz - bz, loc=(0, (by + br[1] * 0.7 + hy) / 2, (bz + hz) / 2), colour=fur, rot=(-35, 0, 0), seg=8)
+    z.set_bone("head")
     if "mane" in marks and fur in ("sand", "tan", "orange"):  # lion mane; tamarins use other generators
         z.ball(hr * 1.5, loc=(0, hy - hr * 0.75, hz - hr * 0.2), colour="brown", scale=(1, 0.55, 1.05), seg=12, rings=8)
     z.ball(hr, loc=(0, hy, hz), colour=fur, scale=(1, 0.95, 0.9), seg=12, rings=8)
@@ -71,11 +84,13 @@ def build(a, z):
             z.box((hr * 0.07, hr * 0.06, hr * 0.6), loc=(s * hr * 0.3, hy + hr * 0.92, hz - hr * 0.15), colour="black",
                   rot=(0, s * 12, 0))
 
+    z.set_bone("tail")
     # tail: two segments, the second one raised; thick for snow leopard, black tip for lion
     tl = L * tail_frac
     tr = lr * (0.75 if "thick_tail" in marks else 0.4)
     ty0 = by - br[1] * 0.95
     tz0 = bz + br[2] * 0.3
+    z.joint("tail", (0, ty0 + tl * 0.05, tz0), (0, ty0 - tl * 0.85, tz0 - tl * 0.25), "body")
     t1 = (0, ty0 - tl * 0.25, tz0 - tl * 0.2)
     z.cyl(tr, tl * 0.6, loc=t1, colour=fur, rot=(-55, 0, 0), seg=6)
     t2 = (0, ty0 - tl * 0.62, tz0 - tl * 0.26)
@@ -84,6 +99,7 @@ def build(a, z):
         z.ball(tr * 1.6, loc=(0, ty0 - tl * 0.85, tz0 - tl * 0.22), colour="black" if "short_tail" in marks else "brown",
                seg=6, rings=4)
 
+    z.set_bone("body")
     # coat patterns on the torso
     if "stripes" in marks:  # bands that wrap the torso
         for i in range(8):
@@ -92,7 +108,8 @@ def build(a, z):
             z.ball(1, loc=(0, by + br[1] * t, bz), colour=ink, scale=(br[0] * k, br[1] * 0.05, br[2] * k),
                    rot=(0, 0, 0), seg=10, rings=6)
         for s in (1, -1):  # face stripes
-            z.box((hr * 0.06, hr * 0.5, hr * 0.12), loc=(s * hr * 0.85, hy, hz + hr * 0.05), colour=ink, rot=(0, 0, s * 15))
+            with z.bone("head"):
+                z.box((hr * 0.06, hr * 0.5, hr * 0.12), loc=(s * hr * 0.85, hy, hz + hr * 0.05), colour=ink, rot=(0, 0, s * 15))
     spot_kind = next((m for m in ("rosettes_big", "rosettes", "spots") if m in marks), None)
     if spot_kind:
         sr = W * {"rosettes_big": 0.09, "rosettes": 0.07, "spots": 0.045}[spot_kind]
@@ -118,3 +135,4 @@ def build(a, z):
     for o in bpy.context.scene.objects:
         if o.type == "MESH":
             o.data.transform(turn)
+    z.transform_joints(turn)

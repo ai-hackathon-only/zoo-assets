@@ -550,6 +550,8 @@
       color: #b45309;
     }
 
+    #clip-btns { margin-top: 8px; }
+    #clip-btns .ctrl-btn.active { outline: 2px solid currentColor; font-weight: 600; }
   </style>
 </head>
 <body>
@@ -618,6 +620,7 @@
             <button id="btn-wireframe" class="ctrl-btn">Wireframe</button>
             <button id="btn-reset" class="ctrl-btn">Reset View</button>
           </div>
+          <div id="clip-btns" class="ctrl-btns" hidden></div>
           <span class="hint-label">Drag to rotate • Scroll to zoom</span>
         </div>
       </div>
@@ -817,6 +820,34 @@
     let currentModel = null;
     let autoRotate = true;
     let wireframeMode = false;
+    let mixer = null;
+    const clock = new THREE.Clock();
+    const clipBtns = document.getElementById('clip-btns');
+
+    // Rigged assets (round 3) carry walk / idle / eat clips: show a button per clip, start with walk.
+    function setupClips(gltf) {
+      mixer = null;
+      clipBtns.innerHTML = '';
+      clipBtns.hidden = !gltf.animations.length;
+      if (!gltf.animations.length) return;
+      mixer = new THREE.AnimationMixer(gltf.scene);
+      const order = ['walk', 'idle', 'eat'];
+      const clips = [...gltf.animations].sort((a, b) => order.indexOf(a.name) - order.indexOf(b.name));
+      const play = (clip, btn) => {
+        mixer.stopAllAction();
+        mixer.clipAction(clip).reset().play();
+        clipBtns.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
+      };
+      clips.forEach((clip, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'ctrl-btn';
+        btn.textContent = clip.name.charAt(0).toUpperCase() + clip.name.slice(1);
+        btn.addEventListener('click', () => play(clip, btn));
+        clipBtns.appendChild(btn);
+        if (i === 0) play(clip, btn);
+      });
+      clock.getDelta();
+    }
     let defaultCameraPosition = new THREE.Vector3();
     let defaultTarget = new THREE.Vector3();
 
@@ -868,6 +899,7 @@
 
       function animate() {
         requestAnimationFrame(animate);
+        if (mixer) mixer.update(clock.getDelta());
         controls.update();
         renderer.render(scene, camera);
       }
@@ -940,6 +972,7 @@
       gltfLoader.load(glbUrl, (gltf) => {
         currentModel = gltf.scene;
         scene.add(currentModel);
+        setupClips(gltf);
 
         // Frame camera around model bounding box
         const bbox = new THREE.Box3().setFromObject(currentModel);
@@ -968,6 +1001,8 @@
 
     function closeModal() {
       modalBackdrop.classList.remove('open');
+      mixer = null;
+      clipBtns.hidden = true;
       if (currentModel) {
         scene.remove(currentModel);
         currentModel = null;

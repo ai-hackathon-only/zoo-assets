@@ -36,7 +36,7 @@ def _chain(z, pts, r0, r1, colour, seg=6):
         _limb(z, pts[i], pts[i + 1], r0 + (r1 - r0) * i / n, colour, r2=r0 + (r1 - r0) * (i + 1) / n, seg=seg)
 
 
-def _fit(L, H):
+def _fit(z, L, H):
     """Scale every part about the floor centre so the bounding box is L long (Y) and H tall (Z)."""
     obs = [o for o in bpy.context.scene.objects if o.type == "MESH"]
     bpy.context.view_layer.update()
@@ -46,6 +46,7 @@ def _fit(L, H):
     m = Matrix.Diagonal((1, L / (hi_y - lo_y), H / (hi_z - lo_z), 1)) @ Matrix.Translation((0, -(lo_y + hi_y) / 2, -lo_z))
     for o in obs:
         o.matrix_world = m @ o.matrix_world
+    z.transform_joints(m)
 
 
 def build(a, z):
@@ -69,6 +70,7 @@ def build(a, z):
     bz = leg_h + th / 2
     br = (W * 0.42, body_l / 2, th / 2)
     z.ball(1, loc=(0, by, bz), colour=coat, scale=br, seg=14, rings=8)
+    z.joint("body", (0, by + br[1] * 0.8, bz), (0, by - br[1] * 0.8, bz))
     belly = "white" if "lyre_horns" in m or "spots" in m or "straight_horns" in m else None
     if belly:
         z.ball(1, loc=(0, by, bz - br[2] * 0.35), colour=belly, scale=(br[0] * 0.85, br[1] * 0.85, br[2] * 0.68),
@@ -79,6 +81,9 @@ def build(a, z):
     for x in (br[0] * 0.55, -br[0] * 0.55):
         for y in (by - br[1] * 0.62, by + br[1] * 0.62):
             top = bz - br[2] * 0.1
+            leg = f"leg_{'F' if y < by else 'B'}{'L' if x > 0 else 'R'}"
+            z.joint(leg, (x, y, top), (x, y, 0), "body")
+            z.set_bone(leg)
             _limb(z, (x, y, H * 0.03), (x, y, top), lr * 0.75, coat if "leg_stripes" not in m or y < by else "white",
                   r2=lr * 1.15)
             z.cyl(lr * 0.85, H * 0.04, loc=(x, y, H * 0.02), colour=ink if coat != "black" else "charcoal", seg=7)
@@ -91,6 +96,8 @@ def build(a, z):
                     z.cyl(lr * 1.2, leg_h * 0.06, loc=(x, y, leg_h * (0.35 + 0.2 * i)), colour="black", seg=8)
             if "upright_mane" in m:
                 z.cyl(lr * 0.95, leg_h * 0.35, loc=(x, y, leg_h * 0.2), colour="dark_brown", seg=7)
+
+    z.set_bone("body")
 
     # humps
     if "hump1" in m:
@@ -120,7 +127,12 @@ def build(a, z):
     neck_r = hr * (0.55 if giraffe else 0.7)
     if "fluffy" in m:
         neck_r *= 1.35
-    _limb(z, neck_base, (0, hy + hr * 0.4, hz - hr * 0.1), neck_r * 1.2, coat, r2=neck_r, seg=8)
+    neck_top = (0, hy + hr * 0.4, hz - hr * 0.1)
+    z.joint("neck", neck_base, neck_top, "body")
+    z.joint("head", neck_top, (0, hy - hr * 2.0, hz - hr * 0.3), "neck")
+    with z.bone("neck"):
+        _limb(z, neck_base, neck_top, neck_r * 1.2, coat, r2=neck_r, seg=8)
+    z.set_bone("head")
     z.ball(hr, loc=(0, hy, hz), colour=coat, scale=(0.85, 1.0, 0.95), seg=10, rings=7)
     snl = hr * (1.1 if "saddle_white" in m else 1.5 if not "tusks" in m else 1.3)
     sn_end = (0, hy - hr * 0.5 - snl, hz - hr * (0.35 if not low else 0.55))
@@ -210,6 +222,7 @@ def build(a, z):
     if "beard" in m:
         col = "black" if coat == "charcoal" else "white"
         _limb(z, (0, hy - hr * 0.2, hz - hr * 0.6), (0, hy - hr * 0.1, hz - hr * 1.7), hr * 0.3, col, r2=hr * 0.05, seg=6)
+    z.set_bone("neck")
     # manes
     mane = None
     if "stripes" in m or "thin_stripes" in m and coat == "white":
@@ -223,9 +236,13 @@ def build(a, z):
         n1 = Vector((0, hy + hr * 0.6, hz + hr * 0.75))
         _limb(z, n0, n1, neck_r * 0.35, mane, seg=5)
         if "mane_strip" in m:
-            _limb(z, n0, (0, by + br[1] * 0.4, bz + br[2] * 1.05), neck_r * 0.3, mane, seg=5)
+            with z.bone("body"):
+                _limb(z, n0, (0, by + br[1] * 0.4, bz + br[2] * 1.05), neck_r * 0.3, mane, seg=5)
     if "fluffy" in m:
-        z.ball(hr * 0.75, loc=(0, hy + hr * 0.1, hz + hr * 0.75), colour=coat, scale=(1, 1, 0.6), seg=8, rings=5)
+        with z.bone("head"):
+            z.ball(hr * 0.75, loc=(0, hy + hr * 0.1, hz + hr * 0.75), colour=coat, scale=(1, 1, 0.6), seg=8, rings=5)
+
+    z.set_bone("body")
 
     # coat patterns
     if "stripes" in m or "thin_stripes" in m:
@@ -241,7 +258,8 @@ def build(a, z):
             for t in (0.3, 0.55, 0.77):
                 c = Vector(neck_base).lerp(Vector((0, hy, hz)), t)
                 for s in (1, -1):
-                    z.ball(neck_r * 0.6, loc=(s * neck_r * 0.66, c.y, c.z), colour="black", scale=(0.6, 0.35, 1.1), seg=7, rings=5)
+                    with z.bone("neck"):
+                        z.ball(neck_r * 0.6, loc=(s * neck_r * 0.66, c.y, c.z), colour="black", scale=(0.6, 0.35, 1.1), seg=7, rings=5)
     if "patches" in m:
         for i in range(16):
             u = math.radians((i * 137.5) % 360)
@@ -254,7 +272,8 @@ def build(a, z):
         for t in (0.2, 0.45, 0.7):
             c = Vector(neck_base).lerp(Vector((0, hy, hz)), t)
             for s in (1, -1):
-                z.ball(neck_r * 0.5, loc=(s * neck_r * 0.7, c.y, c.z), colour="brown", seg=6, rings=4)
+                with z.bone("neck"):
+                    z.ball(neck_r * 0.5, loc=(s * neck_r * 0.7, c.y, c.z), colour="brown", seg=6, rings=4)
     if "spots" in m:
         for i in range(12):
             s = 1 if i % 2 else -1
@@ -270,8 +289,10 @@ def build(a, z):
     t0 = (0, by + br[1] * 0.95, bz + br[2] * 0.4)
     tl = H * (0.12 if giraffe else 0.25 if "upright_mane" in m or "stripes" in m or "thin_stripes" in m else 0.15)
     t1 = (0, t0[1] + tl * 0.2, t0[2] - tl)
+    z.joint("tail", t0, t1, "body")
+    z.set_bone("tail")
     _limb(z, t0, t1, lr * 0.3, coat, r2=lr * 0.2, seg=5)
     tuft = ink if coat not in ("cream", "white", "tan") or giraffe or "stripes" in m else coat
     z.ball(lr * 0.45, loc=t1, colour=tuft, scale=(1, 1, 1.8), seg=6, rings=4)
 
-    _fit(L, H)
+    _fit(z, L, H)
