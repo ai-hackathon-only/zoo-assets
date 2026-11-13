@@ -29,9 +29,12 @@ One id per skeleton. A species with its own bones or clips gets `<family>.<speci
 | mollusc (giant African snail) | idle, crawl | foot, shell, eyestalk_L/R |
 | human | idle, walk, wave (keepers also carry) | hips, spine, chest, neck, head, upperarm/forearm L/R, thigh/shin L/R, prop |
 | vehicle | idle, drive | body, one bone per wheel |
-| facility, gate or door | idle, open, close | door or gate bone |
+| gate | idle, open, close | door or gate bone |
+| facility (no door or gate) | idle | root |
 | plant | idle, sway | trunk, crown |
 | static | idle | root |
+
+`gate` is for the facilities whose id starts with `gate_` (8 today, e.g. `gate_paddock_double_wood`) plus `turnstile_bank_quad`; the `rig` field in assets.json says which. The other facilities use `facility`.
 
 Scorpion and tarantula use `arachnid` and are built by `insect.py`. Species extras and the non-animal groups follow the tables in `docs/RIG-PROPOSAL.md` until the team edits them here.
 
