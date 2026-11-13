@@ -262,6 +262,11 @@ def finish(asset):
             ob.vertex_groups.new(name=g)
         transform_joints(Matrix.Translation(shift))
         rig.build(ob, JOINTS)
+    else:  # root-only rig: one bone, one idle clip, so the game loads every asset the same way
+        from lib import rig
+        ob.vertex_groups.new(name="root")
+        ob.vertex_groups["root"].add(list(range(len(ob.data.vertices))), 1.0, "REPLACE")
+        rig.build(ob, {})
     return ob
 
 

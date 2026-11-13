@@ -93,8 +93,8 @@ def _build_food(W, L, H, variant, aid, p, z):
         z.box((W, L, H * 0.10), loc=(0, 0, H * 0.05), colour="tan")
         z.box((W, 0.03, H * 0.85), loc=(0, -L * 0.46, H * 0.50), colour="tan")
         z.box((W, 0.03, H * 0.85), loc=(0, L * 0.46, H * 0.50), colour="tan")
-        z.box((0.03, L, H * 0.85), loc=(-W * 0.46, 0, H * 0.50), colour="tan")
-        z.box((0.03, L, H * 0.85), loc=(W * 0.46, 0, H * 0.50), colour="tan")
+        z.box((0.03, L - 0.04, H * 0.85), loc=(-W * 0.46, 0, H * 0.50), colour="tan")
+        z.box((0.03, L - 0.04, H * 0.85), loc=(W * 0.46, 0, H * 0.50), colour="tan")
         # Fruit inside (apples and oranges)
         for fx in (-0.14, 0.0, 0.14):
             for fy in (-0.08, 0.08):
@@ -726,7 +726,7 @@ def _build_vet(W, L, H, aid, p, z):
         # Long pole with hoop net
         z.cyl(0.025, L * 0.85, loc=(0, 0, H * 0.50), colour="rust", rot=(90, 0, 0), seg=6)
         # Hoop net at end
-        z.cyl(W * 0.40, 0.03, loc=(0, -L * 0.45, H * 0.50), colour="light_grey", rot=(90, 0, 0), seg=8)
+        z.cyl(W * 0.44, 0.03, loc=(0, -L * 0.45, H * 0.50), colour="light_grey", rot=(90, 0, 0), seg=8)
         z.cone(W * 0.38, 0.40, loc=(0, -L * 0.60, H * 0.50), colour="sand", rot=(90, 0, 0), seg=8)
 
     elif aid == "vet_oxygen_cylinder_trolley":

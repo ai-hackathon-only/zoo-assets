@@ -45,11 +45,30 @@ def build(ob, joints):
     for pb in arm.pose.bones:
         pb.rotation_mode = "XYZ"
     from lib import rig_human
-    if rig_human.is_human(joints):  # shared human skeleton: its own clips
+    if not joints:  # root-only rig (props, rocks, signs ...)
+        _root_clips(arm, max(ob.dimensions.z, 0.05))
+    elif rig_human.is_human(joints):  # shared human skeleton: its own clips
         rig_human.clips(arm, max(ob.dimensions.z, 0.05), _key)
     else:
         _clips(arm, max(ob.dimensions.z, 0.05))
     return arm
+
+
+def _root_clips(arm, h):
+    """idle (48 frames, loop): the root bobs a tiny bit (1 mm per metre of height, so rocks look still)."""
+    pb = arm.pose.bones["root"]
+    ad = arm.animation_data_create()
+    for f in range(49):
+        _key(pb, f, loc=(0, 0, 0.001 * h * math.sin(2 * math.pi * f / 48)))
+    act = ad.action
+    act.name = "idle"
+    act.use_fake_user = True
+    track = ad.nla_tracks.new()
+    track.name = "idle"
+    track.strips.new("idle", 0, act)
+    track.mute = True
+    ad.action = None
+    pb.location = (0, 0, 0)
 
 
 def _key(pb, frame, rot=None, loc=None, scale=None):
@@ -154,4 +173,6 @@ def _clips(arm, h):
 def expected_clips(bone_names):
     """Clip names the Decision lists for a skeleton, judged by its bone names (used by validate.py)."""
     from lib import rig_human
+    if set(bone_names) == {"root"}:
+        return {"idle": 48}
     return rig_human.CLIPS if rig_human.is_human(bone_names) else CLIPS
