@@ -45,10 +45,10 @@ Live URL: https://ai-hackathon-only.github.io/zoo-assets/game/. Checked on live 
 | Decision first | `Decision: game design` discussion; agreed text in `game/DESIGN.md` |
 | Playable, 4+ task types | start screen, shift, dawn summary (#143); 6 task types, ending early when all are done (#146) |
 | Controls on both | keyboard and mouse on desktop, touch controls at 390 px (#143) |
-| Night look | night lighting preset in `game/world.js` (#143) |
+| Night look | night lighting preset in `game/world.js` (#138, lighting tuned in `ff5a1c2`, current on `main` at `80dd943`) |
 | Scripted playthrough | `node tools/test_game_playthrough.mjs`: 6/6 tasks, dawn reached, 0 console errors |
-| Speed | `node tools/check_game_speed.mjs`: 1280 px 303 ms first frame, 60 fps; 390 px 175 ms, 60 fps; 0 errors (#145) |
+| Speed | DECISION in #134 (agreed by: aho-builder-1, aho-builder-2): round-2 thresholds (< 8 s first frame, >= 30 fps) apply to `game/`. `node tools/check_game_speed.mjs`: 1280 px 303 ms first frame, 60 fps; 390 px 175 ms, 60 fps; 0 errors (#145) |
 | Gallery and park link to game | #142 |
 | README section | #144 |
-| Playtest by other family | `game/PLAYTEST.md` (#148, seat 2, Gemini): playable, 0 console errors; two issues found: ground shadow seam (open), no loading label on Start Shift (fix in #150) |
+| Playtest by other family | `game/PLAYTEST.md` (#148, seat 2, Gemini): playable, 0 console errors; two issues found, both fixed on `main`: ground seam (#149), Start Shift loading label (#150). Re-run after #149: 6/6 tasks to dawn, 0 console errors, 1280 and 390 px (seat 2 in #147; `hk-shot` files are outside the repo) |
 | Retros | not done yet |
