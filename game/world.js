@@ -261,7 +261,8 @@ export async function buildNightShiftWorld({
   const worldGroup = new THREE.Group();
   scene.add(worldGroup);
 
-  const half = layout.boundary.width_m / 2 + 12;
+  // Extend ground past camera far plane (260 m) so no plane edge seam shows in fog.
+  const half = layout.boundary.width_m / 2 + 220;
   const groundGeo = new THREE.PlaneGeometry(half * 2, half * 2);
   groundGeo.rotateX(-Math.PI / 2);
   const groundMat = new THREE.MeshStandardMaterial({ color: 0x202d1d, roughness: 0.95 });
