@@ -16,6 +16,11 @@
       --radius: 12px; --radius-sm: 8px;
       --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
+    body[data-look="ink"] {
+      --bg: #ede5d2; --surface: #f9f5ea; --border: #cfc6b0; --text: #1c1a16;
+      --text-muted: #665f52; --primary: #2a2722; --primary-dark: #141310;
+    }
+    body[data-look="ink"] button.ghost:hover { background: #ebe3cf; }
     * { box-sizing: border-box; }
     html, body { margin: 0; height: 100%; }
     body { font-family: var(--font); color: var(--text); background: var(--bg); overflow: hidden; }

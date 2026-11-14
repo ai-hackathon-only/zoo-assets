@@ -46,14 +46,6 @@ renderer.outputColorSpace = THREE.SRGBColorSpace;
 const ink = new InkLook(THREE, renderer);
 ink.lineScale = 0.3;
 const lookBtn = $('look-toggle');
-function setLook(on) {
-  ink.enabled = on; setLookInUrl(on);
-  lookBtn.textContent = on ? 'Look: Sumi-e' : 'Look: Toy';
-  lookBtn.setAttribute('aria-pressed', String(on));
-  document.body.dataset.look = on ? 'ink' : 'toy';
-}
-lookBtn.addEventListener('click', () => setLook(!ink.enabled));
-setLook(lookFromUrl());
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xcfe8f3);
 const camera = new THREE.PerspectiveCamera(50, 1, 0.5, 4000);
@@ -71,9 +63,94 @@ ground.rotation.x = -Math.PI / 2;
 scene.add(ground);
 const world = new THREE.Group();
 scene.add(world);
+const inkParkGroup = new THREE.Group();
+inkParkGroup.visible = false;
+scene.add(inkParkGroup);
+const toyPathMeshes = [];
+
+let paperGroundTex = null;
+function getPaperGroundTex() {
+  if (paperGroundTex) return paperGroundTex;
+  const c = document.createElement('canvas');
+  c.width = c.height = 256;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#faf7ef';
+  ctx.fillRect(0, 0, 256, 256);
+  // Subtle rice-paper wash blotches and dry-brush grass tufts
+  for (let i = 0; i < 24; i++) {
+    const x = (i * 73) % 256, y = (i * 137) % 256, r = 18 + (i % 5) * 9;
+    const g = ctx.createRadialGradient(x, y, 2, x, y, r);
+    g.addColorStop(0, 'rgba(72, 66, 54, 0.08)');
+    g.addColorStop(1, 'rgba(72, 66, 54, 0)');
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+  }
+  ctx.strokeStyle = 'rgba(42, 38, 32, 0.18)';
+  ctx.lineWidth = 1.4;
+  ctx.lineCap = 'round';
+  for (let i = 0; i < 42; i++) {
+    const x = (i * 53 + 17) % 244 + 6, y = (i * 97 + 29) % 244 + 6;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.quadraticCurveTo(x - 2, y - 5, x - 4 + (i % 3), y - 8);
+    ctx.moveTo(x + 2, y);
+    ctx.quadraticCurveTo(x + 4, y - 4, x + 6, y - 7);
+    ctx.stroke();
+  }
+  paperGroundTex = new THREE.CanvasTexture(c);
+  paperGroundTex.wrapS = paperGroundTex.wrapT = THREE.RepeatWrapping;
+  paperGroundTex.colorSpace = THREE.SRGBColorSpace;
+  const sz = layout ? layout.boundary.width_m : 200;
+  paperGroundTex.repeat.set((sz + 40) / 16, (sz + 40) / 16);
+  return paperGroundTex;
+}
+
+let inkPathTex = null;
+function getInkPathTex() {
+  if (inkPathTex) return inkPathTex;
+  const c = document.createElement('canvas');
+  c.width = c.height = 128;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#ddd6c7';
+  ctx.fillRect(0, 0, 128, 128);
+  for (let i = 0; i < 18; i++) {
+    ctx.fillStyle = i % 2 ? 'rgba(55, 50, 42, 0.08)' : 'rgba(250, 246, 236, 0.16)';
+    ctx.fillRect((i * 37) % 112, (i * 59) % 112, 16 + (i % 4) * 6, 12 + (i % 3) * 5);
+  }
+  inkPathTex = new THREE.CanvasTexture(c);
+  inkPathTex.colorSpace = THREE.SRGBColorSpace;
+  return inkPathTex;
+}
 
 let currentTheme = 'day';
 const loadedMaterials = new Set();
+
+function applyParkLook() {
+  const on = ink.enabled;
+  inkParkGroup.visible = on;
+  for (const m of toyPathMeshes) m.visible = !on;
+  if (on) {
+    scene.background.setHex(0xf7f3ea);
+    ground.material.color.setHex(0xffffff);
+    ground.material.map = getPaperGroundTex();
+    ground.material.needsUpdate = true;
+  } else {
+    ground.material.map = null;
+    ground.material.needsUpdate = true;
+    setTheme(currentTheme);
+  }
+  if (layout) drawMinimap();
+}
+
+function setLook(on) {
+  ink.enabled = on; setLookInUrl(on);
+  lookBtn.textContent = on ? 'Look: Sumi-e' : 'Look: Toy';
+  lookBtn.setAttribute('aria-pressed', String(on));
+  document.body.dataset.look = on ? 'ink' : 'toy';
+  applyParkLook();
+}
+lookBtn.addEventListener('click', () => setLook(!ink.enabled));
+setLook(lookFromUrl());
 
 function setTheme(theme) {
   currentTheme = theme === 'night' ? 'night' : 'day';
@@ -85,13 +162,15 @@ function setTheme(theme) {
   }
   document.body.dataset.theme = currentTheme;
   if (isNight) {
-    scene.background.setHex(0x0a1122);
+    if (!ink.enabled) {
+      scene.background.setHex(0x0a1122);
+      ground.material.color.setHex(0x233120);
+    }
     hemiLight.color.setHex(0x3a4866);
     hemiLight.groundColor.setHex(0x18202c);
     hemiLight.intensity = 0.5;
     sun.color.setHex(0x5c7ca8);
     sun.intensity = 0.6;
-    ground.material.color.setHex(0x233120);
     for (const mat of loadedMaterials) {
       if (mat.emissive && (mat.emissive.r > 0 || mat.emissive.g > 0 || mat.emissive.b > 0)) {
         mat.emissiveIntensity = 8.0;
@@ -99,13 +178,15 @@ function setTheme(theme) {
       }
     }
   } else {
-    scene.background.setHex(0xcfe8f3);
+    if (!ink.enabled) {
+      scene.background.setHex(0xcfe8f3);
+      ground.material.color.setHex(0x9cc77a);
+    }
     hemiLight.color.setHex(0xffffff);
     hemiLight.groundColor.setHex(0x8a9a6a);
     hemiLight.intensity = 1.6;
     sun.color.setHex(0xffffff);
     sun.intensity = 1.8;
-    ground.material.color.setHex(0x9cc77a);
     for (const mat of loadedMaterials) {
       if (mat.emissive && (mat.emissive.r > 0 || mat.emissive.g > 0 || mat.emissive.b > 0)) {
         mat.emissiveIntensity = 0.0;
@@ -435,6 +516,7 @@ async function build(s, given = null) {
   const genMs = performance.now() - t;
   const size = layout.boundary.width_m;
   ground.scale.set(size + 40, size + 40, 1);
+  if (paperGroundTex) paperGroundTex.repeat.set((size + 40) / 16, (size + 40) / 16);
   drawMinimap();
 
   const groups = collectPlacements(layout);
@@ -445,6 +527,13 @@ async function build(s, given = null) {
     world.remove(c);
     c.dispose?.();
     c.traverse((o) => { if (o.isSkinnedMesh) o.skeleton.dispose(); }); // bone textures of animated copies
+  }
+  toyPathMeshes.length = 0;
+  for (const c of [...inkParkGroup.children]) {
+    inkParkGroup.remove(c);
+    c.geometry?.dispose();
+    c.material?.dispose();
+    c.dispose?.();
   }
   let instances = 0, draws = 0, rigged = 0;
   const tmp = new THREE.Matrix4();
@@ -474,11 +563,16 @@ async function build(s, given = null) {
       });
       im.instanceMatrix.needsUpdate = true;
       im.computeBoundingSphere();
+      if (id === PATH_ASSET) {
+        toyPathMeshes.push(im);
+        im.visible = !ink.enabled;
+      }
       world.add(im);
       draws++;
     }
     instances += items.length;
   }
+  buildInkParkOverlays(layout);
   const st = layout.stats;
   $('stats').textContent =
     `${st.total_enclosures} enclosures · ${st.total_animals} animals · ${st.total_facilities} facilities · ` +
@@ -510,33 +604,107 @@ function focusEnclosure(e) {
   document.body.dataset.focus = e.id;
 }
 
+function buildInkParkOverlays(L) {
+  const half = L.boundary.width_m / 2;
+  const dummy = new THREE.Object3D();
+  if (L.paths.length) {
+    const pathGeo = new THREE.PlaneGeometry(GRID_M, GRID_M);
+    pathGeo.rotateX(-Math.PI / 2);
+    const pathMat = new THREE.MeshLambertMaterial({ map: getInkPathTex(), color: 0xffffff });
+    const pathIM = new THREE.InstancedMesh(pathGeo, pathMat, L.paths.length);
+    const pathSet = new Set(L.paths.map((p) => `${Math.round(p.position[0])},${Math.round(p.position[1])}`));
+    const edges = [];
+    L.paths.forEach((p, i) => {
+      const px = p.position[0], py = p.position[1];
+      dummy.position.set(px - half, 0.02, py - half);
+      dummy.rotation.set(0, 0, 0);
+      dummy.updateMatrix();
+      pathIM.setMatrixAt(i, dummy.matrix);
+      for (const [dx, dy, rot] of [[0, -GRID_M, 0], [0, GRID_M, 0], [-GRID_M, 0, Math.PI / 2], [GRID_M, 0, Math.PI / 2]]) {
+        if (!pathSet.has(`${Math.round(px + dx)},${Math.round(py + dy)}`)) {
+          edges.push([px - half + dx * 0.5, py - half + dy * 0.5, rot]);
+        }
+      }
+    });
+    pathIM.instanceMatrix.needsUpdate = true;
+    inkParkGroup.add(pathIM);
+
+    if (edges.length) {
+      const edgeGeo = new THREE.PlaneGeometry(GRID_M + 0.14, 0.18);
+      edgeGeo.rotateX(-Math.PI / 2);
+      const edgeMat = new THREE.MeshBasicMaterial({ color: 0x1c1a16 });
+      const edgeIM = new THREE.InstancedMesh(edgeGeo, edgeMat, edges.length);
+      edges.forEach(([ex, ez, rot], i) => {
+        dummy.position.set(ex, 0.03, ez);
+        dummy.rotation.set(0, rot, 0);
+        dummy.updateMatrix();
+        edgeIM.setMatrixAt(i, dummy.matrix);
+      });
+      edgeIM.instanceMatrix.needsUpdate = true;
+      inkParkGroup.add(edgeIM);
+    }
+  }
+
+  const fenceSegs = [];
+  for (const e of L.enclosures) {
+    const b = e.bounds;
+    for (let x = b.min_x; x < b.max_x - 0.01; x += GRID_M) {
+      for (const y of [b.min_y, b.max_y]) fenceSegs.push([x + 1 - half, y - half, 0]);
+    }
+    for (let y = b.min_y; y < b.max_y - 0.01; y += GRID_M) {
+      for (const x of [b.min_x, b.max_x]) fenceSegs.push([x - half, y + 1 - half, Math.PI / 2]);
+    }
+  }
+  if (fenceSegs.length) {
+    const fGeo = new THREE.PlaneGeometry(GRID_M + 0.12, 0.24);
+    fGeo.rotateX(-Math.PI / 2);
+    const fMat = new THREE.MeshBasicMaterial({ color: 0x1c1a16 });
+    const fIM = new THREE.InstancedMesh(fGeo, fMat, fenceSegs.length);
+    fenceSegs.forEach(([fx, fz, rot], i) => {
+      dummy.position.set(fx, 0.025, fz);
+      dummy.rotation.set(0, rot, 0);
+      dummy.updateMatrix();
+      fIM.setMatrixAt(i, dummy.matrix);
+    });
+    fIM.instanceMatrix.needsUpdate = true;
+    inkParkGroup.add(fIM);
+  }
+  inkParkGroup.visible = ink.enabled;
+}
+
 // ---------- minimap ----------
 const mini = $('minimap');
 const mctx = mini.getContext('2d');
 function drawMinimap() {
   const L = layout, W = mini.width, k = W / L.boundary.width_m;
-  mctx.fillStyle = '#b9d99c';
+  const isInk = ink.enabled;
+  mctx.fillStyle = isInk ? '#f3ebd8' : '#b9d99c';
   mctx.fillRect(0, 0, W, W);
-  mctx.fillStyle = '#e9dfc8';
-  for (const p of L.paths) mctx.fillRect((p.position[0] - 1) * k, (p.position[1] - 1) * k, Math.max(1, 2 * k), Math.max(1, 2 * k));
-  mctx.fillStyle = '#7e9f62';
+  mctx.fillStyle = isInk ? '#dbd3be' : '#e9dfc8';
+  mctx.strokeStyle = isInk ? '#5e5749' : 'transparent';
+  for (const p of L.paths) {
+    const x = (p.position[0] - 1) * k, y = (p.position[1] - 1) * k, s = Math.max(1, 2 * k);
+    mctx.fillRect(x, y, s, s);
+    if (isInk) mctx.strokeRect(x, y, s, s);
+  }
+  mctx.fillStyle = isInk ? '#b6ae9b' : '#7e9f62';
   for (const f of L.facilities) mctx.fillRect((f.position[0] - f.footprint[0] / 2) * k, (f.position[1] - f.footprint[1] / 2) * k, f.footprint[0] * k, f.footprint[1] * k);
   mctx.font = `${Math.max(8, Math.min(11, 160 / Math.sqrt(L.enclosures.length + 1)))}px system-ui, sans-serif`;
   mctx.textAlign = 'center';
   for (const e of L.enclosures) {
     const b = e.bounds;
-    mctx.fillStyle = '#f6c56a';
-    mctx.strokeStyle = '#5b4220';
+    mctx.fillStyle = isInk ? '#ede4ce' : '#f6c56a';
+    mctx.strokeStyle = isInk ? '#1c1a16' : '#5b4220';
     mctx.fillRect(b.min_x * k, b.min_y * k, b.width * k, b.depth * k);
     mctx.strokeRect(b.min_x * k, b.min_y * k, b.width * k, b.depth * k);
   }
-  mctx.fillStyle = '#2d2414';
+  mctx.fillStyle = isInk ? '#1a1814' : '#2d2414';
   for (const e of L.enclosures) {
     const label = e.name.replace(/ Habitat$/, '');
     mctx.fillText(label.length > 14 ? label.slice(0, 13) + '…' : label, e.center[0] * k, e.center[1] * k + 3);
   }
   const en = L.entrance;
-  mctx.fillStyle = '#c0392b';
+  mctx.fillStyle = isInk ? '#8b2e24' : '#c0392b';
   mctx.fillRect((en.position[0] - 3) * k, (en.position[1] - 1) * k, Math.max(4, 6 * k), Math.max(3, 2 * k));
 }
 mini.addEventListener('click', (ev) => {
