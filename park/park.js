@@ -1,5 +1,6 @@
 // park/park.js: assembles a layout from park/generator.js into a three.js scene.
 // Every GLB is fetched once; each mesh inside it becomes one InstancedMesh.
+// Animals and people with a rig (RIGS.md) get their own skinned copy instead, so their clips play.
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/GLTFLoader.js';
@@ -113,7 +114,58 @@ new ResizeObserver(resize).observe(canvas);
 const loader = new GLTFLoader();
 let catalog = [];
 const byId = new Map();
-const glbCache = new Map(); // asset id -> Promise<[{geometry, material, local}]>
+const glbCache = new Map(); // asset id -> Promise<[{geometry, material, local}]> (+ .rig = {scene, clips})
+const MOVE_CLIPS = ['walk', 'swim', 'slither', 'crawl', 'fly', 'drive']; // first match is the moving clip
+
+// Same as three's SkeletonUtils.clone: copy the scene and point each skinned mesh at its own bones.
+function cloneSkinned(source) {
+  const srcOf = new Map(), cloneOf = new Map();
+  const copy = source.clone();
+  (function walk(a, b) {
+    srcOf.set(b, a); cloneOf.set(a, b);
+    for (let i = 0; i < a.children.length; i++) walk(a.children[i], b.children[i]);
+  })(source, copy);
+  copy.traverse((node) => {
+    if (!node.isSkinnedMesh) return;
+    const src = srcOf.get(node);
+    node.skeleton = src.skeleton.clone();
+    node.bindMatrix.copy(src.bindMatrix);
+    node.skeleton.bones = src.skeleton.bones.map((b) => cloneOf.get(b));
+    node.bind(node.skeleton, node.bindMatrix);
+  });
+  return copy;
+}
+
+// One animated copy per moving creature: idle while standing, the locomotion clip while moving.
+function makeRigged(rig, entity) {
+  const obj = cloneSkinned(rig.scene);
+  obj.matrixAutoUpdate = false;
+  obj.traverse((o) => { if (o.isMesh) o.frustumCulled = false; });
+  const mixer = new THREE.AnimationMixer(obj);
+  const byName = new Map(rig.clips.map((c) => [c.name, c]));
+  const idleClip = byName.get('idle');
+  const moveClip = MOVE_CLIPS.map((n) => byName.get(n)).find(Boolean);
+  const idle = idleClip ? mixer.clipAction(idleClip) : null;
+  const move = moveClip ? mixer.clipAction(moveClip) : null;
+  for (const a of [idle, move]) if (a) { a.play(); a.time = Math.random() * a.getClip().duration; a.setEffectiveWeight(0); }
+  entity.rig = { obj, mixer, idle, move, moving: null };
+  setMoving(entity.rig, false);
+  mixer.update(0);
+  return obj;
+}
+
+function setMoving(r, moving) {
+  if (r.moving === moving) return;
+  const to = moving ? (r.move || r.idle) : (r.idle || r.move);
+  const from = moving ? r.idle : r.move;
+  if (r.moving === null || !from || from === to) {
+    for (const a of [r.idle, r.move]) if (a) a.setEffectiveWeight(a === to ? 1 : 0);
+  } else {
+    to.enabled = true; to.setEffectiveWeight(1);
+    from.crossFadeTo(to, 0.25, false);
+  }
+  r.moving = moving;
+}
 
 function loadParts(id) {
   if (glbCache.has(id)) return glbCache.get(id);
@@ -121,13 +173,16 @@ function loadParts(id) {
   const p = !row || !row.glb ? Promise.resolve([]) : loader.loadAsync(`../${row.glb}`).then((gltf) => {
     const parts = [];
     gltf.scene.updateMatrixWorld(true);
+    let skinned = false;
     gltf.scene.traverse((o) => {
       if (o.isMesh) {
         parts.push({ geometry: o.geometry, material: o.material, local: o.matrixWorld.clone() });
+        if (o.isSkinnedMesh) skinned = true;
         if (Array.isArray(o.material)) o.material.forEach((m) => loadedMaterials.add(m));
         else if (o.material) loadedMaterials.add(o.material);
       }
     });
+    if (skinned && gltf.animations.length) parts.rig = { scene: gltf.scene, clips: gltf.animations };
     setTheme(currentTheme);
     return parts;
   }).catch((e) => { console.warn('GLB failed', id, e.message); return []; });
@@ -226,6 +281,13 @@ function updateSimulation(dt, half) {
     }
 
     updatePlacementMatrix(_dynMatrix, [ent.curX, ent.curY, ent.z], ent.rotDeg, half);
+    if (ent.rig) {
+      const moving = ent.type === 'animal' ? ent.state === 'walk'
+        : !(ent.waitTimer > 0) && !!ent.currentNode && !!ent.targetNode && ent.currentNode !== ent.targetNode;
+      setMoving(ent.rig, moving);
+      ent.rig.obj.matrix.copy(_dynMatrix);
+      ent.rig.obj.matrixWorldNeedsUpdate = true;
+    }
     for (const b of ent.bindings) {
       _tmpMatrix.multiplyMatrices(_dynMatrix, b.local);
       b.im.setMatrixAt(b.index, _tmpMatrix);
@@ -366,11 +428,27 @@ async function build(s, given = null) {
   const loaded = await Promise.all([...groups.keys()].map((id) => loadParts(id).then((parts) => [id, parts])));
   if (token !== buildToken) return;
 
-  for (const c of [...world.children]) { world.remove(c); c.dispose?.(); }
-  let instances = 0, draws = 0;
+  for (const c of [...world.children]) {
+    world.remove(c);
+    c.dispose?.();
+    c.traverse((o) => { if (o.isSkinnedMesh) o.skeleton.dispose(); }); // bone textures of animated copies
+  }
+  let instances = 0, draws = 0, rigged = 0;
   const tmp = new THREE.Matrix4();
   for (const [id, parts] of loaded) {
-    const items = groups.get(id);
+    let items = groups.get(id);
+    if (parts.rig) {
+      for (const item of items) {
+        if (!item.entity) continue;
+        const obj = makeRigged(parts.rig, item.entity);
+        obj.matrix.copy(item.m);
+        obj.matrixWorldNeedsUpdate = true;
+        world.add(obj);
+        rigged++;
+      }
+      items = items.filter((item) => !item.entity);
+      if (!items.length) continue;
+    }
     for (const part of parts) {
       const im = new THREE.InstancedMesh(part.geometry, part.material, items.length);
       items.forEach((item, i) => {
@@ -391,9 +469,10 @@ async function build(s, given = null) {
   const st = layout.stats;
   $('stats').textContent =
     `${st.total_enclosures} enclosures · ${st.total_animals} animals · ${st.total_facilities} facilities · ` +
-    `${st.total_people} people · ${glbCache.size} GLBs · ${instances} instances · ${draws} draws · ` +
+    `${st.total_people} people · ${glbCache.size} GLBs · ${instances} instances · ${draws} draws · ${rigged} animated · ` +
     (given ? 'imported layout.json' : `layout ${genMs.toFixed(1)} ms`);
   document.body.dataset.ready = '1';
+  document.body.dataset.rigged = String(rigged);
   document.body.dataset.animals = String(st.total_animals);
   document.body.dataset.people = String(st.total_people);
   document.body.dataset.source = given ? 'import' : 'generator';
@@ -550,6 +629,7 @@ function loop(now) {
   lastSimTime = now;
   if (simRunning && dynamicEntities.length > 0 && layout) {
     updateSimulation(dt, layout.boundary.width_m / 2);
+    for (const e of dynamicEntities) if (e.rig) e.rig.mixer.update(dt);
   }
   renderer.render(scene, camera);
   if (!firstFrame && document.body.dataset.ready) {
