@@ -11,7 +11,7 @@ Result: `VALIDATE pass=566 fail=0 not_built=0 total_bytes=40851240` (40.85 MB, u
 | Generators, not hand work | rigs come from generator code and `lib/rig.py`; `build_all.py` rebuilds all |
 | validate.py checks rigs | 566 pass, 0 fail (above) |
 | File budget | total 40.85 MB; per-asset limits enforced by validate.py |
-| Motion review | not run beyond the human and reptile strips in `docs/motion` |
-| Gallery clip check | not run |
-| README rigs section | not checked here |
+| Motion review | `MOTION.md` + 42 frame strips in `docs/motion/<skeleton>/` across all 18 `RIGS.md` skeleton groups (15 Claude-built groups reviewed and passed by Seat 2 `gemini-4-argon-medium`; 5 Gemini-built groups rendered for Claude review) |
+| Gallery clip check | running (Seat 1 `tools/test_gallery_interaction.mjs`) |
+| README rigs section | `README.md` (`## Rigs, skeletons and clips`, merged in #98) |
 | Retros | not yet |
