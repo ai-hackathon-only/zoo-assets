@@ -24,6 +24,38 @@ TOTAL_MAX = 120 * 1024 * 1024
 H_TOL, L_TOL, ORIGIN_TOL = 0.20, 0.30, 0.02  # height +-20 %, longest side +-30 %, origin 2 cm
 
 
+# Required clips per RIGS.md. The `rig` field in assets.json is not filled yet, so the list is inferred from the
+# category and the bones in the GLB; once `rig` exists, RIG_CLIPS[rig.split(".")[0]] wins.
+RIG_CLIPS = {"quadruped": "idle walk eat", "hoofed": "idle walk eat", "bigcat": "idle walk eat",
+             "upright": "idle walk eat", "primate": "idle walk eat sit", "bird": "idle walk eat",
+             "reptile": "idle walk eat", "snake": "idle slither", "fish": "idle swim", "marine": "idle swim eat",
+             "insect": "idle crawl", "arachnid": "idle crawl", "mollusc": "idle crawl",
+             "human": "idle walk wave carry", "vehicle": "idle drive", "gate": "idle open close",
+             "facility": "idle", "plant": "idle sway", "static": "idle"}
+MOVERS = ("walk", "swim", "crawl", "slither", "fly", "drive")
+
+
+def required_clips(r, bones, clips):
+    """Returns (list of required clip names, list of 'one of' groups)."""
+    if r.get("rig"):
+        return RIG_CLIPS[r["rig"].split(".")[0]].split(), []
+    cat = r["category"]
+    has = lambda *n: any(b in bones for b in n)
+    if cat == "plants":
+        return ["idle", "sway"], []
+    if cat in ("keepers", "visitors"):
+        return ["idle", "walk"], []
+    if cat == "vehicles":
+        return ["idle"], [("drive",)] if has("wheel_FL", "wheel_BL") or any(b.startswith("wheel") for b in bones) else []
+    if cat == "animals":
+        if has("leg_FL", "leg_L", "leg_L_upper", "thigh_L"):
+            return ["idle", "walk", "eat"], []
+        return ["idle"], [MOVERS]
+    if has("door", "gate") or any(b.startswith(("door", "gate")) for b in bones):
+        return ["idle", "open", "close"], []
+    return ["idle"], []
+
+
 def check(r):
     errs = []
     glb = os.path.join("assets", r["category"], r["id"] + ".glb")
@@ -50,7 +82,11 @@ def check(r):
         if len(arms) != 1:
             errs.append(f"{len(arms)} armatures, want 1")
         clips = sorted(act.name for act in bpy.data.actions)
-        missing = [c for c in rig.CLIPS if not any(n.startswith(c) for n in clips)]
+        bones = {b.name for a in arms for b in a.data.bones}
+        need, groups = required_clips(r, bones, clips)
+        has_clip = lambda c: any(n.startswith(c) for n in clips)
+        missing = [c for c in need if not has_clip(c)]
+        missing += ["one of " + "/".join(g) for g in groups if not any(has_clip(c) for c in g)]
         if missing:
             errs.append(f"rig: missing clips {missing} (have {clips})")
         for o in obs:

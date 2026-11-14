@@ -3,13 +3,62 @@
 size_m = [width, length, height]. The animal faces -Y (DECISION in Plan & roles); swimmers rest their
 belly on the floor so the origin stays at floor centre. One builder per asset id, all sized from size_m.
 """
+SHAPES = ("box", "ball", "cyl", "cone")
+
+
+def _bounds(parts):
+    from mathutils import Vector
+    pts = [o.matrix_world @ Vector(c) for o in parts for c in o.bound_box]
+    return (Vector([min(p[i] for p in pts) for i in range(3)]), Vector([max(p[i] for p in pts) for i in range(3)]))
+
+
 from generators.quadruped import _limb
+
+
+class _YTagger:
+    """Tags each part by where it sits along the body: head (front, -Y), tail (back), else body."""
+
+    def __init__(self, z, size):
+        self._z, self._s = z, size
+
+    def __getattr__(self, name):
+        fn = getattr(self._z, name)
+        if name not in SHAPES:
+            return fn
+        L = self._s[1]
+
+        def make(*a, **kw):
+            y = kw.get("loc", (0, 0, 0))[1]
+            kind = "head" if y < -0.27 * L else "tail" if y > 0.27 * L else "body"
+            with self._z.bone(kind):
+                return fn(*a, **kw)
+        return make
+
+
+def _declare_joints(z):
+    import bpy
+    bpy.context.view_layer.update()
+    groups = {}
+    for o in bpy.context.scene.objects:
+        if o.type == "MESH":
+            groups.setdefault(o.get("bone", "body"), []).append(o)
+    bb = {k: _bounds(v) for k, v in groups.items()}
+    lo, hi = bb["body"]
+    zc = (lo.z + hi.z) / 2
+    z.joint("body", (0, hi.y, zc), (0, lo.y, zc), "root")
+    if "head" in bb:
+        lo, hi = bb["head"]
+        z.joint("head", (0, hi.y, (lo.z + hi.z) / 2), (0, lo.y, (lo.z + hi.z) / 2), "body")
+    if "tail" in bb:
+        lo, hi = bb["tail"]
+        z.joint("tail", (0, lo.y, (lo.z + hi.z) / 2), (0, hi.y, (lo.z + hi.z) / 2), "body")
 
 
 def build(a, z):
     W, L, H = a["size_m"]
     body = a.get("params", {}).get("body", "grey")
-    BUILDERS[a["id"]](z, W, L, H, body)
+    BUILDERS[a["id"]](_YTagger(z, (W, L, H)), W, L, H, body)
+    _declare_joints(z)
 
 
 def _fin(z, base, length, height, loc, colour, rot=(0, 0, 0), thick=None):

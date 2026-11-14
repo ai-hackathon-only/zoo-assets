@@ -68,6 +68,23 @@ def build(asset, z):
     if not fn:
         raise ValueError(f"Unknown plant kind: {kind} for asset {aid}")
     fn(aid, W, L, H, params, z)
+    _rig(H, z)
+
+
+def _rig(H, z):
+    """Two bones: trunk (parts whose centre is in the lower 35 % of the height) and crown (the rest).
+    Rigid weights; the crown pivots at the top of the trunk part so the whole plant sways from the ground."""
+    import bpy
+    from mathutils import Vector
+    cut = 0.35
+    lo = min((o.matrix_world @ Vector(c)).z for o in bpy.context.scene.objects if o.type == "MESH" for c in o.bound_box)
+    for o in bpy.context.scene.objects:
+        if o.type != "MESH":
+            continue
+        zs = [(o.matrix_world @ Vector(c)).z for c in o.bound_box]
+        o["bone"] = "trunk" if (min(zs) + max(zs)) / 2 < lo + cut * H else "crown"
+    z.joint("trunk", (0, 0, 0), (0, 0, cut * H))
+    z.joint("crown", (0, 0, cut * H), (0, 0, H), parent="trunk")
 
 
 # -----------------------------------------------------------------------------
