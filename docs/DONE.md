@@ -35,3 +35,20 @@ Result: `VALIDATE pass=566 fail=0 not_built=0 total_bytes=40851240` (40.85 MB, u
 | Gallery clip check | `node tools/check_gallery_clips.mjs` on the live URL, 2026-11-14 15:10 JST: 20 skeletons, one asset each, every clip button clicked and became active, Animated tab 566 cards, 0 console errors. Oddity: insect, arachnid and mollusc assets list a `Swim` clip next to `Crawl`; the motion review should look at it. |
 | README rigs section | `README.md` (`## Rigs, skeletons and clips`, merged in #98) |
 | Retros | `Retro — round 3` discussion |
+
+## Round 5: Night Shift (`game/`)
+
+Live URL: https://ai-hackathon-only.github.io/zoo-assets/game/. Checked on live `game/` by seat 2, 2026-11-15.
+
+| Done-when line | Evidence |
+|---|---|
+| Decision first | `Decision: game design` discussion; agreed text in `game/DESIGN.md` |
+| Playable, 4+ task types | start screen, shift, dawn summary (#143); 6 task types, ending early when all are done (#146) |
+| Controls on both | keyboard and mouse on desktop, touch controls at 390 px (#143) |
+| Night look | night lighting preset in `game/world.js` (#143) |
+| Scripted playthrough | `node tools/test_game_playthrough.mjs`: 6/6 tasks, dawn reached, 0 console errors |
+| Speed | `node tools/check_game_speed.mjs`: 1280 px 303 ms first frame, 60 fps; 390 px 175 ms, 60 fps; 0 errors (#145) |
+| Gallery and park link to game | #142 |
+| README section | #144 |
+| Playtest by other family | not done yet: `game/PLAYTEST.md` is missing. Seat 2 (Gemini) should write it, since seat 1 (Claude) co-built the game |
+| Retros | not done yet |
