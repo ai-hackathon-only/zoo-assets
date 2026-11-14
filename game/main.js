@@ -1,240 +1,460 @@
-// Night Shift: game loop, controls, tasks, screens, test hooks. Design: game/DESIGN.md
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/GLTFLoader.js';
 import { InkLook, lookFromUrl, setLookInUrl } from '../vendor/ink.js';
 import { buildNightShiftWorld } from './world.js';
 
-const $ = (id) => document.getElementById(id);
-const SHIFT_SECONDS = 390;        // 6.5 minutes, dusk to dawn
-const RANGE = 3.2;                // metres to a task marker
-const HOLD = 1.5;                 // seconds to hold Action
-const SPEED = 5.5;
+const SHIFT_DURATION_S = 360; // 6-minute night shift
+const PLAYER_SPEED = 8.5;
+const INTERACT_RANGE = 3.2;
+const HOLD_DURATION_S = 1.5;
 
-const canvas = $('scene');
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-renderer.outputColorSpace = THREE.SRGBColorSpace;
+const canvas = document.getElementById('scene');
+const startScreen = document.getElementById('start-screen');
+const dawnScreen = document.getElementById('dawn-screen');
+const hud = document.getElementById('hud');
+const startBtn = document.getElementById('start-btn');
+const replayBtn = document.getElementById('replay-btn');
+const startLookBtn = document.getElementById('start-look-btn');
+const hudLookBtn = document.getElementById('hud-look-btn');
+const clockPill = document.getElementById('clock-pill');
+const tasksPill = document.getElementById('tasks-pill');
+const promptText = document.getElementById('prompt-text');
+const promptSub = document.getElementById('prompt-sub');
+const actionBtn = document.getElementById('action-btn');
+const actionProgress = document.getElementById('action-progress');
+const minimap = document.getElementById('minimap');
+const minimapCtx = minimap.getContext('2d');
+const dawnStars = document.getElementById('dawn-stars');
+const dawnSubtitle = document.getElementById('dawn-subtitle');
+const dawnList = document.getElementById('dawn-list');
+
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(48, window.innerWidth / window.innerHeight, 0.2, 260);
 const ink = new InkLook(THREE, renderer);
 ink.lineScale = 0.3;
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(50, 1, 0.3, 300);
 
 function setLook(on) {
-  ink.enabled = on; setLookInUrl(on);
-  for (const id of ['look', 'look-start']) $(id).textContent = on ? 'Look: Sumi-e' : 'Look: Toy';
+  ink.enabled = on;
+  setLookInUrl(on);
+  document.body.dataset.look = on ? 'ink' : 'toy';
+  startLookBtn.textContent = on ? 'Look: Sumi-e' : 'Look: Toy';
+  hudLookBtn.textContent = on ? 'Sumi-e' : 'Toy';
 }
-for (const id of ['look', 'look-start']) $(id).addEventListener('click', () => setLook(!ink.enabled));
 setLook(lookFromUrl());
 
-function resize() {
-  const w = innerWidth, h = innerHeight;
-  renderer.setSize(w, h, false);
-  camera.aspect = w / h; camera.updateProjectionMatrix();
-  if (ink.resize) ink.resize(w, h);
-}
-addEventListener('resize', resize); resize();
+startLookBtn.addEventListener('click', () => setLook(!ink.enabled));
+hudLookBtn.addEventListener('click', () => setLook(!ink.enabled));
 
-const S = { screen: 'start', elapsed: 0, hold: 0, carrying: false, target: null, world: null, loading: false, doneAt: null };
+let world = null;
+let worldGroup = null;
+let screen = 'start'; // 'start' | 'playing' | 'dawn'
+let shiftElapsed = 0;
+let currentClip = 'idle';
+let moveTarget = null;
+let holdingAction = false;
+let holdProgress = 0;
+let activeVisitorWalks = [];
+let fpsEstimate = 60;
+let fpsFrames = 0;
+let fpsTimer = 0;
+
 const keys = new Set();
-const show = (name) => {
-  S.screen = name; document.body.dataset.screen = name;
-  $('start').hidden = name !== 'start'; $('hud').hidden = name !== 'play'; $('end').hidden = name !== 'end';
-};
+const raycaster = new THREE.Raycaster();
+const groundPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
 
-// ---------- world ----------
-async function ensureWorld() {
-  if (S.world) return;
-  S.world = await buildNightShiftWorld({ THREE, GLTFLoader, scene });
-}
-function resetShift() {
-  const w = S.world;
-  S.elapsed = 0; S.hold = 0; S.carrying = false; S.target = null; S.doneAt = null;
-  const e = w.layout.entrance.position;
-  w.player.obj.position.set(e[0], 0, e[1] + 3);
-  w.player.playClip('idle');
-  for (const t of w.tasks) {
-    t.status = 'pending'; t.beacon.visible = true; t.walkTo = null;
-    if (t.type === 'gate') t.rig.playClip('open', { loop: false, fade: 0, clampWhenFinished: true });
-    if (t.type === 'feed') t.rig.playClip('idle');
-    if (t.type === 'visitor') { t.rig.playClip('wave'); }
-    if (t.type === 'lamp') t.light.intensity = 0;
-    if (t.type === 'carry') { t.origin = t.origin || t.position; t.carried = false; w.detachProp(t.prop, t.origin); t.beacon.position.set(t.origin[0], 0, t.origin[2]); }
-  }
+function getTaskTargetPos(task) {
+  return task.type === 'carry' && task.carried ? task.dropoff : task.position;
 }
 
-// ---------- tasks ----------
-const taskPos = (t) => (t.type === 'carry' && t.carried ? t.dropoff : t.position);
-const dist = (p, q) => Math.hypot(p.x - q[0], p.z - q[2]);
-function completeTask(t) {
-  const w = S.world;
-  if (t.type === 'feed') { t.rig.playClip('eat', { loop: false, fade: 0.2, clampWhenFinished: false }); }
-  if (t.type === 'gate') t.rig.playClip('close', { loop: false, fade: 0, clampWhenFinished: true });
-  if (t.type === 'visitor') { t.rig.playClip('wave', { loop: false, fade: 0.1 }); t.walkTo = t.exitPosition; t.waveLeft = 1.4; }
-  if (t.type === 'lamp') t.light.intensity = 2.4;
-  if (t.type === 'carry') {
-    if (!t.carried) {   // stage 1: pick up
-      t.carried = true; w.attachProp(t.prop);
-      w.player.playClip('carry'); t.beacon.position.set(t.dropoff[0], 0, t.dropoff[2]);
-      toast('Bucket picked up. Take it to the trough.'); return false;
+function getNearbyTask() {
+  if (!world) return null;
+  const p = world.player.obj.position;
+  let best = null;
+  let bestDist = INTERACT_RANGE;
+  for (const t of world.tasks) {
+    if (t.done) continue;
+    const pos = getTaskTargetPos(t);
+    const d = Math.hypot(pos[0] - p.x, pos[2] - p.z);
+    if (d <= bestDist) {
+      bestDist = d;
+      best = t;
     }
-    w.detachProp(t.prop, t.dropoff); w.player.playClip('idle');
-  }
-  t.status = 'done'; t.beacon.visible = false;
-  return true;
-}
-function nextPending(type) { return S.world.tasks.find((t) => t.status === 'pending' && (!type || t.type === type)); }
-function nearestTask() {
-  let best = null, bd = RANGE;
-  const p = S.world.player.obj.position;
-  for (const t of S.world.tasks) {
-    if (t.status !== 'pending') continue;
-    const d = dist(p, taskPos(t));
-    if (d < bd) { bd = d; best = t; }
   }
   return best;
 }
-function toast(msg) { $('hint').textContent = msg; }
 
-// ---------- input ----------
-addEventListener('keydown', (e) => {
-  if (['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key)) e.preventDefault();
-  keys.add(e.key.toLowerCase());
-  if (e.key === 'Enter' && S.screen === 'start') startShift();
-});
-addEventListener('keyup', (e) => keys.delete(e.key.toLowerCase()));
-const actHeld = () => keys.has('e') || keys.has(' ') || S.btnDown;
-const act = $('action');
-act.addEventListener('pointerdown', (e) => { e.preventDefault(); S.btnDown = true; });
-for (const ev of ['pointerup', 'pointerleave', 'pointercancel']) act.addEventListener(ev, () => { S.btnDown = false; });
-
-const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(), plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
-canvas.addEventListener('pointerdown', (e) => {
-  if (S.screen !== 'play') return;
-  ndc.set((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
-  ray.setFromCamera(ndc, camera);
-  const hit = new THREE.Vector3();
-  if (ray.ray.intersectPlane(plane, hit)) S.target = hit;
-});
-
-// ---------- flow ----------
-async function startShift() {
-  if (S.loading) return;
-  S.loading = true; $('go').disabled = true; $('go').textContent = 'Loading…';
-  try { await ensureWorld(); } catch (err) { console.error(err); $('go').textContent = 'Load failed'; S.loading = false; return; }
-  resetShift(); show('play'); toast('Find a glowing marker and hold Act.');
-  $('go').disabled = false; $('go').textContent = 'Start shift'; S.loading = false;
-}
-function endShift() {
-  const tasks = S.world.tasks, done = tasks.filter((t) => t.status === 'done');
-  const n = done.length, total = tasks.length;
-  const stars = n >= total ? 3 : n >= 5 ? 2 : n >= 4 ? 1 : 0;
-  $('stars').textContent = stars ? '★'.repeat(stars) + '☆'.repeat(3 - stars) : '☆☆☆';
-  $('verdict').textContent = n >= 4 ? 'A good shift. The day team will find a calm zoo.' : 'A quiet night. The day team will pick up from here.';
-  $('summary').innerHTML = tasks.map((t) => t.status === 'done'
-    ? `<li>✓ ${t.label}</li>` : `<li class="left">· ${t.label} (left for the day team)</li>`).join('');
-  S.world.lighting.setProgress(1);
-  show('end');
-}
-$('go').addEventListener('click', startShift);
-$('again').addEventListener('click', () => { resetShift(); show('play'); });
-
-// ---------- loop ----------
-const clock = new THREE.Clock();
-const mm = $('minimap').getContext('2d');
-let camPos = new THREE.Vector3(), heading = 0, moving = false;
-function drawMap() {
-  const w = S.world, b = w.bounds, W = 240;
-  const half = b.width_m / 2 + 4, k = W / (half * 2);
-  const X = (x) => (x + half) * k, Z = (z) => (z + half) * k;
-  mm.clearRect(0, 0, W, W);
-  mm.fillStyle = '#35435f';
-  for (const p of w.layout.paths) mm.fillRect(X(p.position[0] - p.size[0] / 2), Z(p.position[1] - p.size[1] / 2), p.size[0] * k, p.size[1] * k);
-  for (const t of w.tasks) if (t.status === 'pending') {
-    const q = taskPos(t); mm.fillStyle = '#fbbf24'; mm.beginPath(); mm.arc(X(q[0]), Z(q[2]), 6, 0, 7); mm.fill();
+function resolveTask(task) {
+  if (!task || task.done) return;
+  if (task.type === 'carry' && !task.carried) {
+    world.attachProp(task.prop);
+    task.carried = true;
+    task.beacon.position.set(task.dropoff[0], 0.06, task.dropoff[2]);
+    return;
   }
-  const p = w.player.obj.position; mm.fillStyle = '#fff'; mm.beginPath(); mm.arc(X(p.x), Z(p.z), 5, 0, 7); mm.fill();
+  if (task.type === 'carry' && task.carried) {
+    world.detachProp(task.prop, task.dropoff);
+  } else if (task.type === 'feed') {
+    task.rig?.playClip('eat', { loop: true });
+  } else if (task.type === 'gate') {
+    task.rig?.playClip('close', { loop: false, clampWhenFinished: true });
+  } else if (task.type === 'visitor') {
+    task.rig?.playClip('walk', { loop: true });
+    const exitPos = task.exitPosition || [world.layout.entrance.position[0], 0, world.layout.entrance.position[1]];
+    if (task.rig?.obj) {
+      activeVisitorWalks.push({
+        obj: task.rig.obj,
+        dest: new THREE.Vector3(exitPos[0], 0, exitPos[2]),
+      });
+    }
+  } else if (task.type === 'lamp' && task.light) {
+    task.light.intensity = 2.6;
+  }
+  task.done = true;
+  if (task.beacon) task.beacon.visible = false;
+  updateTaskCounter();
 }
-function frame() {
-  requestAnimationFrame(frame);
-  const dt = Math.min(clock.getDelta(), 0.1), w = S.world;
-  if (w) {
-    if (S.screen === 'play') {
-      S.elapsed += dt;
-      let dx = (keys.has('d') || keys.has('arrowright') ? 1 : 0) - (keys.has('a') || keys.has('arrowleft') ? 1 : 0);
-      let dz = (keys.has('s') || keys.has('arrowdown') ? 1 : 0) - (keys.has('w') || keys.has('arrowup') ? 1 : 0);
-      const p = w.player.obj.position;
-      if (dx || dz) S.target = null;
-      else if (S.target) {
-        const ex = S.target.x - p.x, ez = S.target.z - p.z, d = Math.hypot(ex, ez);
-        if (d < 0.4) S.target = null; else { dx = ex / d; dz = ez / d; }
-      }
-      const len = Math.hypot(dx, dz);
-      const nowMoving = len > 0;
-      if (nowMoving) {
-        dx /= len; dz /= len;
-        const hb = w.bounds.width_m / 2 + 6;
-        p.x = Math.max(-hb, Math.min(hb, p.x + dx * SPEED * dt));
-        p.z = Math.max(-hb, Math.min(hb, p.z + dz * SPEED * dt));
-        heading = Math.atan2(dx, dz); w.player.obj.rotation.y = heading;
-      }
-      if (nowMoving !== moving) { moving = nowMoving; w.player.playClip(moving ? (S.carryingNow() ? 'carry' : 'walk') : (S.carryingNow() ? 'carry' : 'idle')); }
-      // action
-      const t = nearestTask();
-      act.disabled = !t;
-      if (t && actHeld()) {
-        S.hold += dt;
-        if (S.hold >= HOLD) { S.hold = 0; S.btnDown = false; keys.delete('e'); keys.delete(' '); if (completeTask(t)) toast(`Done: ${t.label}`); }
-      } else S.hold = Math.max(0, S.hold - dt * 2);
-      $('bar').firstElementChild.style.width = `${Math.min(100, (S.hold / HOLD) * 100)}%`;
-      if (t && !S.hold) toast(`${t.label}: hold Act`);
-      // visitor walks out
-      for (const v of w.tasks) if (v.walkTo && v.status === 'done') {
-        const o = v.rig.obj.position;
-        if (v.waveLeft > 0) { v.waveLeft -= dt; if (v.waveLeft <= 0) v.rig.playClip('walk'); }
-        else {
-          const ex = v.walkTo[0] - o.x, ez = v.walkTo[2] - o.z, d = Math.hypot(ex, ez);
-          if (d > 1) { o.x += (ex / d) * 2.2 * dt; o.z += (ez / d) * 2.2 * dt; v.rig.obj.rotation.y = Math.atan2(ex, ez); }
-          else { v.walkTo = null; v.rig.obj.visible = false; }
+
+function updateTaskCounter() {
+  if (!world) return;
+  const doneCount = world.tasks.filter((t) => t.done).length;
+  tasksPill.textContent = `${doneCount} / ${world.tasks.length} tasks`;
+}
+
+function formatClock(progress) {
+  const totalMinutes = Math.round(progress * 450); // 22:00 to 05:30 (7.5h)
+  const hour = (22 + Math.floor(totalMinutes / 60)) % 24;
+  const min = totalMinutes % 60;
+  const hh = String(hour).padStart(2, '0');
+  const mm = String(min).padStart(2, '0');
+  const phase = progress < 0.35 ? 'Night' : progress < 0.75 ? 'Late Night' : 'Pre-Dawn';
+  return `${hh}:${mm} · ${phase}`;
+}
+
+function showDawnSummary() {
+  screen = 'dawn';
+  holdingAction = false;
+  holdProgress = 0;
+  hud.classList.add('hidden');
+  dawnScreen.classList.remove('hidden');
+
+  const tasks = world ? world.tasks : [];
+  const doneCount = tasks.filter((t) => t.done).length;
+  const stars = doneCount >= tasks.length ? 3 : doneCount >= 4 ? 2 : 1;
+  dawnStars.textContent = '★'.repeat(stars) + '☆'.repeat(3 - stars);
+  dawnSubtitle.textContent = `You handled ${doneCount} of ${tasks.length} night-shift tasks before sunrise.`;
+
+  dawnList.innerHTML = '';
+  for (const t of tasks) {
+    const li = document.createElement('li');
+    const name = document.createElement('span');
+    name.textContent = t.label;
+    const status = document.createElement('span');
+    status.className = t.done ? 'tag-done' : 'tag-left';
+    status.textContent = t.done ? 'Handled' : 'Left for day team';
+    li.append(name, status);
+    dawnList.appendChild(li);
+  }
+}
+
+async function initWorld() {
+  if (worldGroup) scene.remove(worldGroup);
+  worldGroup = new THREE.Group();
+  scene.add(worldGroup);
+  activeVisitorWalks = [];
+  shiftElapsed = 0;
+  moveTarget = null;
+  holdProgress = 0;
+  holdingAction = false;
+  currentClip = 'idle';
+
+  world = await buildNightShiftWorld({ THREE, GLTFLoader, scene: worldGroup, basePath: '..' });
+  updateTaskCounter();
+  updateCameraAndFlashlight();
+}
+
+function startShift() {
+  if (!world) return;
+  screen = 'playing';
+  shiftElapsed = 0;
+  moveTarget = null;
+  holdProgress = 0;
+  holdingAction = false;
+  startScreen.classList.add('hidden');
+  dawnScreen.classList.add('hidden');
+  hud.classList.remove('hidden');
+}
+
+startBtn.addEventListener('click', startShift);
+replayBtn.addEventListener('click', async () => {
+  replayBtn.disabled = true;
+  await initWorld();
+  replayBtn.disabled = false;
+  startShift();
+});
+
+// Keyboard controls
+window.addEventListener('keydown', (e) => {
+  keys.add(e.code);
+  if ((e.code === 'KeyE' || e.code === 'Space') && screen === 'playing') {
+    holdingAction = true;
+  }
+});
+window.addEventListener('keyup', (e) => {
+  keys.delete(e.code);
+  if (e.code === 'KeyE' || e.code === 'Space') {
+    holdingAction = false;
+  }
+});
+
+// Pointer tap/click-to-move on ground
+canvas.addEventListener('pointerdown', (e) => {
+  if (screen !== 'playing' || !world) return;
+  const ndc = new THREE.Vector2(
+    (e.clientX / window.innerWidth) * 2 - 1,
+    -(e.clientY / window.innerHeight) * 2 + 1
+  );
+  raycaster.setFromCamera(ndc, camera);
+  const hit = new THREE.Vector3();
+  if (raycaster.ray.intersectPlane(groundPlane, hit)) {
+    const b = world.bounds;
+    hit.x = Math.max(b.min_x + 2, Math.min(b.max_x - 2, hit.x));
+    hit.z = Math.max(b.min_y + 2, Math.min(b.max_y - 2, hit.z));
+    moveTarget = hit;
+  }
+});
+
+// Action button (hold or tap)
+actionBtn.addEventListener('pointerdown', (e) => {
+  e.preventDefault();
+  if (screen === 'playing' && !actionBtn.disabled) holdingAction = true;
+});
+window.addEventListener('pointerup', () => { holdingAction = false; });
+window.addEventListener('pointercancel', () => { holdingAction = false; });
+
+function updatePlayer(dt) {
+  if (!world || screen !== 'playing') return;
+  const p = world.player.obj;
+  let vx = 0;
+  let vz = 0;
+  if (keys.has('KeyW') || keys.has('ArrowUp')) vz -= 1;
+  if (keys.has('KeyS') || keys.has('ArrowDown')) vz += 1;
+  if (keys.has('KeyA') || keys.has('ArrowLeft')) vx -= 1;
+  if (keys.has('KeyD') || keys.has('ArrowRight')) vx += 1;
+
+  if (vx !== 0 || vz !== 0) {
+    moveTarget = null;
+    const len = Math.hypot(vx, vz);
+    vx /= len;
+    vz /= len;
+  } else if (moveTarget) {
+    const dx = moveTarget.x - p.position.x;
+    const dz = moveTarget.z - p.position.z;
+    const dist = Math.hypot(dx, dz);
+    if (dist < 0.35) {
+      moveTarget = null;
+    } else {
+      vx = dx / dist;
+      vz = dz / dist;
+    }
+  }
+
+  const moving = vx !== 0 || vz !== 0;
+  if (moving) {
+    const b = world.bounds;
+    p.position.x = Math.max(b.min_x + 2, Math.min(b.max_x - 2, p.position.x + vx * PLAYER_SPEED * dt));
+    p.position.z = Math.max(b.min_y + 2, Math.min(b.max_y - 2, p.position.z + vz * PLAYER_SPEED * dt));
+    p.rotation.y = Math.atan2(vx, vz);
+  }
+
+  const carrying = world.tasks.some((t) => t.type === 'carry' && t.carried && !t.done);
+  const desiredClip = carrying ? 'carry' : moving ? 'walk' : 'idle';
+  if (desiredClip !== currentClip) {
+    currentClip = desiredClip;
+    world.player.playClip(desiredClip, { loop: true });
+  }
+}
+
+function updateCameraAndFlashlight() {
+  if (!world) return;
+  const p = world.player.obj;
+  camera.position.set(p.position.x, 14.5, p.position.z + 12.2);
+  camera.lookAt(p.position.x, 0.8, p.position.z);
+
+  const dirX = Math.sin(p.rotation.y);
+  const dirZ = Math.cos(p.rotation.y);
+  world.lighting.flashlight.position.set(p.position.x, 1.5, p.position.z);
+  world.lighting.flashlightTarget.position.set(p.position.x + dirX * 8, 0.2, p.position.z + dirZ * 8);
+}
+
+function drawMinimap() {
+  if (!world) return;
+  const w = minimap.width;
+  const h = minimap.height;
+  minimapCtx.clearRect(0, 0, w, h);
+
+  const b = world.bounds;
+  const spanX = Math.max(1, b.max_x - b.min_x);
+  const spanZ = Math.max(1, b.max_y - b.min_y);
+  const toMapX = (x) => ((x - b.min_x) / spanX) * (w - 12) + 6;
+  const toMapY = (z) => ((z - b.min_y) / spanZ) * (h - 12) + 6;
+
+  // Enclosures
+  minimapCtx.fillStyle = 'rgba(51, 65, 85, 0.75)';
+  for (const enc of world.layout.enclosures) {
+    const eb = enc.bounds;
+    const x0 = toMapX(eb.min_x);
+    const y0 = toMapY(eb.min_y);
+    const ew = toMapX(eb.max_x) - x0;
+    const eh = toMapY(eb.max_y) - y0;
+    minimapCtx.fillRect(x0, y0, ew, eh);
+  }
+
+  // Task markers
+  for (const t of world.tasks) {
+    if (t.done) continue;
+    const pos = getTaskTargetPos(t);
+    minimapCtx.fillStyle = '#' + t.color.toString(16).padStart(6, '0');
+    minimapCtx.beginPath();
+    minimapCtx.arc(toMapX(pos[0]), toMapY(pos[2]), 3.5, 0, Math.PI * 2);
+    minimapCtx.fill();
+  }
+
+  // Player dot
+  const p = world.player.obj.position;
+  minimapCtx.fillStyle = '#ffffff';
+  minimapCtx.beginPath();
+  minimapCtx.arc(toMapX(p.x), toMapY(p.z), 4, 0, Math.PI * 2);
+  minimapCtx.fill();
+}
+
+function updateInteraction(dt) {
+  if (!world || screen !== 'playing') return;
+  const nearby = getNearbyTask();
+  if (!nearby) {
+    actionBtn.disabled = true;
+    holdProgress = 0;
+    actionProgress.style.width = '0%';
+    promptText.textContent = 'Walk toward a glowing beacon';
+    promptSub.textContent = 'WASD / Tap ground to move';
+    return;
+  }
+
+  actionBtn.disabled = false;
+  const verb = nearby.type === 'carry'
+    ? (nearby.carried ? 'Drop bucket at trough' : 'Pick up fish bucket')
+    : nearby.label;
+  promptText.textContent = verb;
+  promptSub.textContent = 'Hold Action (E / Space)';
+
+  if (holdingAction) {
+    holdProgress += dt / HOLD_DURATION_S;
+    actionProgress.style.width = `${Math.min(100, holdProgress * 100)}%`;
+    if (holdProgress >= 1) {
+      holdProgress = 0;
+      holdingAction = false;
+      actionProgress.style.width = '0%';
+      resolveTask(nearby);
+    }
+  } else {
+    holdProgress = Math.max(0, holdProgress - dt * 2);
+    actionProgress.style.width = `${Math.min(100, holdProgress * 100)}%`;
+  }
+}
+
+let lastTime = performance.now();
+function animate(now) {
+  requestAnimationFrame(animate);
+  const dt = Math.min(0.05, (now - lastTime) / 1000);
+  lastTime = now;
+
+  fpsFrames++;
+  fpsTimer += dt;
+  if (fpsTimer >= 0.5) {
+    fpsEstimate = Math.round(fpsFrames / fpsTimer);
+    fpsFrames = 0;
+    fpsTimer = 0;
+  }
+
+  if (world) {
+    let shiftProgress = 0;
+    if (screen === 'playing') {
+      shiftElapsed += dt;
+      shiftProgress = Math.min(1, shiftElapsed / SHIFT_DURATION_S);
+      clockPill.textContent = formatClock(shiftProgress);
+      updatePlayer(dt);
+      updateInteraction(dt);
+      for (const vw of activeVisitorWalks) {
+        const dx = vw.dest.x - vw.obj.position.x;
+        const dz = vw.dest.z - vw.obj.position.z;
+        const dist = Math.hypot(dx, dz);
+        if (dist > 0.5) {
+          vw.obj.position.x += (dx / dist) * 3.0 * dt;
+          vw.obj.position.z += (dz / dist) * 3.0 * dt;
+          vw.obj.rotation.y = Math.atan2(dx, dz);
         }
       }
-      const prog = Math.min(1, S.elapsed / SHIFT_SECONDS);
-      const left = w.tasks.filter((x) => x.status === 'pending').length;
-      $('count').textContent = `${w.tasks.length - left} / ${w.tasks.length}`;
-      const mins = Math.floor(prog * 6 * 60) , hh = (22 + Math.floor(mins / 60)) % 24, mi = mins % 60;
-      $('clock').textContent = prog >= 1 ? 'Dawn' : `${String(hh).padStart(2, '0')}:${String(mi).padStart(2, '0')}`;
-      if (!left && S.doneAt === null) S.doneAt = S.elapsed;
-      w.update(dt, prog);
-      if (prog >= 1 || (S.doneAt !== null && S.elapsed - S.doneAt > 3)) endShift();
-      drawMap();
-    } else w.update(dt, S.screen === 'end' ? 1 : 0);
-    // chase camera ~50 deg
-    const pp = w.player.obj.position, h = 13, back = 11;
-    camPos.set(pp.x, h, pp.z + back);
-    camera.position.lerp(camPos, 1 - Math.exp(-6 * dt));
-    camera.lookAt(pp.x, 0.8, pp.z);
-  } else { camera.position.set(0, 20, 30); camera.lookAt(0, 0, 0); }
-  ink.render(scene, camera);
-}
-S.carryingNow = () => !!S.world?.tasks.find((t) => t.type === 'carry' && t.carried && t.status === 'pending');
-frame();
+      if (shiftProgress >= 1) showDawnSummary();
+    }
+    world.update(dt, screen === 'dawn' ? 1 : shiftProgress);
+    updateCameraAndFlashlight();
+    if (screen === 'playing') drawMinimap();
+  }
 
-// ---------- test hooks ----------
+  if (ink.enabled) ink.render(scene, camera);
+  else renderer.render(scene, camera);
+}
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// Test / debug hooks per game/DESIGN.md
 window.game = {
   debug: {
-    ready: () => !!S.world,
-    start: () => startShift(),
     completeTask(type) {
-      const t = nextPending(type); if (!t) return null;
-      const p = taskPos(t); S.world.player.obj.position.set(p[0], 0, p[2]);
-      if (!completeTask(t)) completeTask(t);   // carry: pick up, then drop
-      return { id: t.id, type: t.type, status: t.status };
+      if (!world) return false;
+      if (screen === 'start') startShift();
+      const task = world.tasks.find((t) => !t.done && (!type || t.type === type));
+      if (!task) return false;
+      if (task.type === 'carry' && !task.carried) {
+        world.player.obj.position.set(task.position[0], 0, task.position[2]);
+        resolveTask(task);
+      }
+      const pos = getTaskTargetPos(task);
+      world.player.obj.position.set(pos[0], 0, pos[2]);
+      resolveTask(task);
+      return true;
     },
-    skipTo(what) { if (what === 'dawn' && S.screen === 'play') { S.elapsed = SHIFT_SECONDS; } },
+    skipTo(target) {
+      if (!world) return false;
+      if (target === 'dawn') {
+        shiftElapsed = SHIFT_DURATION_S;
+        world.update(0.016, 1);
+        showDawnSummary();
+        return true;
+      }
+      return false;
+    },
     getState() {
-      const w = S.world;
-      return { screen: S.screen, progress: Math.min(1, S.elapsed / SHIFT_SECONDS),
-        player: w ? w.player.obj.position.toArray().map((v) => +v.toFixed(2)) : null,
-        tasks: w ? w.tasks.map((t) => ({ id: t.id, type: t.type, status: t.status })) : [], look: ink.enabled ? 'ink' : 'toy' };
+      const p = world?.player?.obj?.position;
+      return {
+        screen,
+        shiftProgress: Math.min(1, shiftElapsed / SHIFT_DURATION_S),
+        fps: fpsEstimate,
+        completedCount: world ? world.tasks.filter((t) => t.done).length : 0,
+        totalTasks: world ? world.tasks.length : 0,
+        playerPosition: p ? [Number(p.x.toFixed(2)), Number(p.y.toFixed(2)), Number(p.z.toFixed(2))] : [0, 0, 0],
+        tasks: world ? world.tasks.map((t) => ({ id: t.id, type: t.type, label: t.label, done: t.done, carried: Boolean(t.carried) })) : [],
+      };
     },
   },
 };
+
+initWorld().catch((err) => console.error('[game] initWorld failed:', err));
+requestAnimationFrame(animate);
