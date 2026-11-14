@@ -4,6 +4,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/GLTFLoader.js';
+import { InkLook, lookFromUrl, setLookInUrl } from '../vendor/ink.js';
 import { generateLayout, GRID_M } from './generator.js';
 
 // rAF timestamps count from navigation start, so first-frame time includes HTML, three.js and GLB downloads.
@@ -32,6 +33,7 @@ function writeSettings(s) {
   const params = { size: s.size, density: s.density, population: s.population, seed: s.seed };
   if (s.theme === 'night') params.theme = 'night';
   if (s.style && s.style !== 'grid') params.style = s.style;
+  if (new URLSearchParams(location.search).get('look') === 'ink') params.look = 'ink';
   const q = new URLSearchParams(params);
   history.replaceState(null, '', `${location.pathname}?${q}`);
 }
@@ -41,6 +43,17 @@ const canvas = $('scene');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 renderer.outputColorSpace = THREE.SRGBColorSpace;
+const ink = new InkLook(THREE, renderer);
+ink.lineScale = 0.3;
+const lookBtn = $('look-toggle');
+function setLook(on) {
+  ink.enabled = on; setLookInUrl(on);
+  lookBtn.textContent = on ? 'Look: Sumi-e' : 'Look: Toy';
+  lookBtn.setAttribute('aria-pressed', String(on));
+  document.body.dataset.look = on ? 'ink' : 'toy';
+}
+lookBtn.addEventListener('click', () => setLook(!ink.enabled));
+setLook(lookFromUrl());
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xcfe8f3);
 const camera = new THREE.PerspectiveCamera(50, 1, 0.5, 4000);
@@ -631,7 +644,7 @@ function loop(now) {
     updateSimulation(dt, layout.boundary.width_m / 2);
     for (const e of dynamicEntities) if (e.rig) e.rig.mixer.update(dt);
   }
-  renderer.render(scene, camera);
+  ink.render(scene, camera);
   if (!firstFrame && document.body.dataset.ready) {
     firstFrame = now;
     $('first').textContent = `first frame ${(firstFrame / 1000).toFixed(2)} s`;
