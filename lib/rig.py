@@ -93,6 +93,8 @@ def _clips(arm, h):
     has = lambda n: n in pb
     B = "hips" if has("hips") else "body"  # primates call the torso bone hips
     ad = arm.animation_data_create()
+    if "chassis" in pb:
+        return _vehicle_clips(arm, h)
     if "trunk" in pb:
         return _plant_clips(arm, h)
     eat = _eat_angle(arm, h)
@@ -197,6 +199,36 @@ def _clips(arm, h):
         track.name = clip
         track.strips.new(clip, 0, act)
         track.mute = True  # tracks are for export; the scene shows the rest pose
+        ad.action = None
+    for b in pb:
+        b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
+
+
+def _vehicle_clips(arm, h):
+    """Vehicles: drive (24, every wheel turns one full turn about its axle, root bobs a little) and idle (48, root
+    breathes 2 mm). Wheels turn about the bone's own Y (its length axis, along X)."""
+    pb = arm.pose.bones
+    ad = arm.animation_data_create()
+    wheels = [b for b in pb if b.name.startswith("wheel_")]
+    for clip, n in (("drive", 24), ("idle", 48)) if wheels else (("idle", 48),):
+        for b in pb:
+            b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
+        ad.action = None
+        for f in range(n + 1):
+            ph = 2 * math.pi * f / n
+            if clip == "drive":
+                for w in wheels:
+                    _key(w, f, rot=(0, 360.0 * f / n, 0))
+                _key(pb["chassis"], f, loc=(0, 0, 0.006 * abs(math.sin(2 * ph))))
+            else:
+                _key(pb["chassis"], f, loc=(0, 0, 0.002 * math.sin(ph)))
+        act = ad.action
+        act.name = clip
+        act.use_fake_user = True
+        track = ad.nla_tracks.new()
+        track.name = clip
+        track.strips.new(clip, 0, act)
+        track.mute = True
         ad.action = None
     for b in pb:
         b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
