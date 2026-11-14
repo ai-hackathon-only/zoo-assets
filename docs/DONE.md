@@ -12,6 +12,6 @@ Result: `VALIDATE pass=566 fail=0 not_built=0 total_bytes=40851240` (40.85 MB, u
 | validate.py checks rigs | 566 pass, 0 fail (above) |
 | File budget | total 40.85 MB; per-asset limits enforced by validate.py |
 | Motion review | not run beyond the human and reptile strips in `docs/motion` |
-| Gallery clip check | `node tools/check_gallery_clips.mjs` on the live URL, 2026-11-15 15:10 JST: 20 skeletons, one asset each, every clip button clicked and became active, Animated tab 566 cards, 0 console errors. Oddity: insect, arachnid and mollusc assets list a `Swim` clip next to `Crawl`; the motion review should look at it. |
+| Gallery clip check | `node tools/check_gallery_clips.mjs` on the live URL, 2026-11-14 15:10 JST: 20 skeletons, one asset each, every clip button clicked and became active, Animated tab 566 cards, 0 console errors. Oddity: insect, arachnid and mollusc assets list a `Swim` clip next to `Crawl`; the motion review should look at it. |
 | README rigs section | not checked here |
 | Retros | not yet |
