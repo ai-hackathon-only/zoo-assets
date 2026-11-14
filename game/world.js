@@ -14,6 +14,13 @@ export const DEFAULT_WORLD_SETTINGS = {
 };
 
 /**
+ * Convert park/generator.js 2D layout coordinate [x, y, 0] to Three.js world [x, y_up, z].
+ */
+export function layoutToWorld(pos, y = 0) {
+  return [pos[0], y, pos[1]];
+}
+
+/**
  * Clone a skinned Three.js scene so each instance has its own bone hierarchy.
  */
 export function cloneSkinned(source) {
@@ -269,7 +276,7 @@ export async function buildNightShiftWorld({
   const pathGeo = new THREE.BoxGeometry(1, 0.04, 1);
   for (const p of layout.paths) {
     const tile = new THREE.Mesh(pathGeo, pathMat);
-    tile.position.set(p.position[0], 0.02, p.position[2]);
+    tile.position.set(p.position[0], 0.02, p.position[1]);
     tile.scale.set(p.size[0], 1, p.size[1]);
     worldGroup.add(tile);
   }
@@ -303,17 +310,33 @@ export async function buildNightShiftWorld({
   playerRig.obj.position.set(
     layout.entrance.position[0],
     0,
-    layout.entrance.position[2] + 3
+    layout.entrance.position[1] + 3
   );
   worldGroup.add(playerRig.obj);
   mixers.push(playerRig.mixer);
   lighting.attachFlashlight(playerRig.obj);
 
+  const propBone = playerRig.obj.getObjectByName('prop') || playerRig.obj;
+  const attachProp = (propObj) => {
+    if (!propObj) return;
+    propBone.add(propObj);
+    propObj.position.set(0, 0, 0);
+    propObj.rotation.set(0, 0, 0);
+  };
+  const detachProp = (propObj, worldPos) => {
+    if (!propObj) return;
+    worldGroup.add(propObj);
+    if (worldPos) {
+      propObj.position.set(worldPos[0], worldPos[1] ?? 0, worldPos[2]);
+    }
+    propObj.rotation.set(0, 0, 0);
+  };
+
   // Entrance arch
   if (loader.cache.has(layout.entrance.asset_id)) {
     const archData = await loader.loadAsset(layout.entrance.asset_id);
     const arch = loader.instantiate(archData, { rigged: false });
-    arch.obj.position.set(...layout.entrance.position);
+    arch.obj.position.set(...layoutToWorld(layout.entrance.position));
     arch.obj.rotation.y = (layout.entrance.rotation_deg * Math.PI) / 180;
     worldGroup.add(arch.obj);
   }
@@ -323,7 +346,7 @@ export async function buildNightShiftWorld({
     if (!loader.cache.has(dec.asset_id)) continue;
     const data = await loader.loadAsset(dec.asset_id);
     const inst = loader.instantiate(data, { rigged: false });
-    inst.obj.position.set(...dec.position);
+    inst.obj.position.set(...layoutToWorld(dec.position));
     inst.obj.rotation.y = (dec.rotation_deg * Math.PI) / 180;
     if (dec.scale) inst.obj.scale.setScalar(dec.scale);
     worldGroup.add(inst.obj);
@@ -337,7 +360,7 @@ export async function buildNightShiftWorld({
     const w = b.width;
     const d = b.depth;
     const cx = enc.center[0];
-    const cz = enc.center[2];
+    const cz = enc.center[1];
     const railH = 0.9;
     const walls = [
       [cx, railH / 2, b.min_y, w, 0.14],
@@ -355,7 +378,7 @@ export async function buildNightShiftWorld({
     if (firstAnimal && loader.cache.has(firstAnimal.asset_id)) {
       const aData = await loader.loadAsset(firstAnimal.asset_id);
       const aRig = loader.instantiate(aData, { rigged: true });
-      aRig.obj.position.set(...firstAnimal.position);
+      aRig.obj.position.set(...layoutToWorld(firstAnimal.position));
       aRig.obj.rotation.y = (firstAnimal.rotation_deg * Math.PI) / 180;
       worldGroup.add(aRig.obj);
       mixers.push(aRig.mixer);
@@ -380,7 +403,7 @@ export async function buildNightShiftWorld({
       id: `task-feed-${i + 1}`,
       type: 'feed',
       label: `Feed ${enc.name || enc.species_id}`,
-      position: [enc.gate_position[0], 0, enc.gate_position[2]],
+      position: layoutToWorld(enc.gate_position),
       color: 0xf59e0b,
       rig: target.rig,
     });
@@ -391,7 +414,7 @@ export async function buildNightShiftWorld({
   if (gateEnc && loader.cache.has('gate_paddock_double_wood')) {
     const gateData = await loader.loadAsset('gate_paddock_double_wood');
     const gateRig = loader.instantiate(gateData, { rigged: true });
-    gateRig.obj.position.set(gateEnc.gate_position[0], 0, gateEnc.gate_position[2]);
+    gateRig.obj.position.set(...layoutToWorld(gateEnc.gate_position));
     gateRig.playClip('open', { loop: false, fade: 0, clampWhenFinished: true });
     worldGroup.add(gateRig.obj);
     mixers.push(gateRig.mixer);
@@ -399,7 +422,7 @@ export async function buildNightShiftWorld({
       id: 'task-gate-1',
       type: 'gate',
       label: 'Close paddock gate',
-      position: [gateEnc.gate_position[0], 0, gateEnc.gate_position[2]],
+      position: layoutToWorld(gateEnc.gate_position),
       color: 0x38bdf8,
       rig: gateRig,
     });
@@ -410,7 +433,7 @@ export async function buildNightShiftWorld({
   if (pathSpot && loader.cache.has('visitor_tourist_camera_01')) {
     const visData = await loader.loadAsset('visitor_tourist_camera_01');
     const visRig = loader.instantiate(visData, { rigged: true });
-    visRig.obj.position.set(pathSpot.position[0], 0, pathSpot.position[2]);
+    visRig.obj.position.set(...layoutToWorld(pathSpot.position));
     visRig.playClip('wave', { loop: true, fade: 0 });
     worldGroup.add(visRig.obj);
     mixers.push(visRig.mixer);
@@ -418,10 +441,10 @@ export async function buildNightShiftWorld({
       id: 'task-visitor-1',
       type: 'visitor',
       label: 'Guide lost visitor to exit',
-      position: [pathSpot.position[0], 0, pathSpot.position[2]],
+      position: layoutToWorld(pathSpot.position),
       color: 0xa78bfa,
       rig: visRig,
-      exitPosition: [layout.entrance.position[0], 0, layout.entrance.position[2]],
+      exitPosition: layoutToWorld(layout.entrance.position),
     });
   }
 
@@ -430,16 +453,16 @@ export async function buildNightShiftWorld({
   if (lampSpot && loader.cache.has('lamp_post_victorian_single')) {
     const lampData = await loader.loadAsset('lamp_post_victorian_single');
     const lampInst = loader.instantiate(lampData, { rigged: false });
-    lampInst.obj.position.set(lampSpot.position[0] + 1.5, 0, lampSpot.position[2]);
+    lampInst.obj.position.set(lampSpot.position[0] + 1.5, 0, lampSpot.position[1]);
     worldGroup.add(lampInst.obj);
     const bulbLight = new THREE.PointLight(0xffcb77, 0, 14, 1.5);
-    bulbLight.position.set(lampSpot.position[0] + 1.5, 3.1, lampSpot.position[2]);
+    bulbLight.position.set(lampSpot.position[0] + 1.5, 3.1, lampSpot.position[1]);
     worldGroup.add(bulbLight);
     addTask({
       id: 'task-lamp-1',
       type: 'lamp',
       label: 'Relight broken lamp',
-      position: [lampSpot.position[0] + 1.5, 0, lampSpot.position[2]],
+      position: [lampSpot.position[0] + 1.5, 0, lampSpot.position[1]],
       color: 0xfde047,
       light: bulbLight,
     });
@@ -451,13 +474,13 @@ export async function buildNightShiftWorld({
   if (bucketSpot && troughEnc && loader.cache.has('food_fish_bucket_herring_04')) {
     const bucketData = await loader.loadAsset('food_fish_bucket_herring_04');
     const bucketInst = loader.instantiate(bucketData, { rigged: false });
-    bucketInst.obj.position.set(bucketSpot.position[0] - 1.2, 0, bucketSpot.position[2]);
+    bucketInst.obj.position.set(bucketSpot.position[0] - 1.2, 0, bucketSpot.position[1]);
     worldGroup.add(bucketInst.obj);
 
     if (loader.cache.has('food_water_drink_trough_20')) {
       const troughData = await loader.loadAsset('food_water_drink_trough_20');
       const troughInst = loader.instantiate(troughData, { rigged: false });
-      troughInst.obj.position.set(troughEnc.gate_position[0] + 1.4, 0, troughEnc.gate_position[2]);
+      troughInst.obj.position.set(troughEnc.gate_position[0] + 1.4, 0, troughEnc.gate_position[1]);
       worldGroup.add(troughInst.obj);
     }
 
@@ -465,8 +488,8 @@ export async function buildNightShiftWorld({
       id: 'task-carry-1',
       type: 'carry',
       label: 'Carry fish bucket to trough',
-      position: [bucketSpot.position[0] - 1.2, 0, bucketSpot.position[2]],
-      dropoff: [troughEnc.gate_position[0] + 1.4, 0, troughEnc.gate_position[2]],
+      position: [bucketSpot.position[0] - 1.2, 0, bucketSpot.position[1]],
+      dropoff: [troughEnc.gate_position[0] + 1.4, 0, troughEnc.gate_position[1]],
       color: 0x34d399,
       prop: bucketInst.obj,
       carried: false,
@@ -479,10 +502,10 @@ export async function buildNightShiftWorld({
     if (!p || !loader.cache.has('lamp_post_victorian_single')) continue;
     const lampData = await loader.loadAsset('lamp_post_victorian_single');
     const lampInst = loader.instantiate(lampData, { rigged: false });
-    lampInst.obj.position.set(p.position[0] - 1.6, 0, p.position[2]);
+    lampInst.obj.position.set(p.position[0] - 1.6, 0, p.position[1]);
     worldGroup.add(lampInst.obj);
     const l = new THREE.PointLight(0xffcb77, 2.2, 14, 1.5);
-    l.position.set(p.position[0] - 1.6, 3.1, p.position[2]);
+    l.position.set(p.position[0] - 1.6, 3.1, p.position[1]);
     worldGroup.add(l);
   }
 
@@ -504,6 +527,8 @@ export async function buildNightShiftWorld({
     loader,
     lighting,
     player: playerRig,
+    attachProp,
+    detachProp,
     tasks,
     mixers,
     bounds: layout.boundary,
