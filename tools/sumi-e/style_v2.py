@@ -238,7 +238,7 @@ def style(ob, key, img):
         lineset(fs, coll, "c1", (0.2, 0.12, 0.1), 3.0, noise=1.2, seed=2)
 
 
-def render(ob, key, family, out):
+def render(ob, key, family, out, cam_dir=None):
     sc = bpy.context.scene
     sc.render.engine = "BLENDER_EEVEE"; sc.render.resolution_x = sc.render.resolution_y = RES
     sc.view_settings.view_transform = "Standard"
@@ -250,7 +250,8 @@ def render(ob, key, family, out):
     corners = [ob.matrix_world @ Vector(c) for c in ob.bound_box]
     ctr = sum(corners, Vector()) / 8; size = max((c - ctr).length for c in corners)
     cam = bpy.data.objects.new("cam", bpy.data.cameras.new("cam")); sc.collection.objects.link(cam); sc.camera = cam
-    cam.data.lens = 50; cam.location = ctr + Vector((1.0, -1.25, 0.8)).normalized() * size * 2.5
+    v = cam_dir if cam_dir is not None else Vector((1.0, -1.25, 0.8)).normalized()
+    cam.data.lens = 50; cam.location = ctr + v * size * 2.5
     cam.rotation_euler = (ctr - cam.location).to_track_quat("-Z", "Y").to_euler()
     sun = bpy.data.objects.new("sun", bpy.data.lights.new("sun", "SUN")); sc.collection.objects.link(sun)
     sun.rotation_euler = (math.radians(50), 0, math.radians(30)); sun.data.energy = 3.5; sun.data.angle = math.radians(5)

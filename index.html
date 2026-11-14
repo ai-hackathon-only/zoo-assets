@@ -588,6 +588,28 @@
       text-decoration: none;
     }
     .sprite-link:hover { text-decoration: underline; }
+    .sprite-dirs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 4px;
+    }
+    .sprite-dir-btn {
+      font: inherit;
+      font-size: 0.7rem;
+      padding: 1px 6px;
+      border-radius: 4px;
+      border: 1px solid #cbbd9d;
+      background: #f6efe0;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .sprite-dir-btn.active {
+      background: #2b2620;
+      color: #f6efe0;
+      border-color: #2b2620;
+      font-weight: 600;
+    }
     body[data-look="ink"] .thumb-wrap { background: #ede3cc; }
     body[data-look="ink"] .thumb-img { filter: grayscale(1) sepia(0.18) contrast(1.25); }
     /* Phones: header scrolls away, two-column grid, full-screen viewer */
@@ -738,6 +760,7 @@
           <div class="sprite-meta">
             <strong>Sumi-e Sprite Sheet</strong>
             <span id="sprite-info">128×128 • 8 fps</span>
+            <div id="sprite-dirs" class="sprite-dirs" hidden></div>
             <a id="sprite-download" class="sprite-link" href="#" download>Download PNG sheet &rarr;</a>
           </div>
         </div>
@@ -940,21 +963,31 @@
     const spriteCanvas = document.getElementById('sprite-canvas');
     const spriteCtx = spriteCanvas ? spriteCanvas.getContext('2d') : null;
     const spriteInfo = document.getElementById('sprite-info');
+    const spriteDirs = document.getElementById('sprite-dirs');
     const spriteDownload = document.getElementById('sprite-download');
     let spritesManifest = null;
+    let sprites8DirManifest = null;
+    let currentSpriteAsset = null;
     let currentSpriteImg = null;
     let currentSpriteMeta = null;
     let currentSpriteClip = null;
+    let currentSpriteTile = 128;
+    let currentSpriteDir = -1;
     let spriteTimer = null;
     let spriteFrameIdx = 0;
 
     fetch('sprites.json').then(r => r.ok ? r.json() : null).then(d => {
       if (d) spritesManifest = d;
     }).catch(() => {});
+    fetch('sprites_8dir.json').then(r => r.ok ? r.json() : null).then(d => {
+      if (d) sprites8DirManifest = d;
+    }).catch(() => {});
 
     function stopSpritePlayer() {
       if (spriteTimer) { clearInterval(spriteTimer); spriteTimer = null; }
-      currentSpriteImg = null; currentSpriteMeta = null; currentSpriteClip = null;
+      currentSpriteAsset = null; currentSpriteImg = null; currentSpriteMeta = null;
+      currentSpriteClip = null; currentSpriteDir = -1;
+      if (spriteDirs) { spriteDirs.innerHTML = ''; spriteDirs.hidden = true; }
       if (spriteBox) spriteBox.hidden = true;
     }
 
@@ -968,50 +1001,79 @@
       currentSpriteClip = { name: chosenName, start: chosen.start || 0, frames: Math.max(1, chosen.frames || 1) };
       spriteFrameIdx = 0;
       const kb = currentSpriteMeta.bytes ? `${(currentSpriteMeta.bytes / 1024).toFixed(1)} KB` : '';
+      const dirs = (sprites8DirManifest && sprites8DirManifest.directions) || ['S', 'SW', 'W', 'NW', 'N', 'NE', 'E', 'SE'];
+      const dirLabel = currentSpriteDir >= 0 ? ` • ${dirs[currentSpriteDir]}` : '';
       if (spriteInfo) {
-        spriteInfo.textContent = `${chosenName} (${currentSpriteClip.frames}f @ 8 fps) • ${kb}`;
+        spriteInfo.textContent = `${chosenName} (${currentSpriteClip.frames}f @ 8 fps${dirLabel}) • ${kb}`;
       }
       drawSpriteFrame();
     }
 
     function drawSpriteFrame() {
       if (!spriteCtx || !currentSpriteImg || !currentSpriteImg.complete || !currentSpriteClip) return;
-      const tile = (spritesManifest && spritesManifest.tile) || 128;
+      const tile = currentSpriteTile;
       const f = currentSpriteClip.start + (spriteFrameIdx % currentSpriteClip.frames);
-      spriteCtx.clearRect(0, 0, tile, tile);
-      spriteCtx.drawImage(currentSpriteImg, f * tile, 0, tile, tile, 0, 0, tile, tile);
+      const row = currentSpriteDir >= 0 ? currentSpriteDir : 0;
+      spriteCtx.clearRect(0, 0, spriteCanvas.width, spriteCanvas.height);
+      spriteCtx.drawImage(currentSpriteImg, f * tile, row * tile, tile, tile, 0, 0, spriteCanvas.width, spriteCanvas.height);
     }
 
-    function setupSpritePlayer(asset) {
-      stopSpritePlayer();
-      const map = spritesManifest ? (spritesManifest.assets || spritesManifest) : null;
-      const meta = (map && map[asset.id]) || {
-        path: `sprites/${asset.category}/${asset.id}.png`,
-        clips: { idle: { start: 0, frames: 1 } }
-      };
+    function loadSpriteSheet(asset, dirIdx) {
+      currentSpriteDir = dirIdx;
+      const use8 = dirIdx >= 0 && sprites8DirManifest && sprites8DirManifest.assets && sprites8DirManifest.assets[asset.id];
+      const manifest = use8 ? sprites8DirManifest : spritesManifest;
+      const map = manifest ? (manifest.assets || manifest) : null;
+      const src = use8 ? `sprites_8dir/${asset.category}/${asset.id}.png` : `sprites/${asset.category}/${asset.id}.png`;
+      const meta = (map && map[asset.id]) || { path: src, clips: { idle: { start: 0, frames: 1 } } };
       currentSpriteMeta = meta;
+      currentSpriteTile = (manifest && manifest.tile) || (use8 ? 96 : 128);
+      if (spriteDirs) {
+        spriteDirs.querySelectorAll('button').forEach(b => {
+          b.classList.toggle('active', Number(b.dataset.dir) === dirIdx);
+        });
+      }
+      const prevClipName = currentSpriteClip ? currentSpriteClip.name : null;
       const img = new Image();
       img.onload = () => {
+        if (currentSpriteAsset !== asset) return;
         currentSpriteImg = img;
         if (spriteBox) spriteBox.hidden = false;
-        if (!currentSpriteClip) {
-          const firstClip = Object.keys(meta.clips || {})[0] || 'idle';
-          setSpriteClip(firstClip);
-        } else {
-          drawSpriteFrame();
-        }
-        const fps = (spritesManifest && spritesManifest.fps) || 8;
+        const firstClip = prevClipName || Object.keys(meta.clips || {})[0] || 'idle';
+        setSpriteClip(firstClip);
+        const fps = (manifest && manifest.fps) || 8;
         if (spriteTimer) clearInterval(spriteTimer);
         spriteTimer = setInterval(() => {
           spriteFrameIdx++;
           drawSpriteFrame();
         }, Math.round(1000 / fps));
       };
-      img.src = meta.path || `sprites/${asset.category}/${asset.id}.png`;
+      img.src = meta.path || src;
       if (spriteDownload) {
         spriteDownload.href = img.src;
-        spriteDownload.setAttribute('download', `${asset.id}_sprites.png`);
+        spriteDownload.setAttribute('download', `${asset.id}${use8 ? '_8dir' : ''}_sprites.png`);
       }
+    }
+
+    function setupSpritePlayer(asset) {
+      stopSpritePlayer();
+      currentSpriteAsset = asset;
+      const has8 = !!(sprites8DirManifest && sprites8DirManifest.assets && sprites8DirManifest.assets[asset.id]);
+      if (spriteDirs && has8) {
+        const dirs = sprites8DirManifest.directions || ['S', 'SW', 'W', 'NW', 'N', 'NE', 'E', 'SE'];
+        const addBtn = (label, dirIdx) => {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'sprite-dir-btn' + (dirIdx === -1 ? ' active' : '');
+          b.dataset.dir = String(dirIdx);
+          b.textContent = label;
+          b.addEventListener('click', () => loadSpriteSheet(asset, dirIdx));
+          spriteDirs.appendChild(b);
+        };
+        addBtn('1-dir', -1);
+        dirs.forEach((d, idx) => addBtn(d, idx));
+        spriteDirs.hidden = false;
+      }
+      loadSpriteSheet(asset, -1);
     }
 
     // Rigged assets (round 3) carry walk / idle / eat clips: show a button per clip, start with walk.
