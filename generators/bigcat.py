@@ -22,6 +22,7 @@ def _on_body(c, r, u, v, lift=1.0):
 
 
 def build(a, z):
+    z.smooth_joints("neck", "head", "leg_FL", "leg_FR", "leg_BL", "leg_BR")
     W, L, H = a["size_m"]
     p = a.get("params", {})
     marks = set(p.get("marks", []))

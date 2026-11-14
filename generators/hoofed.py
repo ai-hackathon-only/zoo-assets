@@ -50,6 +50,7 @@ def _fit(z, L, H):
 
 
 def build(a, z):
+    z.smooth_joints("neck", "head", "leg_FL", "leg_FR", "leg_BL", "leg_BR")
     W, L, H = a["size_m"]
     p = a.get("params", {})
     m = set(p.get("marks", []))
