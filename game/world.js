@@ -470,8 +470,10 @@ export async function buildNightShiftWorld({
 
   // Task 6: Carry fish bucket to trough
   const bucketSpot = layout.paths[Math.floor(layout.paths.length * 0.2)] || layout.paths[0];
-  const troughEnc = layout.enclosures[3] || layout.enclosures[0];
-  if (bucketSpot && troughEnc && loader.cache.has('food_fish_bucket_herring_04')) {
+  const troughEnc = layout.enclosures[3];
+  if (!troughEnc) {
+    console.warn(`[world] Skipping carry task: layout.enclosures[3] missing (count=${layout.enclosures.length})`);
+  } else if (bucketSpot && loader.cache.has('food_fish_bucket_herring_04')) {
     const bucketData = await loader.loadAsset('food_fish_bucket_herring_04');
     const bucketInst = loader.instantiate(bucketData, { rigged: false });
     bucketInst.obj.position.set(bucketSpot.position[0] - 1.2, 0, bucketSpot.position[1]);
