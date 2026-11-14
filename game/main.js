@@ -13,6 +13,7 @@ const startScreen = document.getElementById('start-screen');
 const dawnScreen = document.getElementById('dawn-screen');
 const hud = document.getElementById('hud');
 const startBtn = document.getElementById('start-btn');
+const nextShiftBtn = document.getElementById('next-shift-btn');
 const replayBtn = document.getElementById('replay-btn');
 const startLookBtn = document.getElementById('start-look-btn');
 const hudLookBtn = document.getElementById('hud-look-btn');
@@ -55,6 +56,8 @@ let screen = 'start'; // 'start' | 'playing' | 'dawn'
 let pendingStart = false;
 let loadingWorld = false;
 let loadFailed = false;
+let shiftNumber = 1;
+let currentSeed = 'night-shift-1';
 let shiftElapsed = 0;
 let currentClip = 'idle';
 let moveTarget = null;
@@ -154,7 +157,7 @@ function showDawnSummary() {
   const doneCount = tasks.filter((t) => t.done).length;
   const stars = doneCount >= tasks.length ? 3 : doneCount >= 4 ? 2 : 1;
   dawnStars.textContent = '★'.repeat(stars) + '☆'.repeat(3 - stars);
-  dawnSubtitle.textContent = `You handled ${doneCount} of ${tasks.length} night-shift tasks before sunrise.`;
+  dawnSubtitle.textContent = `Shift ${shiftNumber} (${currentSeed}): you handled ${doneCount} of ${tasks.length} night-shift tasks before sunrise.`;
 
   dawnList.innerHTML = '';
   for (const t of tasks) {
@@ -184,7 +187,13 @@ async function initWorld() {
   currentClip = 'idle';
 
   try {
-    world = await buildNightShiftWorld({ THREE, GLTFLoader, scene: worldGroup, basePath: '..' });
+    world = await buildNightShiftWorld({
+      THREE,
+      GLTFLoader,
+      scene: worldGroup,
+      settings: { seed: currentSeed, shiftNumber },
+      basePath: '..',
+    });
     updateTaskCounter();
     updateCameraAndFlashlight();
     startBtn.textContent = 'Start Shift';
@@ -224,9 +233,21 @@ function startShift() {
 }
 
 startBtn.addEventListener('click', startShift);
+nextShiftBtn.addEventListener('click', async () => {
+  nextShiftBtn.disabled = true;
+  replayBtn.disabled = true;
+  shiftNumber += 1;
+  currentSeed = `night-shift-${shiftNumber}`;
+  await initWorld();
+  nextShiftBtn.disabled = false;
+  replayBtn.disabled = false;
+  startShift();
+});
 replayBtn.addEventListener('click', async () => {
+  nextShiftBtn.disabled = true;
   replayBtn.disabled = true;
   await initWorld();
+  nextShiftBtn.disabled = false;
   replayBtn.disabled = false;
   startShift();
 });
@@ -480,6 +501,8 @@ window.game = {
       const p = world?.player?.obj?.position;
       return {
         screen,
+        shiftNumber,
+        seed: currentSeed,
         shiftProgress: Math.min(1, shiftElapsed / SHIFT_DURATION_S),
         fps: fpsEstimate,
         completedCount: world ? world.tasks.filter((t) => t.done).length : 0,

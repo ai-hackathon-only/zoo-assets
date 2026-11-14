@@ -11,7 +11,17 @@ export const DEFAULT_WORLD_SETTINGS = {
   population: 6,
   seed: 'night-shift-1',
   style: 'grid',
+  shiftNumber: 1,
 };
+
+function hashSeed(str) {
+  let h = 2166136261 >>> 0;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
 
 /**
  * Convert park/generator.js 2D layout coordinate [x, y, 0] to Three.js world [x, y_up, z].
@@ -396,9 +406,25 @@ export async function buildNightShiftWorld({
     tasks.push({ ...task, beacon, status: 'pending' });
   };
 
-  // Task 1 & 2: Feed animals
-  for (let i = 0; i < Math.min(2, animalRigs.length); i++) {
-    const target = animalRigs[i];
+  const seedHash = hashSeed(String(cfg.seed || 'night-shift-1'));
+  const isDefaultShift = cfg.seed === 'night-shift-1' && (cfg.shiftNumber || 1) === 1;
+  const encCount = Math.max(1, animalRigs.length);
+  const encOffset = isDefaultShift ? 0 : (seedHash % encCount);
+  const pickEncRig = (idx) => animalRigs[(idx + encOffset) % encCount];
+  const pickLayoutEnc = (idx) => layout.enclosures[(idx + encOffset) % layout.enclosures.length] || layout.enclosures[0];
+  const pickPath = (frac, fallbackIdx = 0) => {
+    if (!layout.paths.length) return null;
+    const shiftFrac = isDefaultShift ? frac : ((frac + ((seedHash % 7) * 0.11)) % 1);
+    return layout.paths[Math.floor(layout.paths.length * shiftFrac)] || layout.paths[fallbackIdx] || layout.paths[0];
+  };
+
+  // Vary the 6-task mix on shift 2+ while keeping all 5 task types represented
+  const extraType = isDefaultShift ? 'feed' : ['gate', 'lamp', 'feed'][seedHash % 3];
+
+  // Task 1 (and Task 2 if extraType === 'feed'): Feed animals
+  const feedCount = extraType === 'feed' ? 2 : 1;
+  for (let i = 0; i < Math.min(feedCount, animalRigs.length); i++) {
+    const target = pickEncRig(i);
     const enc = target.enc;
     addTask({
       id: `task-feed-${i + 1}`,
@@ -410,27 +436,30 @@ export async function buildNightShiftWorld({
     });
   }
 
-  // Task 3: Close an open gate
-  const gateEnc = layout.enclosures[2] || layout.enclosures[0];
-  if (gateEnc && loader.cache.has('gate_paddock_double_wood')) {
-    const gateData = await loader.loadAsset('gate_paddock_double_wood');
-    const gateRig = loader.instantiate(gateData, { rigged: true });
-    gateRig.obj.position.set(...layoutToWorld(gateEnc.gate_position));
-    gateRig.playClip('open', { loop: false, fade: 0, clampWhenFinished: true });
-    worldGroup.add(gateRig.obj);
-    mixers.push(gateRig.mixer);
-    addTask({
-      id: 'task-gate-1',
-      type: 'gate',
-      label: 'Close paddock gate',
-      position: layoutToWorld(gateEnc.gate_position),
-      color: 0x38bdf8,
-      rig: gateRig,
-    });
+  // Gate task(s): Close an open gate
+  const gateCount = extraType === 'gate' ? 2 : 1;
+  for (let g = 0; g < gateCount; g++) {
+    const gateEnc = pickLayoutEnc(2 + g);
+    if (gateEnc && loader.cache.has('gate_paddock_double_wood')) {
+      const gateData = await loader.loadAsset('gate_paddock_double_wood');
+      const gateRig = loader.instantiate(gateData, { rigged: true });
+      gateRig.obj.position.set(...layoutToWorld(gateEnc.gate_position));
+      gateRig.playClip('open', { loop: false, fade: 0, clampWhenFinished: true });
+      worldGroup.add(gateRig.obj);
+      mixers.push(gateRig.mixer);
+      addTask({
+        id: `task-gate-${g + 1}`,
+        type: 'gate',
+        label: g === 0 ? 'Close paddock gate' : `Secure ${gateEnc.name || 'north'} gate`,
+        position: layoutToWorld(gateEnc.gate_position),
+        color: 0x38bdf8,
+        rig: gateRig,
+      });
+    }
   }
 
-  // Task 4: Guide lost visitor
-  const pathSpot = layout.paths[Math.floor(layout.paths.length * 0.6)] || layout.paths[0];
+  // Visitor task: Guide lost visitor
+  const pathSpot = pickPath(0.6);
   if (pathSpot && loader.cache.has('visitor_tourist_camera_01')) {
     const visData = await loader.loadAsset('visitor_tourist_camera_01');
     const visRig = loader.instantiate(visData, { rigged: true });
@@ -449,29 +478,33 @@ export async function buildNightShiftWorld({
     });
   }
 
-  // Task 5: Relight broken lamp
-  const lampSpot = layout.paths[Math.floor(layout.paths.length * 0.35)] || layout.paths[0];
-  if (lampSpot && loader.cache.has('lamp_post_victorian_single')) {
-    const lampData = await loader.loadAsset('lamp_post_victorian_single');
-    const lampInst = loader.instantiate(lampData, { rigged: false });
-    lampInst.obj.position.set(lampSpot.position[0] + 1.5, 0, lampSpot.position[1]);
-    worldGroup.add(lampInst.obj);
-    const bulbLight = new THREE.PointLight(0xffcb77, 0, 14, 1.5);
-    bulbLight.position.set(lampSpot.position[0] + 1.5, 3.1, lampSpot.position[1]);
-    worldGroup.add(bulbLight);
-    addTask({
-      id: 'task-lamp-1',
-      type: 'lamp',
-      label: 'Relight broken lamp',
-      position: [lampSpot.position[0] + 1.5, 0, lampSpot.position[1]],
-      color: 0xfde047,
-      light: bulbLight,
-    });
+  // Lamp task(s): Relight broken lamp
+  const lampCount = extraType === 'lamp' ? 2 : 1;
+  for (let l = 0; l < lampCount; l++) {
+    const lampSpot = pickPath(l === 0 ? 0.35 : 0.78);
+    if (lampSpot && loader.cache.has('lamp_post_victorian_single')) {
+      const lampData = await loader.loadAsset('lamp_post_victorian_single');
+      const lampInst = loader.instantiate(lampData, { rigged: false });
+      const lx = lampSpot.position[0] + (l === 0 ? 1.5 : -1.5);
+      lampInst.obj.position.set(lx, 0, lampSpot.position[1]);
+      worldGroup.add(lampInst.obj);
+      const bulbLight = new THREE.PointLight(0xffcb77, 0, 14, 1.5);
+      bulbLight.position.set(lx, 3.1, lampSpot.position[1]);
+      worldGroup.add(bulbLight);
+      addTask({
+        id: `task-lamp-${l + 1}`,
+        type: 'lamp',
+        label: l === 0 ? 'Relight broken lamp' : 'Relight path lantern',
+        position: [lx, 0, lampSpot.position[1]],
+        color: 0xfde047,
+        light: bulbLight,
+      });
+    }
   }
 
-  // Task 6: Carry fish bucket to trough
-  const bucketSpot = layout.paths[Math.floor(layout.paths.length * 0.2)] || layout.paths[0];
-  const troughEnc = layout.enclosures[3];
+  // Carry task: Carry fish bucket to trough
+  const bucketSpot = pickPath(0.2);
+  const troughEnc = pickLayoutEnc(3);
   if (!troughEnc) {
     console.warn(`[world] Skipping carry task: layout.enclosures[3] missing (count=${layout.enclosures.length})`);
   } else if (bucketSpot && loader.cache.has('food_fish_bucket_herring_04')) {
