@@ -560,6 +560,11 @@ window.game = {
       resolveTask(task);
       return true;
     },
+    moveTo(x, z) {
+      if (!world) return false;
+      world.player.obj.position.set(x, 0, z);
+      return true;
+    },
     skipTo(target) {
       if (!world) return false;
       if (target === 'dawn') {
@@ -582,7 +587,7 @@ window.game = {
         completedCount: world ? world.tasks.filter((t) => t.done).length : 0,
         totalTasks: world ? world.tasks.length : 0,
         playerPosition: p ? [Number(p.x.toFixed(2)), Number(p.y.toFixed(2)), Number(p.z.toFixed(2))] : [0, 0, 0],
-        tasks: world ? world.tasks.map((t) => ({ id: t.id, type: t.type, label: t.label, done: t.done, carried: Boolean(t.carried) })) : [],
+        tasks: world ? world.tasks.map((t) => ({ id: t.id, type: t.type, label: t.label, done: t.done, carried: Boolean(t.carried), position: t.position })) : [],
       };
     },
   },
