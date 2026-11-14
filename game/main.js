@@ -53,6 +53,8 @@ let world = null;
 let worldGroup = null;
 let screen = 'start'; // 'start' | 'playing' | 'dawn'
 let pendingStart = false;
+let loadingWorld = false;
+let loadFailed = false;
 let shiftElapsed = 0;
 let currentClip = 'idle';
 let moveTarget = null;
@@ -168,6 +170,8 @@ function showDawnSummary() {
 }
 
 async function initWorld() {
+  loadingWorld = true;
+  loadFailed = false;
   startBtn.textContent = 'Loading zoo…';
   if (worldGroup) scene.remove(worldGroup);
   worldGroup = new THREE.Group();
@@ -179,18 +183,32 @@ async function initWorld() {
   holdingAction = false;
   currentClip = 'idle';
 
-  world = await buildNightShiftWorld({ THREE, GLTFLoader, scene: worldGroup, basePath: '..' });
-  updateTaskCounter();
-  updateCameraAndFlashlight();
-  startBtn.textContent = 'Start Shift';
-  if (pendingStart) {
+  try {
+    world = await buildNightShiftWorld({ THREE, GLTFLoader, scene: worldGroup, basePath: '..' });
+    updateTaskCounter();
+    updateCameraAndFlashlight();
+    startBtn.textContent = 'Start Shift';
+    if (pendingStart) {
+      pendingStart = false;
+      startShift();
+    }
+  } catch (err) {
+    loadFailed = true;
     pendingStart = false;
-    startShift();
+    startBtn.textContent = 'Load failed — Retry';
+    throw err;
+  } finally {
+    loadingWorld = false;
   }
 }
 
 function startShift() {
   if (!world) {
+    if (loadFailed && !loadingWorld) {
+      pendingStart = true;
+      initWorld().catch((err) => console.error('[game] initWorld failed:', err));
+      return;
+    }
     pendingStart = true;
     startBtn.textContent = 'Starting…';
     return;
