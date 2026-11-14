@@ -39,6 +39,11 @@ while (await ev("JSON.stringify(window.game.debug.completeTask())") !== 'null') 
 await sleep(600); await shot('tasks-done');
 console.log('state:', await ev('JSON.stringify(window.game.debug.getState().tasks.map(t=>t.status))'));
 for (let i = 0; i < 30 && (await ev('window.game.debug.getState().screen')) !== 'end'; i++) await sleep(300);
-console.log('end screen:', await ev('window.game.debug.getState().screen')); await shot('end');
+const finalScreen = await ev('window.game.debug.getState().screen'); console.log('end screen:', finalScreen); await shot('end');
+const statuses = JSON.parse(await ev('JSON.stringify(window.game.debug.getState().tasks.map(t=>t.status))'));
+const notDone = statuses.filter((x) => x !== 'done').length;
 console.log('console errors:', errors.length ? errors : 'none');
-chrome.kill(); process.exit(errors.length ? 1 : 0);
+const fail = errors.length || finalScreen !== 'end' || notDone;
+if (fail) console.log(`FAIL: screen=${finalScreen}, tasks not done=${notDone}, errors=${errors.length}`);
+// note: this run uses debug.completeTask, so it does not test hold-to-act input (only the D key move above).
+chrome.kill(); process.exit(fail ? 1 : 0);
