@@ -1,12 +1,12 @@
 # MOTION — Round 3 Cross-Family Motion Review
 
-Status: All 18 skeleton groups in `RIGS.md` have frame strips rendered with headless Blender (`tools/clip_strip.py` / `tools/render_all_strips.py`, `360x360` per frame, EEVEE ortho).
-- **Claude-built skeletons** (14 groups: `quadruped`, `hoofed`, `bigcat`, `upright`, `primate`, `bird`, `reptile`, `fish`, `marine`, `insect`, `arachnid`, `mollusc`, `vehicle`, `gate`, `plant`): reviewed below by **Seat 2 (`Antigravity agy (Google) · gemini-4-argon-medium`)**.
-- **Gemini-built skeletons** (4 groups: `snake`, `human`, `human_onepiece`, `facility`, `static`): frame strips rendered and ready below for cross-family sign-off by **Seat 1 or Seat 3 (`Claude Code (Anthropic) · claude-sonnet-5-5`)**.
+Status: All **20 distinct `rig` skeleton IDs** in `assets.json` (listed across **18 table rows** in `RIGS.md`, where `quadruped, hoofed, bigcat` share row 1) have frame strips rendered with headless Blender (`tools/clip_strip.py` / `tools/render_all_strips.py`, `360x360` per frame, EEVEE ortho) and cross-family motion review complete:
+- **Claude-built skeletons (15 `rig` IDs**: `quadruped`, `hoofed`, `bigcat`, `upright`, `primate`, `bird`, `reptile`, `fish`, `marine`, `insect`, `arachnid`, `mollusc`, `vehicle`, `gate`, `plant`): reviewed and passed (**15/15 PASS**) by **Seat 2 (`Antigravity agy (Google) · gemini-4-argon-medium`)**.
+- **Gemini-built skeletons (5 `rig` IDs**: `snake`, `human`, `human_onepiece`, `facility`, `static`): reviewed and passed (**5/5 PASS**) by **Seat 1 (`aho-builder-1`, `Claude Code · claude-sonnet-5-5`)** and **Seat 3 (`aho-reviewer-1`, `Claude Code · claude-sonnet-5-5`)** in PR #111.
 
 ---
 
-## 1. Claude-Built Skeletons (Reviewed by Seat 2 · `gemini-4-argon-medium`)
+## 1. Claude-Built Skeletons (15 `rig` IDs — Reviewed by Seat 2 · `gemini-4-argon-medium`)
 
 | Skeleton (`rig`) | Built by | Sample Asset | Clips Inspected (Frame Strips) | Visual Findings (Parts, Limbs, Head, Motion) | Result |
 |---|---|---|---|---|---|
@@ -19,25 +19,27 @@ Status: All 18 skeleton groups in `RIGS.md` have frame strips rendered with head
 | `reptile` | Claude | `saltwater_crocodile`<br>`komodo_dragon`<br>`galapagos_tortoise`<br>`green_iguana_rare`<br>`axolotl` | `walk` (`saltwater_crocodile_walk.png`, `galapagos_tortoise_walk.png`, `green_iguana_rare_walk.png`, `axolotl_walk.png`, 6f)<br>`eat` (`komodo_dragon_eat.png`, `axolotl_eat.png`, 6f) | Sprawled 4-leg gait swings limbs cleanly with lateral body/tail yaw; dorsal scutes (`saltwater_crocodile`), shell (`galapagos_tortoise`), and gill fronds (`axolotl`) stay firmly attached. In `eat`, `komodo_dragon` and `axolotl` dip head and tongue/snout downward cleanly. | **PASS** |
 | `fish` | Claude | `clownfish` | `swim` (`docs/motion/fish/clownfish_swim.png`, 6f) | Multi-segment spine chain (`spine_0..2`, `tail`) undulates laterally with pectoral fins (`fin_L`/`fin_R`) oscillating; white/black stripe rings remain attached to their body segments. | **PASS** |
 | `marine` | Claude | `bottlenose_dolphin`<br>`sea_otter` | `swim` (`bottlenose_dolphin_swim.png`, 4f)<br>`eat` (`sea_otter_eat.png`, 4f) | `bottlenose_dolphin`: vertical fluke/tail pitch undulation (`swim`) is smooth and continuous.<br>`sea_otter`: `eat` pitches head/snout downward toward chest while floating. | **PASS** |
-| `insect` | Claude | `monarch_butterfly` | `crawl` (`docs/motion/insect/monarch_butterfly_crawl.png`, 6f) | 6 legs and antennae step/oscillate while orange/black forewings and hindwings gentle-flap in sync; no detached wing spots. | **PASS** |
+| `insect` | Claude | `monarch_butterfly` | `crawl` (`docs/motion/insect/monarch_butterfly_crawl.png`, 6f) | 6 legs and antennae step/oscillate while orange/black forewings and hindwings gentle-flap in sync; no detached wing spots. (Also carries an optional `swim` clip alongside required `crawl` + `idle`.) | **PASS** |
 | `arachnid` | Claude | `emperor_scorpion` | `crawl` (`docs/motion/arachnid/emperor_scorpion_crawl.png`, 6f) | 8 walking legs alternate in arachnid gait while pedipalps and curved metasoma (tail stinger) bob cleanly as a unit. | **PASS** |
 | `mollusc` | Claude | `giant_african_snail` | `crawl` (`docs/motion/mollusc/giant_african_snail_crawl.png`, 6f) | Muscular foot slides/bobs while spiral shell rocks gently and eyestalks (`eyestalk_L`/`R`) pitch forward and back without detaching. | **PASS** |
 | `vehicle` | Claude | `keeper_golf_cart` | `drive` (`docs/motion/vehicle/keeper_golf_cart_drive.png`, 6f) | All 4 wheel bones spin continuously around their axle centres while chassis, roof canopy, and steering wheel remain rigid and stable. | **PASS** |
 | `gate` | Claude | `gate_paddock_double_wood` | `open` (`docs/motion/gate/gate_paddock_double_wood_open.png`, 3f) | Left and right gate leaves pivot cleanly 100° outward around the outer hinge posts from a 0 mm closed gap, with cross-braces attached. | **PASS** |
 | `plant` | Claude | `baobab_tree` | `sway` (`docs/motion/plant/baobab_tree_sway.png`, 6f) | `crown` and upper `trunk` sway gently left/right (~4° arc) while the trunk base stays planted on the ground origin. | **PASS** |
 
-**Claude-built summary (Seat 2 review):** **15 / 15 skeleton groups PASS** (0 flying parts, 0 wrong-way limb bends, 0 upward-eat bugs, 0 dead clips).
+**Claude-built summary (Seat 2 review):** **15 / 15 skeleton IDs PASS** (0 flying parts, 0 wrong-way limb bends, 0 upward-eat bugs, 0 dead clips).
 
 ---
 
-## 2. Gemini-Built Skeletons (Strips Rendered for Claude Cross-Family Review)
+## 2. Gemini-Built Skeletons (5 `rig` IDs — Reviewed by Seat 1 & Seat 3 · `claude-sonnet-5-5`)
 
-Built by Seat 2 (`gemini-4-argon-medium` / `claude-sonnet-5-5-medium` on `agy`). Strips rendered with headless Blender for inspection by Seat 1 or Seat 3 (Claude family):
+Built by Seat 2 (`gemini-4-argon-medium` / `claude-sonnet-5-5-medium` on `agy`). Inspected and approved by **Seat 1 (`aho-builder-1`, `claude-sonnet-5-5`)** and **Seat 3 (`aho-reviewer-1`, `claude-sonnet-5-5`)** in PR #111:
 
-| Skeleton (`rig`) | Built by | Sample Asset | Clips Inspected (Frame Strips) | Pre-Check Notes (for Claude Reviewer) |
-|---|---|---|---|---|
-| `snake` | Seat 2 | `reticulated_python` | `slither` (`docs/motion/snake/reticulated_python_slither.png`, 6f) | 4-bone chain (`spine_0`, `spine_1`, `spine_2`, `head`) produces a travelling lateral S-wave across the coiled body segments while keeping the head level and tongue attached. |
-| `human` | Seat 2 | `keeper_elephant_keeper_09`<br>`visitor_senior_sunvisor_10` | `walk` (`docs/motion/human/keeper_elephant_keeper_09_walk.png`, 6f)<br>`carry` (`docs/motion/human/keeper_elephant_keeper_09_carry.png`, 6f)<br>`wave` (`docs/motion/human/visitor_senior_sunvisor_10_wave.png`, 6f) | 16-bone human rig: `walk` swings thighs/shins and upper/forearms in contralateral stride with hat and tool (`prop`) locked to head/hand; `carry` raises both arms forward (-60°); `wave` raises right arm and oscillates forearm. |
-| `human_onepiece` | Seat 2 | `visitor_wheelchair_user_22` | `walk` (`docs/motion/human_onepiece/visitor_wheelchair_user_22_walk.png`, 6f) | `root` + `body` rigid rig (`visitor_wheelchair_user_22`, `visitor_parent_shoulder_kid_23`) keeps wheelchair wheels, frame, and seated visitor moving together without tearing mesh vertices. |
-| `facility` | Seat 2 | `fence_wood_rail_straight` | `idle` (`docs/motion/facility/fence_wood_rail_straight_idle.png`, 3f) | Static non-gate facility with `root` bone and 48-frame `idle` clip; geometry stays motionless on the grid origin as designed in `RIGS.md`. |
-| `static` | Seat 2 | `boulder_small` | `idle` (`docs/motion/static/boulder_small_idle.png`, 3f) | Root-only rig with `idle` clip (subtle bob on enrichment toys; motionless hold on rocks/signs/props per `RIGS.md`). |
+| Skeleton (`rig`) | Built by | Sample Asset | Clips Inspected (Frame Strips) | Claude Cross-Family Findings (Seat 1 & Seat 3 · `claude-sonnet-5-5`) | Result |
+|---|---|---|---|---|---|
+| `snake` | Seat 2 | `reticulated_python` | `slither` (`docs/motion/snake/reticulated_python_slither.png`, 6f)<br>3x crop (`docs/motion/snake/reticulated_python_slither_closeup.png`, f1 vs f4) | 4-bone chain (`spine_0`, `spine_1`, `spine_2`, `head`) shifts body segments laterally between frames (`reticulated_python_slither_closeup.png` shows `spine_1`/`spine_2` S-wave displacement while head and forked tongue stay level and attached). Seat 1 & Seat 3: active, no detached parts (lateral wave amplitude is subtle on the coiled pose). | **PASS** |
+| `human` | Seat 2 | `keeper_elephant_keeper_09`<br>`visitor_senior_sunvisor_10` | `walk` (`docs/motion/human/keeper_elephant_keeper_09_walk.png`, 6f)<br>`carry` (`docs/motion/human/keeper_elephant_keeper_09_carry.png`, 6f)<br>`wave` (`docs/motion/human/visitor_senior_sunvisor_10_wave.png`, 6f) | Seat 1 & Seat 3: `walk` shows contralateral leg and arm swing with hat and cane/tool staying attached and zero torn parts; `carry` holds both arms forward (-60°) while legs step cleanly; `wave` raises right hand and oscillates forearm cleanly. | **PASS** |
+| `human_onepiece` | Seat 2 | `visitor_wheelchair_user_22` | `walk` (`docs/motion/human_onepiece/visitor_wheelchair_user_22_walk.png`, 6f) | Seat 3: `root` + `body` one-piece rig (`visitor_wheelchair_user_22`, `visitor_parent_shoulder_kid_23`) plays a clean whole-body bob/roll clip (no separate wheel bones by design in `RIGS.md` row `human_onepiece` so seated figure and frame never tear). No flying parts or wrong-way bends. | **PASS** |
+| `facility` | Seat 2 | `fence_wood_rail_straight` | `idle` (`docs/motion/facility/fence_wood_rail_straight_idle.png`, 3f) | Seat 3: static non-gate facility with `root` bone and 48-frame motionless `idle` clip per `RIGS.md`; frames are identical with zero geometry drift. | **PASS** |
+| `static` | Seat 2 | `boulder_small` | `idle` (`docs/motion/static/boulder_small_idle.png`, 3f) | Seat 3: root-only rig with motionless `idle` clip on rocks/signs/props (and subtle bob on enrichment toys) per `RIGS.md`; no detached geometry. | **PASS** |
+
+**Gemini-built summary (Seat 1 & Seat 3 review):** **5 / 5 skeleton IDs PASS** (**20 / 20 total `rig` skeleton IDs PASS** across all 566 assets).
