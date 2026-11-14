@@ -29,7 +29,7 @@ One id per skeleton. A species with its own bones or clips gets `<family>.<speci
 | mollusc (giant African snail) | idle, crawl | foot, shell, eyestalk_L/R |
 | human | idle, walk, wave, carry (all 45, as built in #96; carry lifts both arms to -60°) | hips, spine, chest, neck, head, upperarm/forearm L/R, thigh/shin L/R, prop |
 | human_onepiece (`visitor_wheelchair_user_22`, `visitor_parent_shoulder_kid_23`) | same four clips, body moves as one | root, body |
-| vehicle | idle, drive | chassis, one bone per wheel (≤ 0.30 m width; ramps and doors stay on chassis, no ramp clip) |
+| vehicle | idle, drive (`idle` only for wheel-less `pedal_boat`, `rowing_boat`, `sky_tram_gondola`) | chassis, one bone per wheel (≤ 0.30 m width; ramps and doors stay on chassis, no ramp clip) |
 | gate | idle, open, close | door or gate bone (100° swing, 0 mm closed gap) |
 | facility (no door or gate) | idle | root (includes building_keeper_shed, building_vet_clinic, building_public_restroom, etc. whose door trims are static facade geometry) |
 | plant | idle, sway | trunk, crown |
