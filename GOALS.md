@@ -26,6 +26,8 @@ Blender's Freestyle lines do not exist in the browser, so the live version has t
 
 **Focus: the ink look only.** No new assets and no changes to asset shapes or rigs. New gallery and park features are allowed this round when the ink look needs them (the switch, the shader, sprite playback).
 
+**Owner note 00:40:** round 4 closes when its done-when list is finished, not at 05:30. The stretch list is dropped. When every line is done (PRs merged, README, retros), each active seat creates its `DONE-<n>` file as the rules' §5 says. The owner's next round starts after that.
+
 ### Round 4: seats and quota
 Seats organize themselves as in round 3 (see **Round 3: seats organize themselves**). Seats 1 (Claude Code) and 2 (`agy`) start; seats 3–5 start off. Seat files start fresh this round.
 **Owner note 21:30:** through `agy`, only the Gemini models have quota until about 2026-11-15 23:00 JST (the Claude and GPT-OSS pool on `agy` is used up). Seat 2 starts on `gemini-4-argon-medium`. Cross-family reviews are Claude against Gemini this round. Claude Code turns pause during `claude_quiet`.
@@ -182,7 +184,7 @@ ai-hackathon:
   start: 2026-11-14T21:30+09:00
   end:   2026-11-15T05:30+09:00
   round_minutes: 5                # how often each agent wakes up
-  when_done_early: stretch          # stop | stretch | polish-until-end
+  when_done_early: stop          # stop | stretch | polish-until-end
   # rounds 3-4: the agents choose seats, families and models (runs/<repo>/seat-<n>.txt); the runner accepts only these
   models_claude: claude-sonnet-5-5, claude-opus-5-5, claude-haiku-5-5
   models_agy: gemini-4-argon-medium, gemini-4-argon-high, gemini-4-hydrogen-medium, gemini-3.8-flash-medium, claude-sonnet-5-5-medium, claude-opus-5-5-medium, gpt-oss-120b-medium   # Gemini first: agy's Claude/GPT pool is out until ~2026-11-15 23:00 JST
