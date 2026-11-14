@@ -295,7 +295,7 @@ export async function buildNightShiftWorld({
     'visitor_tourist_camera_01',
     layout.entrance.asset_id,
   ]);
-  for (const enc of layout.enclosures.slice(0, 6)) {
+  for (const enc of layout.enclosures) {
     if (enc.animals[0]) neededIds.add(enc.animals[0].asset_id);
   }
   for (const dec of layout.decorations.slice(0, 12)) {
@@ -355,7 +355,7 @@ export async function buildNightShiftWorld({
   // Enclosures: simple perimeter rails + primary animal
   const railMat = new THREE.MeshStandardMaterial({ color: 0x6f553b, roughness: 0.85 });
   const animalRigs = [];
-  for (const enc of layout.enclosures.slice(0, 6)) {
+  for (const enc of layout.enclosures) {
     const b = enc.bounds;
     const w = b.width;
     const d = b.depth;
