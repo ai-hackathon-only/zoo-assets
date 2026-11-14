@@ -31,6 +31,15 @@ const minimapCtx = minimap.getContext('2d');
 const dawnStars = document.getElementById('dawn-stars');
 const dawnSubtitle = document.getElementById('dawn-subtitle');
 const dawnList = document.getElementById('dawn-list');
+const srAnnouncer = document.getElementById('sr-announcer');
+
+function announce(text) {
+  if (!srAnnouncer) return;
+  srAnnouncer.textContent = '';
+  requestAnimationFrame(() => {
+    srAnnouncer.textContent = text;
+  });
+}
 
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -47,6 +56,12 @@ function setLook(on) {
   document.body.dataset.look = on ? 'ink' : 'toy';
   startLookBtn.textContent = on ? 'Look: Sumi-e' : 'Look: Toy';
   hudLookBtn.textContent = on ? 'Sumi-e' : 'Toy';
+  const nextMode = on ? 'Toy' : 'Sumi-e';
+  const curMode = on ? 'Sumi-e' : 'Toy';
+  startLookBtn.setAttribute('aria-pressed', String(on));
+  hudLookBtn.setAttribute('aria-pressed', String(on));
+  startLookBtn.setAttribute('aria-label', `Look mode: ${curMode}. Press to switch to ${nextMode}.`);
+  hudLookBtn.setAttribute('aria-label', `Look mode: ${curMode}. Press L or click to switch to ${nextMode}.`);
 }
 setLook(lookFromUrl());
 
@@ -58,6 +73,12 @@ function setSoundMuted(muted) {
   audio.setMuted(muted);
   startSoundBtn.textContent = audio.muted ? 'Sound: Off' : 'Sound: On';
   hudSoundBtn.textContent = audio.muted ? 'Muted' : 'Sound';
+  const pressed = audio.muted ? 'false' : 'true';
+  const label = audio.muted ? 'Sound: Off. Press to unmute.' : 'Sound: On. Press to mute.';
+  startSoundBtn.setAttribute('aria-pressed', pressed);
+  hudSoundBtn.setAttribute('aria-pressed', pressed);
+  startSoundBtn.setAttribute('aria-label', label);
+  hudSoundBtn.setAttribute('aria-label', label);
 }
 startSoundBtn.addEventListener('click', () => setSoundMuted(!audio.muted));
 hudSoundBtn.addEventListener('click', () => setSoundMuted(!audio.muted));
@@ -113,6 +134,7 @@ function resolveTask(task) {
     task.carried = true;
     task.beacon.position.set(task.dropoff[0], 0.06, task.dropoff[2]);
     audio.playTaskCue('carry', task.label);
+    announce('Picked up fish bucket. Carry it to the trough.');
     return;
   }
   if (task.type === 'carry' && task.carried) {
@@ -138,6 +160,7 @@ function resolveTask(task) {
   task.done = true;
   if (task.beacon) task.beacon.visible = false;
   updateTaskCounter();
+  announce(`Completed: ${task.label}`);
   if (world.tasks.every((t) => t.done)) {
     setTimeout(() => {
       if (screen === 'playing') showDawnSummary();
@@ -173,6 +196,7 @@ function showDawnSummary() {
   const doneCount = tasks.filter((t) => t.done).length;
   const stars = doneCount >= tasks.length ? 3 : doneCount >= 4 ? 2 : 1;
   dawnStars.textContent = '★'.repeat(stars) + '☆'.repeat(3 - stars);
+  dawnStars.setAttribute('aria-label', `${stars} of 3 stars`);
   dawnSubtitle.textContent = `Shift ${shiftNumber} (${currentSeed}): you handled ${doneCount} of ${tasks.length} night-shift tasks before sunrise.`;
 
   dawnList.innerHTML = '';
@@ -186,6 +210,8 @@ function showDawnSummary() {
     li.append(name, status);
     dawnList.appendChild(li);
   }
+  announce(`Dawn reached. Shift ${shiftNumber} complete: ${doneCount} of ${tasks.length} tasks handled.`);
+  nextShiftBtn.focus();
 }
 
 async function initWorld() {
@@ -247,6 +273,10 @@ function startShift() {
   startScreen.classList.add('hidden');
   dawnScreen.classList.add('hidden');
   hud.classList.remove('hidden');
+  if (document.activeElement && typeof document.activeElement.blur === 'function') {
+    document.activeElement.blur();
+  }
+  announce(`Shift ${shiftNumber} started. Use WASD or Arrow keys to walk toward a glowing beacon.`);
 }
 
 startBtn.addEventListener('click', startShift);
@@ -273,7 +303,14 @@ replayBtn.addEventListener('click', async () => {
 window.addEventListener('keydown', (e) => {
   audio.unlock();
   keys.add(e.code);
+  if (e.code === 'KeyL' && !e.repeat && !e.ctrlKey && !e.metaKey && !e.altKey) {
+    setLook(!ink.enabled);
+    announce(`Look mode: ${ink.enabled ? 'Sumi-e' : 'Toy'}`);
+  }
   if ((e.code === 'KeyE' || e.code === 'Space') && screen === 'playing') {
+    if (e.code === 'Space' && (!document.activeElement || !document.activeElement.closest('button, a'))) {
+      e.preventDefault();
+    }
     holdingAction = true;
   }
 });
@@ -282,6 +319,10 @@ window.addEventListener('keyup', (e) => {
   if (e.code === 'KeyE' || e.code === 'Space') {
     holdingAction = false;
   }
+});
+window.addEventListener('blur', () => {
+  keys.clear();
+  holdingAction = false;
 });
 
 // Pointer tap/click-to-move on ground
@@ -421,6 +462,7 @@ function updateInteraction(dt) {
   const nearby = getNearbyTask();
   if (!nearby) {
     actionBtn.disabled = true;
+    actionBtn.setAttribute('aria-label', 'Action: walk near a task beacon first');
     holdProgress = 0;
     actionProgress.style.width = '0%';
     promptText.textContent = 'Walk toward a glowing beacon';
@@ -432,6 +474,7 @@ function updateInteraction(dt) {
   const verb = nearby.type === 'carry'
     ? (nearby.carried ? 'Drop bucket at trough' : 'Pick up fish bucket')
     : nearby.label;
+  actionBtn.setAttribute('aria-label', `Action: ${verb}. Hold E, Space, or this button.`);
   promptText.textContent = verb;
   promptSub.textContent = 'Hold Action (E / Space)';
 
@@ -544,5 +587,6 @@ window.game = {
   },
 };
 
+startBtn.focus();
 initWorld().catch((err) => console.error('[game] initWorld failed:', err));
 requestAnimationFrame(animate);
