@@ -20,7 +20,7 @@ One id per skeleton. A species with its own bones or clips gets `<family>.<speci
 | upright | idle, walk, eat | body, head, tail, arm_L/R, foot_L/R |
 | primate | idle, walk, eat, sit | hips, neck, head, tail, arm_L/R, leg_L/R (one piece, swing; no spine/chest, no knees) |
 | bird | idle, walk, fly, eat | body, neck, head, beak, wing_L/R, leg_L/R, tail |
-| reptile | idle, walk, eat | body, head, jaw, tail chain, 4 legs |
+| reptile | idle, walk, eat | body, head, tail (one rigid bone), 4 legs; no jaw, no tail chain |
 | snake | idle, slither | spine chain, head, jaw |
 | fish | idle, swim | spine chain, tail, fin_L/R |
 | marine | idle, swim, eat | spine chain, fluke or flippers, head |
