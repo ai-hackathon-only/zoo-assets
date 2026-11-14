@@ -17,7 +17,7 @@ Each task appears as a glowing beacon marker on the park and 2D minimap. Walk wi
 | **Close gate** | Gate rigs (e.g. `gate_paddock_double_wood`, `gate_pedestrian_wicket`) | Gate `close` (starts `open`) | Gate animates shut |
 | **Guide lost visitor** | Visitor (`visitor_*` human rig) | Visitor `wave` → `walk` | Visitor waves, then walks toward the park exit |
 | **Relight lamp** | Lamp posts (`lamp_post_victorian_single`, `lamp_post_modern_led`) | Keeper `idle` | Warm point light + emissive bulb turn back on |
-| **Carry bucket** | `food_fish_bucket_herring_04` → `food_water_drink_trough_20` / enclosure | Keeper `carry` → `walk` | Pick up bucket, carry to target trough |
+| **Carry bucket** | `food_fish_bucket_herring_04` → `food_water_drink_trough_20` / enclosure | Keeper `carry` → `walk` | Pick up bucket (parented to keeper's `prop` bone from `RIGS.md` during `carry`), carry to target trough, and release at the trough |
 
 ## World, Camera & Look
 - **Park layout:** Generated via `park/generator.js` (`generateLayout`) with a fixed default seed (~12 enclosures, paths, lamps, gates, entrance).
