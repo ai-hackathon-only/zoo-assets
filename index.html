@@ -552,6 +552,44 @@
 
     #clip-btns { margin-top: 8px; }
     #clip-btns .ctrl-btn.active { outline: 2px solid currentColor; font-weight: 600; }
+    .sprite-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      background: #eee4cc;
+      border: 1px solid #d8ccb0;
+      border-radius: var(--radius-sm);
+    }
+    .sprite-canvas {
+      width: 72px;
+      height: 72px;
+      border-radius: 6px;
+      border: 1px solid #cbbd9d;
+      background: #ede3cc;
+      flex-shrink: 0;
+      image-rendering: auto;
+    }
+    .sprite-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      min-width: 0;
+    }
+    .sprite-meta strong {
+      color: var(--text);
+      font-size: 0.84rem;
+    }
+    .sprite-link {
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .sprite-link:hover { text-decoration: underline; }
+    body[data-look="ink"] .thumb-wrap { background: #ede3cc; }
+    body[data-look="ink"] .thumb-img { filter: grayscale(1) sepia(0.18) contrast(1.25); }
     /* Phones: header scrolls away, two-column grid, full-screen viewer */
     @media (max-width: 640px) {
       body { padding-bottom: 24px; }
@@ -624,6 +662,7 @@
           </svg>
           <input type="text" id="search-input" class="search-input" placeholder="Search by name, ID, category..." autocomplete="off">
         </div>
+        <button id="btn-look-header" class="cat-btn" aria-pressed="false" title="Switch look: Toy / Sumi-e">Look: Toy</button>
         <div id="status-count" class="status-count">Showing 500 assets</div>
       </div>
     </div>
@@ -694,6 +733,14 @@
             </tr>
           </tbody>
         </table>
+        <div id="sprite-box" class="sprite-box" hidden>
+          <canvas id="sprite-canvas" class="sprite-canvas" width="128" height="128"></canvas>
+          <div class="sprite-meta">
+            <strong>Sumi-e Sprite Sheet</strong>
+            <span id="sprite-info">128×128 • 8 fps</span>
+            <a id="sprite-download" class="sprite-link" href="#" download>Download PNG sheet &rarr;</a>
+          </div>
+        </div>
         <a id="detail-download" class="download-btn" href="#" download>
           Download GLB
         </a>
@@ -861,21 +908,111 @@
     renderGrid();
 
     // Three.js Setup
-    let renderer, scene, camera, controls, ink;
+    let renderer, scene, camera, controls, ink, floorMesh;
     const btnLook = document.getElementById('btn-look');
+    const btnLookHeader = document.getElementById('btn-look-header');
     function setLook(on) {
-      ink.enabled = on; setLookInUrl(on);
-      btnLook.textContent = on ? 'Look: Sumi-e' : 'Look: Toy';
+      if (ink) ink.enabled = on;
+      if (floorMesh) floorMesh.visible = !on;
+      setLookInUrl(on);
+      const label = on ? 'Look: Sumi-e' : 'Look: Toy';
+      btnLook.textContent = label;
       btnLook.setAttribute('aria-pressed', String(on));
+      if (btnLookHeader) {
+        btnLookHeader.textContent = label;
+        btnLookHeader.setAttribute('aria-pressed', String(on));
+        btnLookHeader.classList.toggle('active', on);
+      }
       document.body.dataset.look = on ? 'ink' : 'toy';
     }
-    btnLook.addEventListener('click', () => setLook(!ink.enabled));
+    btnLook.addEventListener('click', () => setLook(ink ? !ink.enabled : (document.body.dataset.look !== 'ink')));
+    if (btnLookHeader) btnLookHeader.addEventListener('click', () => setLook(ink ? !ink.enabled : (document.body.dataset.look !== 'ink')));
+    setLook(lookFromUrl());
     let currentModel = null;
     let autoRotate = true;
     let wireframeMode = false;
     let mixer = null;
     const clock = new THREE.Clock();
     const clipBtns = document.getElementById('clip-btns');
+
+    // Sumi-e 2D sprite sheet player (round 4)
+    const spriteBox = document.getElementById('sprite-box');
+    const spriteCanvas = document.getElementById('sprite-canvas');
+    const spriteCtx = spriteCanvas ? spriteCanvas.getContext('2d') : null;
+    const spriteInfo = document.getElementById('sprite-info');
+    const spriteDownload = document.getElementById('sprite-download');
+    let spritesManifest = null;
+    let currentSpriteImg = null;
+    let currentSpriteMeta = null;
+    let currentSpriteClip = null;
+    let spriteTimer = null;
+    let spriteFrameIdx = 0;
+
+    fetch('sprites.json').then(r => r.ok ? r.json() : null).then(d => {
+      if (d) spritesManifest = d;
+    }).catch(() => {});
+
+    function stopSpritePlayer() {
+      if (spriteTimer) { clearInterval(spriteTimer); spriteTimer = null; }
+      currentSpriteImg = null; currentSpriteMeta = null; currentSpriteClip = null;
+      if (spriteBox) spriteBox.hidden = true;
+    }
+
+    function setSpriteClip(clipName) {
+      if (!currentSpriteMeta || !currentSpriteMeta.clips) return;
+      const base = clipName ? clipName.split('_')[0] : '';
+      const clips = currentSpriteMeta.clips;
+      const chosen = clips[clipName] || clips[base] || clips[Object.keys(clips)[0]];
+      const chosenName = clips[clipName] ? clipName : (clips[base] ? base : Object.keys(clips)[0]);
+      if (!chosen) return;
+      currentSpriteClip = { name: chosenName, start: chosen.start || 0, frames: Math.max(1, chosen.frames || 1) };
+      spriteFrameIdx = 0;
+      const kb = currentSpriteMeta.bytes ? `${(currentSpriteMeta.bytes / 1024).toFixed(1)} KB` : '';
+      if (spriteInfo) {
+        spriteInfo.textContent = `${chosenName} (${currentSpriteClip.frames}f @ 8 fps) • ${kb}`;
+      }
+      drawSpriteFrame();
+    }
+
+    function drawSpriteFrame() {
+      if (!spriteCtx || !currentSpriteImg || !currentSpriteImg.complete || !currentSpriteClip) return;
+      const tile = (spritesManifest && spritesManifest.tile) || 128;
+      const f = currentSpriteClip.start + (spriteFrameIdx % currentSpriteClip.frames);
+      spriteCtx.clearRect(0, 0, tile, tile);
+      spriteCtx.drawImage(currentSpriteImg, f * tile, 0, tile, tile, 0, 0, tile, tile);
+    }
+
+    function setupSpritePlayer(asset) {
+      stopSpritePlayer();
+      const map = spritesManifest ? (spritesManifest.assets || spritesManifest) : null;
+      const meta = (map && map[asset.id]) || {
+        path: `sprites/${asset.category}/${asset.id}.png`,
+        clips: { idle: { start: 0, frames: 1 } }
+      };
+      currentSpriteMeta = meta;
+      const img = new Image();
+      img.onload = () => {
+        currentSpriteImg = img;
+        if (spriteBox) spriteBox.hidden = false;
+        if (!currentSpriteClip) {
+          const firstClip = Object.keys(meta.clips || {})[0] || 'idle';
+          setSpriteClip(firstClip);
+        } else {
+          drawSpriteFrame();
+        }
+        const fps = (spritesManifest && spritesManifest.fps) || 8;
+        if (spriteTimer) clearInterval(spriteTimer);
+        spriteTimer = setInterval(() => {
+          spriteFrameIdx++;
+          drawSpriteFrame();
+        }, Math.round(1000 / fps));
+      };
+      img.src = meta.path || `sprites/${asset.category}/${asset.id}.png`;
+      if (spriteDownload) {
+        spriteDownload.href = img.src;
+        spriteDownload.setAttribute('download', `${asset.id}_sprites.png`);
+      }
+    }
 
     // Rigged assets (round 3) carry walk / idle / eat clips: show a button per clip, start with walk.
     function setupClips(gltf) {
@@ -894,6 +1031,7 @@
         mixer.stopAllAction();
         mixer.clipAction(clip).reset().play();
         clipBtns.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
+        setSpriteClip(clip.name);
       };
       clips.forEach((clip, i) => {
         const btn = document.createElement('button');
@@ -954,6 +1092,8 @@
       const floor = new THREE.Mesh(floorGeo, floorMat);
       floor.rotation.x = -Math.PI / 2;
       floor.position.y = -0.001;
+      floorMesh = floor;
+      floorMesh.visible = !ink.enabled;
       scene.add(floor);
 
       function animate() {
@@ -1012,6 +1152,7 @@
       const glbUrl = `assets/${asset.category}/${asset.id}.glb`;
       detailDownload.href = glbUrl;
       detailDownload.setAttribute('download', `${asset.id}.glb`);
+      setupSpritePlayer(asset);
 
       modalBackdrop.classList.add('open');
       document.body.style.overflow = 'hidden';
@@ -1067,9 +1208,22 @@
       document.body.style.overflow = '';
       mixer = null;
       clipBtns.hidden = true;
+      stopSpritePlayer();
       if (currentModel) {
         scene.remove(currentModel);
         currentModel = null;
+      }
+    }
+
+    const urlAssetId = new URLSearchParams(location.search).get('asset');
+    if (urlAssetId) {
+      const initialAsset = assets.find(a => a.id === urlAssetId);
+      if (initialAsset) {
+        if ( new URLSearchParams(location.search).get('still') === '1' ) {
+          autoRotate = false;
+          if (controls) controls.autoRotate = false;
+        }
+        openAssetModal(initialAsset);
       }
     }
 
