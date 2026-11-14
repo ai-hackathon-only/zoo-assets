@@ -10,6 +10,7 @@ An asset is an ape when it has none of the monkey marks.
 """
 import math
 
+from generators.bird import _Tagger, _bounds
 from generators.quadruped import _limb
 
 MONKEY = {"ringed_tail", "red_blue_face", "red_face", "mane", "prehensile_tail", "big_nose", "white_mask"}
@@ -21,10 +22,49 @@ def build(a, z):
     p = a.get("params", {})
     m = set(p.get("marks", []))
     fur = p.get("body", "brown")
+    t = _Tagger(z)
+    t.SIDED = ("leg", "arm")  # +X is the animal's left (it faces -Y)
     if m & MONKEY:
-        _monkey(z, W, L, H, fur, m)
+        _monkey(t, W, L, H, fur, m)
     else:
-        _ape(z, W, L, H, fur, m)
+        _ape(t, W, L, H, fur, m)
+    _declare_joints(z)
+
+
+def _declare_joints(z):
+    """Pivots from the tagged parts. Bones: hips (whole torso), neck, head, tail, and either arm_L/R + leg_L/R (apes)
+    or leg_FL/FR/BL/BR (monkeys). Limbs hang from their shoulder or hip and swing about X."""
+    import bpy
+    from mathutils import Vector as V
+    bpy.context.view_layer.update()
+    groups = {}
+    for o in bpy.context.scene.objects:
+        if o.type == "MESH":
+            groups.setdefault(o.get("bone", "hips"), []).append(o)
+    bb = {k: _bounds(v) for k, v in groups.items()}
+    lo, hi = bb["hips"]
+    zc = (lo.z + hi.z) / 2
+    z.joint("hips", (0, hi.y, zc), (0, lo.y, zc), "root")
+    body_lo, body_hi = lo, hi
+    lo, hi = bb["neck"]
+    xc, yc = (lo.x + hi.x) / 2, (lo.y + hi.y) / 2
+    z.joint("neck", (xc, yc, lo.z), (xc, yc, hi.z), "hips")
+    hp = V((xc, yc, hi.z))
+    lo, hi = bb["head"]
+    z.joint("head", hp, (hp.x, lo.y, hp.z), "neck")
+    if "tail" in bb:
+        lo, hi = bb["tail"]
+        z.joint("tail", (0, lo.y, hi.z), (0, hi.y, lo.z), "hips")
+    sh_z = body_lo.z + 0.85 * (body_hi.z - body_lo.z)
+    for k, (lo, hi) in bb.items():
+        if k.startswith("leg_"):
+            xc, yc = (lo.x + hi.x) / 2, (lo.y + hi.y) / 2
+            top = hi.z if len(k) == 7 else min(hi.z, body_lo.z + 0.5 * (body_hi.z - body_lo.z))
+            z.joint(k, (xc, yc, top), (xc, yc, lo.z), "hips")
+        elif k.startswith("arm_"):
+            xi = lo.x if k.endswith("L") else hi.x
+            top = max(lo.z, min(hi.z, sh_z))
+            z.joint(k, (xi, (lo.y + hi.y) / 2, top), (xi, (lo.y + hi.y) / 2, lo.z), "hips")
 
 
 def _face(z, c, r, fur, m, ape):
@@ -90,20 +130,26 @@ def _ape(z, W, L, H, fur, m):
     t_lo, t_hi = H * 0.12, hc[2] - hr * 0.6
     tr = (W * (0.4 if big else 0.32), W * (0.32 if big else 0.27), (t_hi - t_lo) / 2)
     tc = (0, 0, t_lo + tr[2])
+    z.tag("hips")
     z.ball(1, loc=tc, colour=fur, scale=tr, rot=(-10, 0, 0), seg=14, rings=9)
     if big:  # gorilla: silver saddle, high crest, heavy shoulders
         z.ball(1, loc=(0, tr[1] * 0.3, tc[2] + tr[2] * 0.1), colour="light_grey", scale=(tr[0] * 1.03, tr[1] * 0.8, tr[2] * 0.8),
                seg=12, rings=8)
+        z.tag("head")
         z.ball(hr * 0.8, loc=(0, hc[1] + hr * 0.2, hc[2] + hr * 0.75), colour=fur, scale=(0.7, 1, 0.8), seg=8, rings=5)
+        z.tag("hips")
     # belly / chest skin on chimps and orangutans
     if "pale_face" in m or "long_arms" in m and not gibbon:
         z.ball(1, loc=(0, -tr[1] * 0.45, tc[2] - tr[2] * 0.1),
                colour="skin_4" if "long_arms" in m else "charcoal", scale=(tr[0] * 0.6, tr[1] * 0.6, tr[2] * 0.6),
                seg=10, rings=6)
+    z.tag("neck")
     _limb(z, (0, tc[1], tc[2] + tr[2] * 0.6), (hc[0], hc[1], hc[2]), hr * 0.55, fur, seg=8)  # neck
+    z.tag("head")
     z.ball(hr, loc=hc, colour=fur, seg=12, rings=8)
     _face(z, hc, hr, fur, m, ape=True)
     for s in (1, -1):
+        z.tag("leg")
         # legs folded in front: thigh forward, shin down, flat foot
         hip = (s * tr[0] * 0.5, -tr[1] * 0.2, t_lo + tr[2] * 0.25)
         knee = (s * tr[0] * 0.75, -tr[1] * 1.15, t_lo + tr[2] * 0.45)
@@ -112,6 +158,7 @@ def _ape(z, W, L, H, fur, m):
         z.box((tr[0] * 0.38, tr[1] * 0.8, H * 0.04), loc=(s * tr[0] * 0.65, -tr[1] * 1.45, H * 0.02),
               colour="black" if fur != "black" else "charcoal")
         # arms
+        z.tag("arm")
         sh = (s * tr[0] * 0.95, -tr[1] * 0.1, tc[2] + tr[2] * 0.6)
         ar = tr[0] * (0.22 if big else 0.2)
         if gibbon:
@@ -146,6 +193,7 @@ def _monkey(z, W, L, H, fur, m):
     br = (W * 0.42, bl / 2, body_h / 2)
     limb = {"big_nose": "light_grey", "white_mask": "yellow"}.get(next(iter(m & {"big_nose", "white_mask"}), ""), fur)
     back = "grey" if "white_mask" in m else fur
+    z.tag("hips")
     z.ball(1, loc=(0, by, bz), colour=fur, scale=br, rot=(-6, 0, 0), seg=14, rings=9)
     if back != fur:
         z.ball(1, loc=(0, by, bz + br[2] * 0.25), colour=back, scale=(br[0] * 0.85, br[1] * 0.95, br[2] * 0.8),
@@ -161,17 +209,21 @@ def _monkey(z, W, L, H, fur, m):
         for fy in (-0.6, 0.6):
             y = by + br[1] * fy
             x = s * br[0] * 0.65
+            z.tag("leg_" + ("F" if fy < 0 else "B") + ("L" if s > 0 else "R"))
             _limb(z, (x, y, 0), (x, y, bz), lr, limb, r2=lr * 1.15, seg=7)
             z.ball(lr * 1.15, loc=(x, y - lr * 0.4, lr * 0.4), colour="black" if limb != "black" else "charcoal",
                    scale=(1, 1.4, 0.5), seg=6, rings=4)
     # head
     hc = (0, by - br[1] - hr * 0.55, H - hr)
+    z.tag("neck")
     _limb(z, (0, by - br[1] * 0.7, bz + br[2] * 0.3), hc, hr * 0.55, fur, seg=8)
+    z.tag("head")
     if "mane" in m:  # tamarin: big round golden mane around the face
         z.ball(hr * 1.35, loc=(hc[0], hc[1] + hr * 0.3, hc[2]), colour="gold", scale=(1, 0.75, 1), seg=12, rings=8)
     z.ball(hr, loc=hc, colour=fur, seg=12, rings=8)
     _face(z, hc, hr, fur, m, ape=False)
     # tail
+    z.tag("tail")
     ty, tz = by + br[1] * 0.92, bz + br[2] * 0.2
     tr = br[2] * (0.32 if "ringed_tail" in m else 0.18)
     room = L / 2 - ty
