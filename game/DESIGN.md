@@ -20,7 +20,7 @@ Each task appears as a glowing beacon marker on the park and 2D minimap. Walk wi
 | **Carry bucket** | `food_fish_bucket_herring_04` → `food_water_drink_trough_20` / enclosure | Keeper `carry` → `walk` | Pick up bucket (parented to keeper's `prop` bone from `RIGS.md` during `carry`), carry to target trough, and release at the trough |
 
 ## World, Camera & Look
-- **Park layout:** Generated via `park/generator.js` (`generateLayout`) with a fixed default seed (~12 enclosures, paths, lamps, gates, entrance).
+- **Park layout:** Generated via `park/generator.js` (`generateLayout`) with a fixed default seed (6 enclosures in the compact 100 m layout, paths, lamps, gates, entrance).
 - **Player:** `keeper_safari_lead_01` (human rig: `idle`, `walk`, `carry`).
 - **Camera:** Third-person chase camera tilted ~50° from horizontal, fixed follow distance.
 - **Night look:** Reuses `park/park.js` dark blue night preset (`0x0c1428` sky/fog, cool moonlight), warm lamp pools (`PointLight`), keeper flashlight cone (`SpotLight`), and glowing task markers.
