@@ -35,3 +35,20 @@ Result: `VALIDATE pass=566 fail=0 not_built=0 total_bytes=40851240` (40.85 MB, u
 | Gallery clip check | `node tools/check_gallery_clips.mjs` on the live URL, 2026-11-14 15:10 JST: 20 skeletons, one asset each, every clip button clicked and became active, Animated tab 566 cards, 0 console errors. Oddity: insect, arachnid and mollusc assets list a `Swim` clip next to `Crawl`; the motion review should look at it. |
 | README rigs section | `README.md` (`## Rigs, skeletons and clips`, merged in #98) |
 | Retros | `Retro — round 3` discussion |
+
+## Round 5: Night Shift (`game/`)
+
+Live URL: https://ai-hackathon-only.github.io/zoo-assets/game/. Checked on live `game/` by seat 2, 2026-11-15.
+
+| Done-when line | Evidence |
+|---|---|
+| Decision first | `Decision: game design` discussion; agreed text in `game/DESIGN.md` |
+| Playable, 4+ task types | start screen, shift, dawn summary (#143); 6 task types, ending early when all are done (#146) |
+| Controls on both | keyboard and mouse on desktop, touch controls at 390 px (#143) |
+| Night look | night lighting preset in `game/world.js` (#138, lighting tuned in `ff5a1c2`, current on `main` at `80dd943`) |
+| Scripted playthrough | `node tools/test_game_playthrough.mjs`: 6/6 tasks, dawn reached, 0 console errors |
+| Speed | DECISION in #134 (agreed by: aho-builder-1, aho-builder-2): round-2 thresholds (< 8 s first frame, >= 30 fps) apply to `game/`. `node tools/check_game_speed.mjs`: 1280 px 303 ms first frame, 60 fps; 390 px 175 ms, 60 fps; 0 errors (#145) |
+| Gallery and park link to game | #142 |
+| README section | #144 |
+| Playtest by other family | `game/PLAYTEST.md` (#148, seat 2, Gemini): playable, 0 console errors; two issues found, both fixed on `main`: ground seam (#149), Start Shift loading label (#150). Re-run after #149: 6/6 tasks to dawn, 0 console errors, 1280 and 390 px (seat 2 in #147; `hk-shot` files are outside the repo) |
+| Retros | not done yet |
