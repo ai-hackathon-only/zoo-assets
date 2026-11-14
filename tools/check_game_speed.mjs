@@ -98,64 +98,89 @@ async function measureFps(durationMs = 2000) {
 
 await cdp('Page.enable');
 await cdp('Runtime.enable');
-await cdp('Emulation.setDeviceMetricsOverride', { width: 1280, height: 800, deviceScaleFactor: 1, mobile: false });
+await cdp('Network.enable');
+await cdp('Network.setCacheDisabled', { cacheDisabled: true });
 
-const t0 = Date.now();
-await cdp('Page.navigate', { url: targetUrl });
-
-let firstFrameMs = 0;
-for (let i = 0; i < 150; i++) {
-  const evalRes = await cdp('Runtime.evaluate', {
-    expression: 'Boolean(window.game && window.game.debug && window.game.debug.getState && window.game.debug.getState().tasks.length > 0)',
+async function getPos() {
+  const r = await cdp('Runtime.evaluate', {
+    expression: 'window.game.debug.getState().playerPosition',
     returnByValue: true
   });
-  if (evalRes.result.value) {
-    firstFrameMs = Date.now() - t0;
-    break;
-  }
-  await new Promise(r => setTimeout(r, 100));
+  return r.result.value;
 }
 
-await cdp('Runtime.evaluate', {
-  expression: `(() => { const b = document.getElementById('start-btn'); if (b) b.click(); })()`
-});
-await new Promise(r => setTimeout(r, 800));
+function distXZ(a, b) {
+  return Math.hypot((b[0] || 0) - (a[0] || 0), (b[2] || 0) - (a[2] || 0));
+}
 
-// 1280x800 Toy (walking)
-await cdp('Input.dispatchKeyEvent', { type: 'keyDown', key: 'w', code: 'KeyW' });
-const fps1280Toy = await measureFps();
-await cdp('Input.dispatchKeyEvent', { type: 'keyUp', key: 'w', code: 'KeyW' });
+async function runViewport(label, width, height, deviceScaleFactor, mobile) {
+  await cdp('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor, mobile });
+  const t0 = Date.now();
+  await cdp('Page.navigate', { url: targetUrl });
 
-// 1280x800 Sumi-e (walking)
-await cdp('Runtime.evaluate', {
-  expression: `(() => { const b = document.getElementById('hud-look-btn'); if (b) b.click(); })()`
-});
-await new Promise(r => setTimeout(r, 400));
-await cdp('Input.dispatchKeyEvent', { type: 'keyDown', key: 's', code: 'KeyS' });
-const fps1280Ink = await measureFps();
-await cdp('Input.dispatchKeyEvent', { type: 'keyUp', key: 's', code: 'KeyS' });
+  let firstFrameMs = 0;
+  for (let i = 0; i < 150; i++) {
+    const evalRes = await cdp('Runtime.evaluate', {
+      expression: 'Boolean(window.game && window.game.debug && window.game.debug.getState && window.game.debug.getState().tasks.length > 0)',
+      returnByValue: true
+    });
+    if (evalRes.result.value) {
+      await cdp('Runtime.evaluate', {
+        expression: 'new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)))',
+        awaitPromise: true
+      });
+      firstFrameMs = Date.now() - t0;
+      break;
+    }
+    await new Promise(r => setTimeout(r, 100));
+  }
 
-// 390x844 Sumi-e -> Toy
-await cdp('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
-await new Promise(r => setTimeout(r, 500));
-const fps390Ink = await measureFps();
+  await cdp('Runtime.evaluate', {
+    expression: `(() => { const b = document.getElementById('start-btn'); if (b) b.click(); })()`
+  });
+  await new Promise(r => setTimeout(r, 800));
 
-await cdp('Runtime.evaluate', {
-  expression: `(() => { const b = document.getElementById('hud-look-btn'); if (b) b.click(); })()`
-});
-await new Promise(r => setTimeout(r, 400));
-const fps390Toy = await measureFps();
+  const p0 = await getPos();
+  await cdp('Runtime.evaluate', {
+    expression: `window.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyW', key: 'w' }))`
+  });
+  const fpsToy = await measureFps();
+  await cdp('Runtime.evaluate', {
+    expression: `window.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyW', key: 'w' }))`
+  });
+  const p1 = await getPos();
+  const movedToy = distXZ(p0, p1);
 
-console.log(`1280x800 first-frame: ${firstFrameMs} ms (limit < 8000 ms)`);
-console.log(`1280x800 walking FPS (Toy): ${fps1280Toy} fps (limit >= 30 fps)`);
-console.log(`1280x800 walking FPS (Sumi-e): ${fps1280Ink} fps (limit >= 30 fps)`);
-console.log(`390x844 FPS (Toy): ${fps390Toy} fps (limit >= 30 fps)`);
-console.log(`390x844 FPS (Sumi-e): ${fps390Ink} fps (limit >= 30 fps)`);
+  await cdp('Runtime.evaluate', {
+    expression: `(() => { const b = document.getElementById('hud-look-btn'); if (b) b.click(); })()`
+  });
+  await new Promise(r => setTimeout(r, 400));
+
+  const p2 = await getPos();
+  await cdp('Runtime.evaluate', {
+    expression: `window.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyS', key: 's' }))`
+  });
+  const fpsInk = await measureFps();
+  await cdp('Runtime.evaluate', {
+    expression: `window.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyS', key: 's' }))`
+  });
+  const p3 = await getPos();
+  const movedInk = distXZ(p2, p3);
+
+  console.log(`${label} world-ready + first-frame: ${firstFrameMs} ms (limit < 8000 ms)`);
+  console.log(`${label} walking FPS (Toy): ${fpsToy} fps (moved ${movedToy.toFixed(1)} m, limit >= 30 fps)`);
+  console.log(`${label} walking FPS (Sumi-e): ${fpsInk} fps (moved ${movedInk.toFixed(1)} m, limit >= 30 fps)`);
+
+  return firstFrameMs > 0 && firstFrameMs < 8000 &&
+    fpsToy >= 30 && fpsInk >= 30 &&
+    movedToy >= 0.5 && movedInk >= 0.5;
+}
+
+const ok1280 = await runViewport('1280x800', 1280, 800, 1, false);
+const ok390 = await runViewport('390x844', 390, 844, 2, true);
 console.log(`Console errors: ${consoleErrors.length === 0 ? 'none' : consoleErrors.join('; ')}`);
 
-const passed = firstFrameMs > 0 && firstFrameMs < 8000 &&
-  fps1280Toy >= 30 && fps1280Ink >= 30 && fps390Toy >= 30 && fps390Ink >= 30 &&
-  consoleErrors.length === 0;
+const passed = ok1280 && ok390 && consoleErrors.length === 0;
 
 ws.close();
 chrome.kill();
