@@ -97,6 +97,7 @@ function resolveTask(task) {
   }
   if (task.type === 'carry' && task.carried) {
     world.detachProp(task.prop, task.dropoff);
+    task.carried = false;
   } else if (task.type === 'feed') {
     task.rig?.playClip('eat', { loop: true });
   } else if (task.type === 'gate') {
@@ -116,6 +117,11 @@ function resolveTask(task) {
   task.done = true;
   if (task.beacon) task.beacon.visible = false;
   updateTaskCounter();
+  if (world.tasks.every((t) => t.done)) {
+    setTimeout(() => {
+      if (screen === 'playing') showDawnSummary();
+    }, 1200);
+  }
 }
 
 function updateTaskCounter() {

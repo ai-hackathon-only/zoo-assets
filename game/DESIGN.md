@@ -5,7 +5,7 @@ Agreed in [Decision: game design (#133)](https://github.com/ai-hackathon-only/zo
 ## Concept & Core Loop
 - **Title:** Night Shift
 - **Premise:** You are the zoo keeper on the night shift after closing. The park is dark, and you walk the paths handling tasks until dawn.
-- **Shift length:** 6–7 minutes (dusk to dawn clock; sky and ambient light brighten smoothly toward dawn).
+- **Shift length:** 6–7 minutes (dusk to dawn clock; sky and ambient light brighten smoothly toward dawn). Completing all 6 tasks ends the shift early (~1.2 s pause, then transitions to dawn).
 - **Scoring:** Gentle, no fail state. 6 tasks total across 5 task types; 4+ completed counts as a good shift (1–3 stars on the dawn summary). Any unfinished tasks are listed kindly as "left for the day team".
 
 ## Tasks (5 types, 6 tasks per shift)

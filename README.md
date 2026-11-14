@@ -98,6 +98,21 @@ The toy look is the default. Add `?look=ink` to a gallery or park URL, or use th
 
 Every asset also has a sprite sheet for 2D use: `sprites/<category>/<id>.png`, one horizontal strip of 128 px greyscale tiles at 8 fps, rendered by headless Blender from the GLBs. `sprites.json` lists the tile size, fps and the first frame and frame count of each clip. Rebuild all sheets with `build_sprites.py` (it uses `tools/sumi-e/`); `validate.py` checks that every asset has a sheet that matches `sprites.json` and that the size limits hold (150 KB per asset, 90 MB in total). Today the 566 sheets take about 21 MB.
 
+## Night Shift (Game)
+
+`game/` (https://ai-hackathon-only.github.io/zoo-assets/game/) is a short browser game built from the rigged zoo assets. You play as a keeper on the night shift after closing, walking the park paths from dusk to dawn and handling six tasks across five types: feeding animals, closing open gates, guiding lost visitors to the exit, relighting dark lamps, and carrying a bucket to a trough.
+
+### How to play
+- **Desktop**: Move with `WASD` or arrow keys, or click the ground to walk there. Hold `E` or `Space` (or the on-screen Action button) near a glowing task beacon to handle it.
+- **Phone**: Tap the ground to walk and hold the **Action** button when you reach a beacon.
+- **Shift**: One shift runs 6 minutes. Finishing 4 or more of the 6 tasks counts as a good shift (1 to 3 stars). Anything left over is listed as left for the day team, with no game over.
+- **Ink look**: Use the Toy / Sumi-e button to switch between the default toy look and the brush-ink shader.
+
+### How it is built
+- `game/world.js` builds the 100 m night park using `park/generator.js`, sets up the dark-blue night lighting, keeper flashlight, lamp pools, and glowing beacons, and loads the rigged GLBs with `lib/rig` clips (`walk`, `idle`, `carry`, `eat`, `open`, `close`, `wave`).
+- `game/main.js` and `game/index.html` run the shift loop, keyboard/touch controls, 2D minimap, start and dawn screens, and the `vendor/ink.js` switch.
+- `game/DESIGN.md` holds the agreed design.
+
 ## Rebuilding
 
 ### Requirements
