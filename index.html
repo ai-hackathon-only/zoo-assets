@@ -925,8 +925,9 @@
       }
       document.body.dataset.look = on ? 'ink' : 'toy';
     }
-    btnLook.addEventListener('click', () => setLook(!ink.enabled));
-    if (btnLookHeader) btnLookHeader.addEventListener('click', () => setLook(!ink.enabled));
+    btnLook.addEventListener('click', () => setLook(ink ? !ink.enabled : (document.body.dataset.look !== 'ink')));
+    if (btnLookHeader) btnLookHeader.addEventListener('click', () => setLook(ink ? !ink.enabled : (document.body.dataset.look !== 'ink')));
+    setLook(lookFromUrl());
     let currentModel = null;
     let autoRotate = true;
     let wireframeMode = false;
