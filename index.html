@@ -1033,13 +1033,14 @@
         clipBtns.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
         setSpriteClip(clip.name);
       };
+      const isStill = new URLSearchParams(location.search).get('still') === '1';
       clips.forEach((clip, i) => {
         const btn = document.createElement('button');
         btn.className = 'ctrl-btn';
         btn.textContent = clip.name.charAt(0).toUpperCase() + clip.name.slice(1);
         btn.addEventListener('click', () => play(clip, btn));
         clipBtns.appendChild(btn);
-        if (i === 0) play(clip, btn);
+        if (i === 0 && !isStill) play(clip, btn);
       });
       clock.getDelta();
     }
@@ -1103,6 +1104,7 @@
         ink.render(scene, camera);
       }
       animate();
+      window.__zooRender = () => { if (ink && scene && camera) ink.render(scene, camera); };
 
       window.addEventListener('resize', () => {
         if (!modalBackdrop.classList.contains('open')) return;
@@ -1187,7 +1189,13 @@
         const dist = maxDim * 2.2;
 
         controls.target.set(center.x, center.y, center.z);
-        camera.position.set(center.x + dist * 0.7, center.y + dist * 0.6, center.z + dist * 0.9);
+        if (new URLSearchParams(location.search).get('still') === '1') {
+          const halfDiag = 0.5 * size.length();
+          const refDir = new THREE.Vector3(1.0, 0.8, 1.25).normalize();
+          camera.position.copy(center).addScaledVector(refDir, halfDiag * 2.5);
+        } else {
+          camera.position.set(center.x + dist * 0.7, center.y + dist * 0.6, center.z + dist * 0.9);
+        }
         camera.lookAt(controls.target);
 
         defaultCameraPosition.copy(camera.position);
