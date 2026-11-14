@@ -60,8 +60,8 @@ function setLook(on) {
   const curMode = on ? 'Sumi-e' : 'Toy';
   startLookBtn.setAttribute('aria-pressed', String(on));
   hudLookBtn.setAttribute('aria-pressed', String(on));
-  startLookBtn.setAttribute('aria-label', `Look mode: ${curMode}. Press to switch to ${nextMode}.`);
-  hudLookBtn.setAttribute('aria-label', `Look mode: ${curMode}. Press L or click to switch to ${nextMode}.`);
+  startLookBtn.setAttribute('aria-label', `Look: ${curMode}. Press to switch to ${nextMode}.`);
+  hudLookBtn.setAttribute('aria-label', `${curMode} look. Press L or click to switch to ${nextMode}.`);
 }
 setLook(lookFromUrl());
 
@@ -74,11 +74,12 @@ function setSoundMuted(muted) {
   startSoundBtn.textContent = audio.muted ? 'Sound: Off' : 'Sound: On';
   hudSoundBtn.textContent = audio.muted ? 'Muted' : 'Sound';
   const pressed = audio.muted ? 'false' : 'true';
-  const label = audio.muted ? 'Sound: Off. Press to unmute.' : 'Sound: On. Press to mute.';
+  const startLabel = audio.muted ? 'Sound: Off. Press to unmute.' : 'Sound: On. Press to mute.';
+  const hudLabel = audio.muted ? 'Muted. Press to unmute.' : 'Sound on. Press to mute.';
   startSoundBtn.setAttribute('aria-pressed', pressed);
   hudSoundBtn.setAttribute('aria-pressed', pressed);
-  startSoundBtn.setAttribute('aria-label', label);
-  hudSoundBtn.setAttribute('aria-label', label);
+  startSoundBtn.setAttribute('aria-label', startLabel);
+  hudSoundBtn.setAttribute('aria-label', hudLabel);
 }
 startSoundBtn.addEventListener('click', () => setSoundMuted(!audio.muted));
 hudSoundBtn.addEventListener('click', () => setSoundMuted(!audio.muted));
