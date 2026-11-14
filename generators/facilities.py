@@ -69,6 +69,32 @@ def build(asset, z):
                     v.co.x = (v.co.x - (min_x + max_x) / 2) * scale_x
                     v.co.y = (v.co.y - (min_y + max_y) / 2) * scale_y
                     v.co.z = (v.co.z - min_z) * scale_z
+    _rig(z)
+
+
+def _rig(z):
+    """Swing gates (leaf parts marked in _build_gate) get one door bone per leaf, hinged at the outer edge; clips open
+    and close. Facilities without leaves declare no joints and get the root-only rig."""
+    import bpy
+    from mathutils import Vector
+    meshes = [o for o in bpy.context.scene.objects if o.type == "MESH"]
+    leaves = {}
+    for o in meshes:
+        if "leaf" in o:
+            leaves.setdefault(int(o["leaf"]), []).append(o)
+    if not leaves:
+        return
+    for o in meshes:
+        o["bone"] = "frame"
+    z.joint("frame", (0, 0, 0), (0, 0, 0.1))
+    for side, objs in leaves.items():
+        cs = [o.matrix_world @ Vector(c) for o in objs for c in o.bound_box]
+        x = min(c.x for c in cs) if side == 1 else max(c.x for c in cs)
+        name = "door_L" if side == 1 else "door_R"
+        for o in objs:
+            o["bone"] = name
+        y = sum(c.y for c in cs) / len(cs)
+        z.joint(name, (x, y, min(c.z for c in cs)), (x, y, max(c.z for c in cs)), parent="frame")
 
 
 # --- FENCES & WALLS ---
@@ -211,9 +237,11 @@ def _build_gate(W, L, H, variant, aid, z):
         for u in range(units):
             ux = -W * 0.5 + uw * (u + 0.5)
             z.box((uw * 0.7, L * 0.7, H * 0.8), loc=(ux, 0, H * 0.4), colour="light_grey")
-            z.cyl(0.06, 0.15, loc=(ux, L * 0.2, H * 0.75), rot=(45, 0, 0), colour="charcoal")
+            hub = z.cyl(0.06, 0.15, loc=(ux, L * 0.2, H * 0.75), rot=(45, 0, 0), colour="charcoal")
+            hub["leaf"] = 1 if u % 2 == 0 else -1
             for rot_deg in (0, 120, 240):
-                z.box((0.03, 0.03, max(uw, L) * 0.65), loc=(ux, L * 0.28, H * 0.75), rot=(rot_deg, 45, 0), colour="light_grey")
+                arm = z.box((0.03, 0.03, max(uw, L) * 0.65), loc=(ux, L * 0.28, H * 0.75), rot=(rot_deg, 45, 0), colour="light_grey")
+                arm["leaf"] = hub["leaf"]
         if variant == "turnstile_bank":
             z.box((W * 0.98, L * 0.92, 0.15), loc=(0, 0, H * 0.95), colour="navy")
             z.cyl(0.06, H * 0.92, loc=(-W * 0.46, -L * 0.4, H * 0.46), colour="charcoal", seg=6)
@@ -223,21 +251,24 @@ def _build_gate(W, L, H, variant, aid, z):
         for x in (-W * 0.35, W * 0.35):
             z.box((cab_w, L * 0.85, H * 0.85), loc=(x, 0, H * 0.425), colour="light_grey")
             z.box((cab_w * 0.7, L * 0.4, 0.05), loc=(x, 0, H * 0.86), colour="teal")
-        z.box((W * 0.35, 0.04, H * 0.35), loc=(0, 0, H * 0.55), colour="teal")
+        flap = z.box((W * 0.35, 0.04, H * 0.35), loc=(0, 0, H * 0.55), colour="teal")
+        flap["leaf"] = 1
     elif variant == "keeper_slide":
         z.box((0.15, L * 0.8, H * 0.92), loc=(-W * 0.45, 0, H * 0.46), colour="charcoal")
         z.box((0.15, L * 0.8, H * 0.92), loc=(W * 0.45, 0, H * 0.46), colour="charcoal")
         z.box((W * 0.98, L * 0.6, 0.15), loc=(0, 0, H * 0.95), colour="charcoal")
-        z.box((W * 0.85, 0.08, H * 0.85), loc=(W * 0.05, 0, H * 0.45), colour="light_grey")
-        z.box((W * 0.82, 0.12, 0.08), loc=(W * 0.05, 0, H * 0.45), colour="charcoal")
+        d1 = z.box((W * 0.85, 0.08, H * 0.85), loc=(W * 0.05, 0, H * 0.45), colour="light_grey")
+        d2 = z.box((W * 0.82, 0.12, 0.08), loc=(W * 0.05, 0, H * 0.45), colour="charcoal")
+        d1["leaf"] = d2["leaf"] = 1
     elif variant == "safari_airlock":
         z.box((W * 0.95, L * 0.95, 0.2), loc=(0, 0, 0.1), colour="grey")
         for x in (-W * 0.45, W * 0.45):
             for y in (-L * 0.45, L * 0.45):
                 z.box((0.3, 0.3, H * 0.74), loc=(x, y, 0.2 + H * 0.37), colour="charcoal")
         z.box((W * 0.98, L * 0.98, 0.18), loc=(0, 0, H * 0.94), colour="charcoal")
-        z.box((W * 0.78, 0.15, H * 0.7), loc=(0, -L * 0.45, 0.2 + H * 0.36), colour="rust")
-        z.box((W * 0.78, 0.15, H * 0.7), loc=(0, L * 0.45, 0.2 + H * 0.36), colour="rust")
+        d1 = z.box((W * 0.78, 0.15, H * 0.7), loc=(0, -L * 0.45, 0.2 + H * 0.36), colour="rust")
+        d2 = z.box((W * 0.78, 0.15, H * 0.7), loc=(0, L * 0.45, 0.2 + H * 0.36), colour="rust")
+        d1["leaf"], d2["leaf"] = 1, -1
     else:
         post_w = 0.22
         z.box((post_w, L * 0.8, H * 0.95), loc=(-W * 0.45, 0, H * 0.475), colour="dark_brown")
@@ -245,8 +276,9 @@ def _build_gate(W, L, H, variant, aid, z):
         gw = W * 0.42 if variant == "paddock_double" else W * 0.8
         gh = H * 0.8
         for gx in ((-W * 0.22, W * 0.22) if variant == "paddock_double" else (0,)):
-            z.box((gw * 0.95, 0.08, gh), loc=(gx, 0, gh * 0.5 + 0.1), colour="brown")
-            z.box((gw * 0.9, 0.1, 0.08), loc=(gx, 0, gh * 0.5 + 0.1), rot=(0, 25, 0), colour="tan")
+            a = z.box((gw * 0.95, 0.08, gh), loc=(gx, 0, gh * 0.5 + 0.1), colour="brown")
+            b = z.box((gw * 0.9, 0.1, 0.08), loc=(gx, 0, gh * 0.5 + 0.1), rot=(0, 25, 0), colour="tan")
+            a["leaf"] = b["leaf"] = 1 if gx <= 0 else -1  # 1: hinge at the -X edge (door_L), -1: at the +X edge (door_R)
 
 
 # --- BUILDINGS & SHELTERS ---
