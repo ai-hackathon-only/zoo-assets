@@ -49,6 +49,38 @@ def build(asset, z):
         builder(W, L, H, aid, params, z)
     else:
         z.box((W, L, H), loc=(0, 0, H / 2), colour="leaf")
+    _rig(z)
+
+
+def _rig(z):
+    """One bone per wheel (pivot on the axle, bone along X so a turn about its own axis rolls the wheel); every other
+    part is on the chassis bone (child of root). A wheel is a thin round part (X <= 0.3 m, Y and Z equal, >= 8 cm) standing on the ground;
+    tyre and hub share a centre, so they share a bone. Doors and ramps are not rigged yet."""
+    import bpy
+    from mathutils import Vector
+    meshes = [o for o in bpy.context.scene.objects if o.type == "MESH"]
+    box = {}
+    for o in meshes:
+        cs = [o.matrix_world @ Vector(c) for c in o.bound_box]
+        lo = Vector(min(c[i] for c in cs) for i in range(3))
+        hi = Vector(max(c[i] for c in cs) for i in range(3))
+        box[o] = (lo, hi)
+    keys = {}
+    for o, (lo, hi) in box.items():
+        d = hi - lo
+        c = (lo + hi) / 2
+        if d.x <= 0.3 and d.y >= 0.08 and abs(d.y - d.z) < 0.01 and c.z - d.z / 2 < 0.02:
+            keys.setdefault((round(c.x, 2), round(c.y, 2)), []).append(o)
+    hubs = {k: max(box[o][1].x - box[o][0].x for o in v) for k, v in keys.items()}
+    for o in meshes:
+        o["bone"] = "chassis"
+    z.joint("chassis", (0, 0, 0), (0, 0, 0.1))
+    for i, (k, objs) in enumerate(sorted(keys.items())):
+        c = (box[objs[0]][0] + box[objs[0]][1]) / 2
+        for o in objs:
+            o["bone"] = f"wheel_{i}"
+        half = hubs[k] / 2
+        z.joint(f"wheel_{i}", (c.x - half, c.y, c.z), (c.x + half, c.y, c.z), parent="chassis")
 
 
 def _add_wheel(z, r, w, loc, tire_col="black", hub_col="light_grey"):

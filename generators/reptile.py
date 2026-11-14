@@ -11,8 +11,72 @@ All models face -Y in Blender (glTF +Z), matching the thumbnail camera.
 """
 import math
 
+from generators.bird import SHAPES, _bounds
+
+
+class _PosTagger:
+    """Wraps z and tags each part by where it sits: head (front), tail (back), legs (low and off-centre, split into
+    FL/FR/BL/BR; +X is the animal's left), everything else body. Reptile parts are placed by fractions of W/L/H, so
+    the position says which section the part belongs to."""
+
+    def __init__(self, z, size):
+        self._z, self._s = z, size
+
+    def __getattr__(self, name):
+        fn = getattr(self._z, name)
+        if name not in SHAPES:
+            return fn
+        W, L, H = self._s
+
+        def make(*a, **kw):
+            x, y, zz = kw.get("loc", (0, 0, 0))
+            if abs(x) > 0.2 * W and zz < 0.45 * H:
+                kind = "leg_" + ("F" if y < 0 else "B") + ("L" if x >= 0 else "R")
+            elif y < -0.19 * L:
+                kind = "head"
+            elif y > 0.17 * L:
+                kind = "tail"
+            else:
+                kind = "body"
+            with self._z.bone(kind):
+                return fn(*a, **kw)
+        return make
+
+
+def _declare_joints(z):
+    import bpy
+    from mathutils import Vector as V
+    bpy.context.view_layer.update()
+    groups = {}
+    for o in bpy.context.scene.objects:
+        if o.type == "MESH":
+            groups.setdefault(o.get("bone", "body"), []).append(o)
+    bb = {k: _bounds(v) for k, v in groups.items()}
+    lo, hi = bb["body"]
+    zc = (lo.z + hi.z) / 2
+    z.joint("body", (0, hi.y, zc), (0, lo.y, zc), "root")
+    if "head" in bb:
+        lo, hi = bb["head"]
+        zc = (lo.z + hi.z) / 2
+        z.joint("head", (0, hi.y, zc), (0, lo.y, zc), "body")
+    if "tail" in bb:
+        lo, hi = bb["tail"]
+        zc = (lo.z + hi.z) / 2
+        z.joint("tail", (0, lo.y, zc), (0, hi.y, zc), "body")
+    for k, (lo, hi) in bb.items():
+        if k.startswith("leg_"):
+            xc, yc = (lo.x + hi.x) / 2, (lo.y + hi.y) / 2
+            z.joint(k, (xc, yc, hi.z), (xc, yc, lo.z), "body")
+
 
 def build(a, z):
+    if a["id"] in ("reticulated_python", "king_cobra"):  # snakes: slither clip not made yet
+        return _build(a, z)
+    _build(a, _PosTagger(z, a["size_m"]))
+    _declare_joints(z)
+
+
+def _build(a, z):
     aid = a["id"]
     p = a.get("params", {})
     marks = set(p.get("marks", []))

@@ -26,8 +26,14 @@ PALETTE_PNG = os.path.join(ROOT, "palette", "palette.png")
 MAT_NAME = "MAT_palette"
 EMISSIVE_MAT_NAME = "MAT_emissive"
 
-# GOALS.md budgets: (max tris, max bytes)
-BUDGETS = {"animals": (5000, 300_000), "keepers": (3000, 300_000), "facilities": (10000, 300_000)}
+# GOALS.md budgets: (max tris, max bytes); round 3 raises rigged animals/humans/vehicles/facilities to 500 KB
+BUDGETS = {
+    "animals": (5000, 500_000),
+    "keepers": (3000, 500_000),
+    "visitors": (2000, 500_000),
+    "vehicles": (2000, 500_000),
+    "facilities": (10000, 500_000),
+}
 DEFAULT_BUDGET = (2000, 150_000)
 
 

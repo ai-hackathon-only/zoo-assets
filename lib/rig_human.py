@@ -14,8 +14,9 @@ CLIPS = {"walk": 24, "idle": 48, "wave": 48, "carry": 24}
 SKELETON = {"root", "body", "head", "arm_L", "arm_R", "leg_L", "leg_R"}
 
 
-def is_human(bone_names):
-    return {"leg_L", "leg_R", "arm_L", "arm_R"} <= set(bone_names)
+def is_human(bone_names, name=""):
+    """Full skeleton, or a one-piece person (wheelchair user, kid on shoulders) named SM_/RIG_ keepers or visitors."""
+    return {"leg_L", "leg_R", "arm_L", "arm_R"} <= set(bone_names) or ("_keepers_" in name or "_visitors_" in name)
 
 
 def clips(arm, h, key):
@@ -60,7 +61,7 @@ def clips(arm, h, key):
             elif clip == "wave":
                 if has("arm_R"):
                     up = min(1.0, f / 8, (n - f) / 8)  # lift in 8 frames, wave, lower
-                    key(pb["arm_R"], f, rot=(0, -(150 + 12 * math.sin(ph * 4)) * up, 0))
+                    key(pb["arm_R"], f, rot=(0, 0, (135 + 12 * math.sin(ph * 4)) * up))
                 if has("head"):
                     key(pb["head"], f, rot=(0, 0, 6 * math.sin(ph)))
                 if has("body"):
