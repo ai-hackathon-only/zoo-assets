@@ -167,9 +167,10 @@ async function runViewport(label, width, height, deviceScaleFactor, mobile) {
   const p3 = await getPos();
   const movedInk = distXZ(p2, p3);
 
+  const fmtPos = p => `[${p[0].toFixed(2)}, ${p[2].toFixed(2)}]`;
   console.log(`${label} world-ready + first-frame: ${firstFrameMs} ms (limit < 8000 ms)`);
-  console.log(`${label} walking FPS (Toy): ${fpsToy} fps (moved ${movedToy.toFixed(1)} m, limit >= 30 fps)`);
-  console.log(`${label} walking FPS (Sumi-e): ${fpsInk} fps (moved ${movedInk.toFixed(1)} m, limit >= 30 fps)`);
+  console.log(`${label} walking FPS (Toy): ${fpsToy} fps (moved ${movedToy.toFixed(1)} m ${fmtPos(p0)} -> ${fmtPos(p1)}, limit >= 30 fps)`);
+  console.log(`${label} walking FPS (Sumi-e): ${fpsInk} fps (moved ${movedInk.toFixed(1)} m ${fmtPos(p2)} -> ${fmtPos(p3)}, limit >= 30 fps)`);
 
   return firstFrameMs > 0 && firstFrameMs < 8000 &&
     fpsToy >= 30 && fpsInk >= 30 &&
