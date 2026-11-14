@@ -1,0 +1,8912 @@
+{
+ "tile": 128,
+ "fps": 8,
+ "assets": {
+  "aardvark": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 33278
+  },
+  "acacia_tree": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 26535
+  },
+  "african_elephant": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 38207
+  },
+  "african_elephant_baby": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 37306
+  },
+  "african_elephant_rare": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 36403
+  },
+  "african_penguin": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 62890
+  },
+  "african_penguin_baby": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 62629
+  },
+  "african_penguin_rare": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 60701
+  },
+  "african_wild_dog": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 36900
+  },
+  "agave_plant": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 40559
+  },
+  "aloe_plant": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 39807
+  },
+  "alpaca": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 38834
+  },
+  "american_alligator": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 33786
+  },
+  "american_alligator_baby": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 33698
+  },
+  "american_alligator_rare": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 33790
+  },
+  "american_beaver": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 32938
+  },
+  "american_bison": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 36855
+  },
+  "american_bison_baby": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 37822
+  },
+  "american_bison_rare": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 36270
+  },
+  "amur_tiger": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 39588
+  },
+  "animal_statue_elephant": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8169
+  },
+  "animal_statue_lion": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8009
+  },
+  "animal_transport_truck": {
+   "category": "vehicles",
+   "tiles": 8,
+   "clips": {
+    "drive": {
+     "start": 0,
+     "frames": 6
+    },
+    "idle": {
+     "start": 6,
+     "frames": 2
+    }
+   },
+   "bytes": 29461
+  },
+  "arctic_fox": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 32837
+  },
+  "asian_elephant": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 37692
+  },
+  "atlas_moth": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "crawl": {
+     "start": 0,
+     "frames": 6
+    },
+    "eat": {
+     "start": 6,
+     "frames": 3
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "swim": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 48517
+  },
+  "axolotl": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 34456
+  },
+  "bactrian_camel": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 40438
+  },
+  "bald_eagle": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 54358
+  },
+  "bamboo_clump": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 36517
+  },
+  "banana_plant": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 33538
+  },
+  "banner_pole": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7028
+  },
+  "baobab_tree": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 28028
+  },
+  "barrel_cactus": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 25313
+  },
+  "barrier_moat_trench": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7032
+  },
+  "bench_cast_iron_ornate": {
+   "category": "benches_lamps_bins_signs",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8820
+  },
+  "bench_concrete_modern": {
+   "category": "benches_lamps_bins_signs",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6138
+  },
+  "bench_park_wood_classic": {
+   "category": "benches_lamps_bins_signs",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 9122
+  },
+  "bench_picnic_table_combo": {
+   "category": "benches_lamps_bins_signs",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7908
+  },
+  "bench_rustic_log": {
+   "category": "benches_lamps_bins_signs",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6999
+  },
+  "bengal_tiger": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 39731
+  },
+  "bengal_tiger_baby": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 37968
+  },
+  "bengal_tiger_rare": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 39359
+  },
+  "berry_bush": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 26457
+  },
+  "bicycle": {
+   "category": "vehicles",
+   "tiles": 8,
+   "clips": {
+    "drive": {
+     "start": 0,
+     "frames": 6
+    },
+    "idle": {
+     "start": 6,
+     "frames": 2
+    }
+   },
+   "bytes": 28397
+  },
+  "bin_animal_proof_bear": {
+   "category": "benches_lamps_bins_signs",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8430
+  },
+  "bin_recycle_dual_metal": {
+   "category": "benches_lamps_bins_signs",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6971
+  },
+  "bin_solar_compactor": {
+   "category": "benches_lamps_bins_signs",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7647
+  },
+  "bin_waste_general_timber": {
+   "category": "benches_lamps_bins_signs",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7093
+  },
+  "birch_tree": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 25691
+  },
+  "bird_bath": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7239
+  },
+  "bird_feeder_post": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7518
+  },
+  "black_howler": {
+   "category": "animals",
+   "tiles": 14,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "sit": {
+     "start": 5,
+     "frames": 3
+    },
+    "walk": {
+     "start": 8,
+     "frames": 6
+    }
+   },
+   "bytes": 47345
+  },
+  "black_panther": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 34778
+  },
+  "blue_tang": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "swim": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 36984
+  },
+  "blue_wildebeest": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 39586
+  },
+  "bonobo": {
+   "category": "animals",
+   "tiles": 14,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "sit": {
+     "start": 5,
+     "frames": 3
+    },
+    "walk": {
+     "start": 8,
+     "frames": 6
+    }
+   },
+   "bytes": 58013
+  },
+  "bonsai_pine": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 29179
+  },
+  "booth_visitor_info": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7463
+  },
+  "bornean_orangutan": {
+   "category": "animals",
+   "tiles": 14,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "sit": {
+     "start": 5,
+     "frames": 3
+    },
+    "walk": {
+     "start": 8,
+     "frames": 6
+    }
+   },
+   "bytes": 63699
+  },
+  "bornean_orangutan_baby": {
+   "category": "animals",
+   "tiles": 14,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "sit": {
+     "start": 5,
+     "frames": 3
+    },
+    "walk": {
+     "start": 8,
+     "frames": 6
+    }
+   },
+   "bytes": 60915
+  },
+  "bornean_orangutan_rare": {
+   "category": "animals",
+   "tiles": 14,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "sit": {
+     "start": 5,
+     "frames": 3
+    },
+    "walk": {
+     "start": 8,
+     "frames": 6
+    }
+   },
+   "bytes": 60490
+  },
+  "bottlenose_dolphin": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "swim": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 30773
+  },
+  "boulder_large": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6808
+  },
+  "boulder_medium": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6935
+  },
+  "boulder_small": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6955
+  },
+  "box_hedge": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 29659
+  },
+  "bridge_stone_arch": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6604
+  },
+  "bridge_timber_footbridge": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 9576
+  },
+  "bromeliad": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 39428
+  },
+  "brown_bear": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 36156
+  },
+  "brown_bear_baby": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 36385
+  },
+  "brown_bear_rare": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 34102
+  },
+  "building_aquarium_dome": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6355
+  },
+  "building_aviary_walkthrough": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6629
+  },
+  "building_butterfly_hothouse": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8159
+  },
+  "building_first_aid_station": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7792
+  },
+  "building_hay_barn": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7420
+  },
+  "building_keeper_shed": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7703
+  },
+  "building_lost_and_found": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7684
+  },
+  "building_public_restroom": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8518
+  },
+  "building_quarantine_bay": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8283
+  },
+  "building_reptile_house": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7926
+  },
+  "building_staff_breakroom": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7769
+  },
+  "building_vet_clinic": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8027
+  },
+  "bunting_string": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6720
+  },
+  "cafe_table_set": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7968
+  },
+  "california_sea_lion": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "swim": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 38314
+  },
+  "canopy_walkway_ramp": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7489
+  },
+  "canopy_walkway_straight": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 9040
+  },
+  "canyon_wall": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8756
+  },
+  "cape_buffalo": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 36133
+  },
+  "capybara": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 34384
+  },
+  "cave_bat_nocturnal_portal": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7591
+  },
+  "chameleon": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 38061
+  },
+  "cheetah": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 37568
+  },
+  "cheetah_baby": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 37113
+  },
+  "cheetah_rare": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 37539
+  },
+  "cherry_tree_blossom": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 25390
+  },
+  "chimpanzee": {
+   "category": "animals",
+   "tiles": 14,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "sit": {
+     "start": 5,
+     "frames": 3
+    },
+    "walk": {
+     "start": 8,
+     "frames": 6
+    }
+   },
+   "bytes": 57943
+  },
+  "chimpanzee_baby": {
+   "category": "animals",
+   "tiles": 14,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "sit": {
+     "start": 5,
+     "frames": 3
+    },
+    "walk": {
+     "start": 8,
+     "frames": 6
+    }
+   },
+   "bytes": 58166
+  },
+  "chimpanzee_rare": {
+   "category": "animals",
+   "tiles": 14,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "sit": {
+     "start": 5,
+     "frames": 3
+    },
+    "walk": {
+     "start": 8,
+     "frames": 6
+    }
+   },
+   "bytes": 59618
+  },
+  "cliff_corner": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6853
+  },
+  "cliff_wall": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7304
+  },
+  "climbing_tree_trunk": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8105
+  },
+  "clownfish": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "swim": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 39317
+  },
+  "common_squirrel_monkey": {
+   "category": "animals",
+   "tiles": 14,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "sit": {
+     "start": 5,
+     "frames": 3
+    },
+    "walk": {
+     "start": 8,
+     "frames": 6
+    }
+   },
+   "bytes": 45337
+  },
+  "coral_cluster": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 32340
+  },
+  "cougar": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 35954
+  },
+  "cougar_baby": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 34367
+  },
+  "cougar_rare": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 35881
+  },
+  "crate_stack": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7145
+  },
+  "crystal_rock": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6905
+  },
+  "cypress_tree": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 27925
+  },
+  "daisy_patch": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 31073
+  },
+  "date_palm": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 34222
+  },
+  "dead_tree": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 34815
+  },
+  "delivery_van": {
+   "category": "vehicles",
+   "tiles": 8,
+   "clips": {
+    "drive": {
+     "start": 0,
+     "frames": 6
+    },
+    "idle": {
+     "start": 6,
+     "frames": 2
+    }
+   },
+   "bytes": 27957
+  },
+  "dirt_mound": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6023
+  },
+  "dirt_tile": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6921
+  },
+  "dome_meerkat_viewing_bubble": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6490
+  },
+  "driftwood": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6195
+  },
+  "drinking_fountain_pedestal": {
+   "category": "benches_lamps_bins_signs",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7366
+  },
+  "dromedary": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 40235
+  },
+  "dromedary_baby": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 38094
+  },
+  "dromedary_rare": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 39773
+  },
+  "emperor_penguin": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 62678
+  },
+  "emperor_scorpion": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "crawl": {
+     "start": 0,
+     "frames": 6
+    },
+    "eat": {
+     "start": 6,
+     "frames": 3
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "swim": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 53017
+  },
+  "emu": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 42515
+  },
+  "emu_baby": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 41410
+  },
+  "emu_rare": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 40157
+  },
+  "enrich_bamboo_windchime_toy_13": {
+   "category": "enrichment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7212
+  },
+  "enrich_boomer_ball_lg_01": {
+   "category": "enrichment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6476
+  },
+  "enrich_boomer_ball_sm_02": {
+   "category": "enrichment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 5826
+  },
+  "enrich_climbing_cargo_net_16": {
+   "category": "enrichment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 9539
+  },
+  "enrich_firehose_cube_06": {
+   "category": "enrichment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7110
+  },
+  "enrich_floating_log_buoy_09": {
+   "category": "enrichment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7888
+  },
+  "enrich_floating_plastic_ring_20": {
+   "category": "enrichment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6122
+  },
+  "enrich_forage_bungee_net_12": {
+   "category": "enrichment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7728
+  },
+  "enrich_ice_block_treat_07": {
+   "category": "enrichment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7437
+  },
+  "enrich_misting_rub_station_17": {
+   "category": "enrichment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7733
+  },
+  "enrich_primate_puzzle_box_14": {
+   "category": "enrichment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 5465
+  },
+  "enrich_puzzle_barrel_05": {
+   "category": "enrichment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6515
+  },
+  "enrich_rope_spiral_tug_11": {
+   "category": "enrichment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7841
+  },
+  "enrich_rubber_wobble_cone_15": {
+   "category": "enrichment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7437
+  },
+  "enrich_scent_marking_log_10": {
+   "category": "enrichment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6377
+  },
+  "enrich_scratch_post_timber_08": {
+   "category": "enrichment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7140
+  },
+  "enrich_splash_wading_tub_18": {
+   "category": "enrichment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6740
+  },
+  "enrich_tire_pyramid_04": {
+   "category": "enrichment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7161
+  },
+  "enrich_tire_swing_single_03": {
+   "category": "enrichment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7659
+  },
+  "enrich_treat_labyrinth_plate_19": {
+   "category": "enrichment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6582
+  },
+  "eucalyptus_tree": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 26442
+  },
+  "eurasian_lynx": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 38159
+  },
+  "european_badger": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 34225
+  },
+  "european_bison": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 36971
+  },
+  "fallen_log": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6533
+  },
+  "feature_safari_sunshade": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7685
+  },
+  "feed_trailer": {
+   "category": "vehicles",
+   "tiles": 8,
+   "clips": {
+    "drive": {
+     "start": 0,
+     "frames": 6
+    },
+    "idle": {
+     "start": 6,
+     "frames": 2
+    }
+   },
+   "bytes": 24039
+  },
+  "fence_bamboo_panel": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 9723
+  },
+  "fence_chainlink_panel": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8856
+  },
+  "fence_chainlink_post": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7687
+  },
+  "fence_rope_stanchions": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7977
+  },
+  "fence_wood_post": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7025
+  },
+  "fence_wood_rail_corner": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 9615
+  },
+  "fence_wood_rail_straight": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 9295
+  },
+  "fern_bush": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 37272
+  },
+  "flag_pole": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6977
+  },
+  "flat_rock": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6430
+  },
+  "flower_planter_box": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 35622
+  },
+  "flowering_shrub": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 26255
+  },
+  "food_bamboo_stalk_sheaf_06": {
+   "category": "food",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8652
+  },
+  "food_browse_wall_rack_13": {
+   "category": "food",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7765
+  },
+  "food_carnivore_nutrient_loaf_16": {
+   "category": "food",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7902
+  },
+  "food_eucalyptus_bundle_05": {
+   "category": "food",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7379
+  },
+  "food_fish_bucket_herring_04": {
+   "category": "food",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7162
+  },
+  "food_fruit_crate_mixed_07": {
+   "category": "food",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7560
+  },
+  "food_hay_bale_round_02": {
+   "category": "food",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6466
+  },
+  "food_hay_bale_square_01": {
+   "category": "food",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6366
+  },
+  "food_insect_larva_dish_10": {
+   "category": "food",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6592
+  },
+  "food_krill_shrimp_pail_18": {
+   "category": "food",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 5991
+  },
+  "food_meat_rib_slab_03": {
+   "category": "food",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8512
+  },
+  "food_nectar_tube_feeder_15": {
+   "category": "food",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6889
+  },
+  "food_pellet_feed_sack_19": {
+   "category": "food",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6873
+  },
+  "food_raw_marrow_bone_12": {
+   "category": "food",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7682
+  },
+  "food_salt_lick_mineral_11": {
+   "category": "food",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8360
+  },
+  "food_seed_pellet_trough_09": {
+   "category": "food",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6729
+  },
+  "food_slow_feeder_haynet_14": {
+   "category": "food",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6964
+  },
+  "food_veggie_bushel_roots_08": {
+   "category": "food",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7469
+  },
+  "food_water_drink_trough_20": {
+   "category": "food",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 5893
+  },
+  "food_watermelon_enrich_treat_17": {
+   "category": "food",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7311
+  },
+  "footprint_paver": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6001
+  },
+  "forklift": {
+   "category": "vehicles",
+   "tiles": 8,
+   "clips": {
+    "drive": {
+     "start": 0,
+     "frames": 6
+    },
+    "idle": {
+     "start": 6,
+     "frames": 2
+    }
+   },
+   "bytes": 28949
+  },
+  "galapagos_tortoise": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 37725
+  },
+  "garden_arch": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7972
+  },
+  "garden_trellis": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 10219
+  },
+  "garden_wishing_well": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7770
+  },
+  "gate_entrance_arch_grand": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8318
+  },
+  "gate_keeper_metal_slide": {
+   "category": "facilities",
+   "tiles": 8,
+   "clips": {
+    "close": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "open": {
+     "start": 5,
+     "frames": 3
+    }
+   },
+   "bytes": 27218
+  },
+  "gate_paddock_double_wood": {
+   "category": "facilities",
+   "tiles": 8,
+   "clips": {
+    "close": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "open": {
+     "start": 5,
+     "frames": 3
+    }
+   },
+   "bytes": 29070
+  },
+  "gate_pedestrian_wicket": {
+   "category": "facilities",
+   "tiles": 8,
+   "clips": {
+    "close": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "open": {
+     "start": 5,
+     "frames": 3
+    }
+   },
+   "bytes": 28512
+  },
+  "gate_safari_vehicle_airlock": {
+   "category": "facilities",
+   "tiles": 8,
+   "clips": {
+    "close": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "open": {
+     "start": 5,
+     "frames": 3
+    }
+   },
+   "bytes": 29097
+  },
+  "gate_ticket_barrier": {
+   "category": "facilities",
+   "tiles": 8,
+   "clips": {
+    "close": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "open": {
+     "start": 5,
+     "frames": 3
+    }
+   },
+   "bytes": 25512
+  },
+  "gate_visitor_turnstile": {
+   "category": "facilities",
+   "tiles": 8,
+   "clips": {
+    "close": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "open": {
+     "start": 5,
+     "frames": 3
+    }
+   },
+   "bytes": 24663
+  },
+  "gazebo_small": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7202
+  },
+  "gemsbok": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 40515
+  },
+  "gharial": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 32044
+  },
+  "giant_african_snail": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "crawl": {
+     "start": 0,
+     "frames": 6
+    },
+    "eat": {
+     "start": 6,
+     "frames": 3
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "swim": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 59473
+  },
+  "giant_anteater": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 34869
+  },
+  "giant_egg_sculpture": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7289
+  },
+  "giant_pacific_octopus": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "swim": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 43607
+  },
+  "giant_panda": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 36587
+  },
+  "giant_panda_baby": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 34922
+  },
+  "giant_panda_rare": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 36566
+  },
+  "giraffe": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 42002
+  },
+  "giraffe_baby": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 42232
+  },
+  "giraffe_rare": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 41178
+  },
+  "golden_lion_tamarin": {
+   "category": "animals",
+   "tiles": 14,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "sit": {
+     "start": 5,
+     "frames": 3
+    },
+    "walk": {
+     "start": 8,
+     "frames": 6
+    }
+   },
+   "bytes": 44175
+  },
+  "goliath_beetle": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "crawl": {
+     "start": 0,
+     "frames": 6
+    },
+    "eat": {
+     "start": 6,
+     "frames": 3
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "swim": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 53341
+  },
+  "grass_hill": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6103
+  },
+  "grass_tile": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6163
+  },
+  "gravel_tile": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 5954
+  },
+  "great_white_shark": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "swim": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 34162
+  },
+  "greater_flamingo": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 65630
+  },
+  "greater_flamingo_baby": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 65083
+  },
+  "greater_flamingo_rare": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 65213
+  },
+  "greater_kudu": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 43398
+  },
+  "green_iguana": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 36182
+  },
+  "green_iguana_baby": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 36457
+  },
+  "green_iguana_rare": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 36191
+  },
+  "green_moray": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "swim": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 29826
+  },
+  "green_sea_turtle": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 31614
+  },
+  "grevys_zebra": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 42101
+  },
+  "grey_wolf": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 35764
+  },
+  "grey_wolf_baby": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 36133
+  },
+  "grey_wolf_rare": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 34599
+  },
+  "hand_cart": {
+   "category": "vehicles",
+   "tiles": 8,
+   "clips": {
+    "drive": {
+     "start": 0,
+     "frames": 6
+    },
+    "idle": {
+     "start": 6,
+     "frames": 2
+    }
+   },
+   "bytes": 29442
+  },
+  "hanging_basket": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7583
+  },
+  "hanging_vine": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 33144
+  },
+  "harbour_seal": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "swim": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 29844
+  },
+  "hay_mound": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 5836
+  },
+  "hedge_corner": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 29976
+  },
+  "height_chart": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7570
+  },
+  "hippo": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 36820
+  },
+  "hippo_baby": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 35545
+  },
+  "hippo_rare": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 34497
+  },
+  "hollow_log": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6178
+  },
+  "honey_bee": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "crawl": {
+     "start": 0,
+     "frames": 6
+    },
+    "eat": {
+     "start": 6,
+     "frames": 3
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "swim": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 35347
+  },
+  "ice_cream_cart": {
+   "category": "vehicles",
+   "tiles": 8,
+   "clips": {
+    "drive": {
+     "start": 0,
+     "frames": 6
+    },
+    "idle": {
+     "start": 6,
+     "frames": 2
+    }
+   },
+   "bytes": 29998
+  },
+  "ice_floe": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6013
+  },
+  "iceberg_rock": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6107
+  },
+  "impala": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 38813
+  },
+  "indian_peafowl": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 51027
+  },
+  "indian_peafowl_baby": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 51147
+  },
+  "indian_peafowl_rare": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 49799
+  },
+  "indian_rhino": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 38735
+  },
+  "ivy_wall_patch": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 36318
+  },
+  "jaguar": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 38017
+  },
+  "japanese_macaque": {
+   "category": "animals",
+   "tiles": 14,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "sit": {
+     "start": 5,
+     "frames": 3
+    },
+    "walk": {
+     "start": 8,
+     "frames": 6
+    }
+   },
+   "bytes": 49420
+  },
+  "japanese_macaque_baby": {
+   "category": "animals",
+   "tiles": 14,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "sit": {
+     "start": 5,
+     "frames": 3
+    },
+    "walk": {
+     "start": 8,
+     "frames": 6
+    }
+   },
+   "bytes": 49437
+  },
+  "japanese_macaque_rare": {
+   "category": "animals",
+   "tiles": 14,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "sit": {
+     "start": 5,
+     "frames": 3
+    },
+    "walk": {
+     "start": 8,
+     "frames": 6
+    }
+   },
+   "bytes": 47980
+  },
+  "joshua_tree": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 30610
+  },
+  "kapok_tree": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 27857
+  },
+  "keeper_apprentice_keeper_20": {
+   "category": "keepers",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 51283
+  },
+  "keeper_aquatic_feeder_03": {
+   "category": "keepers",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 50788
+  },
+  "keeper_arctic_curator_11": {
+   "category": "keepers",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 52334
+  },
+  "keeper_aviary_curator_07": {
+   "category": "keepers",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 52266
+  },
+  "keeper_botanist_curator_19": {
+   "category": "keepers",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 52360
+  },
+  "keeper_carnivore_specialist_02": {
+   "category": "keepers",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 51494
+  },
+  "keeper_education_guide_17": {
+   "category": "keepers",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 52033
+  },
+  "keeper_elephant_keeper_09": {
+   "category": "keepers",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 52246
+  },
+  "keeper_golf_cart": {
+   "category": "vehicles",
+   "tiles": 8,
+   "clips": {
+    "drive": {
+     "start": 0,
+     "frames": 6
+    },
+    "idle": {
+     "start": 6,
+     "frames": 2
+    }
+   },
+   "bytes": 33024
+  },
+  "keeper_grounds_landscaper_14": {
+   "category": "keepers",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 52658
+  },
+  "keeper_herpetologist_08": {
+   "category": "keepers",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 51377
+  },
+  "keeper_maintenance_tech_15": {
+   "category": "keepers",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 51788
+  },
+  "keeper_nocturnal_keeper_12": {
+   "category": "keepers",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 51050
+  },
+  "keeper_nursery_nurse_13": {
+   "category": "keepers",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 51919
+  },
+  "keeper_penguin_keeper_18": {
+   "category": "keepers",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 52047
+  },
+  "keeper_primate_caregiver_04": {
+   "category": "keepers",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 50517
+  },
+  "keeper_quad_bike": {
+   "category": "vehicles",
+   "tiles": 8,
+   "clips": {
+    "drive": {
+     "start": 0,
+     "frames": 6
+    },
+    "idle": {
+     "start": 6,
+     "frames": 2
+    }
+   },
+   "bytes": 32900
+  },
+  "keeper_safari_lead_01": {
+   "category": "keepers",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 51160
+  },
+  "keeper_security_ranger_16": {
+   "category": "keepers",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 51748
+  },
+  "keeper_ungulate_feeder_10": {
+   "category": "keepers",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 51088
+  },
+  "keeper_vet_assistant_06": {
+   "category": "keepers",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 50931
+  },
+  "keeper_vet_surgeon_05": {
+   "category": "keepers",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 51635
+  },
+  "kelp_strand": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 30324
+  },
+  "kick_scooter": {
+   "category": "vehicles",
+   "tiles": 8,
+   "clips": {
+    "drive": {
+     "start": 0,
+     "frames": 6
+    },
+    "idle": {
+     "start": 6,
+     "frames": 2
+    }
+   },
+   "bytes": 29717
+  },
+  "king_cobra": {
+   "category": "animals",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "slither": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 34460
+  },
+  "kiosk_beverage_bar": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7745
+  },
+  "kiosk_ice_cream": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7209
+  },
+  "kiosk_pretzel_snack": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7910
+  },
+  "kiosk_souvenir_stand": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8494
+  },
+  "kiosk_ticketing_booth": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7684
+  },
+  "kiwi": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 37838
+  },
+  "koala": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 42764
+  },
+  "komodo_dragon": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 34155
+  },
+  "kookaburra": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 54488
+  },
+  "kopje_outcrop": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7112
+  },
+  "lamp_bollard_solar": {
+   "category": "benches_lamps_bins_signs",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6535
+  },
+  "lamp_post_modern_led": {
+   "category": "benches_lamps_bins_signs",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6884
+  },
+  "lamp_post_victorian_double": {
+   "category": "benches_lamps_bins_signs",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7611
+  },
+  "lamp_post_victorian_single": {
+   "category": "benches_lamps_bins_signs",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7493
+  },
+  "lantern_string": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6665
+  },
+  "lar_gibbon": {
+   "category": "animals",
+   "tiles": 14,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "sit": {
+     "start": 5,
+     "frames": 3
+    },
+    "walk": {
+     "start": 8,
+     "frames": 6
+    }
+   },
+   "bytes": 63462
+  },
+  "lava_rock": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6211
+  },
+  "lavender_bush": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 25179
+  },
+  "lawn_mower": {
+   "category": "vehicles",
+   "tiles": 8,
+   "clips": {
+    "drive": {
+     "start": 0,
+     "frames": 6
+    },
+    "idle": {
+     "start": 6,
+     "frames": 2
+    }
+   },
+   "bytes": 31831
+  },
+  "leafcutter_ant": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "crawl": {
+     "start": 0,
+     "frames": 6
+    },
+    "eat": {
+     "start": 6,
+     "frames": 3
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "swim": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 35347
+  },
+  "leopard": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 38410
+  },
+  "leopard_baby": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 36481
+  },
+  "leopard_rare": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 39407
+  },
+  "lion": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 37842
+  },
+  "lion_baby": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 37098
+  },
+  "lion_rare": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 36761
+  },
+  "lioness": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 35446
+  },
+  "llama": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 39506
+  },
+  "lotus_flower": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 27509
+  },
+  "manatee": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "swim": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 32059
+  },
+  "mandrill": {
+   "category": "animals",
+   "tiles": 14,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "sit": {
+     "start": 5,
+     "frames": 3
+    },
+    "walk": {
+     "start": 8,
+     "frames": 6
+    }
+   },
+   "bytes": 51159
+  },
+  "mangrove_tree": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 31668
+  },
+  "manta_ray": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "swim": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 30686
+  },
+  "maple_tree_autumn": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 27168
+  },
+  "markhor": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 38853
+  },
+  "meerkat": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 38152
+  },
+  "mexican_redknee_tarantula": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "crawl": {
+     "start": 0,
+     "frames": 6
+    },
+    "eat": {
+     "start": 6,
+     "frames": 3
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "swim": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 60486
+  },
+  "misting_cooling_station": {
+   "category": "benches_lamps_bins_signs",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8159
+  },
+  "monarch_butterfly": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "crawl": {
+     "start": 0,
+     "frames": 6
+    },
+    "eat": {
+     "start": 6,
+     "frames": 3
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "swim": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 50637
+  },
+  "monstera_plant": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 39996
+  },
+  "moon_jellyfish": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "swim": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 33707
+  },
+  "moose": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 39742
+  },
+  "mossy_rock": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7099
+  },
+  "mountain_goat": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 37267
+  },
+  "mulch_tile": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7374
+  },
+  "mushroom_cluster": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 28059
+  },
+  "nile_crocodile": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 33254
+  },
+  "nile_crocodile_baby": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 33966
+  },
+  "nile_crocodile_rare": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 33158
+  },
+  "oak_tree": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 28091
+  },
+  "okapi": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 37315
+  },
+  "orca_calf": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "swim": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 33105
+  },
+  "ostrich": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 67569
+  },
+  "ostrich_baby": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 65045
+  },
+  "ostrich_rare": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 67432
+  },
+  "painted_rock": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6570
+  },
+  "palm_tree": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 34393
+  },
+  "pampas_grass": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 33926
+  },
+  "papyrus_clump": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 32497
+  },
+  "path_asphalt_junction_t": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6560
+  },
+  "path_asphalt_straight": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6807
+  },
+  "path_cobblestone_straight": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 5436
+  },
+  "path_gravel_trail": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 5675
+  },
+  "path_wood_boardwalk": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7408
+  },
+  "patio_umbrella": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7092
+  },
+  "pavilion_viewing_safari": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8032
+  },
+  "pebble_patch": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7146
+  },
+  "pedal_boat": {
+   "category": "vehicles",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7577
+  },
+  "pelican": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 52373
+  },
+  "pen_petting_zoo_corral": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7175
+  },
+  "pergola_picnic_shaded": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 9009
+  },
+  "photo_cutout_board": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8713
+  },
+  "picnic_blanket": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7263
+  },
+  "pine_tree": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 30306
+  },
+  "plains_zebra": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 40839
+  },
+  "plains_zebra_baby": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 39095
+  },
+  "plains_zebra_rare": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 40389
+  },
+  "platform_giraffe_feeding": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8697
+  },
+  "platypus": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 31447
+  },
+  "poison_dart_frog": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 43476
+  },
+  "polar_bear": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 34188
+  },
+  "pond_island": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6698
+  },
+  "pond_small": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6133
+  },
+  "porcupine": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 37798
+  },
+  "praying_mantis": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "crawl": {
+     "start": 0,
+     "frames": 6
+    },
+    "eat": {
+     "start": 6,
+     "frames": 3
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "swim": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 50951
+  },
+  "prickly_pear": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 27967
+  },
+  "proboscis_monkey": {
+   "category": "animals",
+   "tiles": 14,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "sit": {
+     "start": 5,
+     "frames": 3
+    },
+    "walk": {
+     "start": 8,
+     "frames": 6
+    }
+   },
+   "bytes": 47440
+  },
+  "przewalskis_horse": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 37042
+  },
+  "pygmy_hippo": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 38644
+  },
+  "raccoon": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 35845
+  },
+  "red_crowned_crane": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 59454
+  },
+  "red_deer": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 41640
+  },
+  "red_deer_baby": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 41925
+  },
+  "red_deer_rare": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 41238
+  },
+  "red_fox": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 33490
+  },
+  "red_kangaroo": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 44219
+  },
+  "red_panda": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 34445
+  },
+  "red_panda_baby": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 32957
+  },
+  "red_panda_rare": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 32931
+  },
+  "red_rock": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6766
+  },
+  "reeds_clump": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 33040
+  },
+  "reindeer": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 42568
+  },
+  "reindeer_baby": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 42748
+  },
+  "reindeer_rare": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 41313
+  },
+  "reticulated_python": {
+   "category": "animals",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "slither": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 30609
+  },
+  "reticulated_python_baby": {
+   "category": "animals",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "slither": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 27981
+  },
+  "reticulated_python_rare": {
+   "category": "animals",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "slither": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 29945
+  },
+  "rhododendron_bush": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 25976
+  },
+  "ring_tailed_lemur": {
+   "category": "animals",
+   "tiles": 14,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "sit": {
+     "start": 5,
+     "frames": 3
+    },
+    "walk": {
+     "start": 8,
+     "frames": 6
+    }
+   },
+   "bytes": 49422
+  },
+  "ring_tailed_lemur_baby": {
+   "category": "animals",
+   "tiles": 14,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "sit": {
+     "start": 5,
+     "frames": 3
+    },
+    "walk": {
+     "start": 8,
+     "frames": 6
+    }
+   },
+   "bytes": 46077
+  },
+  "ring_tailed_lemur_rare": {
+   "category": "animals",
+   "tiles": 14,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "sit": {
+     "start": 5,
+     "frames": 3
+    },
+    "walk": {
+     "start": 8,
+     "frames": 6
+    }
+   },
+   "bytes": 50623
+  },
+  "river_otter": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 32117
+  },
+  "rock_arch": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6566
+  },
+  "rock_cave": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7122
+  },
+  "rock_column": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6202
+  },
+  "rock_ledge": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6624
+  },
+  "rock_pile": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7315
+  },
+  "root_tangle": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6910
+  },
+  "round_flower_pot": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 30888
+  },
+  "round_shrub": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 24288
+  },
+  "rowing_boat": {
+   "category": "vehicles",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7343
+  },
+  "safari_bus": {
+   "category": "vehicles",
+   "tiles": 8,
+   "clips": {
+    "drive": {
+     "start": 0,
+     "frames": 6
+    },
+    "idle": {
+     "start": 6,
+     "frames": 2
+    }
+   },
+   "bytes": 34716
+  },
+  "safari_jeep": {
+   "category": "vehicles",
+   "tiles": 8,
+   "clips": {
+    "drive": {
+     "start": 0,
+     "frames": 6
+    },
+    "idle": {
+     "start": 6,
+     "frames": 2
+    }
+   },
+   "bytes": 31603
+  },
+  "saguaro_cactus": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 28687
+  },
+  "sand_dune": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 5647
+  },
+  "sand_tile": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 5954
+  },
+  "sandbank": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 5555
+  },
+  "sandstone_boulder": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 5991
+  },
+  "savanna_grass": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 36983
+  },
+  "scarlet_macaw": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 54092
+  },
+  "scarlet_macaw_baby": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 52901
+  },
+  "scarlet_macaw_rare": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 51994
+  },
+  "sea_otter": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "swim": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 33442
+  },
+  "serval": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 39021
+  },
+  "shelter_animal_night_brick": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8192
+  },
+  "shelter_animal_timber_lean": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7563
+  },
+  "shelter_otter_holts_rock": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6712
+  },
+  "shoebill": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 63150
+  },
+  "shop_animal_ear_headband_07": {
+   "category": "shop",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7155
+  },
+  "shop_animal_sticker_sheet_16": {
+   "category": "shop",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6229
+  },
+  "shop_ceramic_souvenir_mug_10": {
+   "category": "shop",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6390
+  },
+  "shop_figurine_blind_box_18": {
+   "category": "shop",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7333
+  },
+  "shop_fountain_soda_cup_15": {
+   "category": "shop",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7507
+  },
+  "shop_helium_tiger_balloon_20": {
+   "category": "shop",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6959
+  },
+  "shop_keychain_spin_tree_17": {
+   "category": "shop",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8260
+  },
+  "shop_plush_elephant_toy_02": {
+   "category": "shop",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7048
+  },
+  "shop_plush_giraffe_toy_04": {
+   "category": "shop",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7797
+  },
+  "shop_plush_lion_toy_01": {
+   "category": "shop",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6665
+  },
+  "shop_plush_penguin_toy_03": {
+   "category": "shop",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6531
+  },
+  "shop_postcard_carousel_rack_06": {
+   "category": "shop",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6944
+  },
+  "shop_safari_pith_helmet_08": {
+   "category": "shop",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6653
+  },
+  "shop_soft_pretzel_mustard_13": {
+   "category": "shop",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7846
+  },
+  "shop_softserve_icecream_cone_14": {
+   "category": "shop",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7810
+  },
+  "shop_spiral_rainbow_lollipop_12": {
+   "category": "shop",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7278
+  },
+  "shop_steel_water_bottle_11": {
+   "category": "shop",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6740
+  },
+  "shop_toy_plastic_binoculars_19": {
+   "category": "shop",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7703
+  },
+  "shop_zoo_guide_brochure_05": {
+   "category": "shop",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6395
+  },
+  "shop_zoo_logo_hoodie_09": {
+   "category": "shop",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7116
+  },
+  "sign_direction_fingerpost": {
+   "category": "benches_lamps_bins_signs",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7220
+  },
+  "sign_entrance_totem_monolith": {
+   "category": "benches_lamps_bins_signs",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6920
+  },
+  "sign_exhibit_info_plaque": {
+   "category": "benches_lamps_bins_signs",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8043
+  },
+  "sign_warning_caution_barrier": {
+   "category": "benches_lamps_bins_signs",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6889
+  },
+  "sign_zoo_map_board": {
+   "category": "benches_lamps_bins_signs",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7974
+  },
+  "sika_deer": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 41608
+  },
+  "sky_tram_gondola": {
+   "category": "vehicles",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8578
+  },
+  "sloth_bear": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 34409
+  },
+  "snow_leopard": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 38501
+  },
+  "snow_mound": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 5770
+  },
+  "snow_tile": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 5954
+  },
+  "snowy_owl": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 56629
+  },
+  "spectacled_bear": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 33686
+  },
+  "spruce_tree": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 31039
+  },
+  "stalagmite_group": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8056
+  },
+  "stand_ice_slush": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7064
+  },
+  "station_waste_compost_bay": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7334
+  },
+  "stepping_stones": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6757
+  },
+  "stick_insect": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "crawl": {
+     "start": 0,
+     "frames": 6
+    },
+    "eat": {
+     "start": 6,
+     "frames": 3
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "swim": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 50266
+  },
+  "stone_planter": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6763
+  },
+  "stream_section": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6341
+  },
+  "striped_parasol": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7083
+  },
+  "stroller": {
+   "category": "vehicles",
+   "tiles": 8,
+   "clips": {
+    "drive": {
+     "start": 0,
+     "frames": 6
+    },
+    "idle": {
+     "start": 6,
+     "frames": 2
+    }
+   },
+   "bytes": 30605
+  },
+  "sundial": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7924
+  },
+  "sunflower_patch": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 33354
+  },
+  "tall_grass_clump": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 37974
+  },
+  "tapir": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 36801
+  },
+  "tasmanian_devil": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 32785
+  },
+  "termite_mound": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8264
+  },
+  "terrace_glass_overlook": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8517
+  },
+  "tide_pool_rocks": {
+   "category": "landscape",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7516
+  },
+  "tiki_torch": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7194
+  },
+  "toco_toucan": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 53802
+  },
+  "topiary_ball": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 29874
+  },
+  "tower_wooden_observation": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7815
+  },
+  "tractor": {
+   "category": "vehicles",
+   "tiles": 8,
+   "clips": {
+    "drive": {
+     "start": 0,
+     "frames": 6
+    },
+    "idle": {
+     "start": 6,
+     "frames": 2
+    }
+   },
+   "bytes": 34736
+  },
+  "tree_fern": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 34064
+  },
+  "tree_stump": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 23834
+  },
+  "tulip_bed": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 28059
+  },
+  "tunnel_underwater_aquarium": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7531
+  },
+  "turnstile_bank_quad": {
+   "category": "facilities",
+   "tiles": 8,
+   "clips": {
+    "close": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "open": {
+     "start": 5,
+     "frames": 3
+    }
+   },
+   "bytes": 25050
+  },
+  "utility_truck": {
+   "category": "vehicles",
+   "tiles": 8,
+   "clips": {
+    "drive": {
+     "start": 0,
+     "frames": 6
+    },
+    "idle": {
+     "start": 6,
+     "frames": 2
+    }
+   },
+   "bytes": 31044
+  },
+  "vet_anesthesia_machine": {
+   "category": "vet_equipment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6848
+  },
+  "vet_capture_net_pole": {
+   "category": "vet_equipment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6551
+  },
+  "vet_centrifuge_unit": {
+   "category": "vet_equipment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6019
+  },
+  "vet_dart_rifle_case": {
+   "category": "vet_equipment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6731
+  },
+  "vet_digital_scale_large": {
+   "category": "vet_equipment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 5994
+  },
+  "vet_digital_scale_small": {
+   "category": "vet_equipment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6023
+  },
+  "vet_exam_table": {
+   "category": "vet_equipment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7079
+  },
+  "vet_first_aid_trunk": {
+   "category": "vet_equipment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7608
+  },
+  "vet_heavy_transport_gurney": {
+   "category": "vet_equipment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6827
+  },
+  "vet_hydrotherapy_tank": {
+   "category": "vet_equipment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6507
+  },
+  "vet_incubator_brooder": {
+   "category": "vet_equipment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6717
+  },
+  "vet_instrument_tray": {
+   "category": "vet_equipment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7447
+  },
+  "vet_iv_drip_stand": {
+   "category": "vet_equipment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7364
+  },
+  "vet_medicine_cabinet": {
+   "category": "vet_equipment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6713
+  },
+  "vet_microscope_station": {
+   "category": "vet_equipment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8380
+  },
+  "vet_mobile_ultrasound": {
+   "category": "vet_equipment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6683
+  },
+  "vet_oxygen_cylinder_trolley": {
+   "category": "vet_equipment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7182
+  },
+  "vet_recovery_stretcher": {
+   "category": "vet_equipment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6428
+  },
+  "vet_surgical_light": {
+   "category": "vet_equipment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7456
+  },
+  "vet_van": {
+   "category": "vehicles",
+   "tiles": 8,
+   "clips": {
+    "drive": {
+     "start": 0,
+     "frames": 6
+    },
+    "idle": {
+     "start": 6,
+     "frames": 2
+    }
+   },
+   "bytes": 28668
+  },
+  "vet_xray_portable": {
+   "category": "vet_equipment",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6004
+  },
+  "visitor_art_student_14": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 52402
+  },
+  "visitor_bird_watcher_21": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 52202
+  },
+  "visitor_child_balloon_03": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 54503
+  },
+  "visitor_child_cap_05": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 52891
+  },
+  "visitor_child_icecream_04": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 50986
+  },
+  "visitor_family_dad_backpack_11": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 52479
+  },
+  "visitor_family_mom_stroller_12": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 51013
+  },
+  "visitor_jogger_sport_19": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 50896
+  },
+  "visitor_parent_shoulder_kid_23": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 47503
+  },
+  "visitor_school_chaperone_16": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 51151
+  },
+  "visitor_school_trip_scout_15": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 52155
+  },
+  "visitor_senior_cane_09": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 52190
+  },
+  "visitor_senior_sunvisor_10": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 50872
+  },
+  "visitor_snack_muncher_20": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 51843
+  },
+  "visitor_souvenir_shopper_18": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 50317
+  },
+  "visitor_teen_phone_07": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 51658
+  },
+  "visitor_teen_skateboard_08": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 52023
+  },
+  "visitor_toddler_waddling_06": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 50093
+  },
+  "visitor_tourist_camera_01": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 52129
+  },
+  "visitor_tourist_sunhat_02": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 51855
+  },
+  "visitor_twin_kid_boy_24": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 51298
+  },
+  "visitor_twin_kid_girl_25": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 51298
+  },
+  "visitor_wheelchair_user_22": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 49587
+  },
+  "visitor_wildlife_photographer_13": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 52161
+  },
+  "visitor_zoology_student_17": {
+   "category": "visitors",
+   "tiles": 14,
+   "clips": {
+    "carry": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    },
+    "wave": {
+     "start": 11,
+     "frames": 3
+    }
+   },
+   "bytes": 51657
+  },
+  "wall_glass_viewing_curved": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7230
+  },
+  "wall_glass_viewing_panel": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7487
+  },
+  "wall_stone_perimeter_low": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6795
+  },
+  "wall_stone_perimeter_tall": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6857
+  },
+  "walrus": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "swim": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 31770
+  },
+  "warthog": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 39879
+  },
+  "water_alligator_swamp": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 5066
+  },
+  "water_decorative_fountain": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7153
+  },
+  "water_duck_pond": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 5172
+  },
+  "water_elephant_splash_pool": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 5558
+  },
+  "water_flamingo_shallow_lagoon": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 5504
+  },
+  "water_hippo_mud_pond": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 5255
+  },
+  "water_lily": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 21856
+  },
+  "water_penguin_pool": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 5064
+  },
+  "water_rock_waterfall": {
+   "category": "facilities",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 6874
+  },
+  "water_tanker": {
+   "category": "vehicles",
+   "tiles": 8,
+   "clips": {
+    "drive": {
+     "start": 0,
+     "frames": 6
+    },
+    "idle": {
+     "start": 6,
+     "frames": 2
+    }
+   },
+   "bytes": 27882
+  },
+  "weather_vane": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7920
+  },
+  "western_gorilla": {
+   "category": "animals",
+   "tiles": 14,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "sit": {
+     "start": 5,
+     "frames": 3
+    },
+    "walk": {
+     "start": 8,
+     "frames": 6
+    }
+   },
+   "bytes": 61691
+  },
+  "western_gorilla_baby": {
+   "category": "animals",
+   "tiles": 14,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "sit": {
+     "start": 5,
+     "frames": 3
+    },
+    "walk": {
+     "start": 8,
+     "frames": 6
+    }
+   },
+   "bytes": 61273
+  },
+  "western_gorilla_rare": {
+   "category": "animals",
+   "tiles": 14,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "sit": {
+     "start": 5,
+     "frames": 3
+    },
+    "walk": {
+     "start": 8,
+     "frames": 6
+    }
+   },
+   "bytes": 58162
+  },
+  "wheelbarrow": {
+   "category": "vehicles",
+   "tiles": 8,
+   "clips": {
+    "drive": {
+     "start": 0,
+     "frames": 6
+    },
+    "idle": {
+     "start": 6,
+     "frames": 2
+    }
+   },
+   "bytes": 25748
+  },
+  "wheelchair": {
+   "category": "vehicles",
+   "tiles": 8,
+   "clips": {
+    "drive": {
+     "start": 0,
+     "frames": 6
+    },
+    "idle": {
+     "start": 6,
+     "frames": 2
+    }
+   },
+   "bytes": 33077
+  },
+  "white_rhino": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 35348
+  },
+  "white_rhino_baby": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 35261
+  },
+  "white_rhino_rare": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 35168
+  },
+  "white_stork": {
+   "category": "animals",
+   "tiles": 17,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "fly": {
+     "start": 3,
+     "frames": 6
+    },
+    "idle": {
+     "start": 9,
+     "frames": 2
+    },
+    "walk": {
+     "start": 11,
+     "frames": 6
+    }
+   },
+   "bytes": 57952
+  },
+  "willow_tree": {
+   "category": "plants",
+   "tiles": 8,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    },
+    "sway": {
+     "start": 2,
+     "frames": 6
+    }
+   },
+   "bytes": 27821
+  },
+  "wind_chime": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7487
+  },
+  "wombat": {
+   "category": "animals",
+   "tiles": 11,
+   "clips": {
+    "eat": {
+     "start": 0,
+     "frames": 3
+    },
+    "idle": {
+     "start": 3,
+     "frames": 2
+    },
+    "walk": {
+     "start": 5,
+     "frames": 6
+    }
+   },
+   "bytes": 33991
+  },
+  "wooden_barrel": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 7279
+  },
+  "wooden_crate": {
+   "category": "decor",
+   "tiles": 2,
+   "clips": {
+    "idle": {
+     "start": 0,
+     "frames": 2
+    }
+   },
+   "bytes": 8946
+  },
+  "zoo_train_carriage": {
+   "category": "vehicles",
+   "tiles": 8,
+   "clips": {
+    "drive": {
+     "start": 0,
+     "frames": 6
+    },
+    "idle": {
+     "start": 6,
+     "frames": 2
+    }
+   },
+   "bytes": 34942
+  },
+  "zoo_train_engine": {
+   "category": "vehicles",
+   "tiles": 8,
+   "clips": {
+    "drive": {
+     "start": 0,
+     "frames": 6
+    },
+    "idle": {
+     "start": 6,
+     "frames": 2
+    }
+   },
+   "bytes": 32727
+  }
+ }
+}
