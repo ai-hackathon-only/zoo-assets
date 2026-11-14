@@ -50,5 +50,5 @@ Live URL: https://ai-hackathon-only.github.io/zoo-assets/game/. Checked on live 
 | Speed | `node tools/check_game_speed.mjs`: 1280 px 303 ms first frame, 60 fps; 390 px 175 ms, 60 fps; 0 errors (#145) |
 | Gallery and park link to game | #142 |
 | README section | #144 |
-| Playtest by other family | not done yet: `game/PLAYTEST.md` is missing. Seat 2 (Gemini) should write it, since seat 1 (Claude) co-built the game |
+| Playtest by other family | `game/PLAYTEST.md` (#148, seat 2, Gemini): playable, 0 console errors; two issues found: ground shadow seam (open), no loading label on Start Shift (fix in #150) |
 | Retros | not done yet |
