@@ -36,6 +36,7 @@ def build(a, z):
     ink = INK.get(fur, "black")
     if "upright" in m:
         return _upright(z, W, L, H, fur, belly, ink, m)
+    z.smooth_joints("neck", "head", "leg_FL", "leg_FR", "leg_BL", "leg_BR")
 
     ratio = H / L
     leg_h = H * p.get("leg", min(0.48, max(0.22, 0.12 + 0.55 * ratio)))

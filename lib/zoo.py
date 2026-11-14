@@ -43,6 +43,7 @@ def budget(category):
 
 _BONES = ["body"]
 JOINTS = {}  # name -> (head, tail, parent) in build coordinates
+SMOOTH_BONES = set()  # bones whose parent/child joints get smooth weight blending
 
 
 def reset():
@@ -51,6 +52,7 @@ def reset():
     _RECOLOUR = _VARIANT = None
     _BONES[:] = ["body"]
     JOINTS.clear()
+    SMOOTH_BONES.clear()
 
 
 def begin(asset):
@@ -85,6 +87,66 @@ def transform_joints(m):
     """Apply the same matrix the generator applied to its parts (turns, _fit scaling)."""
     for k, (h, t, par) in JOINTS.items():
         JOINTS[k] = (m @ h, m @ t, par)
+
+
+def smooth_joints(*names):
+    """Mark bones for smooth vertex-weight blending at their joint pivots (primary weight stays > 0.5)."""
+    SMOOTH_BONES.update(names)
+
+
+def _apply_smooth_weights(bm, dl, ranges, groups):
+    """Blend vertex weights near joint pivots for SMOOTH_BONES while keeping primary weight >= 0.55."""
+    children = {}
+    for name, (_, _, par) in JOINTS.items():
+        if name in SMOOTH_BONES and par in groups:
+            children.setdefault(par, []).append(name)
+    for a0, a1, b in ranges:
+        if b not in SMOOTH_BONES and b not in children:
+            continue
+        gi = groups.index(b)
+        par_info = None
+        if b in SMOOTH_BONES and b in JOINTS:
+            h, t, par = JOINTS[b]
+            if par in groups:
+                blen = max((t - h).length, 1e-4)
+                rad = blen * (0.45 if b == "neck" else 0.25 if b == "head" else 0.35)
+                par_info = (groups.index(par), h, max(rad, 0.03), 0.40)
+        child_infos = []
+        for c in children.get(b, ()):
+            ch, ct, _ = JOINTS[c]
+            clen = max((ct - ch).length, 1e-4)
+            if b == "neck" and c == "head":
+                nlen = max((JOINTS[b][1] - JOINTS[b][0]).length, 1e-4)
+                rad, max_w = max(nlen * 0.45, 0.03), 0.40
+            elif b == "body":
+                rad, max_w = max(clen * 0.25, 0.03), 0.30
+            else:
+                rad, max_w = max(clen * 0.35, 0.03), 0.35
+            child_infos.append((groups.index(c), ch, rad, max_w))
+        for i in range(a0, a1):
+            co = bm.verts[i].co
+            sec = {}
+            if par_info:
+                pgi, ph, prad, pmax = par_info
+                d = (co - ph).length
+                if d < prad:
+                    sec[pgi] = pmax * (1.0 - d / prad)
+            for cgi, ch, crad, cmax in child_infos:
+                d = (co - ch).length
+                if d < crad:
+                    w = cmax * (1.0 - d / crad)
+                    if w > sec.get(cgi, 0.0):
+                        sec[cgi] = w
+            if sec:
+                tot = sum(sec.values())
+                if tot > 0.45:
+                    s = 0.45 / tot
+                    sec = {k: v * s for k, v in sec.items()}
+                    tot = 0.45
+                bm.verts[i][dl][gi] = 1.0 - tot
+                for k, v in sec.items():
+                    if v > 1e-4:
+                        bm.verts[i][dl][k] = v
 
 
 def material():
@@ -245,6 +307,8 @@ def finish(asset):
             gi = groups.index(b)
             for i in range(a0, a1):
                 bm.verts[i][dl][gi] = 1.0
+        if SMOOTH_BONES:
+            _apply_smooth_weights(bm, dl, ranges, groups)
     for o in obs:
         me = o.data
         bpy.data.objects.remove(o)
