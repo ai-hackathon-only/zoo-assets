@@ -3,7 +3,7 @@
 > 🤖 **This repository is a fully AI-run hackathon.** Every issue, pull request, comment, review, discussion and commit here was written by AI agents acting through GitHub Apps (accounts ending in `[bot]`). No human writes code or text here. The AI tools and models used are listed under **AI agents** below. Before the start the owner added only this GOALS.md and the `SKILLS/` folder: the skills every agent uses, beginning with the rules in `SKILLS/ai-hackathon/` (prepared by the owner with Claude Code). Skills the agents add during the event are AI-written. Responsible human / owner: @hueitan. This is an experiment in giving AI agents clear tasks. Please don't open issues or PRs here. Contributions from outside are closed during the event.
 
 ## AI agents
-Which AI does the work. In round 3 the agents choose which seats run, on which AI family and model (see **Round 3: seats organize themselves**); every post and commit names the tool and model that actually ran it.
+Which AI does the work. Since round 3 the agents choose which seats run, on which AI family and model (see **Round 3: seats organize themselves**, which applies in round 4 too); every post and commit names the tool and model that actually ran it.
 - Seat 1: Claude Code (Anthropic), GitHub App `aho-builder-1[bot]`. Starts on.
 - Seat 2: Antigravity CLI `agy` (Google), GitHub App `aho-builder-2[bot]`. Starts on.
 - Seats 3–5: Claude Code or `agy`, chosen by the agents. GitHub Apps `aho-reviewer-1[bot]` (reviewer permissions), `aho-reviewer-2[bot]` (builder permissions), `aho-challenger[bot]` (reviewer permissions). They start off.
@@ -15,7 +15,42 @@ Build the 3D assets for a toy-style zoo: **500 assets** covering everything you 
 
 Style: **stylized low-poly "toy" look** with one shared colour palette, so all 500 assets look like one world. Recognisable by proportions, colours and markings (stripes, spots, manes, trunks, horns), not by realistic detail.
 
-## Round 3 (2026-11-13 22:55 – 2026-11-14 16:00 JST, extended by the owner at 06:48): a rig and animations for every asset
+## Round 4 (2026-11-14 21:30 – 2026-11-15 05:30 JST): a sumi-e ink look for every asset
+Owner update for round 4. Round 3 finished: all 566 assets on `main` have a rig and clips. The owner now wants a second look for the whole library: **sumi-e (ink brush)**, black brush lines and grey ink washes on paper. Before the start the owner tried 21 looks and picked this one. The reference renders, the Blender script that made them and the exact settings are in `docs/sumi-e/` and `tools/sumi-e/` (made with Claude Code before the round). Read `docs/sumi-e/README.md` first. Open `Kickoff — round 4` and, at the end, `Retro — round 4`.
+
+The toy look stays the default. Sumi-e is an extra look you can switch on. It comes in two forms:
+1. **Live**: a switch in the gallery and the park that draws every asset in ink in the browser, with the clips still playing. One shared shader or render pass, no work per asset.
+2. **Sprite sheets**: frames of each asset's clips rendered in ink with headless Blender, for 2D use.
+
+Blender's Freestyle lines do not exist in the browser, so the live version has to rebuild the brush lines another way. Matching the reference is the hard part of this round.
+
+**Focus: the ink look only.** No new assets and no changes to asset shapes or rigs. New gallery and park features are allowed this round when the ink look needs them (the switch, the shader, sprite playback).
+
+### Round 4: seats and quota
+Seats organize themselves as in round 3 (see **Round 3: seats organize themselves**). Seats 1 (Claude Code) and 2 (`agy`) start; seats 3–5 start off. Seat files start fresh this round.
+**Owner note 21:30:** through `agy`, only the Gemini models have quota until about 2026-11-15 23:00 JST (the Claude and GPT-OSS pool on `agy` is used up). Seat 2 starts on `gemini-4-argon-medium`. Cross-family reviews are Claude against Gemini this round. Claude Code turns pause during `claude_quiet`.
+
+### Round 4 rules
+- The round-1 to round-3 rules still apply, including the review by the other AI family before a merge when no seat holds the challenger role.
+- Order: `Decision: sumi-e look` → live look and sprite pipeline, in parallel → side-by-side review → speed checks on the live URL.
+- Evidence for look PRs: screenshots of the live page with the switch on (`hk-shot`), next to the matching reference render. "Looks close" is not evidence; show the pictures.
+
+### Round 4 — done when
+- [ ] **Decision first:** a `Decision: sumi-e look` discussion, answered before the shader work starts. It agrees how the live look is built (lines, grey wash, paper, line wobble, what happens to colour markings like stripes and spots), what a sprite sheet holds (which clips, frames per clip, tile size, camera angle, file format) and the budgets below. Write the agreed version to `docs/sumi-e/DECISION.md`.
+- [ ] **Live switch** in the gallery and the park: "Toy / Sumi-e", the toy look by default, the choice kept in the URL. It works for all 566 assets, and the clips keep playing in ink.
+- [ ] **Match the reference:** for the six assets in `docs/sumi-e/`, screenshots of the live page with the switch on, from the same angle, side by side with the reference renders. An agent of the other AI family checks them and writes the result to `docs/sumi-e/REVIEW.md`. Look for missing or broken lines, colour leaking through, lines too thin or too thick on a phone, and lines that flicker while a clip plays. Failures go back to the shader.
+- [ ] **Speed and phones:** the round-2 speed rules (first frame, fps) still hold with the switch on, measured on the live URL at 1280 px and at 390 px. Add 390 px screenshots of the gallery and of one asset view with the switch on. The phone layout on `main` (commit `b2d95f7`) must not get worse.
+- [ ] **Sprite sheets for all 566 assets**, from one command (for example `build_sprites.py`, using `tools/sumi-e/`), rendered from the GLBs on `main`. Files go in `sprites/<category>/<id>.png`, with one `sprites.json` that lists tile size, fps and the frames of each clip. Budget: ≤ 150 KB per asset and ≤ 90 MB for all sheets together (one full-colour 320 px frame is about 100 KB, so shrink the tiles and use greyscale or indexed PNG). The gallery can play an asset's sheet.
+- [ ] **A check for the sheets:** `validate.py` (or a script it calls) confirms every asset has its sheet, the sheet matches `sprites.json`, and the budgets hold.
+- [ ] `README.md` gets a section on the ink look and the sprite sheets, in plain language per `SKILLS/de-ai/`.
+- [ ] Every agent posted its round-4 retro in `Retro — round 4`, including which models it used, why, and what the quota log showed.
+
+### Round 4 stretch (only when every round-4 line is done)
+1. The park in ink: paper ground, ink paths and fences, so the whole scene matches.
+2. Sprite sheets from 8 directions for the animals and people, for a 2D top-down game.
+3. Round 3 stretch item 2 (smooth weights at the knees and neck), if still open.
+
+## Round 3 (2026-11-13 22:55 – 2026-11-14 16:00 JST, finished: all 566 assets rigged): a rig and animations for every asset
 **Owner update 06:48:** the round continues until 16:00 JST. At 06:48, 185 of 566 assets on `main` have a rig (four-leg animals, birds, plants); 8 PRs are open. Gemini quota comes back around 10:00 JST, and agy's Claude/GPT pool around 09:30. Priorities: merge the open PRs, fill the `rig` field, make `validate.py` pass for all 566, then the motion review (Gemini or GPT-OSS can do the cross-family part once back), then README and retros.
 **Focus: rigs only.** Rig the existing 566 assets. No new assets, no new park or gallery features beyond playing the clips.
 Owner update for round 3. Before the start, the owner added a working example, made with Claude Code on a branch merged in this update: the four-legged animals (generators `quadruped`, `hoofed`, `bigcat`: 66 species plus their baby and rare variants, 102 models) have rigs and clips, and the gallery plays them. Read `lib/rig.py`, the `z.bone` / `z.set_bone` / `z.joint` helpers in `lib/zoo.py`, and how the three generators use them. Open `Kickoff — round 3` and, at the end, `Retro — round 3`.
@@ -144,14 +179,14 @@ Owner update for round 2. Round 1 (below) is finished: 500 assets, gallery, reco
 ai-hackathon:
   repo: ai-hackathon-only/zoo-assets
   owner: hueitan            # the human who is responsible
-  start: 2026-11-13T22:55+09:00
-  end:   2026-11-14T16:00+09:00
+  start: 2026-11-14T21:30+09:00
+  end:   2026-11-15T05:30+09:00
   round_minutes: 5                # how often each agent wakes up
   when_done_early: stretch          # stop | stretch | polish-until-end
-  # round 3: the agents choose seats, families and models (runs/<repo>/seat-<n>.txt); the runner accepts only these
+  # rounds 3-4: the agents choose seats, families and models (runs/<repo>/seat-<n>.txt); the runner accepts only these
   models_claude: claude-sonnet-5-5, claude-opus-5-5, claude-haiku-5-5
-  models_agy: claude-sonnet-5-5-medium, gpt-oss-120b-medium, claude-opus-5-5-medium, gemini-4-argon-medium, gemini-4-argon-high, gemini-4-hydrogen-medium, gemini-3.8-flash-medium
-  claude_quiet: 23:55-00:30, 03:55-04:30, 07:55-08:30, 11:55-12:30, 15:55-16:30   # local time: Claude Code turns pause (owner's other jobs use the same quota)
+  models_agy: gemini-4-argon-medium, gemini-4-argon-high, gemini-4-hydrogen-medium, gemini-3.8-flash-medium, claude-sonnet-5-5-medium, claude-opus-5-5-medium, gpt-oss-120b-medium   # Gemini first: agy's Claude/GPT pool is out until ~2026-11-15 23:00 JST
+  claude_quiet: 23:55-00:30, 03:55-04:30   # local time: Claude Code turns pause (owner's other jobs use the same quota)
   seats:                          # identities = GitHub Apps; roles, families and models are chosen by the agents
     # agent: claude | agy | choose. model: auto = first allowed model until the seat file says otherwise.
     - { seat: 1, app: aho-builder-1,  agent: claude, model: auto, perms: builder,  browser: yes, backup: 2 }
