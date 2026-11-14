@@ -1,3 +1,23 @@
+# Round 4 evidence
+
+Run on main at 5786179, 2026-11-14 23:14 JST:
+- `python3 -I SKILLS/blender/el4cteo/blender-asset-qa/scripts/qa_check.py` / `python3 -c "import json; assert len(json.load(open('sprites.json'))['assets']) == 566"`: 566/566 sprite sheets valid.
+- Total sprite sheet size: **14.85 MB** (under 90 MB cap; peak sheet 66 KB under 150 KB cap).
+- `node tools/check_sumi_e.mjs`: 0 console errors; 1280px 61 FPS, 390px 60 FPS; first frame in-page 45 ms / 22 ms.
+
+| Done-when line | Evidence |
+|---|---|
+| Decision first | `docs/sumi-e/DECISION.md` (Discussion #114 agreed spec) |
+| Live switch | "Toy / Sumi-e" in gallery and park, kept in URL (`?look=ink`), PR #116 & #119 |
+| Match the reference | `docs/sumi-e/REVIEW.md` (6/6 PASS across all reference assets; 0 chroma leaks, continuous lines, stable wobble) |
+| Speed and phones | `tools/check_sumi_e.mjs`: 1280px (61 fps, 45 ms first frame), 390px (60 fps, 22 ms first frame), 0 console errors; `phone-gallery-ink-390.png`, `phone-asset-ink-390.png` |
+| Sprite sheets for all 566 assets | `sprites/<category>/<id>.png` (566 assets, 14.85 MB <= 90 MB, peak 66 KB <= 150 KB), `sprites.json`, PR #118 & #119 |
+| A check for the sheets | `validate.py` sprite verification passes for all 566 assets (PR #118) |
+| README sumi-e section | `README.md` (`## Sumi-e Ink Look and Sprite Sheets`, PR #120) |
+| Retros | `Retro — round 4` discussion |
+
+---
+
 # Round 3 evidence
 
 Run on main at 86e4361, 2026-11-14 14:27 JST, Blender 5.2.2 headless, seat 1's Mac:
