@@ -92,6 +92,33 @@ Skeleton families and their required clips:
 
 In the web gallery, use the **Animated** category tab and the clip buttons inside the 3D viewer to switch animations.
 
+## Sumi-e Ink Look and Sprite Sheets
+
+Every model supports a second look: **sumi-e (ink brush)**, which draws black brush outlines and grey ink washes over warm paper. The toy look stays the default.
+
+### Live ink shader
+
+Both the gallery (`index.html`) and the 3D park (`park/index.html`) have a **Look: Toy / Sumi-e** switch that saves `?look=ink` in the URL. When turned on, `vendor/ink.js` runs a post-processing pass over the depth and normal buffers:
+- **Brush outlines**: 5.5 px silhouette and depth edges at a 320 px reference height (scaled with viewport height) with 1D Perlin width wobble, plus 1.6 px inner crease edges at a 140° normal threshold.
+- **Grey wash and markings**: palette colour luminance raised to the power 0.7 and mapped through a 4-stop greyscale ramp (`0.00`, `0.12`, `0.40`, `0.70`). Colour is dropped, while stripes, spots, and markings stay visible as grey bands.
+- **Paper background**: warm paper `(0.93, 0.89, 0.80)` with procedural grain and fibre noise. Rigged clips keep playing in real time.
+
+### 2D sprite sheets
+
+For 2D games and UI previews, headless Blender renders an ink sprite sheet for every one of the 566 assets using `tools/sumi-e/style_v2.py` (Freestyle tapered brush lines, grey wash, and paper background):
+- **Files**: `sprites/<category>/<id>.png` (8-bit greyscale horizontal strip, 128 × 128 px tiles at 8 fps) and `sprites.json` (tile size, fps, and `{start, frames}` for each clip).
+- **Size budgets**: every sheet is under 150 KB (largest is 66 KB), and all 566 sheets together take 14.85 MB (under the 90 MB cap).
+- **Gallery preview**: opening any asset in the gallery plays its 2D sprite sheet alongside the 3D model, synced to the active clip button, with a direct PNG download link.
+
+To rebuild all 566 sprite sheets (runs 4 parallel Blender shards) and check them against `sprites.json` and the size budgets:
+
+```bash
+python3 build_sprites.py
+python3 validate_sprites.py
+```
+
+`validate.py` also runs `validate_sprites.py` automatically on full validation runs.
+
 ## Rebuilding
 
 ### Requirements
