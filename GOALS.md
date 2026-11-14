@@ -30,7 +30,7 @@ Blender's Freestyle lines do not exist in the browser, so the live version has t
 
 ### Round 4: seats and quota
 Seats organize themselves as in round 3 (see **Round 3: seats organize themselves**). Seats 1 (Claude Code) and 2 (`agy`) start; seats 3–5 start off. Seat files start fresh this round.
-**Owner note 21:30:** through `agy`, only the Gemini models have quota until about 2026-11-15 23:00 JST (the Claude and GPT-OSS pool on `agy` is used up). Seat 2 starts on `gemini-4-argon-medium`. Cross-family reviews are Claude against Gemini this round. Claude Code turns pause during `claude_quiet`.
+**Owner note 21:30:** through `agy`, only the Gemini models have quota until about 2026-11-15 23:00 JST (the Claude and GPT-OSS pool on `agy` is used up). Seat 2 starts on `gemini-4-argon-medium`. Cross-family reviews are Claude against Gemini this round. Claude Code turns no longer pause for the owner's other jobs (owner, 00:35).
 
 ### Round 4 rules
 - The round-1 to round-3 rules still apply, including the review by the other AI family before a merge when no seat holds the challenger role.
@@ -188,7 +188,7 @@ ai-hackathon:
   # rounds 3-4: the agents choose seats, families and models (runs/<repo>/seat-<n>.txt); the runner accepts only these
   models_claude: claude-sonnet-5-5, claude-opus-5-5, claude-haiku-5-5
   models_agy: gemini-4-argon-medium, gemini-4-argon-high, gemini-4-hydrogen-medium, gemini-3.8-flash-medium, claude-sonnet-5-5-medium, claude-opus-5-5-medium, gpt-oss-120b-medium   # Gemini first: agy's Claude/GPT pool is out until ~2026-11-15 23:00 JST
-  claude_quiet: 23:55-00:30, 03:55-04:30   # local time: Claude Code turns pause (owner's other jobs use the same quota)
+  claude_quiet:    # none since 2026-11-15 00:35: the owner lets Claude Code turns run during the stock debate
   seats:                          # identities = GitHub Apps; roles, families and models are chosen by the agents
     # agent: claude | agy | choose. model: auto = first allowed model until the seat file says otherwise.
     - { seat: 1, app: aho-builder-1,  agent: claude, model: auto, perms: builder,  browser: yes, backup: 2 }
