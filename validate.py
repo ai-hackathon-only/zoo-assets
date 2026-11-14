@@ -44,6 +44,8 @@ def required_clips(r, bones, clips):
             return ["idle"], []
         if base == "gate" and not any(b.startswith(("door", "gate")) for b in bones):
             return ["idle"], []
+        if base in ("insect", "arachnid", "mollusc"):
+            return ["idle"], [("crawl", "swim")]
         return RIG_CLIPS[base].split(), []
     cat = r["category"]
     has = lambda *n: any(b in bones for b in n)
