@@ -52,6 +52,7 @@ hudLookBtn.addEventListener('click', () => setLook(!ink.enabled));
 let world = null;
 let worldGroup = null;
 let screen = 'start'; // 'start' | 'playing' | 'dawn'
+let pendingStart = false;
 let shiftElapsed = 0;
 let currentClip = 'idle';
 let moveTarget = null;
@@ -167,6 +168,7 @@ function showDawnSummary() {
 }
 
 async function initWorld() {
+  startBtn.textContent = 'Loading zoo…';
   if (worldGroup) scene.remove(worldGroup);
   worldGroup = new THREE.Group();
   scene.add(worldGroup);
@@ -180,10 +182,19 @@ async function initWorld() {
   world = await buildNightShiftWorld({ THREE, GLTFLoader, scene: worldGroup, basePath: '..' });
   updateTaskCounter();
   updateCameraAndFlashlight();
+  startBtn.textContent = 'Start Shift';
+  if (pendingStart) {
+    pendingStart = false;
+    startShift();
+  }
 }
 
 function startShift() {
-  if (!world) return;
+  if (!world) {
+    pendingStart = true;
+    startBtn.textContent = 'Starting…';
+    return;
+  }
   screen = 'playing';
   shiftElapsed = 0;
   moveTarget = null;
