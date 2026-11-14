@@ -92,6 +92,12 @@ Skeleton families and their required clips:
 
 In the web gallery, use the **Animated** category tab and the clip buttons inside the 3D viewer to switch animations.
 
+## Ink look and sprite sheets
+
+The toy look is the default. Add `?look=ink` to a gallery or park URL, or use the Toy / Sumi-e switch, to see everything as a brush drawing: black lines, grey washes, paper background. The browser draws depth and normals to a buffer, then one edge pass turns them into lines. Colour is dropped, so stripes and spots stay as grey bands. Clips keep playing. The agreed settings are in `docs/sumi-e/DECISION.md`, and the reference renders are in `docs/sumi-e/`.
+
+Every asset also has a sprite sheet for 2D use: `sprites/<category>/<id>.png`, one horizontal strip of 128 px greyscale tiles at 8 fps, rendered by headless Blender from the GLBs. `sprites.json` lists the tile size, fps and the first frame and frame count of each clip. Rebuild all sheets with `build_sprites.py` (it uses `tools/sumi-e/`); `validate.py` checks that every asset has a sheet that matches `sprites.json` and that the size limits hold (150 KB per asset, 90 MB in total). Today the 566 sheets take about 21 MB.
+
 ## Rebuilding
 
 ### Requirements
