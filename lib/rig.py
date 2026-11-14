@@ -99,6 +99,10 @@ def _clips(arm, h):
     clips = dict(CLIPS)
     if has("wing_L"):
         clips["fly"] = FLY
+    if not any(n.startswith(("leg_", "arm_", "wing_")) for n in pb.keys()) and "neck" not in pb:
+        del clips["walk"]  # legless swimmers (sea animals) get swim instead
+        clips["swim"] = 24
+        clips["crawl"] = 24  # RIGS.md insect row requires crawl; same body wave as swim
     if has("hips"):
         clips["sit"] = 48
     for clip, n in clips.items():
@@ -140,6 +144,12 @@ def _clips(arm, h):
                         _key(pb[leg], f, rot=(-35, 0, 0))
                 if has("tail"):
                     _key(pb["tail"], f, rot=(10 * math.sin(ph), 0, 0))
+            elif clip in ("swim", "crawl"):  # body rolls and bobs, tail beats in both axes, head counters
+                _key(pb["body"], f, loc=(0, 0, 0.02 * h * math.sin(ph)), rot=(0, 3 * math.sin(ph), 4 * math.sin(ph)))
+                if has("tail"):
+                    _key(pb["tail"], f, rot=(12 * math.sin(ph + 1), 0, 25 * math.sin(ph)))
+                if has("head"):
+                    _key(pb["head"], f, rot=(3 * math.sin(ph), 0, -6 * math.sin(ph)))
             elif clip == "idle":
                 if has(B):
                     s = 1 + 0.015 * math.sin(2 * ph)
@@ -157,7 +167,9 @@ def _clips(arm, h):
                 chew = 4 * math.sin(6 * ph) * down
                 if has("neck"):
                     _key(pb["neck"], f, rot=(eat * down, 0, 0))
-                if has("head"):
+                if has("head") and not has("neck"):  # head-only bone points -Y: local +X lifts the nose, so go negative
+                    _key(pb["head"], f, rot=(-35 * down + chew, 0, 0))
+                elif has("head"):
                     _key(pb["head"], f, rot=(eat * 0.6 * down + chew, 0, 0))
                 elif has(B):
                     _key(pb[B], f, rot=(6 * down, 0, 0))
