@@ -113,8 +113,7 @@ function distXZ(a, b) {
   return Math.hypot((b[0] || 0) - (a[0] || 0), (b[2] || 0) - (a[2] || 0));
 }
 
-async function runViewport(label, width, height, deviceScaleFactor, mobile) {
-  await cdp('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor, mobile });
+async function loadAndStart() {
   const t0 = Date.now();
   await cdp('Page.navigate', { url: targetUrl });
 
@@ -139,42 +138,52 @@ async function runViewport(label, width, height, deviceScaleFactor, mobile) {
     expression: `(() => { const b = document.getElementById('start-btn'); if (b) b.click(); })()`
   });
   await new Promise(r => setTimeout(r, 800));
+  return firstFrameMs;
+}
 
-  const p0 = await getPos();
+async function measureWalkingFps(code = 'KeyS', key = 's') {
+  const pInit = await getPos();
   await cdp('Runtime.evaluate', {
-    expression: `window.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyW', key: 'w' }))`
+    expression: `window.dispatchEvent(new KeyboardEvent('keydown', { code: '${code}', key: '${key}' }))`
   });
-  const fpsToy = await measureFps();
-  await cdp('Runtime.evaluate', {
-    expression: `window.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyW', key: 'w' }))`
-  });
-  const p1 = await getPos();
-  const movedToy = distXZ(p0, p1);
 
+  // Start the FPS window only after the player has actually moved.
+  let pStart = pInit;
+  for (let i = 0; i < 40; i++) {
+    await new Promise(r => setTimeout(r, 50));
+    pStart = await getPos();
+    if (distXZ(pInit, pStart) > 0.05) break;
+  }
+
+  const fps = await measureFps();
+  await cdp('Runtime.evaluate', {
+    expression: `window.dispatchEvent(new KeyboardEvent('keyup', { code: '${code}', key: '${key}' }))`
+  });
+  const pEnd = await getPos();
+  return { fps, pStart, pEnd, moved: distXZ(pStart, pEnd) };
+}
+
+async function runViewport(label, width, height, deviceScaleFactor, mobile) {
+  await cdp('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor, mobile });
+  const firstFrameMs = await loadAndStart();
+  const toy = await measureWalkingFps('KeyS', 's');
+
+  // Fresh shift from the same spawn for Sumi-e so both looks use the same key & spawn.
+  await loadAndStart();
   await cdp('Runtime.evaluate', {
     expression: `(() => { const b = document.getElementById('hud-look-btn'); if (b) b.click(); })()`
   });
   await new Promise(r => setTimeout(r, 400));
-
-  const p2 = await getPos();
-  await cdp('Runtime.evaluate', {
-    expression: `window.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyS', key: 's' }))`
-  });
-  const fpsInk = await measureFps();
-  await cdp('Runtime.evaluate', {
-    expression: `window.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyS', key: 's' }))`
-  });
-  const p3 = await getPos();
-  const movedInk = distXZ(p2, p3);
+  const ink = await measureWalkingFps('KeyS', 's');
 
   const fmtPos = p => `[${p[0].toFixed(2)}, ${p[2].toFixed(2)}]`;
   console.log(`${label} world-ready + first-frame: ${firstFrameMs} ms (limit < 8000 ms)`);
-  console.log(`${label} walking FPS (Toy): ${fpsToy} fps (moved ${movedToy.toFixed(1)} m ${fmtPos(p0)} -> ${fmtPos(p1)}, limit >= 30 fps)`);
-  console.log(`${label} walking FPS (Sumi-e): ${fpsInk} fps (moved ${movedInk.toFixed(1)} m ${fmtPos(p2)} -> ${fmtPos(p3)}, limit >= 30 fps)`);
+  console.log(`${label} walking FPS (Toy): ${toy.fps} fps (moved ${toy.moved.toFixed(1)} m ${fmtPos(toy.pStart)} -> ${fmtPos(toy.pEnd)}, limit >= 30 fps)`);
+  console.log(`${label} walking FPS (Sumi-e): ${ink.fps} fps (moved ${ink.moved.toFixed(1)} m ${fmtPos(ink.pStart)} -> ${fmtPos(ink.pEnd)}, limit >= 30 fps)`);
 
   return firstFrameMs > 0 && firstFrameMs < 8000 &&
-    fpsToy >= 30 && fpsInk >= 30 &&
-    movedToy >= 0.5 && movedInk >= 0.5;
+    toy.fps >= 30 && ink.fps >= 30 &&
+    toy.moved >= 0.5 && ink.moved >= 0.5;
 }
 
 const ok1280 = await runViewport('1280x800', 1280, 800, 1, false);
