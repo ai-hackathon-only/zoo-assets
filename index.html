@@ -659,6 +659,7 @@
             <button id="btn-rotate" class="ctrl-btn">Pause Auto-Rotate</button>
             <button id="btn-wireframe" class="ctrl-btn">Wireframe</button>
             <button id="btn-reset" class="ctrl-btn">Reset View</button>
+            <button id="btn-look" class="ctrl-btn" aria-pressed="false" title="Draw in ink: Toy / Sumi-e">Look: Toy</button>
           </div>
           <div id="clip-btns" class="ctrl-btns" hidden></div>
           <span class="hint-label">Drag to rotate • Scroll to zoom</span>
@@ -708,6 +709,7 @@
     import * as THREE from 'three';
     import { OrbitControls } from 'three/addons/OrbitControls.js';
     import { GLTFLoader } from 'three/addons/GLTFLoader.js';
+    import { InkLook, lookFromUrl, setLookInUrl } from './vendor/ink.js';
 
     // State
     let assets = [];
@@ -859,7 +861,15 @@
     renderGrid();
 
     // Three.js Setup
-    let renderer, scene, camera, controls;
+    let renderer, scene, camera, controls, ink;
+    const btnLook = document.getElementById('btn-look');
+    function setLook(on) {
+      ink.enabled = on; setLookInUrl(on);
+      btnLook.textContent = on ? 'Look: Sumi-e' : 'Look: Toy';
+      btnLook.setAttribute('aria-pressed', String(on));
+      document.body.dataset.look = on ? 'ink' : 'toy';
+    }
+    btnLook.addEventListener('click', () => setLook(!ink.enabled));
     let currentModel = null;
     let autoRotate = true;
     let wireframeMode = false;
@@ -914,6 +924,8 @@
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.1;
 
+      ink = new InkLook(THREE, renderer);
+      setLook(lookFromUrl());
       controls = new OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
       controls.dampingFactor = 0.05;
@@ -948,7 +960,7 @@
         requestAnimationFrame(animate);
         if (mixer) mixer.update(clock.getDelta());
         controls.update();
-        renderer.render(scene, camera);
+        ink.render(scene, camera);
       }
       animate();
 
