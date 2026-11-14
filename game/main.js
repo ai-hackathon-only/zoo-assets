@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/GLTFLoader.js';
 import { InkLook, lookFromUrl, setLookInUrl } from '../vendor/ink.js';
 import { buildNightShiftWorld } from './world.js';
+import { NightAudio } from './audio.js';
 
 const SHIFT_DURATION_S = 360; // 6-minute night shift
 const PLAYER_SPEED = 8.5;
@@ -17,6 +18,8 @@ const nextShiftBtn = document.getElementById('next-shift-btn');
 const replayBtn = document.getElementById('replay-btn');
 const startLookBtn = document.getElementById('start-look-btn');
 const hudLookBtn = document.getElementById('hud-look-btn');
+const startSoundBtn = document.getElementById('start-sound-btn');
+const hudSoundBtn = document.getElementById('hud-sound-btn');
 const clockPill = document.getElementById('clock-pill');
 const tasksPill = document.getElementById('tasks-pill');
 const promptText = document.getElementById('prompt-text');
@@ -50,6 +53,15 @@ setLook(lookFromUrl());
 startLookBtn.addEventListener('click', () => setLook(!ink.enabled));
 hudLookBtn.addEventListener('click', () => setLook(!ink.enabled));
 
+const audio = new NightAudio();
+function setSoundMuted(muted) {
+  audio.setMuted(muted);
+  startSoundBtn.textContent = audio.muted ? 'Sound: Off' : 'Sound: On';
+  hudSoundBtn.textContent = audio.muted ? 'Muted' : 'Sound';
+}
+startSoundBtn.addEventListener('click', () => setSoundMuted(!audio.muted));
+hudSoundBtn.addEventListener('click', () => setSoundMuted(!audio.muted));
+
 let world = null;
 let worldGroup = null;
 let screen = 'start'; // 'start' | 'playing' | 'dawn'
@@ -60,6 +72,7 @@ let shiftNumber = 1;
 let currentSeed = 'night-shift-1';
 let shiftElapsed = 0;
 let currentClip = 'idle';
+let stepTimer = 0;
 let moveTarget = null;
 let holdingAction = false;
 let holdProgress = 0;
@@ -99,6 +112,7 @@ function resolveTask(task) {
     world.attachProp(task.prop);
     task.carried = true;
     task.beacon.position.set(task.dropoff[0], 0.06, task.dropoff[2]);
+    audio.playTaskCue('carry', task.label);
     return;
   }
   if (task.type === 'carry' && task.carried) {
@@ -120,6 +134,7 @@ function resolveTask(task) {
   } else if (task.type === 'lamp' && task.light) {
     task.light.intensity = 2.6;
   }
+  audio.playTaskCue(task.type, task.label);
   task.done = true;
   if (task.beacon) task.beacon.visible = false;
   updateTaskCounter();
@@ -152,6 +167,7 @@ function showDawnSummary() {
   holdProgress = 0;
   hud.classList.add('hidden');
   dawnScreen.classList.remove('hidden');
+  audio.playDawnChime();
 
   const tasks = world ? world.tasks : [];
   const doneCount = tasks.filter((t) => t.done).length;
@@ -212,6 +228,7 @@ async function initWorld() {
 }
 
 function startShift() {
+  audio.unlock();
   if (!world) {
     if (loadFailed && !loadingWorld) {
       pendingStart = true;
@@ -254,6 +271,7 @@ replayBtn.addEventListener('click', async () => {
 
 // Keyboard controls
 window.addEventListener('keydown', (e) => {
+  audio.unlock();
   keys.add(e.code);
   if ((e.code === 'KeyE' || e.code === 'Space') && screen === 'playing') {
     holdingAction = true;
@@ -268,6 +286,7 @@ window.addEventListener('keyup', (e) => {
 
 // Pointer tap/click-to-move on ground
 canvas.addEventListener('pointerdown', (e) => {
+  audio.unlock();
   if (screen !== 'playing' || !world) return;
   const ndc = new THREE.Vector2(
     (e.clientX / window.innerWidth) * 2 - 1,
@@ -327,6 +346,16 @@ function updatePlayer(dt) {
   }
 
   const carrying = world.tasks.some((t) => t.type === 'carry' && t.carried && !t.done);
+  if (moving) {
+    stepTimer += dt;
+    if (stepTimer >= 0.36) {
+      stepTimer = 0;
+      audio.playFootstep(carrying);
+    }
+  } else {
+    stepTimer = 0.25;
+  }
+
   const desiredClip = carrying ? 'carry' : moving ? 'walk' : 'idle';
   if (desiredClip !== currentClip) {
     currentClip = desiredClip;
@@ -503,6 +532,7 @@ window.game = {
         screen,
         shiftNumber,
         seed: currentSeed,
+        muted: audio.muted,
         shiftProgress: Math.min(1, shiftElapsed / SHIFT_DURATION_S),
         fps: fpsEstimate,
         completedCount: world ? world.tasks.filter((t) => t.done).length : 0,
