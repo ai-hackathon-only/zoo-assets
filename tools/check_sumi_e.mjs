@@ -42,7 +42,7 @@ await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
 const port = server.address().port;
 const baseUrl = (process.argv[2] || `http://127.0.0.1:${port}/`).replace(/\/?$/, '/');
 
-const chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const chromePath = process.env.CHROME_BIN || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const userDataDir = fs.mkdtempSync('/tmp/chrome-sumie-');
 const chrome = spawn(chromePath, [
   '--headless=new',
@@ -128,11 +128,11 @@ for (const aid of REF_ASSETS) {
       if (ldr && ldr.style.display === 'none') break;
       await new Promise(r => setTimeout(r, 100));
     }
-    if (window.__zooRender) window.__zooRender();
-    const gl = document.getElementById('three-canvas');
     const refImg = new Image();
     refImg.crossOrigin = 'anonymous';
     await new Promise((res, rej) => { refImg.onload = res; refImg.onerror = rej; refImg.src = 'docs/sumi-e/${aid}__ink.png'; });
+    if (window.__zooRender) window.__zooRender();
+    const gl = document.getElementById('three-canvas');
     const c = document.createElement('canvas');
     c.width = 640; c.height = 320;
     const ctx = c.getContext('2d');
