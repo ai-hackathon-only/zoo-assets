@@ -192,6 +192,11 @@ def main():
     for k, v in bad.items():
         for e in v:
             print(f"FAIL {k}: {e}")
+    if not a.only and not a.category and not a.allow_missing:
+        sys.path.insert(0, ROOT); import validate_sprites
+        serrs, _ = validate_sprites.run()
+        if serrs:
+            bad["sprites"] = serrs[:20] + ([f"... {len(serrs)} sprite errors"] if len(serrs) > 20 else [])
     print(f"VALIDATE pass={ok} fail={len(bad)} not_built={missing} total_bytes={total}")
     if a.write:
         with open(jpath, "w") as f:
