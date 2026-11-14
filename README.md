@@ -74,6 +74,24 @@ To add diversity to the zoo population, 33 animal species have three distinct mo
 
 All 66 variants are generated programmatically via `tools/make_variants.py` and `lib/variants.py`. They are indexed in `assets.json`, include individual thumbnails, and pass `validate.py` scale and triangle budgets.
 
+## Rigs and Animations
+
+Every model in the library has an armature with a `root` bone at floor center, rigid skin weights (one bone per vertex), and looping animation clips at 24 fps. The full skeleton and clip table is in [RIGS.md](RIGS.md), and each asset entry in `assets.json` carries a `rig` field naming its skeleton id.
+
+Skeleton families and their required clips:
+- **Four-legged mammals (`quadruped`, `hoofed`, `bigcat`) and upright mammals (`upright`)**: `body`, `neck`, `head`, `tail`, and limb bones, with `idle`, `walk`, and `eat`.
+- **Primates (`primate`)**: `hips`, `neck`, `head`, `tail`, `arm_L/R`, and `leg_L/R`, with `idle`, `walk`, `eat`, and `sit`.
+- **Birds (`bird`)**: `body`, `neck`, `head`, `beak`, `wing_L/R`, `leg_L/R`, and `tail`, with `idle`, `walk`, `eat`, and `fly` (flightless birds skip `fly`).
+- **Reptiles and amphibians (`reptile`, `snake`)**: four-legged reptiles get `idle`, `walk`, and `eat`; snakes get a segmented spine chain with `idle` and `slither`.
+- **Sea animals (`fish`, `marine`)**: `idle` and `swim` (plus `eat` for marine mammals).
+- **Invertebrates (`insect`, `arachnid`, `mollusc`)**: `idle` and `crawl` (`eat` optional).
+- **Keepers and visitors (`human`, `human_onepiece`)**: shared human skeleton with `idle`, `walk`, `wave`, and `carry`.
+- **Vehicles (`vehicle`)**: `chassis` and one bone per wheel, with `idle` and `drive`.
+- **Gates (`gate`) and plants (`plant`)**: swing/slide gates get door bones with `idle`, `open`, and `close`; plants get `trunk` and `crown` bones with `idle` and `sway`.
+- **Other facilities and props (`facility`, `static`)**: a `root` bone and a 48-frame `idle` clip so the web viewer and park loader can play every asset the same way.
+
+In the web gallery, use the **Animated** category tab and the clip buttons inside the 3D viewer to switch animations.
+
 ## Rebuilding
 
 ### Requirements

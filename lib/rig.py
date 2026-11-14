@@ -116,10 +116,14 @@ def _clips(arm, h):
     has = lambda n: n in pb
     B = "hips" if has("hips") else "body"  # primates call the torso bone hips
     ad = arm.animation_data_create()
+    if "frame" in pb:
+        return _gate_clips(arm)
     if "chassis" in pb:
         return _vehicle_clips(arm, h)
     if "trunk" in pb:
         return _plant_clips(arm, h)
+    if "spine_0" in pb:
+        return _snake_clips(arm, h)
     eat = _eat_angle(arm, h)
     clips = dict(CLIPS)
     if has("wing_L"):
@@ -245,6 +249,66 @@ def _vehicle_clips(arm, h):
                 _key(pb["chassis"], f, loc=(0, 0, 0.006 * abs(math.sin(2 * ph))))
             else:
                 _key(pb["chassis"], f, loc=(0, 0, 0.002 * math.sin(ph)))
+        act = ad.action
+        act.name = clip
+        act.use_fake_user = True
+        track = ad.nla_tracks.new()
+        track.name = clip
+        track.strips.new(clip, 0, act)
+        track.mute = True
+        ad.action = None
+    for b in pb:
+        b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
+
+
+def _gate_clips(arm):
+    """Swing gates: open (24 frames, each leaf swings 100 degrees about its hinge, eased), close (the reverse) and
+    idle (24 frames, nothing moves). door_R turns the other way so a double gate opens outward from the middle."""
+    pb = arm.pose.bones
+    ad = arm.animation_data_create()
+    doors = [b for b in pb if b.name.startswith("door_")]
+    for clip in ("open", "close", "idle"):
+        for b in pb:
+            b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
+        ad.action = None
+        for f in range(25):
+            t = 0.5 - 0.5 * math.cos(math.pi * f / 24)
+            a = 100.0 * (t if clip == "open" else 1 - t if clip == "close" else 0)
+            for d in doors:
+                _key(d, f, rot=(0, a if d.name == "door_L" else -a, 0))
+        act = ad.action
+        act.name = clip
+        act.use_fake_user = True
+        track = ad.nla_tracks.new()
+        track.name = clip
+        track.strips.new(clip, 0, act)
+        track.mute = True
+        ad.action = None
+    for b in pb:
+        b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
+
+
+def _snake_clips(arm, h):
+    """Snakes: slither (24 frames, wave down spine chain + head counter-turn) and idle (48 frames, breathing + head sway)."""
+    pb = arm.pose.bones
+    ad = arm.animation_data_create()
+    spines = [b for b in pb if b.name.startswith("spine_")]
+    for clip, n in (("slither", 24), ("idle", 48)):
+        for b in pb:
+            b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
+        ad.action = None
+        for f in range(n + 1):
+            ph = 2 * math.pi * f / n
+            if clip == "slither":
+                for i, sp in enumerate(spines):
+                    _key(sp, f, rot=(0, 3 * math.sin(ph - i * 0.9), 10 * math.sin(ph - i * 0.9)))
+                if "head" in pb:
+                    _key(pb["head"], f, rot=(4 * math.sin(2 * ph), 0, -12 * math.sin(ph)))
+            else:
+                for i, sp in enumerate(spines):
+                    _key(sp, f, rot=(0, 0, 3 * math.sin(ph - i * 0.7)))
+                if "head" in pb:
+                    _key(pb["head"], f, rot=(3 * math.sin(2 * ph), 0, 10 * math.sin(ph)))
         act = ad.action
         act.name = clip
         act.use_fake_user = True

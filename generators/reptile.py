@@ -70,10 +70,53 @@ def _declare_joints(z):
 
 
 def build(a, z):
-    if a["id"] in ("reticulated_python", "king_cobra"):  # snakes: slither clip not made yet
-        return _build(a, z)
+    if a["id"] in ("reticulated_python", "king_cobra"):
+        _build(a, _SnakeTagger(z, a["size_m"]))
+        return _declare_snake_joints(z)
     _build(a, _PosTagger(z, a["size_m"]))
     _declare_joints(z)
+
+
+class _SnakeTagger:
+    """Tags snake coil balls along 3 spine segments (spine_0, spine_1, spine_2) and upper head/hood parts as head."""
+
+    def __init__(self, z, size):
+        self._z, self._s = z, size
+        self._i = 0
+
+    def __getattr__(self, name):
+        fn = getattr(self._z, name)
+        if name not in SHAPES:
+            return fn
+        W, L, H = self._s
+
+        def make(*a, **kw):
+            x, y, zz = kw.get("loc", (0, 0, 0))
+            if zz > 0.56 * H or y < -0.18 * L:
+                kind = "head"
+            else:
+                kind = f"spine_{min(2, self._i // 14)}"
+                self._i += 1
+            with self._z.bone(kind):
+                return fn(*a, **kw)
+        return make
+
+
+def _declare_snake_joints(z):
+    import bpy
+    bpy.context.view_layer.update()
+    groups = {}
+    for o in bpy.context.scene.objects:
+        if o.type == "MESH":
+            groups.setdefault(o.get("bone", "spine_0"), []).append(o)
+    bb = {k: _bounds(v) for k, v in groups.items()}
+    prev = "root"
+    for k in ("spine_0", "spine_1", "spine_2", "head"):
+        if k in bb:
+            lo, hi = bb[k]
+            xc, yc, zc = (lo.x + hi.x) / 2, (lo.y + hi.y) / 2, (lo.z + hi.z) / 2
+            z.joint(k, (xc, hi.y, zc), (xc, lo.y, zc), prev)
+            prev = k
 
 
 def _build(a, z):
