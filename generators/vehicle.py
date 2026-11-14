@@ -54,7 +54,7 @@ def build(asset, z):
 
 def _rig(z):
     """One bone per wheel (pivot on the axle, bone along X so a turn about its own axis rolls the wheel); every other
-    part is on the chassis bone (child of root). A wheel is a thin round part (X <= 0.25 m, Y and Z equal, >= 8 cm) standing on the ground;
+    part is on the chassis bone (child of root). A wheel is a thin round part (X <= 0.3 m, Y and Z equal, >= 8 cm) standing on the ground;
     tyre and hub share a centre, so they share a bone. Doors and ramps are not rigged yet."""
     import bpy
     from mathutils import Vector
@@ -69,7 +69,7 @@ def _rig(z):
     for o, (lo, hi) in box.items():
         d = hi - lo
         c = (lo + hi) / 2
-        if d.x <= 0.25 and d.y >= 0.08 and abs(d.y - d.z) < 0.01 and c.z - d.z / 2 < 0.02:
+        if d.x <= 0.3 and d.y >= 0.08 and abs(d.y - d.z) < 0.01 and c.z - d.z / 2 < 0.02:
             keys.setdefault((round(c.x, 2), round(c.y, 2)), []).append(o)
     hubs = {k: max(box[o][1].x - box[o][0].x for o in v) for k, v in keys.items()}
     for o in meshes:

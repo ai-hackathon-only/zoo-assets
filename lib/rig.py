@@ -15,6 +15,7 @@ from mathutils import Vector
 
 FPS = 24
 CLIPS = {"walk": 24, "idle": 48, "eat": 48}
+FLY = 24  # birds (bones wing_L / wing_R) also get a fly clip of this many frames
 
 
 def build(ob, joints):
@@ -90,13 +91,25 @@ def _clips(arm, h):
     """h = model height in metres (scales the walk bob and the eat target)."""
     pb = arm.pose.bones
     has = lambda n: n in pb
+    B = "hips" if has("hips") else "body"  # primates call the torso bone hips
     ad = arm.animation_data_create()
     if "frame" in pb:
         return _gate_clips(arm)
     if "chassis" in pb:
         return _vehicle_clips(arm, h)
+    if "trunk" in pb:
+        return _plant_clips(arm, h)
     eat = _eat_angle(arm, h)
-    for clip, n in CLIPS.items():
+    clips = dict(CLIPS)
+    if has("wing_L"):
+        clips["fly"] = FLY
+    if not any(n.startswith(("leg_", "arm_", "wing_")) for n in pb.keys()) and "neck" not in pb:
+        del clips["walk"]  # legless swimmers (sea animals) get swim instead
+        clips["swim"] = 24
+        clips["crawl"] = 24  # RIGS.md insect row requires crawl; same body wave as swim
+    if has("hips"):
+        clips["sit"] = 48
+    for clip, n in clips.items():
         for b in pb:  # each clip starts from the rest pose
             b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
         ad.action = None
@@ -106,18 +119,45 @@ def _clips(arm, h):
                 for leg, off in (("leg_FL", 0), ("leg_BR", 0), ("leg_FR", math.pi), ("leg_BL", math.pi)):
                     if has(leg):
                         _key(pb[leg], f, rot=(22 * math.sin(ph + off), 0, 0))
-                if has("body"):
-                    _key(pb["body"], f, loc=(0, 0, 0.012 * h * abs(math.sin(ph))), rot=(0, 2 * math.sin(ph), 0))
+                for leg, off in (("leg_L", 0), ("leg_R", math.pi)):  # two-leg walkers
+                    if has(leg):
+                        _key(pb[leg], f, rot=(25 * math.sin(ph + off), 0, 0))
+                for side, off in (("arm_L", math.pi), ("arm_R", 0)):  # apes swing their arms against the legs
+                    if has(side):
+                        _key(pb[side], f, rot=(18 * math.sin(ph + off), 0, 0))
+                if has(B):
+                    _key(pb[B], f, loc=(0, 0, 0.012 * h * abs(math.sin(ph))), rot=(0, 2 * math.sin(ph), 0))
                 if has("neck"):
                     _key(pb["neck"], f, rot=(5 * math.sin(2 * ph), 0, 0))
                 if has("head"):
                     _key(pb["head"], f, rot=(-4 * math.sin(2 * ph), 0, 3 * math.sin(ph)))
                 if has("tail"):
                     _key(pb["tail"], f, rot=(0, 0, 18 * math.sin(ph)))
+            elif clip == "fly":
+                for wing, sgn in (("wing_L", -1), ("wing_R", 1)):
+                    if has(wing):  # bone points down, local Z = world Y: flap up and out, then down
+                        _key(pb[wing], f, rot=(0, 0, sgn * (10 + 45 * math.sin(ph))))
+                if has(B):
+                    _key(pb[B], f, loc=(0, 0, 0.03 * h * math.sin(ph + 1.2)))
+                if has("neck"):
+                    _key(pb["neck"], f, rot=(-8, 0, 0))
+                if has("head"):
+                    _key(pb["head"], f, rot=(4, 0, 0))
+                for leg in ("leg_L", "leg_R"):
+                    if has(leg):
+                        _key(pb[leg], f, rot=(-35, 0, 0))
+                if has("tail"):
+                    _key(pb["tail"], f, rot=(10 * math.sin(ph), 0, 0))
+            elif clip in ("swim", "crawl"):  # body rolls and bobs, tail beats in both axes, head counters
+                _key(pb["body"], f, loc=(0, 0, 0.02 * h * math.sin(ph)), rot=(0, 3 * math.sin(ph), 4 * math.sin(ph)))
+                if has("tail"):
+                    _key(pb["tail"], f, rot=(12 * math.sin(ph + 1), 0, 25 * math.sin(ph)))
+                if has("head"):
+                    _key(pb["head"], f, rot=(3 * math.sin(ph), 0, -6 * math.sin(ph)))
             elif clip == "idle":
-                if has("body"):
+                if has(B):
                     s = 1 + 0.015 * math.sin(2 * ph)
-                    _key(pb["body"], f, scale=(s, 1, s))
+                    _key(pb[B], f, scale=(s, 1, s))
                 if has("head"):
                     _key(pb["head"], f, rot=(3 * math.sin(2 * ph), 0, 16 * math.sin(ph)))
                 if has("neck"):
@@ -131,12 +171,27 @@ def _clips(arm, h):
                 chew = 4 * math.sin(6 * ph) * down
                 if has("neck"):
                     _key(pb["neck"], f, rot=(eat * down, 0, 0))
-                if has("head"):
+                if has("head") and not has("neck"):  # head-only bone points -Y: local +X lifts the nose, so go negative
+                    _key(pb["head"], f, rot=(-35 * down + chew, 0, 0))
+                elif has("head"):
                     _key(pb["head"], f, rot=(eat * 0.6 * down + chew, 0, 0))
-                elif has("body"):
-                    _key(pb["body"], f, rot=(6 * down, 0, 0))
+                elif has(B):
+                    _key(pb[B], f, rot=(6 * down, 0, 0))
                 if has("tail"):
                     _key(pb["tail"], f, rot=(0, 0, 8 * math.sin(ph)))
+                for side_arm in ("arm_L", "arm_R"):  # hands come up to the mouth
+                    if has(side_arm):
+                        _key(pb[side_arm], f, rot=(-70 * down, 0, 0))
+            elif clip == "sit":  # settle back, head turns, arms rest, slow breathing
+                s = 1 + 0.02 * math.sin(ph)
+                _key(pb[B], f, scale=(s, 1, s))
+                if has("head"):
+                    _key(pb["head"], f, rot=(6 * math.sin(ph), 0, 20 * math.sin(ph)))
+                if has("neck"):
+                    _key(pb["neck"], f, rot=(4, 0, 0))
+                for side_arm in ("arm_L", "arm_R"):
+                    if has(side_arm):
+                        _key(pb[side_arm], f, rot=(4 * math.sin(ph), 0, 0))
         act = ad.action
         if act is None:
             continue
@@ -196,6 +251,32 @@ def _gate_clips(arm):
             a = 100.0 * (t if clip == "open" else 1 - t if clip == "close" else 0)
             for d in doors:
                 _key(d, f, rot=(0, a if d.name == "door_L" else -a, 0))
+        act = ad.action
+        act.name = clip
+        act.use_fake_user = True
+        track = ad.nla_tracks.new()
+        track.name = clip
+        track.strips.new(clip, 0, act)
+        track.mute = True
+        ad.action = None
+    for b in pb:
+        b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
+
+
+
+def _plant_clips(arm, h):
+    """Plants: idle (48, tiny crown breathing) and sway (48, trunk and crown lean with a phase lag)."""
+    pb = arm.pose.bones
+    ad = arm.animation_data_create()
+    for clip, n in (("idle", 48), ("sway", 48)):
+        for b in pb:
+            b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
+        ad.action = None
+        amp = 1.0 if clip == "idle" else 5.0
+        for f in range(n + 1):
+            ph = 2 * math.pi * f / n
+            _key(pb["trunk"], f, rot=(0.3 * amp * math.sin(ph + 0.6), 0, 0.5 * amp * math.sin(ph)))
+            _key(pb["crown"], f, rot=(0.6 * amp * math.sin(ph), 0, 1.0 * amp * math.sin(ph - 0.8)))
         act = ad.action
         act.name = clip
         act.use_fake_user = True
