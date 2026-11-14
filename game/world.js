@@ -155,19 +155,19 @@ export class NightLighting {
 
     this.nightSky = new THREE.Color(0x0c1428);
     this.dawnSky = new THREE.Color(0xdba784);
-    this.nightHemiSky = new THREE.Color(0x3a4866);
+    this.nightHemiSky = new THREE.Color(0x6a7fb0);
     this.dawnHemiSky = new THREE.Color(0xffe1c2);
-    this.nightHemiGround = new THREE.Color(0x18202c);
+    this.nightHemiGround = new THREE.Color(0x2c3a50);
     this.dawnHemiGround = new THREE.Color(0x6d7c58);
     this.nightSun = new THREE.Color(0x6b8ec2);
     this.dawnSun = new THREE.Color(0xffcfa0);
-    this.nightGround = new THREE.Color(0x202d1d);
+    this.nightGround = new THREE.Color(0x35502f);
     this.dawnGround = new THREE.Color(0x7ca65e);
 
     scene.background = this.nightSky.clone();
     scene.fog = new THREE.FogExp2(0x0c1428, 0.014);
 
-    this.hemi = new THREE.HemisphereLight(0x3a4866, 0x18202c, 0.65);
+    this.hemi = new THREE.HemisphereLight(0x3a4866, 0x18202c, 1.25);
     scene.add(this.hemi);
 
     this.sun = new THREE.DirectionalLight(0x6b8ec2, 0.75);
@@ -202,7 +202,7 @@ export class NightLighting {
     }
     this.hemi.color.lerpColors(this.nightHemiSky, this.dawnHemiSky, dawn);
     this.hemi.groundColor.lerpColors(this.nightHemiGround, this.dawnHemiGround, dawn);
-    this.hemi.intensity = 0.65 + dawn * 0.85;
+    this.hemi.intensity = 1.25 + dawn * 0.4;
     this.sun.color.lerpColors(this.nightSun, this.dawnSun, dawn);
     this.sun.intensity = 0.75 + dawn * 1.05;
     if (this.ground && this.ground.material) {

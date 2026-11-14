@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Night Shift · zoo-assets</title>
+<script type="importmap">
+{ "imports": { "three": "../vendor/three/three.module.js", "three/addons/": "../vendor/three/" } }
+</script>
+<style>
+  :root { --bg:#0c1428; --panel:rgba(14,22,44,.86); --text:#eef2fb; --muted:#9fb0d0; --accent:#fbbf24; --radius:12px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; background:var(--bg); color:var(--text); overflow:hidden; touch-action:none; }
+  canvas#scene { position:fixed; inset:0; width:100%; height:100%; display:block; }
+  .screen { position:fixed; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
+    padding:24px; text-align:center; background:rgba(8,12,26,.78); z-index:5; }
+  .screen[hidden] { display:none; }
+  h1 { margin:0; font-size:clamp(2rem,8vw,3.4rem); letter-spacing:.02em; }
+  p { margin:0; max-width:34rem; line-height:1.45; color:var(--muted); }
+  button, a.btn { font:inherit; font-weight:600; color:#1a1405; background:var(--accent); border:0; border-radius:var(--radius);
+    padding:12px 22px; min-height:48px; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; }
+  button.ghost, a.btn.ghost { background:transparent; color:var(--text); border:1px solid #3b4a6e; }
+  .row { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+  #hud { position:fixed; inset:0; pointer-events:none; z-index:2; }
+  #hud[hidden] { display:none; }
+  #hud .top { position:absolute; top:max(10px,env(safe-area-inset-top)); left:10px; right:10px; display:flex; gap:8px; align-items:flex-start; justify-content:space-between; }
+  .chip { background:var(--panel); border-radius:var(--radius); padding:8px 12px; font-size:.95rem; }
+  #hint { position:absolute; left:50%; transform:translateX(-50%); top:max(64px,calc(env(safe-area-inset-top) + 54px)); max-width:calc(100% - 20px); text-align:center; }
+  #minimap { position:absolute; left:10px; bottom:max(10px,env(safe-area-inset-bottom)); width:120px; height:120px; border-radius:var(--radius); background:var(--panel); }
+  #look { pointer-events:auto; min-height:40px; padding:8px 12px; font-size:.9rem; }
+  #action { position:absolute; right:14px; bottom:max(18px,env(safe-area-inset-bottom)); width:104px; height:104px; border-radius:50%;
+    pointer-events:auto; font-size:1.05rem; box-shadow:0 0 0 4px rgba(251,191,36,.25); }
+  #action[disabled] { opacity:.45; box-shadow:none; }
+  #bar { position:absolute; right:14px; bottom:134px; width:104px; height:8px; border-radius:4px; background:rgba(255,255,255,.2); overflow:hidden; }
+  #bar i { display:block; height:100%; width:0; background:var(--accent); }
+  ul#summary { list-style:none; padding:0; margin:0; text-align:left; color:var(--text); }
+  ul#summary li { padding:3px 0; } ul#summary .left { color:var(--muted); }
+  #stars { font-size:2.4rem; color:var(--accent); letter-spacing:.2em; }
+</style>
+</head>
+<body data-screen="start">
+<canvas id="scene"></canvas>
+
+<div id="start" class="screen">
+  <h1>Night Shift</h1>
+  <p>The zoo is closed and dark. You are the keeper on duty. Walk the paths, find the glowing markers and handle what comes up before dawn.</p>
+  <p>Move: WASD or arrows, or tap the ground. Act: E / Space, or hold the round button for a moment.</p>
+  <div class="row"><button id="go">Start shift</button><button id="look-start" class="ghost">Look: Toy</button></div>
+  <div class="row"><a class="btn ghost" href="../">Gallery</a><a class="btn ghost" href="../park/">Park</a></div>
+</div>
+
+<div id="hud" hidden>
+  <div class="top">
+    <div class="chip" id="clock">Dusk</div>
+    <div class="chip" id="count">0 / 6</div>
+    <button id="look" class="ghost">Look: Toy</button>
+  </div>
+  <div class="chip" id="hint">Loading…</div>
+  <canvas id="minimap" width="240" height="240"></canvas>
+  <div id="bar"><i></i></div>
+  <button id="action" disabled>Act</button>
+</div>
+
+<div id="end" class="screen" hidden>
+  <h1>Dawn</h1>
+  <div id="stars"></div>
+  <p id="verdict"></p>
+  <ul id="summary"></ul>
+  <div class="row"><button id="again">Play again</button><a class="btn ghost" href="../">Gallery</a><a class="btn ghost" href="../park/">Park</a></div>
+</div>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>
