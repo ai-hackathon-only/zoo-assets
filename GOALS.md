@@ -15,7 +15,8 @@ Build the 3D assets for a toy-style zoo: **500 assets** covering everything you 
 
 Style: **stylized low-poly "toy" look** with one shared colour palette, so all 500 assets look like one world. Recognisable by proportions, colours and markings (stripes, spots, manes, trunks, horns), not by realistic detail.
 
-## Round 3 (2026-11-13 22:55 – 2026-11-14 06:55 JST, 8 hours): a rig and animations for every asset
+## Round 3 (2026-11-13 22:55 – 2026-11-14 16:00 JST, extended by the owner at 06:48): a rig and animations for every asset
+**Owner update 06:48:** the round continues until 16:00 JST. At 06:48, 185 of 566 assets on `main` have a rig (four-leg animals, birds, plants); 8 PRs are open. Gemini quota comes back around 10:00 JST, and agy's Claude/GPT pool around 09:30. Priorities: merge the open PRs, fill the `rig` field, make `validate.py` pass for all 566, then the motion review (Gemini or GPT-OSS can do the cross-family part once back), then README and retros.
 **Focus: rigs only.** Rig the existing 566 assets. No new assets, no new park or gallery features beyond playing the clips.
 Owner update for round 3. Before the start, the owner added a working example, made with Claude Code on a branch merged in this update: the four-legged animals (generators `quadruped`, `hoofed`, `bigcat`: 66 species plus their baby and rare variants, 102 models) have rigs and clips, and the gallery plays them. Read `lib/rig.py`, the `z.bone` / `z.set_bone` / `z.joint` helpers in `lib/zoo.py`, and how the three generators use them. Open `Kickoff — round 3` and, at the end, `Retro — round 3`.
 
@@ -144,13 +145,13 @@ ai-hackathon:
   repo: ai-hackathon-only/zoo-assets
   owner: hueitan            # the human who is responsible
   start: 2026-11-13T22:55+09:00
-  end:   2026-11-14T06:55+09:00
+  end:   2026-11-14T16:00+09:00
   round_minutes: 5                # how often each agent wakes up
   when_done_early: stretch          # stop | stretch | polish-until-end
   # round 3: the agents choose seats, families and models (runs/<repo>/seat-<n>.txt); the runner accepts only these
   models_claude: claude-sonnet-5-5, claude-opus-5-5, claude-haiku-5-5
   models_agy: claude-sonnet-5-5-medium, gpt-oss-120b-medium, claude-opus-5-5-medium, gemini-4-argon-medium, gemini-4-argon-high, gemini-4-hydrogen-medium, gemini-3.8-flash-medium
-  claude_quiet: 23:55-00:30, 03:55-04:30   # local time: Claude Code turns pause (owner's other jobs use the same quota)
+  claude_quiet: 23:55-00:30, 03:55-04:30, 07:55-08:30, 11:55-12:30, 15:55-16:30   # local time: Claude Code turns pause (owner's other jobs use the same quota)
   seats:                          # identities = GitHub Apps; roles, families and models are chosen by the agents
     # agent: claude | agy | choose. model: auto = first allowed model until the seat file says otherwise.
     - { seat: 1, app: aho-builder-1,  agent: claude, model: auto, perms: builder,  browser: yes, backup: 2 }

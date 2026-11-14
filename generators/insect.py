@@ -13,6 +13,8 @@ def build(a, z):
     marks = set(p.get("marks", []))
     fur = p.get("body", "black")
     iid = a["id"]
+    from generators.sea import _YTagger, _declare_joints
+    z0, z = z, _YTagger(z, (W, L, H))
 
     if iid == "monarch_butterfly":
         _build_butterfly(a, z, W, L, H, "orange", marks)
@@ -36,6 +38,7 @@ def build(a, z):
         _build_mantis(a, z, W, L, H, "pink", marks)
     else:
         _build_generic_bug(a, z, W, L, H, fur, marks)
+    _declare_joints(z0)
 
 
 def _build_butterfly(a, z, W, L, H, col, marks):
