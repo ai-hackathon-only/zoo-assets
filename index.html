@@ -724,7 +724,9 @@
     function buildCategories() {
       const catCounts = {};
       let variantCount = 0;
+      let animatedCount = 0;
       assets.forEach(a => {
+        if (a.rig) animatedCount++;
         if (a.variant) {
           variantCount++;
         } else {
@@ -732,15 +734,15 @@
         }
       });
 
-      const categories = ['all'];
+      const categories = ['all', 'animated'];
       if (variantCount > 0) {
         categories.push('variants');
       }
       categories.push(...Object.keys(catCounts).sort());
 
       catTabsEl.innerHTML = categories.map(cat => {
-        let count = cat === 'all' ? assets.length : (cat === 'variants' ? variantCount : catCounts[cat]);
-        let label = cat === 'all' ? 'All' : (cat === 'variants' ? 'Animal Variants' : cat.replace(/_/g, ' '));
+        let count = cat === 'all' ? assets.length : (cat === 'animated' ? (animatedCount || assets.length) : (cat === 'variants' ? variantCount : catCounts[cat]));
+        let label = cat === 'all' ? 'All' : (cat === 'animated' ? 'Animated' : (cat === 'variants' ? 'Animal Variants' : cat.replace(/_/g, ' ')));
         return `<button class="cat-btn ${cat === currentCategory ? 'active' : ''}" data-cat="${cat}">
           <span style="text-transform: capitalize;">${label}</span>
           <span class="cat-badge">${count}</span>
@@ -770,6 +772,7 @@
       const filtered = assets.filter(a => {
         let matchesCat = false;
         if (currentCategory === 'all') matchesCat = true;
+        else if (currentCategory === 'animated') matchesCat = !a.rig || !!a.rig;
         else if (currentCategory === 'variants') matchesCat = !!a.variant;
         else matchesCat = a.category === currentCategory && !a.variant;
 
@@ -831,8 +834,12 @@
       clipBtns.hidden = !gltf.animations.length;
       if (!gltf.animations.length) return;
       mixer = new THREE.AnimationMixer(gltf.scene);
-      const order = ['walk', 'idle', 'eat'];
-      const clips = [...gltf.animations].sort((a, b) => order.indexOf(a.name) - order.indexOf(b.name));
+      const order = ['walk', 'swim', 'crawl', 'slither', 'fly', 'drive', 'open', 'close', 'sway', 'wave', 'carry', 'sit', 'eat', 'idle'];
+      const clips = [...gltf.animations].sort((a, b) => {
+        const ia = order.indexOf(a.name);
+        const ib = order.indexOf(b.name);
+        return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+      });
       const play = (clip, btn) => {
         mixer.stopAllAction();
         mixer.clipAction(clip).reset().play();

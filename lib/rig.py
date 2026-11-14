@@ -46,11 +46,30 @@ def build(ob, joints):
     for pb in arm.pose.bones:
         pb.rotation_mode = "XYZ"
     from lib import rig_human
-    if rig_human.is_human(joints, ob.name):  # shared human skeleton: its own clips
+    if not joints:  # root-only rig (props, rocks, signs ...)
+        _root_clips(arm, max(ob.dimensions.z, 0.05))
+    elif rig_human.is_human(joints, ob.name):  # shared human skeleton: its own clips
         rig_human.clips(arm, max(ob.dimensions.z, 0.05), _key)
     else:
         _clips(arm, max(ob.dimensions.z, 0.05))
     return arm
+
+
+def _root_clips(arm, h):
+    """idle (48 frames, loop): the root bobs a tiny bit (1 mm per metre of height, so rocks look still)."""
+    pb = arm.pose.bones["root"]
+    ad = arm.animation_data_create()
+    for f in range(49):
+        _key(pb, f, loc=(0, 0, 0.001 * h * math.sin(2 * math.pi * f / 48)))
+    act = ad.action
+    act.name = "idle"
+    act.use_fake_user = True
+    track = ad.nla_tracks.new()
+    track.name = "idle"
+    track.strips.new("idle", 0, act)
+    track.mute = True
+    ad.action = None
+    pb.location = (0, 0, 0)
 
 
 def _key(pb, frame, rot=None, loc=None, scale=None):
@@ -103,6 +122,8 @@ def _clips(arm, h):
         return _vehicle_clips(arm, h)
     if "trunk" in pb:
         return _plant_clips(arm, h)
+    if "spine_0" in pb:
+        return _snake_clips(arm, h)
     eat = _eat_angle(arm, h)
     clips = dict(CLIPS)
     if has("wing_L"):
@@ -267,6 +288,38 @@ def _gate_clips(arm):
         b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
 
 
+def _snake_clips(arm, h):
+    """Snakes: slither (24 frames, wave down spine chain + head counter-turn) and idle (48 frames, breathing + head sway)."""
+    pb = arm.pose.bones
+    ad = arm.animation_data_create()
+    spines = [b for b in pb if b.name.startswith("spine_")]
+    for clip, n in (("slither", 24), ("idle", 48)):
+        for b in pb:
+            b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
+        ad.action = None
+        for f in range(n + 1):
+            ph = 2 * math.pi * f / n
+            if clip == "slither":
+                for i, sp in enumerate(spines):
+                    _key(sp, f, rot=(0, 3 * math.sin(ph - i * 0.9), 10 * math.sin(ph - i * 0.9)))
+                if "head" in pb:
+                    _key(pb["head"], f, rot=(4 * math.sin(2 * ph), 0, -12 * math.sin(ph)))
+            else:
+                for i, sp in enumerate(spines):
+                    _key(sp, f, rot=(0, 0, 3 * math.sin(ph - i * 0.7)))
+                if "head" in pb:
+                    _key(pb["head"], f, rot=(3 * math.sin(2 * ph), 0, 10 * math.sin(ph)))
+        act = ad.action
+        act.name = clip
+        act.use_fake_user = True
+        track = ad.nla_tracks.new()
+        track.name = clip
+        track.strips.new(clip, 0, act)
+        track.mute = True
+        ad.action = None
+    for b in pb:
+        b.rotation_euler = (0, 0, 0); b.location = (0, 0, 0); b.scale = (1, 1, 1)
+
 
 def _plant_clips(arm, h):
     """Plants: idle (48, tiny crown breathing) and sway (48, trunk and crown lean with a phase lag)."""
@@ -296,4 +349,6 @@ def _plant_clips(arm, h):
 def expected_clips(bone_names, name=""):
     """Clip names the Decision lists for a skeleton, judged by its bone names (used by validate.py)."""
     from lib import rig_human
+    if set(bone_names) == {"root"}:
+        return {"idle": 48}
     return rig_human.CLIPS if rig_human.is_human(bone_names, name) else CLIPS

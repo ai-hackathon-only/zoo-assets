@@ -26,8 +26,14 @@ PALETTE_PNG = os.path.join(ROOT, "palette", "palette.png")
 MAT_NAME = "MAT_palette"
 EMISSIVE_MAT_NAME = "MAT_emissive"
 
-# GOALS.md budgets: (max tris, max bytes)
-BUDGETS = {"animals": (5000, 300_000), "keepers": (3000, 300_000), "facilities": (10000, 300_000)}
+# GOALS.md budgets: (max tris, max bytes); round 3 raises rigged animals/humans/vehicles/facilities to 500 KB
+BUDGETS = {
+    "animals": (5000, 500_000),
+    "keepers": (3000, 500_000),
+    "visitors": (2000, 500_000),
+    "vehicles": (2000, 500_000),
+    "facilities": (10000, 500_000),
+}
 DEFAULT_BUDGET = (2000, 150_000)
 
 
@@ -262,6 +268,11 @@ def finish(asset):
             ob.vertex_groups.new(name=g)
         transform_joints(Matrix.Translation(shift))
         rig.build(ob, JOINTS)
+    else:  # root-only rig: one bone, one idle clip, so the game loads every asset the same way
+        from lib import rig
+        ob.vertex_groups.new(name="root")
+        ob.vertex_groups["root"].add(list(range(len(ob.data.vertices))), 1.0, "REPLACE")
+        rig.build(ob, {})
     return ob
 
 

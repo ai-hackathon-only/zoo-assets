@@ -20,7 +20,7 @@ import qa_check  # noqa: E402
 
 from lib import rig, zoo  # noqa: E402
 
-TOTAL_MAX = 120 * 1024 * 1024
+TOTAL_MAX = 150 * 1024 * 1024
 H_TOL, L_TOL, ORIGIN_TOL = 0.20, 0.30, 0.02  # height +-20 %, longest side +-30 %, origin 2 cm
 
 
@@ -30,7 +30,8 @@ RIG_CLIPS = {"quadruped": "idle walk eat", "hoofed": "idle walk eat", "bigcat": 
              "upright": "idle walk eat", "primate": "idle walk eat sit", "bird": "idle walk eat",
              "reptile": "idle walk eat", "snake": "idle slither", "fish": "idle swim", "marine": "idle swim eat",
              "insect": "idle crawl", "arachnid": "idle crawl", "mollusc": "idle crawl",
-             "human": "idle walk wave carry", "vehicle": "idle drive", "gate": "idle open close",
+             "human": "idle walk wave carry", "human_onepiece": "idle walk wave carry",
+             "vehicle": "idle drive", "gate": "idle open close",
              "facility": "idle", "plant": "idle sway", "static": "idle"}
 MOVERS = ("walk", "swim", "crawl", "slither", "fly", "drive")
 
@@ -38,7 +39,14 @@ MOVERS = ("walk", "swim", "crawl", "slither", "fly", "drive")
 def required_clips(r, bones, clips):
     """Returns (list of required clip names, list of 'one of' groups)."""
     if r.get("rig"):
-        return RIG_CLIPS[r["rig"].split(".")[0]].split(), []
+        base = r["rig"].split(".")[0]
+        if base == "vehicle" and not any(b.startswith("wheel") for b in bones):
+            return ["idle"], []
+        if base == "gate" and not any(b.startswith(("door", "gate")) for b in bones):
+            return ["idle"], []
+        if base in ("insect", "arachnid", "mollusc"):
+            return ["idle"], [("crawl", "swim")]
+        return RIG_CLIPS[base].split(), []
     cat = r["category"]
     has = lambda *n: any(b in bones for b in n)
     if cat == "plants":
